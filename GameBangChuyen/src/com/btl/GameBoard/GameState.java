@@ -9,7 +9,6 @@ public abstract class GameState implements MouseListener {
 
 	public GameState(GamePanel parent) {
 		this.parent = parent;
-		this.parent.addMouseListener(this);
 	}
 
 	/**
