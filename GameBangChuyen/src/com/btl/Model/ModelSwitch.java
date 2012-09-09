@@ -12,6 +12,8 @@ public abstract class ModelSwitch {
 	public ModelSwitch(int x, int y) {
 		this.x = x;
 		this.y = y;
+
+		listDirection = new ArrayList<Direction>();
 	}
 
 	public void addDirection(Direction d) {
