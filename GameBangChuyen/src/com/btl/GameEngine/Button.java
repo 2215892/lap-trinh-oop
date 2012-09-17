@@ -1,11 +1,9 @@
-package com.btl.GameElements;
+package com.btl.GameEngine;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-
-import com.btl.GameEngine.Clickable;
-import com.btl.GameEngine.Drawable;
+import java.awt.image.BufferedImage;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -15,7 +13,7 @@ public abstract class Button implements Drawable, Clickable {
 
 	private Point position;
 	private int width, height;
-	private Image img;
+	private Image originImg, img;
 
 	/**
 	 * Khoi tao button.
@@ -34,13 +32,41 @@ public abstract class Button implements Drawable, Clickable {
 	 * 
 	 * @param img
 	 *            hinh anh muon dat
+	 * @param width
+	 *            chieu rong
+	 * @param height
+	 *            chieu cao
 	 */
-	public void setImage(Image img) {
-		this.img = img;
+	public void setImage(Image img, int width, int height) {
+		this.originImg = img;
+		this.width = width;
+		this.height = height;
 
-		/* Dat lai kich thuoc cua nut */
-		this.width = this.img.getWidth(null);
-		this.height = this.img.getHeight(null);
+		this.img = new BufferedImage(this.width, this.height,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics g = this.img.getGraphics();
+		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
+		g.dispose();
+
+	}
+
+	/**
+	 * Thay doi kich thuoc.
+	 * 
+	 * @param width
+	 *            chieu rong
+	 * @param height
+	 *            chieu cao
+	 */
+	public void changeSize(int width, int height) {
+		this.width = width;
+		this.height = height;
+
+		this.img = new BufferedImage(this.width, this.height,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics g = this.img.getGraphics();
+		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
+		g.dispose();
 	}
 
 	/*
