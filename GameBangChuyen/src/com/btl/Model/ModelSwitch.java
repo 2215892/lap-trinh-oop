@@ -1,17 +1,16 @@
 package com.btl.Model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public abstract class ModelSwitch {
 
 	protected ArrayList<Direction> listDirection;
-	protected int x;
-	protected int y;
+	protected Point position;
 	protected int currentDir;
 
-	public ModelSwitch(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public ModelSwitch(Point p) {
+		this.position = p;
 
 		listDirection = new ArrayList<Direction>();
 	}
