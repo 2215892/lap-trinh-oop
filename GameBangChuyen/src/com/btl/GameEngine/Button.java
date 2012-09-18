@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 /**
  * The Class Button.
  */
-public abstract class Button implements Drawable, Clickable {
+public class Button implements Drawable, Clickable {
 
 	private Point position;
 	private int width, height;
@@ -80,7 +80,6 @@ public abstract class Button implements Drawable, Clickable {
 		/* Kiem tra p co nam trong nut khong */
 		if ((this.position.x <= p.x && (this.position.x + this.width) >= p.x)
 				&& (this.position.y <= p.y && (this.position.y + this.height) >= p.y)) {
-			this.onClick();
 			return true;
 		} else
 			return false;

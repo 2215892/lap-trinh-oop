@@ -6,6 +6,4 @@ public interface Clickable {
 
 	public boolean contains(Point p);
 
-	public void onClick();
-
 }
