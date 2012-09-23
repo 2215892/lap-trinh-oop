@@ -1,5 +1,7 @@
 package com.btl.GameBoard;
 
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
@@ -18,6 +20,14 @@ public class GamePanel extends JPanel {
 		this.currentState = state;
 		this.addMouseListener(this.currentState);
 
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+
+		if (this.currentState != null)
+			this.currentState.gameRender(g);
 	}
 
 }
