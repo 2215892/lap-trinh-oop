@@ -1,15 +1,17 @@
-package com.btl.GameEngine;
+package com.btl.GameElements;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+import com.btl.GameEngine.Drawable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Button.
  */
-public class Button implements Drawable, Clickable {
+public class Button implements Drawable {
 
 	private Point position;
 	private int width, height;
