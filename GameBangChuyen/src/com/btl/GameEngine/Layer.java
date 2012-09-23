@@ -51,6 +51,8 @@ public class Layer {
 		for (Drawable i : listDrawable) {
 			i.paint(g);
 		}
+
+		g.dispose();
 	}
 
 	public void show() {
