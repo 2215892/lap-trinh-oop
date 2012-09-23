@@ -37,6 +37,7 @@ public class ConversionFunction {
 		try {
 			img = ImageIO.read(new File(fileDir));
 		} catch (IOException e) {
+			System.out.print("\nerror load file" + fileDir);
 		}
 		return img;
 	}
