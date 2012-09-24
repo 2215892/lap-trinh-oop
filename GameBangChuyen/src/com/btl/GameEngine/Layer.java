@@ -41,6 +41,10 @@ public class Layer {
 		return null;
 	}
 
+	public void addDrawable(Drawable drawable) {
+		this.listDrawable.add(drawable);
+	}
+
 	public void render() {
 		Graphics2D g = (Graphics2D) this.buffer.getGraphics();
 
