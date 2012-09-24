@@ -15,7 +15,7 @@ public class Layer {
 
 	/** The buffer. */
 	private BufferedImage buffer;
-	public boolean isVisible = true;
+	private boolean isVisible = true;
 
 	private ArrayList<Drawable> listDrawable;
 
@@ -39,6 +39,10 @@ public class Layer {
 			}
 		}
 		return null;
+	}
+
+	public boolean isVisible() {
+		return this.isVisible;
 	}
 
 	public void addDrawable(Drawable drawable) {
