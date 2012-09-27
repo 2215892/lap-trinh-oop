@@ -41,12 +41,35 @@ public class Layer {
 		return null;
 	}
 
+	/**
+	 * Lam rong layer
+	 */
+	public void empty() {
+		this.listDrawable.clear();
+	}
+
 	public boolean isVisible() {
 		return this.isVisible;
 	}
 
+	/**
+	 * Them doi tuong drawable cho layer quan ly.
+	 * 
+	 * @param drawable
+	 *            doi tuong can them
+	 */
 	public void addDrawable(Drawable drawable) {
 		this.listDrawable.add(drawable);
+	}
+
+	/**
+	 * Xoa doi tuong Drawable khoi danh sach quan ly.
+	 * 
+	 * @param drawable
+	 *            doi tuong can xoa
+	 */
+	public void removeDrawable(Drawable drawable) {
+		this.listDrawable.remove(drawable);
 	}
 
 	public void render() {
