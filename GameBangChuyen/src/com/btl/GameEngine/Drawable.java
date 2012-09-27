@@ -7,6 +7,6 @@ public interface Drawable {
 
 	public void paint(Graphics g);
 
-	public boolean contains(Point p);
+	public boolean contains(Point point);
 
 }
