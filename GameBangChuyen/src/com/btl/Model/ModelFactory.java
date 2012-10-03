@@ -2,23 +2,62 @@ package com.btl.Model;
 
 import java.awt.Point;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating Model objects.
+ */
 public class ModelFactory {
-	protected Point position;
-	protected Direction direction;
+    /** The position. */
+    private Point position;
 
-	public ModelFactory(Point p) {
-		position = p;
-	}
+    /** The direction. */
+    private Direction direction;
 
-	public Point getPosition() {
-		return position;
-	}
+    /**
+     * Instantiates a new model factory.
+     * 
+     * @param p
+     *            the p
+     */
+    public ModelFactory(final Point p) {
+	setPosition(p);
+    }
 
-	public Direction getDirection() {
-		return direction;
-	}
+    /**
+     * Gets the position.
+     * 
+     * @return the position
+     */
+    public final Point getPosition() {
+	return position;
+    }
 
-	public void setDirection(Direction d) {
-		direction = d;
-	}
+    /**
+     * Gets the direction.
+     * 
+     * @return the direction
+     */
+    public final Direction getDirection() {
+	return direction;
+    }
+
+    /**
+     * Sets the direction.
+     * 
+     * @param d
+     *            the new direction
+     */
+    public final void setDirection(final Direction d) {
+	direction = d;
+    }
+
+    /**
+     * Sets the position.
+     * 
+     * @param position
+     *            the new position
+     */
+    protected final void setPosition(final Point position) {
+	this.position = position;
+    }
 }

@@ -1,7 +1,17 @@
 package com.btl.Model;
 
+/**
+ * The Enum Direction.
+ */
 public enum Direction {
 
-	UP, RIGHT, DOWN, LEFT;
+    /** Len tren. */
+    UP,
+    /** Sang phai. */
+    RIGHT,
+    /** Xuong duoi. */
+    DOWN,
+    /** Sang trai. */
+    LEFT;
 
 }
