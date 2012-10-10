@@ -8,25 +8,29 @@ import java.awt.Point;
  */
 public class ModelTerminal {
 
-    /** The position. */
-    Point position;
+	/** The position. */
+	protected Point position;
 
-    /**
-     * Instantiates a new model terminal.
-     * 
-     * @param p
-     *            the p
-     */
-    public ModelTerminal(Point p) {
-	position = p;
-    }
+	/**
+	 * Instantiates a new model terminal.
+	 * 
+	 * @param p
+	 *            the p
+	 */
+	public ModelTerminal(Point p) {
+		position = p;
+	}
 
-    /**
-     * Gets the position.
-     * 
-     * @return the position
-     */
-    public Point getPosition() {
-	return position;
-    }
+	public ModelTerminal() {
+
+	}
+
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
+	public Point getPosition() {
+		return position;
+	}
 }

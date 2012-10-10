@@ -10,16 +10,25 @@ import java.util.ArrayList;
 public class ModelSwitch {
 
 	/** The list direction. */
-	protected ArrayList<Direction> listDirection;
+	private ArrayList<Direction> listDirection;
 
 	/** The position. */
-	protected Point position;
+	private Point position;
 
 	/** The current dir. */
-	protected int currentDir = -1; /* Khong co huong nao thi currentDir = -1 */
+	private int currentDir = -1; /* Khong co huong nao thi currentDir = -1 */
 
 	public void setCurrentDir(int i) {
 		this.currentDir = i;
+	}
+	public ArrayList<Direction> getListDirection() {
+		return listDirection;
+	}
+	protected void setListDirection(ArrayList<Direction> listDirection) {
+		this.listDirection = listDirection;
+	}
+	protected void setPosition(Point position) {
+		this.position = position;
 	}
 	/**
 	 * Instantiates a new model switch.
@@ -28,8 +37,12 @@ public class ModelSwitch {
 	 *            the p
 	 */
 	public ModelSwitch(Point p) {
+		this();
 		this.position = p;
 
+	}
+
+	public ModelSwitch() {
 		listDirection = new ArrayList<Direction>();
 	}
 
@@ -79,5 +92,20 @@ public class ModelSwitch {
 		if (this.currentDir != -1) {
 			this.currentDir = (this.currentDir + 1) / this.listDirection.size();
 		}
+	}
+
+	public int getCurrentDir() {
+		return this.currentDir;
+	}
+
+	public Direction getDirection() {
+		if (this.listDirection.size() > 0)
+			return this.listDirection.get(this.currentDir);
+		else
+			return null;
+	}
+
+	public Point getPosition() {
+		return this.position;
 	}
 }

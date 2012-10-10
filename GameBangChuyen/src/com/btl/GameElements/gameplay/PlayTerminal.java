@@ -21,6 +21,10 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		}
 	}
 
+	public PlayTerminal(ModelTerminal terminal) {
+		this.position = terminal.getPosition();
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		Point coordinate = this.getCoordinate();

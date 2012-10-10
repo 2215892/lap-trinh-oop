@@ -23,6 +23,10 @@ public class ModelFactory {
 		setPosition(p);
 	}
 
+	public ModelFactory() {
+
+	}
+
 	public ModelFactory(final Point p, Direction d) {
 		setPosition(p);
 		setDirection(d);

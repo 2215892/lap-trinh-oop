@@ -32,6 +32,11 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		}
 	}
 
+	public PlayFactory(final ModelFactory factory) {
+		this.setPosition(factory.getPosition());
+		this.setDirection(factory.getDirection());
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
