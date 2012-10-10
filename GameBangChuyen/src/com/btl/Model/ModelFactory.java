@@ -7,57 +7,62 @@ import java.awt.Point;
  * A factory for creating Model objects.
  */
 public class ModelFactory {
-    /** The position. */
-    private Point position;
+	/** The position. */
+	private Point position;
 
-    /** The direction. */
-    private Direction direction;
+	/** The direction. */
+	private Direction direction;
 
-    /**
-     * Instantiates a new model factory.
-     * 
-     * @param p
-     *            the p
-     */
-    public ModelFactory(final Point p) {
-	setPosition(p);
-    }
+	/**
+	 * Instantiates a new model factory.
+	 * 
+	 * @param p
+	 *            the p
+	 */
+	public ModelFactory(final Point p) {
+		setPosition(p);
+	}
 
-    /**
-     * Gets the position.
-     * 
-     * @return the position
-     */
-    public final Point getPosition() {
-	return position;
-    }
+	public ModelFactory(final Point p, Direction d) {
+		setPosition(p);
+		setDirection(d);
+	}
 
-    /**
-     * Gets the direction.
-     * 
-     * @return the direction
-     */
-    public final Direction getDirection() {
-	return direction;
-    }
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
+	public final Point getPosition() {
+		return position;
+	}
 
-    /**
-     * Sets the direction.
-     * 
-     * @param d
-     *            the new direction
-     */
-    public final void setDirection(final Direction d) {
-	direction = d;
-    }
+	/**
+	 * Gets the direction.
+	 * 
+	 * @return the direction
+	 */
+	public final Direction getDirection() {
+		return direction;
+	}
 
-    /**
-     * Sets the position.
-     * 
-     * @param position
-     *            the new position
-     */
-    protected final void setPosition(final Point position) {
-	this.position = position;
-    }
+	/**
+	 * Sets the direction.
+	 * 
+	 * @param d
+	 *            the new direction
+	 */
+	public final void setDirection(final Direction d) {
+		direction = d;
+	}
+
+	/**
+	 * Sets the position.
+	 * 
+	 * @param position
+	 *            the new position
+	 */
+	protected final void setPosition(final Point position) {
+		this.position = position;
+	}
 }
