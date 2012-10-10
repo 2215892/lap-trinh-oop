@@ -18,10 +18,11 @@ public class ModelSwitch {
 	/** The current dir. */
 	private int currentDir = -1; /* Khong co huong nao thi currentDir = -1 */
 
-	public void setCurrentDir(int i) {
+	protected void setCurrentDir(int i) {
 		this.currentDir = i;
 	}
-	public ArrayList<Direction> getListDirection() {
+
+	protected ArrayList<Direction> getListDirection() {
 		return listDirection;
 	}
 	protected void setListDirection(ArrayList<Direction> listDirection) {
@@ -44,6 +45,13 @@ public class ModelSwitch {
 
 	public ModelSwitch() {
 		listDirection = new ArrayList<Direction>();
+	}
+
+	public ModelSwitch(final ModelSwitch mSwitch) {
+		this();
+		this.setPosition(mSwitch.getPosition());
+		this.setCurrentDir(mSwitch.getCurrentDir());
+		this.setListDirection(mSwitch.getListDirection());
 	}
 
 	/**
@@ -94,7 +102,7 @@ public class ModelSwitch {
 		}
 	}
 
-	public int getCurrentDir() {
+	protected int getCurrentDir() {
 		return this.currentDir;
 	}
 

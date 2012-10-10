@@ -25,6 +25,14 @@ public class ModelTerminal {
 
 	}
 
+	public ModelTerminal(final ModelTerminal terminal) {
+		this.position = terminal.getPosition();
+	}
+
+	protected void setPosition(Point position) {
+		this.position = position;
+	}
+
 	/**
 	 * Gets the position.
 	 * 

@@ -27,7 +27,13 @@ public class ModelFactory {
 
 	}
 
-	public ModelFactory(final Point p, Direction d) {
+	public ModelFactory(final ModelFactory factory) {
+
+		this.setPosition(factory.getPosition());
+		this.setDirection(factory.getDirection());
+	}
+
+	public ModelFactory(final Point p, final Direction d) {
 		setPosition(p);
 		setDirection(d);
 	}

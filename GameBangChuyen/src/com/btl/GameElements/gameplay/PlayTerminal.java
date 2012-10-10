@@ -22,7 +22,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	}
 
 	public PlayTerminal(ModelTerminal terminal) {
-		this.position = terminal.getPosition();
+		super(terminal);
 	}
 
 	@Override

@@ -27,9 +27,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		super(p);
 	}
 	public PlaySwitch(ModelSwitch mSwitch) {
-		this.setPosition(mSwitch.getPosition());
-		this.setCurrentDir(mSwitch.getCurrentDir());
-		this.setListDirection(mSwitch.getListDirection());
+		super(mSwitch);
 	}
 	/**
 	 * Lay toa do de ve hinh
