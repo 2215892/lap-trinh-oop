@@ -11,7 +11,7 @@ import com.btl.Model.ModelTerminal;
 public class PlayTerminal extends ModelTerminal implements Drawable {
 	public static final int SIZE = PlaySquare.SIZE;
 	private static Image picture;
-	private static final String resDir = "E:\\Working project\\OOP\\res\\terminal.pnt";
+	private static final String resDir = "E:\\Working project\\OOP\\res\\terminal.png";
 
 	public PlayTerminal(Point p) {
 		super(p);
@@ -23,14 +23,19 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	public PlayTerminal(ModelTerminal terminal) {
 		super(terminal);
+		if (PlayTerminal.picture == null) {
+			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
+		}
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		Point coordinate = this.getCoordinate();
-		int imageSize = 2 * SIZE;
+		int imageSizeWidth = 2 * SIZE;
+		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
+
 		g.drawImage(PlayTerminal.picture, coordinate.x, coordinate.y,
-				imageSize, imageSize, null);
+				imageSizeWidth, imageSizeHeigh, null);
 
 	}
 

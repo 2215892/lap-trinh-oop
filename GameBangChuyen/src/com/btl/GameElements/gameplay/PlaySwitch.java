@@ -15,7 +15,7 @@ import com.btl.Model.ModelSwitch;
 public class PlaySwitch extends ModelSwitch implements Drawable {
 
 	/** The Constant SIZE. */
-	public final static int SIZE = 30;
+	public final static int SIZE = 20;
 
 	/**
 	 * Instantiates a new play switch.
@@ -54,7 +54,8 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	@Override
 	public void paint(Graphics g) {
 		Point coordinate = this.getCoordinate();
-		int imageSize = 2 * SIZE;
+		int imageSizeWidth = 2 * SIZE;
+		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
 		if (this.getListDirection().size() == 1) { /* Co 1 huong */
 
 			Direction direction = this.getListDirection().get(
@@ -63,22 +64,22 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 			switch (direction) { /* Xet huong de chon hinh phu hop */
 				case UP : {
 					g.drawImage(DirectionImage.UP, coordinate.x, coordinate.y,
-							imageSize, imageSize, null);
+							imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case DOWN : {
 					g.drawImage(DirectionImage.DOWN, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case RIGHT : {
 					g.drawImage(DirectionImage.RIGHT, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case LEFT : {
 					g.drawImage(DirectionImage.LEFT, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 			}
@@ -90,22 +91,22 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 			switch (direction) { /* Xet huong de chon hinh phu hop */
 				case UP : {
 					g.drawImage(DirectionImage.SUP, coordinate.x, coordinate.y,
-							imageSize, imageSize, null);
+							imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case DOWN : {
 					g.drawImage(DirectionImage.SDOWN, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case RIGHT : {
 					g.drawImage(DirectionImage.SRIGHT, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 				case LEFT : {
 					g.drawImage(DirectionImage.SLEFT, coordinate.x,
-							coordinate.y, imageSize, imageSize, null);
+							coordinate.y, imageSizeWidth, imageSizeHeigh, null);
 					break;
 				}
 			}

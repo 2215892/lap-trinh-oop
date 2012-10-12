@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameEngine.Layer;
+import com.btl.Model.ModelFactory;
 import com.btl.Model.ModelMap;
+import com.btl.Model.ModelSwitch;
+import com.btl.Model.ModelTerminal;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -22,8 +25,8 @@ public class PlayState extends GameState {
 
 	private Image buffer;
 
-	private Layer squareLayer, switchLayer, FTLayer, boxLayer, menuLayer,
-			hiddenMenuLayer;
+	private Layer squareLayer, switchLayer, factoryLayer, terminalLayer,
+			boxLayer, menuLayer, hiddenMenuLayer;
 	private ArrayList<Layer> listLayer;
 
 	/**
@@ -32,13 +35,27 @@ public class PlayState extends GameState {
 	 * @param parent
 	 *            the parent
 	 */
-	public PlayState(GamePanel parent, ModelMap map) {
+	public PlayState(GamePanel parent, final ModelMap map) {
 		super(parent);
 		initialize();
 		initFromModelMap(map);
 	}
 
-	private void initFromModelMap(ModelMap map) {
+	private void initFromModelMap(final ModelMap map) {
+		/* them factory tu map vao factoryLayer */
+		for (ModelFactory factory : map.getListFactory()) {
+			this.factoryLayer.addDrawable(new PlayFactory(factory));
+		}
+
+		/* them terminal tu map vao terminalLayer */
+		for (ModelTerminal terminal : map.getListTerminal()) {
+			this.terminalLayer.addDrawable(new PlayTerminal(terminal));
+		}
+
+		/* them switch vao switchLayer */
+		for (ModelSwitch mSwitch : map.getListSwitch()) {
+			this.switchLayer.addDrawable(new PlaySwitch(mSwitch));
+		}
 
 	}
 
@@ -49,13 +66,6 @@ public class PlayState extends GameState {
 		buffer = new BufferedImage(PlayState.WIDTH, PlayState.HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
 
-		this.listLayer = new ArrayList<Layer>();
-		this.listLayer.add(squareLayer);
-		this.listLayer.add(switchLayer);
-		this.listLayer.add(FTLayer);
-		this.listLayer.add(boxLayer);
-		this.listLayer.add(menuLayer);
-		this.listLayer.add(hiddenMenuLayer);
 		//
 		// SquareLayer
 		//
@@ -65,9 +75,13 @@ public class PlayState extends GameState {
 		//
 		this.switchLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
-		// FTLayer
+		// factoryLayer
 		//
-		this.FTLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
+		this.factoryLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
+		//
+		// terminalLayer
+		//
+		this.terminalLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
 		// boxLayer
 		//
@@ -81,6 +95,17 @@ public class PlayState extends GameState {
 		//
 		this.hiddenMenuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
 		this.hiddenMenuLayer.hide();
+		//
+		// listLayer
+		//
+		this.listLayer = new ArrayList<Layer>();
+		this.listLayer.add(squareLayer);
+		this.listLayer.add(switchLayer);
+		this.listLayer.add(factoryLayer);
+		this.listLayer.add(terminalLayer);
+		this.listLayer.add(boxLayer);
+		this.listLayer.add(menuLayer);
+		this.listLayer.add(hiddenMenuLayer);
 
 	}
 
@@ -158,8 +183,14 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void gameRender(Graphics g) {
+		Graphics g1 = buffer.getGraphics();
+		for (Layer l : this.listLayer) {
+			l.render();
+			g1.drawImage(l.getLayer(), 0, 0, null);
+
+		}
+
 		g.drawImage(this.buffer, 0, 0, null);
 
 	}
-
 }

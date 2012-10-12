@@ -34,6 +34,10 @@ public class PlayFactory extends ModelFactory implements Drawable {
 
 	public PlayFactory(final ModelFactory factory) {
 		super(factory);
+
+		if (PlayFactory.picture == null) {
+			PlayFactory.picture = ConversionFunction.loadImage(resDir);
+		}
 	}
 
 	/*
@@ -44,9 +48,10 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	@Override
 	public void paint(final Graphics g) {
 		Point coordinate = this.getCoordinate();
-		int imageSize = 2 * SIZE;
-		g.drawImage(PlayFactory.picture, coordinate.x, coordinate.y, imageSize,
-				imageSize, null);
+		int imageSizeWidth = 2 * SIZE;
+		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
+		g.drawImage(PlayFactory.picture, coordinate.x, coordinate.y,
+				imageSizeWidth, imageSizeHeigh, null);
 
 	}
 
