@@ -51,12 +51,13 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		if (this.picture == null) {
 			initPicture();
 		}
-		g.drawImage(this.picture, coordinate.x - 13, coordinate.y - 11, null);
+		g.drawImage(this.picture, coordinate.x - 13, coordinate.y - 11 - SIZE
+				/ 2, null);
 		if (!(this.getListDirection().size() == 1 && this.input.size() == 1))
 			g.drawImage(
 					getArrow(getDirection(),
 							this.getListDirection().size() == 1),
-					coordinate.x + 1, coordinate.y, null);
+					coordinate.x + 1, coordinate.y - SIZE / 2, null);
 
 	}
 	private Image getArrow(final Direction d, boolean singleDirection) {

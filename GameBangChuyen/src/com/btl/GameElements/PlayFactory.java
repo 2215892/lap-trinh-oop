@@ -49,10 +49,8 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	public void paint(final Graphics g) {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
-		int imageSizeWidth = 2 * SIZE;
-		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
-		g.drawImage(PlayFactory.picture, coordinate.x, coordinate.y,
-				imageSizeWidth, imageSizeHeigh, null);
+		g.drawImage(PlayFactory.picture, coordinate.x, coordinate.y - SIZE / 2,
+				null);
 
 	}
 

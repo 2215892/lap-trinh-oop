@@ -32,11 +32,9 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	public void paint(Graphics g) {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
-		int imageSizeWidth = 2 * SIZE;
-		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
 
-		g.drawImage(PlayTerminal.picture, coordinate.x, coordinate.y,
-				imageSizeWidth, imageSizeHeigh, null);
+		g.drawImage(PlayTerminal.picture, coordinate.x,
+				coordinate.y - SIZE / 2, null);
 
 	}
 
