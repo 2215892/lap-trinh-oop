@@ -6,7 +6,7 @@ import java.awt.Point;
 /**
  * The Class ModelTerminal.
  */
-public class ModelTerminal {
+public class ModelTerminal extends GraphNode implements ModelObject {
 
 	/** The position. */
 	protected Point position;

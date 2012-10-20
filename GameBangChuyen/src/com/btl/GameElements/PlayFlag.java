@@ -1,4 +1,4 @@
-package com.btl.GameElements.gameplay;
+package com.btl.GameElements;
 
 import java.awt.Graphics;
 import java.awt.Point;

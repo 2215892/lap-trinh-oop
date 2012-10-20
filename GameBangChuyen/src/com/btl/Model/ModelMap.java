@@ -28,7 +28,7 @@ public class ModelMap {
 		return listTerminal;
 	}
 
-	public ModelMap createMap(final String fileDir) {
+	public static ModelMap createMap(final String fileDir) {
 		ModelMap map = new ModelMap();
 		if (map.loadMap(fileDir)) {
 			return map;
@@ -77,16 +77,19 @@ public class ModelMap {
 
 				String temp;
 
-				temp = input.split("factory\n{\n")[1];
-				temp = temp.split("}")[0];
+				temp = input.split("factory")[1];
+				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
+				temp = temp.split("\\nend")[0];
 				readFactory(temp);
 
-				temp = input.split("terminal\n{\n")[1];
-				temp = temp.split("}")[0];
+				temp = input.split("terminal")[1];
+				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
+				temp = temp.split("\\nend")[0];
 				readTerminal(temp);
 
-				temp = input.split("switch\n{\n")[1];
-				temp = temp.split("}")[0];
+				temp = input.split("switch")[1];
+				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
+				temp = temp.split("\\nend")[0];
 				readSwitch(temp);
 
 				return true;
@@ -109,13 +112,13 @@ public class ModelMap {
 
 	private Direction string2Direction(final String str) {
 
-		if (str == "UP")
+		if (str.equals("UP"))
 			return Direction.UP;
-		if (str == "DOWN")
+		if (str.equals("DOWN"))
 			return Direction.DOWN;
-		if (str == "RIGHT")
+		if (str.equals("RIGHT"))
 			return Direction.RIGHT;
-		if (str == "LEFT")
+		if (str.equals("LEFT"))
 			return Direction.LEFT;
 		return null;
 

@@ -6,7 +6,7 @@ import java.awt.Point;
 /**
  * A factory for creating Model objects.
  */
-public class ModelFactory {
+public class ModelFactory extends GraphNode implements ModelObject {
 	/** The position. */
 	private Point position;
 

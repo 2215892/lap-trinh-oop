@@ -3,9 +3,6 @@ package com.btl.GameElements;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import com.btl.GameElements.gameplay.BoxImage;
-import com.btl.GameElements.gameplay.PlayFlag;
-import com.btl.GameElements.gameplay.PlaySquare;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 

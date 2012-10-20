@@ -2,14 +2,11 @@ package com.btl.GameBoard;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.btl.GameElements.gameplay.PlayState;
+import com.btl.GameElements.PlayState;
 import com.btl.Model.ModelMap;
 
 // TODO: Auto-generated Javadoc
@@ -59,25 +56,12 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		JButton btnNewButton = new JButton("Init");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ModelMap map = ModelMap
-						.createMap("E:\\Working project\\OOP\\bangchuyen.txt");
-				if (map == null)
-					JOptionPane.showMessageDialog(frame, "Error");
-				else
-					panel.setState(new PlayState(panel, map));
-			}
-		});
-		frame.getContentPane().add(btnNewButton, BorderLayout.NORTH);
+		ModelMap map = ModelMap
+				.createMap("E:\\Working project\\OOP\\bangchuyen.txt");
+		if (map == null)
+			JOptionPane.showMessageDialog(frame, "Error");
+		else
+			panel.setState(new PlayState(panel, map));
 
-		JButton btnStart = new JButton("Start");
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panel.repaint();
-			}
-		});
-		frame.getContentPane().add(btnStart, BorderLayout.SOUTH);
 	}
 }

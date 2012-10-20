@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * The Class ModelSwitch.
  */
-public class ModelSwitch {
+public class ModelSwitch extends GraphNode implements ModelObject {
 
 	/** The list direction. */
 	private ArrayList<Direction> listDirection;
@@ -22,7 +22,7 @@ public class ModelSwitch {
 		this.currentDir = i;
 	}
 
-	protected ArrayList<Direction> getListDirection() {
+	public ArrayList<Direction> getListDirection() {
 		return listDirection;
 	}
 	protected void setListDirection(ArrayList<Direction> listDirection) {

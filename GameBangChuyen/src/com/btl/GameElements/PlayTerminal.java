@@ -1,4 +1,4 @@
-package com.btl.GameElements.gameplay;
+package com.btl.GameElements;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -30,7 +30,8 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	@Override
 	public void paint(Graphics g) {
-		Point coordinate = this.getCoordinate();
+		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
+				SIZE);
 		int imageSizeWidth = 2 * SIZE;
 		int imageSizeHeigh = (int) (imageSizeWidth / Math.sqrt(3));
 
@@ -43,23 +44,6 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	public boolean contains(Point point) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	/**
-	 * Lay toa do de ve hinh
-	 * 
-	 * @return toa do goc tren ben trai de ve hinh
-	 */
-	private Point getCoordinate() {
-		Point coordinateLogic = new Point(this.getPosition().x * SIZE,
-				this.getPosition().y * SIZE);
-		/* Goc tren ben trai */
-		Point vertexA = ConversionFunction.logicToReal(coordinateLogic);
-		/* Goc tren ben phai */
-		Point vertexB = ConversionFunction.logicToReal(new Point(
-				coordinateLogic.x + SIZE, coordinateLogic.y));
-
-		return new Point(vertexA.x, vertexB.y);
 	}
 
 }
