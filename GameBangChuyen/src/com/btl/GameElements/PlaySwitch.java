@@ -136,10 +136,8 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	@Override
 	public boolean contains(Point point) {
 
-		Point logicCoordinate = ConversionFunction.realToLogic(point);
-
-		logicCoordinate.x = logicCoordinate.x / PlaySwitch.SIZE;
-		logicCoordinate.y = logicCoordinate.y / PlaySwitch.SIZE;
+		Point logicCoordinate = ConversionFunction.locationToPosition(point,
+				SIZE);
 
 		if (logicCoordinate.equals(getPosition()))
 			return true;

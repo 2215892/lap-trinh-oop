@@ -11,6 +11,7 @@ import java.util.TimerTask;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
+import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.Model.Direction;
 import com.btl.Model.GraphNode;
@@ -222,6 +223,9 @@ public class PlayState extends GameState {
 		// TODO Auto-generated method stub
 
 	}
+	private void switchClickedHandle(final PlaySwitch pSwitch) {
+		pSwitch.changeDirection();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -252,7 +256,18 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		Drawable clicked = null;
+		Point p = new Point(arg0.getX(), arg0.getY());
+
+		for (Layer i : this.listLayer) {
+			clicked = i.getClickedObj(p);
+			if (clicked != null)
+				break;
+		}
+		if (clicked != null) {
+			if (clicked.getClass().equals(PlaySwitch.class))
+				switchClickedHandle((PlaySwitch) clicked);
+		}
 
 	}
 

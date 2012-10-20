@@ -98,7 +98,7 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 	 */
 	public void changeDirection() {
 		if (this.currentDir != -1) {
-			this.currentDir = (this.currentDir + 1) / this.listDirection.size();
+			this.currentDir = (this.currentDir + 1) % this.listDirection.size();
 		}
 	}
 

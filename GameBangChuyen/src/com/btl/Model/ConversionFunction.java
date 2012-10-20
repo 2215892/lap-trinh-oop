@@ -47,10 +47,14 @@ public abstract class ConversionFunction {
 	}
 
 	public static Point locationToPosition(Point location, int size) {
-		return new Point((location.x + 2 * location.y) / 2 / size,
-				(location.x - 2 * location.y) / 2 / size);
+		int x = (location.x + 2 * location.y) / 2 / size;
+		int y = (location.x - 2 * location.y) / 2 / size;
+		if (x < 0)
+			x--;
+		if (y < 0)
+			y--;
+		return new Point(x, y);
 	}
-
 	/**
 	 * Load anh.
 	 * 
