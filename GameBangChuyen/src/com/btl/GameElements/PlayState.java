@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
+
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameEngine.Drawable;
@@ -55,12 +57,17 @@ public class PlayState extends GameState {
 
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				parent.repaint();
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						parent.repaint();
+					}
+				});
 			}
 		}, 0, 20);
 
 	}
-
 	private void initSquare() {
 		for (PlaySwitch pSwitch : this.listSwitch) {
 			pSwitch.setFlag(0);
