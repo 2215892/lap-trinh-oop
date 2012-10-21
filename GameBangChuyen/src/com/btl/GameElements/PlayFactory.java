@@ -16,7 +16,7 @@ public class PlayFactory extends ModelFactory implements Drawable {
 
 	public static final int SIZE = PlaySquare.SIZE;
 	private static Image picture;
-	private static final String resDir = "E:\\Working project\\OOP\\res\\factory.png";
+	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
 
 	/**
 	 * Instantiates a new play factory.
@@ -49,8 +49,8 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	public void paint(final Graphics g) {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
-		g.drawImage(PlayFactory.picture, coordinate.x, coordinate.y - SIZE / 2,
-				null);
+		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 7
+				- SIZE / 2, null);
 
 	}
 
@@ -61,7 +61,12 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	 */
 	@Override
 	public final boolean contains(final Point point) {
+		Point logicCoordinate = ConversionFunction.locationToPosition(point,
+				SIZE);
+
+		if (logicCoordinate.equals(getPosition()))
+			return true;
+
 		return false;
 	}
-
 }

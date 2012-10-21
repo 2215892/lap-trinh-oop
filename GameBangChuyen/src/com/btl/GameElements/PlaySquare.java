@@ -19,7 +19,7 @@ public class PlaySquare implements Drawable, ModelObject {
 	private Point position;
 	private Image picture = null;
 	private int picIndex = 0;
-	private static final int PICCOUNT = 16;
+	private static final int PICCOUNT = 8;
 
 	/** The Constant SIZE. */
 	public final static int SIZE = PlaySwitch.SIZE;

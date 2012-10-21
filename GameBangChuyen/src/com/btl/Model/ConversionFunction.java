@@ -49,9 +49,9 @@ public abstract class ConversionFunction {
 	public static Point locationToPosition(Point location, int size) {
 		int x = (location.x + 2 * location.y) / 2;
 		int y = (location.x - 2 * location.y) / 2;
-		if (x < 0)
+		if (x < 0 && (x % size != 0))
 			x -= size;
-		if (y < 0)
+		if (y < 0 && (y % size != 0))
 			y -= size;
 		return new Point(x / size, y / size);
 	}

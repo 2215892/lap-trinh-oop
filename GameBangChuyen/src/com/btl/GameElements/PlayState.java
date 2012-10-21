@@ -15,6 +15,7 @@ import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
+import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.GraphNode;
 import com.btl.Model.ModelFactory;
@@ -31,16 +32,19 @@ public class PlayState extends GameState {
 	private static final int WIDTH = 700;
 	private static final int HEIGHT = 700;
 
+	private Image background = null;
+
 	private Image buffer;
 
-	private ArrayList<PlaySquare> listSquare = new ArrayList<PlaySquare>();
-	private ArrayList<PlayFactory> listFactory = new ArrayList<PlayFactory>();
-	private ArrayList<PlayTerminal> listTerminal = new ArrayList<PlayTerminal>();
-	private ArrayList<PlaySwitch> listSwitch = new ArrayList<PlaySwitch>();
+	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();
+	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
+	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
+	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
 
 	private Layer menuLayer, hiddenMenuLayer;
-	private DrawLayer bgLayer, objLayer;
-	private ArrayList<Layer> listLayer;
+	private DrawLayer bgLayer, objLayer, switchLayer;
+	private ArrayList<Layer> listLayers;
+	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 
 	/**
 	 * Instantiates a new play state.
@@ -57,6 +61,9 @@ public class PlayState extends GameState {
 
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
+
+				updateGame();
+
 				SwingUtilities.invokeLater(new Runnable() {
 
 					@Override
@@ -64,16 +71,59 @@ public class PlayState extends GameState {
 						parent.repaint();
 					}
 				});
+
 			}
 		}, 0, 20);
 
 	}
+
+	int count = 0;
+
+	private void updateGame() {
+
+		// TODO tesst
+		if (count == 0) {
+			PlayBox test = new PlayBox(ConversionFunction.positionToLocation(
+					new Point(7, -4), PlaySwitch.SIZE), null);
+
+			objLayer.addDrawable(test);
+			listBoxs.add(test);
+		}
+		count = (count + 1) % 64;
+
+		for (PlayBox i : listBoxs) {
+			if (!(i.isMoving())) {
+
+				Drawable drawable = this.bgLayer.getClickedObj(i.getLocation());
+				if (drawable == null)
+					drawable = this.switchLayer.getClickedObj(i.getLocation());
+				if (drawable != null) {
+					if (drawable.getClass().equals(PlaySwitch.class)) {
+						PlaySwitch pSwitch = (PlaySwitch) drawable;
+						if (i.getLocation()
+								.equals(ConversionFunction.positionToLocation(
+										pSwitch.getPosition(), PlaySwitch.SIZE)))
+							i.setDestination(pSwitch.getNeighbor(
+									pSwitch.getDirection()).getPosition());
+					} else if (drawable.getClass().equals(PlayFactory.class)) {
+						PlayFactory factory = (PlayFactory) drawable;
+						if (i.getLocation()
+								.equals(ConversionFunction.positionToLocation(
+										factory.getPosition(), PlaySwitch.SIZE)))
+							i.setDestination(factory.getNeighbor(
+									factory.getDirection()).getPosition());
+					}
+				}
+
+			}
+		}
+	}
 	private void initSquare() {
-		for (PlaySwitch pSwitch : this.listSwitch) {
+		for (PlaySwitch pSwitch : this.listSwitchs) {
 			pSwitch.setFlag(0);
 		}
 
-		for (PlayFactory factory : this.listFactory) {
+		for (PlayFactory factory : this.listFactorys) {
 			initFromFactory(factory);
 		}
 
@@ -96,7 +146,7 @@ public class PlayState extends GameState {
 			newPoint = goDirection(newPoint, d);
 			node = getNode(newPoint);
 			if (node == null) { /* Tao square */
-				this.listSquare.add(new PlaySquare(d, newPoint));
+				this.listSquares.add(new PlaySquare(d, newPoint));
 
 			} else
 				return node;
@@ -105,11 +155,11 @@ public class PlayState extends GameState {
 	}
 
 	private GraphNode getNode(final Point p) {
-		for (PlaySwitch i : this.listSwitch) {
+		for (PlaySwitch i : this.listSwitchs) {
 			if (i.getPosition().equals(p))
 				return i;
 		}
-		for (PlayTerminal i : this.listTerminal) {
+		for (PlayTerminal i : this.listTerminals) {
 			if (i.getPosition().equals(p))
 				return i;
 		}
@@ -147,36 +197,36 @@ public class PlayState extends GameState {
 	private void initFromModelMap(final ModelMap map) {
 		/* them factory tu map vao listFactory */
 		for (ModelFactory factory : map.getListFactory()) {
-			this.listFactory.add(new PlayFactory(factory));
+			this.listFactorys.add(new PlayFactory(factory));
 		}
 
 		/* them terminal tu map vao listTerminal */
 		for (ModelTerminal terminal : map.getListTerminal()) {
-			this.listTerminal.add(new PlayTerminal(terminal));
+			this.listTerminals.add(new PlayTerminal(terminal));
 		}
 
 		/* them switch vao listSwitch */
 		for (ModelSwitch mSwitch : map.getListSwitch()) {
-			this.listSwitch.add(new PlaySwitch(mSwitch));
+			this.listSwitchs.add(new PlaySwitch(mSwitch));
 		}
 
 		/* init duong trung gian va hinh thanh graph */
 		initSquare();
 
 		/* dua cac doi tuong vao bgLayer */
-		for (PlayFactory factory : this.listFactory) {
+		for (PlayFactory factory : this.listFactorys) {
 			this.bgLayer.addDrawable(factory);
 		}
-		for (PlaySquare square : this.listSquare) {
+		for (PlaySquare square : this.listSquares) {
 			this.bgLayer.addDrawable(square);
 		}
-		for (PlayTerminal terminal : this.listTerminal) {
+		for (PlayTerminal terminal : this.listTerminals) {
 			this.bgLayer.addDrawable(terminal);
 		}
-		/* Dua switch vao objLayer */
+		/* Dua switch vao switchLayer */
 
-		for (PlaySwitch mSwitch : this.listSwitch) {
-			this.objLayer.addDrawable(mSwitch);
+		for (PlaySwitch mSwitch : this.listSwitchs) {
+			this.switchLayer.addDrawable(mSwitch);
 		}
 
 		/* sap xep lai cac doi tuong trong bgLayer, objLayer */
@@ -189,17 +239,23 @@ public class PlayState extends GameState {
 	 * Initialize.
 	 */
 	private void initialize() {
+		background = ConversionFunction
+				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
 		buffer = new BufferedImage(PlayState.WIDTH, PlayState.HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
 
 		//
-		// drawLayer
+		// bgLayer
 		//
 		this.bgLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
-		// boxLayer
+		// objLayer
 		//
 		this.objLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
+		//
+		// switchLayer
+		//
+		this.switchLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
 		// menuLayer
 		//
@@ -212,14 +268,14 @@ public class PlayState extends GameState {
 		//
 		// listLayer
 		//
-		this.listLayer = new ArrayList<Layer>();
-		this.listLayer.add(bgLayer);
-		this.listLayer.add(objLayer);
-		this.listLayer.add(menuLayer);
-		this.listLayer.add(hiddenMenuLayer);
+		this.listLayers = new ArrayList<Layer>();
+		this.listLayers.add(bgLayer);
+		this.listLayers.add(switchLayer);
+		this.listLayers.add(objLayer);
+		this.listLayers.add(menuLayer);
+		this.listLayers.add(hiddenMenuLayer);
 
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -266,7 +322,7 @@ public class PlayState extends GameState {
 		Drawable clicked = null;
 		Point p = new Point(arg0.getX(), arg0.getY());
 
-		for (Layer i : this.listLayer) {
+		for (Layer i : this.listLayers) {
 			clicked = i.getClickedObj(p);
 			if (clicked != null)
 				break;
@@ -308,8 +364,11 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void gameRender(Graphics g) {
+		this.objLayer.sort();
+
 		Graphics g1 = buffer.getGraphics();
-		for (Layer l : this.listLayer) {
+		g1.drawImage(this.background, 0, 0, null);
+		for (Layer l : this.listLayers) {
 			l.render();
 			g1.drawImage(l.getLayer(), 0, 0, null);
 

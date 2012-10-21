@@ -1,5 +1,6 @@
 package com.btl.Model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public abstract class GraphNode implements ModelObject {
@@ -26,4 +27,40 @@ public abstract class GraphNode implements ModelObject {
 		return this.listNeighbor.remove(modelObj);
 	}
 
+	public ModelObject getNeighbor(final Direction d) {
+
+		Point temp;
+		switch (d) {
+			case UP :
+				for (ModelObject i : this.listNeighbor) {
+					temp = i.getPosition();
+					if (temp.x < this.getPosition().x)
+						return i;
+				}
+				break;
+			case DOWN :
+				for (ModelObject i : this.listNeighbor) {
+					temp = i.getPosition();
+					if (temp.x > this.getPosition().x)
+						return i;
+				}
+				break;
+			case LEFT :
+				for (ModelObject i : this.listNeighbor) {
+					temp = i.getPosition();
+					if (temp.y < this.getPosition().y)
+						return i;
+				}
+				break;
+			case RIGHT :
+				for (ModelObject i : this.listNeighbor) {
+					temp = i.getPosition();
+					if (temp.y > this.getPosition().y)
+						return i;
+				}
+				break;
+		}
+
+		return null;
+	}
 }
