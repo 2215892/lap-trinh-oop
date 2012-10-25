@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import com.btl.GameBoard.GamePanel;
@@ -38,12 +37,13 @@ public class PlayState extends GameState {
 
 	private Image buffer;
 
+	private ArrayList<PlayScore> listScores = new ArrayList<PlayScore>();
 	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();
 	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
 	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
 
-	private Layer menuLayer, hiddenMenuLayer;
+	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
 	private DrawLayer bgLayer, objLayer, switchLayer;
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
@@ -65,13 +65,7 @@ public class PlayState extends GameState {
 			public void actionPerformed(ActionEvent e) {
 				updateGame();
 
-				SwingUtilities.invokeLater(new Runnable() {
-
-					@Override
-					public void run() {
-						parent.repaint();
-					}
-				});
+				parent.repaint();
 			}
 		});
 
@@ -100,7 +94,17 @@ public class PlayState extends GameState {
 
 		for (PlayBox i : deletedBox) {
 			removeBox(i);
+			addScore(new PlayScore(i.getPosition(), -5000));
 		}
+	}
+	private void addScore(PlayScore score) {
+		this.listScores.add(score);
+		this.scoreLayer.addDrawable(score);
+	}
+
+	private void removeScore(PlayScore score) {
+		this.listScores.remove(score);
+		this.scoreLayer.removeDrawable(score);
 	}
 
 	private ArrayList<PlayBox> getCollidedBoxs(
@@ -120,6 +124,7 @@ public class PlayState extends GameState {
 		}
 		return collidedBoxs;
 	}
+
 	private void removeBox(PlayBox box) {
 		this.listBoxs.remove(box);
 		this.objLayer.removeDrawable(box);
@@ -171,6 +176,18 @@ public class PlayState extends GameState {
 		}
 
 		updateBoxs();
+		removeOldScore();
+	}
+
+	private void removeOldScore() {
+		ArrayList<PlayScore> listDelete = new ArrayList<PlayScore>();
+		for (PlayScore i : this.listScores) {
+			if (i.isDone())
+				listDelete.add(i);
+		}
+		for (PlayScore i : listDelete) {
+			removeScore(i);
+		}
 	}
 
 	private void initSquare() {
@@ -312,6 +329,10 @@ public class PlayState extends GameState {
 		//
 		this.switchLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
+		// scoreLayer
+		//
+		this.scoreLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
+		//
 		// menuLayer
 		//
 		this.menuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
@@ -327,6 +348,7 @@ public class PlayState extends GameState {
 		this.listLayers.add(bgLayer);
 		this.listLayers.add(switchLayer);
 		this.listLayers.add(objLayer);
+		this.listLayers.add(scoreLayer);
 		this.listLayers.add(menuLayer);
 		this.listLayers.add(hiddenMenuLayer);
 
