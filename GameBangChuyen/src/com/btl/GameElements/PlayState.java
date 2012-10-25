@@ -3,13 +3,15 @@ package com.btl.GameElements;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
@@ -46,6 +48,8 @@ public class PlayState extends GameState {
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 
+	private static final int TIMER_DELAY = 20;
+
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -57,11 +61,8 @@ public class PlayState extends GameState {
 		initialize();
 		initFromModelMap(map);
 
-		Timer timer = new Timer();
-
-		timer.scheduleAtFixedRate(new TimerTask() {
-			public void run() {
-
+		Timer timer = new Timer(TIMER_DELAY, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				updateGame();
 
 				SwingUtilities.invokeLater(new Runnable() {
@@ -71,53 +72,107 @@ public class PlayState extends GameState {
 						parent.repaint();
 					}
 				});
-
 			}
-		}, 0, 20);
+		});
 
+		timer.start();
 	}
 
-	int count = 0;
+	// TODO Test
+	int count = -1;
+	Random rnd = new Random();
+	// TODO TEst
 
-	private void updateGame() {
-
-		// TODO tesst
-		if (count == 0) {
-			PlayBox test = new PlayBox(ConversionFunction.positionToLocation(
-					new Point(7, -4), PlaySwitch.SIZE), null);
-
-			objLayer.addDrawable(test);
-			listBoxs.add(test);
-		}
-		count = (count + 1) % 64;
-
+	private void updateBoxs() {
+		ArrayList<PlayBox> deletedBox = new ArrayList<PlayBox>();
+		ArrayList<PlayBox> notMovingBoxs = new ArrayList<PlayBox>();
 		for (PlayBox i : listBoxs) {
-			if (!(i.isMoving())) {
+			if (!(i.isMoving())) { /* Chi kiem tra box da den dich */
+				notMovingBoxs.add(i);
+				setBoxDestination(i);
+				if (isBoxArrived(i)) {
+					deletedBox.add(i);
+				}
+			}
+		}
 
-				Drawable drawable = this.bgLayer.getClickedObj(i.getLocation());
-				if (drawable == null)
-					drawable = this.switchLayer.getClickedObj(i.getLocation());
-				if (drawable != null) {
-					if (drawable.getClass().equals(PlaySwitch.class)) {
-						PlaySwitch pSwitch = (PlaySwitch) drawable;
-						if (i.getLocation()
-								.equals(ConversionFunction.positionToLocation(
-										pSwitch.getPosition(), PlaySwitch.SIZE)))
-							i.setDestination(pSwitch.getNeighbor(
-									pSwitch.getDirection()).getPosition());
-					} else if (drawable.getClass().equals(PlayFactory.class)) {
-						PlayFactory factory = (PlayFactory) drawable;
-						if (i.getLocation()
-								.equals(ConversionFunction.positionToLocation(
-										factory.getPosition(), PlaySwitch.SIZE)))
-							i.setDestination(factory.getNeighbor(
-									factory.getDirection()).getPosition());
-					}
+		deletedBox.addAll(getCollidedBoxs(notMovingBoxs));
+
+		for (PlayBox i : deletedBox) {
+			removeBox(i);
+		}
+	}
+
+	private ArrayList<PlayBox> getCollidedBoxs(
+			final ArrayList<PlayBox> notMovingBoxs) {
+		ArrayList<PlayBox> collidedBoxs = new ArrayList<PlayBox>();
+		int size = notMovingBoxs.size();
+		for (int i = 0; i < size; ++i) {
+			for (int j = i + 1; j < size; ++j) {
+				PlayBox boxA = notMovingBoxs.get(i);
+				PlayBox boxB = notMovingBoxs.get(j);
+				if (boxA.getPosition().equals(boxB.getPosition())) {
+					collidedBoxs.add(boxA);
+					collidedBoxs.add(boxB);
 				}
 
 			}
 		}
+		return collidedBoxs;
 	}
+	private void removeBox(PlayBox box) {
+		this.listBoxs.remove(box);
+		this.objLayer.removeDrawable(box);
+	}
+
+	private boolean isBoxArrived(PlayBox box) {
+
+		/* Lay doi tuong tai vi tri cua box o layer background */
+		Drawable drawable = this.bgLayer.getClickedObj(box.getLocation());
+
+		if (drawable != null) {
+
+			/* Neu tim thay terminal ben duoi box */
+			if (drawable.getClass().equals(PlayTerminal.class)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private void setBoxDestination(PlayBox box) {
+		/* Lay doi tuong tai vi tri cua box o layer Switch */
+		Drawable drawable = this.switchLayer.getClickedObj(box.getLocation());
+
+		if (drawable != null) {
+
+			/* Neu tim thay switch ben duoi box */
+			if (drawable.getClass().equals(PlaySwitch.class)) {
+				PlaySwitch pSwitch = (PlaySwitch) drawable;
+
+				/* Dat dich cho box */
+				box.setDestination(pSwitch.getNeighbor(pSwitch.getDirection())
+						.getPosition());
+			}
+		}
+	}
+
+	private void updateGame() {
+
+		// TODO tesst
+		++count;
+		if (count % 64 == 0) {
+			int index = rnd.nextInt(this.listFactorys.size());
+			PlayBox test = this.listFactorys.get(index).makeBox(null);
+
+			objLayer.addDrawable(test);
+			listBoxs.add(test);
+		}
+
+		updateBoxs();
+	}
+
 	private void initSquare() {
 		for (PlaySwitch pSwitch : this.listSwitchs) {
 			pSwitch.setFlag(0);

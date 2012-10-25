@@ -67,11 +67,7 @@ public class PlayBox implements Drawable, ModelObject {
 
 	}
 	private void move() {
-		if (this.getLocation().equals(
-				ConversionFunction.positionToLocation(this.destination, SIZE))) {
-			this.direction = null;
-			this.isMoving = false;
-		} else if (this.direction != null)
+		if (this.direction != null)
 			switch (this.direction) {
 				case UP :
 					this.location.x -= 2 * step;
@@ -91,6 +87,13 @@ public class PlayBox implements Drawable, ModelObject {
 					break;
 				default :
 			}
+		if (this.destination != null
+				&& this.getLocation().equals(
+						ConversionFunction.positionToLocation(this.destination,
+								SIZE))) {
+			this.direction = null;
+			this.isMoving = false;
+		}
 	}
 
 	public boolean setDestination(final Point position) {
@@ -101,7 +104,7 @@ public class PlayBox implements Drawable, ModelObject {
 			this.direction = caculateDirection(
 					ConversionFunction.locationToPosition(this.location, SIZE),
 					this.destination);
-
+			this.isMoving = true;
 			return true;
 		}
 

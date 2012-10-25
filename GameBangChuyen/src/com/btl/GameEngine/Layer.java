@@ -94,14 +94,14 @@ public class Layer {
 		/* Xoa nen buffer */
 		g.setBackground(new Color(255, 255, 255, 0));
 		g.clearRect(0, 0, buffer.getWidth(), buffer.getHeight());
-
-		for (Drawable i : listDrawable) {
+		Drawable listObj[] = listDrawable.toArray(new Drawable[listDrawable
+				.size()]);
+		for (Drawable i : listObj) {
 			i.paint(g);
 		}
 
 		g.dispose();
 	}
-
 	/**
 	 * Show.
 	 */

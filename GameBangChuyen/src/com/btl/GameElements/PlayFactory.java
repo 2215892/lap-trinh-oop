@@ -1,5 +1,6 @@
 package com.btl.GameElements;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -32,6 +33,13 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		}
 	}
 
+	public PlayBox makeBox(Color color) {
+
+		PlayBox box = new PlayBox(ConversionFunction.positionToLocation(
+				this.getPosition(), PlaySwitch.SIZE), color);
+		box.setDestination(this.getNeighbor(this.getDirection()).getPosition());
+		return box;
+	}
 	public PlayFactory(final ModelFactory factory) {
 		super(factory);
 
