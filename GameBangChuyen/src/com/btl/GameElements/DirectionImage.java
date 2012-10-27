@@ -17,6 +17,9 @@ public abstract class DirectionImage {
 	public final static Image SQUARE = ConversionFunction.loadImage(dir
 			+ "SQUARE.png");
 
+	public final static Image LINE = ConversionFunction.loadImage(dir
+			+ "LINE.png");
+
 	public final static Image DOWN = ConversionFunction.loadImage(dir
 			+ "DOWN.png");
 

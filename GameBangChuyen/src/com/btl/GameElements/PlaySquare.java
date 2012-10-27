@@ -1,9 +1,12 @@
 package com.btl.GameElements;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
@@ -19,7 +22,7 @@ public class PlaySquare implements Drawable, ModelObject {
 	private Point position;
 	private Image picture = null;
 	private int picIndex = 0;
-	private static final int PICCOUNT = 8;
+	public static final int PICCOUNT = 8;
 
 	/** The Constant SIZE. */
 	public final static int SIZE = PlaySwitch.SIZE;
@@ -46,47 +49,68 @@ public class PlaySquare implements Drawable, ModelObject {
 	public void paint(Graphics g) {
 		Point coordinate = ConversionFunction
 				.positionToLocation(position, SIZE);
-		if (this.picture == null)
-			this.picture = DirectionImage.SQUARE;
 
-		g.drawImage(this.picture, coordinate.x - 8,
-				coordinate.y - 7 - SIZE / 2, null);
-		drawLine(g, coordinate);
+		g.drawImage(this.buffer, coordinate.x - 8, coordinate.y - 7 - SIZE / 2,
+				null);
 
 	}
 
-	private void drawLine(Graphics g, Point coordinate) {
-		// TODO
+	private BufferedImage buffer = null;
+
+	public void update() {
+		if (this.picture == null)
+			this.picture = DirectionImage.SQUARE;
+		if (this.buffer == null) {
+			buffer = new BufferedImage(this.picture.getWidth(null),
+					this.picture.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		}
+
+		Point coordinate = new Point(8, 7 + SIZE / 2);
+		Graphics2D g = (Graphics2D) buffer.getGraphics();
+
+		g.setComposite(AlphaComposite.Clear);
+		g.fillRect(0, 0, this.picture.getWidth(null),
+				this.picture.getHeight(null));
+		g.setComposite(AlphaComposite.SrcOver);
+
+		g.drawImage(picture, 0, 0, null);
+
 		g.setColor(new Color(210, 125, 14));
-		int x1, y1, x2, y2;
-		x1 = x2 = y1 = y2 = 0;
+		int x1, y1;
+		x1 = y1 = 0;
 		switch (direction) {
 			case UP :
 				x1 = coordinate.x + SIZE - SIZE * picIndex / PICCOUNT;
-				x2 = coordinate.x + 2 * SIZE - SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y + SIZE / 2 - SIZE / 2 * picIndex / PICCOUNT;
-				y2 = coordinate.y - SIZE / 2 * picIndex / PICCOUNT;
+				g.drawImage(ConversionFunction
+						.flipHorizontally(DirectionImage.LINE), x1 - 2, y1 - 9,
+						null);
+
 				break;
 			case DOWN :
 				x1 = coordinate.x + SIZE * picIndex / PICCOUNT;
-				x2 = coordinate.x + SIZE + SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y + SIZE * picIndex / PICCOUNT / 2;
-				y2 = coordinate.y - SIZE / 2 + SIZE * picIndex / PICCOUNT / 2;
+				g.drawImage(ConversionFunction
+						.flipHorizontally(DirectionImage.LINE), x1 - 2, y1 - 9,
+						null);
 				break;
 			case RIGHT :
 				x1 = coordinate.x + SIZE * picIndex / PICCOUNT;
-				x2 = coordinate.x + SIZE + SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y - SIZE / 2 * picIndex / PICCOUNT;
-				y2 = coordinate.y + SIZE / 2 - SIZE / 2 * picIndex / PICCOUNT;
+				if (x1 == coordinate.x && y1 == coordinate.y) {
+					x1 = coordinate.x + SIZE;
+					y1 = coordinate.y - SIZE / 2;
+				}
+				g.drawImage(DirectionImage.LINE, x1 - 2, y1 - 1, null);
 				break;
 			case LEFT :
 				x1 = coordinate.x + SIZE - SIZE * picIndex / PICCOUNT;
-				x2 = coordinate.x + 2 * SIZE - SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y - SIZE / 2 + SIZE / 2 * picIndex / PICCOUNT;
-				y2 = coordinate.y + SIZE / 2 * picIndex / PICCOUNT;
+				g.drawImage(DirectionImage.LINE, x1 - 2, y1 - 1, null);
 				break;
 		}
-		g.drawLine(x1, y1, x2, y2);
+
+		g.dispose();
 
 		picIndex = (picIndex + 1) % PICCOUNT;
 	}

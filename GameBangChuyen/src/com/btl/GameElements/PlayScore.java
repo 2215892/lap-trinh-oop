@@ -2,6 +2,7 @@ package com.btl.GameElements;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -48,6 +49,10 @@ public class PlayScore implements Drawable {
 		this.score = score;
 	}
 
+	public int getScore() {
+		return this.score;
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		if (!isDone) {
@@ -67,8 +72,12 @@ public class PlayScore implements Drawable {
 			Point coordinate = ConversionFunction.positionToLocation(
 					getPosition(), PlaySwitch.SIZE);
 
-			g2d.drawString(Integer.toString(score), coordinate.x, coordinate.y
-					- height);
+			String text = Integer.toString(score);
+			if (score > 0)
+				text = "+" + text;
+			Font f = new Font("Dialog", Font.BOLD, 14);
+			g.setFont(f);
+			g2d.drawString(text, coordinate.x, coordinate.y - height);
 
 			isDone = count == TIME_SPAN;
 			alpha -= 1.0f / 50;

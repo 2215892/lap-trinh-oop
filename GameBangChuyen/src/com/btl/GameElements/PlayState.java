@@ -3,14 +3,12 @@ package com.btl.GameElements;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
@@ -48,7 +46,7 @@ public class PlayState extends GameState {
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 
-	private static final int TIMER_DELAY = 20;
+	private static final int TIMER_DELAY = 30;
 
 	/**
 	 * Instantiates a new play state.
@@ -61,15 +59,16 @@ public class PlayState extends GameState {
 		initialize();
 		initFromModelMap(map);
 
-		Timer timer = new Timer(TIMER_DELAY, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
 				updateGame();
 
 				parent.repaint();
 			}
-		});
-
-		timer.start();
+		}, 0, TIMER_DELAY);
 	}
 
 	// TODO Test
@@ -78,24 +77,21 @@ public class PlayState extends GameState {
 	// TODO TEst
 
 	private void updateBoxs() {
-		ArrayList<PlayBox> deletedBox = new ArrayList<PlayBox>();
 		ArrayList<PlayBox> notMovingBoxs = new ArrayList<PlayBox>();
+		ArrayList<PlayBox> onSwitchBoxs = new ArrayList<PlayBox>();
 		for (PlayBox i : listBoxs) {
+			i.update();
 			if (!(i.isMoving())) { /* Chi kiem tra box da den dich */
-				notMovingBoxs.add(i);
-				setBoxDestination(i);
-				if (isBoxArrived(i)) {
-					deletedBox.add(i);
-				}
+
+				if (!(setBoxDestination(i)))
+					notMovingBoxs.add(i);
+				else
+					onSwitchBoxs.add(i);
 			}
 		}
 
-		deletedBox.addAll(getCollidedBoxs(notMovingBoxs));
-
-		for (PlayBox i : deletedBox) {
-			removeBox(i);
-			addScore(new PlayScore(i.getPosition(), -5000));
-		}
+		collisionHandle(onSwitchBoxs);
+		arrivalHandle(notMovingBoxs);
 	}
 	private void addScore(PlayScore score) {
 		this.listScores.add(score);
@@ -107,8 +103,7 @@ public class PlayState extends GameState {
 		this.scoreLayer.removeDrawable(score);
 	}
 
-	private ArrayList<PlayBox> getCollidedBoxs(
-			final ArrayList<PlayBox> notMovingBoxs) {
+	private void collisionHandle(final ArrayList<PlayBox> notMovingBoxs) {
 		ArrayList<PlayBox> collidedBoxs = new ArrayList<PlayBox>();
 		int size = notMovingBoxs.size();
 		for (int i = 0; i < size; ++i) {
@@ -118,11 +113,16 @@ public class PlayState extends GameState {
 				if (boxA.getPosition().equals(boxB.getPosition())) {
 					collidedBoxs.add(boxA);
 					collidedBoxs.add(boxB);
+					addScore(new PlayScore(boxA.getPosition(), -10000));
 				}
 
 			}
 		}
-		return collidedBoxs;
+
+		for (PlayBox i : collidedBoxs) {
+
+			removeBox(i);
+		}
 	}
 
 	private void removeBox(PlayBox box) {
@@ -130,23 +130,29 @@ public class PlayState extends GameState {
 		this.objLayer.removeDrawable(box);
 	}
 
-	private boolean isBoxArrived(PlayBox box) {
+	private void arrivalHandle(ArrayList<PlayBox> notMovingBoxs) {
 
-		/* Lay doi tuong tai vi tri cua box o layer background */
-		Drawable drawable = this.bgLayer.getClickedObj(box.getLocation());
+		for (PlayBox box : notMovingBoxs) {
+			/* Lay doi tuong tai vi tri cua box o layer background */
+			Drawable drawable = this.bgLayer.getClickedObj(box.getLocation());
 
-		if (drawable != null) {
+			if (drawable != null) {
 
-			/* Neu tim thay terminal ben duoi box */
-			if (drawable.getClass().equals(PlayTerminal.class)) {
-				return true;
+				/* Neu tim thay terminal ben duoi box */
+				if (drawable.getClass().equals(PlayTerminal.class)) {
+					PlayTerminal terminal = (PlayTerminal) drawable;
+
+					if (terminal.getColor().equals(box.getColor()))
+						addScore(new PlayScore(terminal.getPosition(), 5000));
+					else
+						addScore(new PlayScore(terminal.getPosition(), -5000));
+
+					removeBox(box);
+				}
 			}
 		}
-
-		return false;
 	}
-
-	private void setBoxDestination(PlayBox box) {
+	private boolean setBoxDestination(PlayBox box) {
 		/* Lay doi tuong tai vi tri cua box o layer Switch */
 		Drawable drawable = this.switchLayer.getClickedObj(box.getLocation());
 
@@ -159,24 +165,40 @@ public class PlayState extends GameState {
 				/* Dat dich cho box */
 				box.setDestination(pSwitch.getNeighbor(pSwitch.getDirection())
 						.getPosition());
+				return true;
 			}
+		}
+		return false;
+	}
+
+	private void updateSquares() {
+		for (PlaySquare i : listSquares) {
+			i.update();
+		}
+	}
+	private void updateSwitchs() {
+		for (PlaySwitch i : listSwitchs) {
+			i.update();
 		}
 	}
 
 	private void updateGame() {
 
+		updateSwitchs();
+		updateSquares();
+		updateBoxs();
+		removeOldScore();
+
 		// TODO tesst
 		++count;
 		if (count % 64 == 0) {
 			int index = rnd.nextInt(this.listFactorys.size());
-			PlayBox test = this.listFactorys.get(index).makeBox(null);
+			PlayBox test = this.listFactorys.get(index)
+					.makeBox(PlayBox.DEFAULT);
 
 			objLayer.addDrawable(test);
 			listBoxs.add(test);
 		}
-
-		updateBoxs();
-		removeOldScore();
 	}
 
 	private void removeOldScore() {
@@ -452,6 +474,7 @@ public class PlayState extends GameState {
 		}
 
 		g.drawImage(this.buffer, 0, 0, null);
+		g.drawString(Integer.toString(count * TIMER_DELAY / 1000), 10, 10);
 
 	}
 }

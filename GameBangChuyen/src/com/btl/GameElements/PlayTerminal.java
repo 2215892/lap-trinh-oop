@@ -10,7 +10,8 @@ import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelTerminal;
 
 public class PlayTerminal extends ModelTerminal implements Drawable {
-	private Color color;
+	private static final Color DEFAULT = Color.white;
+	private Color color = DEFAULT;
 	public static final int SIZE = PlaySquare.SIZE;
 	private static Image picture;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";

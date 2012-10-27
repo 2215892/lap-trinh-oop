@@ -29,7 +29,8 @@ public class PlayBox implements Drawable, ModelObject {
 
 	/* Toa do logic */
 	private Point location;
-	private Color color;
+	public static final Color DEFAULT = Color.white;
+	private Color color = DEFAULT;
 	private boolean isMoving = false;
 	private Direction direction;
 	private Point destination;
@@ -61,13 +62,13 @@ public class PlayBox implements Drawable, ModelObject {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		this.move();
 		g.drawImage(BoxImage.getBoxImage(color), location.x + 2,
 				location.y - 19, null);
 
 	}
-	private void move() {
-		if (this.direction != null)
+
+	public void update() {
+		if (this.direction != null) {
 			switch (this.direction) {
 				case UP :
 					this.location.x -= 2 * step;
@@ -87,12 +88,12 @@ public class PlayBox implements Drawable, ModelObject {
 					break;
 				default :
 			}
-		if (this.destination != null
-				&& this.getLocation().equals(
-						ConversionFunction.positionToLocation(this.destination,
-								SIZE))) {
-			this.direction = null;
-			this.isMoving = false;
+			if (this.getLocation().equals(
+					ConversionFunction.positionToLocation(this.destination,
+							SIZE))) {
+				this.direction = null;
+				this.isMoving = false;
+			}
 		}
 	}
 
