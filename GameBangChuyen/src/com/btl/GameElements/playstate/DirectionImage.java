@@ -1,6 +1,6 @@
 package com.btl.GameElements.playstate;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import com.btl.Model.ConversionFunction;
 
@@ -14,43 +14,43 @@ public abstract class DirectionImage {
 	public static String dir = "E:\\Working project\\OOP\\res\\";
 
 	/** The Constant SQUARE. */
-	public final static Image SQUARE = ConversionFunction.loadImage(dir
+	public final static BufferedImage SQUARE = ConversionFunction.loadImage(dir
 			+ "SQUARE.png");
 
-	public final static Image LINE = ConversionFunction.loadImage(dir
+	public final static BufferedImage LINE = ConversionFunction.loadImage(dir
 			+ "LINE.png");
 
-	public final static Image DOWN = ConversionFunction.loadImage(dir
+	public final static BufferedImage DOWN = ConversionFunction.loadImage(dir
 			+ "DOWN.png");
 
-	public final static Image LEFT = ConversionFunction.loadImage(dir
+	public final static BufferedImage LEFT = ConversionFunction.loadImage(dir
 			+ "LEFT.png");
 
-	public final static Image UPRIGHT = ConversionFunction.loadImage(dir
-			+ "UPRIGHT.png");
+	public final static BufferedImage UPRIGHT = ConversionFunction
+			.loadImage(dir + "UPRIGHT.png");
 
 	/** The Constant SDOWN. */
-	public final static Image SDOWN = ConversionFunction.loadImage(dir
+	public final static BufferedImage SDOWN = ConversionFunction.loadImage(dir
 			+ "SDOWN.png");
 
 	/** The Constant SLEFT. */
-	public final static Image SLEFT = ConversionFunction.loadImage(dir
+	public final static BufferedImage SLEFT = ConversionFunction.loadImage(dir
 			+ "SLEFT.png");
 
 	/** The Constant SRIGHT. */
-	public final static Image SDOWNLEFT = ConversionFunction.loadImage(dir
-			+ "SDOWNLEFT.png");
+	public final static BufferedImage SDOWNLEFT = ConversionFunction
+			.loadImage(dir + "SDOWNLEFT.png");
 
-	public final static Image ALEFT1 = ConversionFunction.loadImage(dir
+	public final static BufferedImage ALEFT1 = ConversionFunction.loadImage(dir
 			+ "ALEFT1.png");
 
-	public final static Image AUP1 = ConversionFunction.loadImage(dir
+	public final static BufferedImage AUP1 = ConversionFunction.loadImage(dir
 			+ "AUP1.png");
 
-	public final static Image ALEFT = ConversionFunction.loadImage(dir
+	public final static BufferedImage ALEFT = ConversionFunction.loadImage(dir
 			+ "ALEFT.png");
 
-	public final static Image AUP = ConversionFunction.loadImage(dir
+	public final static BufferedImage AUP = ConversionFunction.loadImage(dir
 			+ "AUP.png");
 
 }

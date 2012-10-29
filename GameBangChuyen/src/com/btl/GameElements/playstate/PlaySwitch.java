@@ -4,7 +4,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public void addInput(final Direction d) {
 		this.input.add(d);
 	}
-	public Image picture = null;
+	public BufferedImage picture = null;
 	/**
 	 * Instantiates a new play switch.
 	 * 
@@ -308,7 +307,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		picIndex = (picIndex + 1) % PICCOUNT;
 
 	}
-	private Image getArrow(final Direction d, boolean singleDirection) {
+	private BufferedImage getArrow(final Direction d, boolean singleDirection) {
 		switch (d) {
 			case UP :
 				if (singleDirection)

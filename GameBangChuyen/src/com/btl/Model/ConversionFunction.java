@@ -1,7 +1,6 @@
 package com.btl.Model;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -72,9 +71,9 @@ public abstract class ConversionFunction {
 		return img;
 	}
 
-	public static Image flipHorizontally(Image pic) {
-		Image img = new BufferedImage(pic.getWidth(null), pic.getHeight(null),
-				BufferedImage.TYPE_INT_ARGB);
+	public static BufferedImage flipHorizontally(BufferedImage pic) {
+		BufferedImage img = new BufferedImage(pic.getWidth(null),
+				pic.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.getGraphics();
 		g.drawImage(pic, pic.getWidth(null), 0, 0, pic.getHeight(null), 0, 0,
 				pic.getWidth(null), pic.getHeight(null), null);

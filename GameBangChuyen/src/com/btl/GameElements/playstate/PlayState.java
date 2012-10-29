@@ -1,7 +1,6 @@
 package com.btl.GameElements.playstate;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -31,9 +30,9 @@ public class PlayState extends GameState {
 	private static final int WIDTH = 700;
 	private static final int HEIGHT = 700;
 
-	private Image background = null;
+	private BufferedImage background = null;
 
-	private Image buffer;
+	private BufferedImage buffer;
 
 	private ArrayList<PlayScore> listScores = new ArrayList<PlayScore>();
 	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();

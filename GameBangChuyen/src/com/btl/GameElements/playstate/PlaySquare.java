@@ -4,7 +4,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
@@ -20,7 +19,7 @@ import com.btl.Model.ModelObject;
 public class PlaySquare implements Drawable, ModelObject {
 	private Direction direction;
 	private Point position;
-	private Image picture = null;
+	private BufferedImage picture = null;
 	private int picIndex = 0;
 	public static final int PICCOUNT = 8;
 

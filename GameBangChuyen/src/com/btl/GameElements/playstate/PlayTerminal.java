@@ -2,8 +2,8 @@ package com.btl.GameElements.playstate;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
@@ -13,7 +13,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	private static final Color DEFAULT = Color.white;
 	private Color color = DEFAULT;
 	public static final int SIZE = PlaySquare.SIZE;
-	private static Image picture;
+	private static BufferedImage picture;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
 
 	public PlayTerminal(Point p) {
@@ -28,6 +28,9 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		super(terminal);
 		if (PlayTerminal.picture == null) {
 			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
+		}
+		if (this.getType() == 0) {
+			this.setColor(DEFAULT);
 		}
 	}
 

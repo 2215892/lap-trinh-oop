@@ -120,7 +120,7 @@ public class Layer {
 	 * 
 	 * @return the layer
 	 */
-	public Image getLayer() {
+	public BufferedImage getLayer() {
 		if (this.isVisible)
 			return buffer;
 		else
