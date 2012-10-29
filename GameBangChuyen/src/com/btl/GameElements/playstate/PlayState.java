@@ -42,7 +42,7 @@ public class PlayState extends GameState {
 	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
 
 	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
-	private DrawLayer bgLayer, objLayer, switchLayer;
+	private DrawLayer bgLayer, objLayer, bg2Layer;
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 
@@ -154,7 +154,9 @@ public class PlayState extends GameState {
 	}
 	private boolean setBoxDestination(PlayBox box) {
 		/* Lay doi tuong tai vi tri cua box o layer Switch */
-		Drawable drawable = this.switchLayer.getClickedObj(box.getLocation());
+		Drawable drawable = this.bg2Layer.getClickedObj(box.getLocation());
+		if (drawable == null)
+			drawable = this.bgLayer.getClickedObj(box.getLocation());
 
 		if (drawable != null) {
 
@@ -317,10 +319,13 @@ public class PlayState extends GameState {
 		for (PlayTerminal terminal : this.listTerminals) {
 			this.bgLayer.addDrawable(terminal);
 		}
-		/* Dua switch vao switchLayer */
+		/* Dua switch vao bg2Layer */
 
 		for (PlaySwitch mSwitch : this.listSwitchs) {
-			this.switchLayer.addDrawable(mSwitch);
+			if (mSwitch.getListDirection().size() > 1)
+				this.bg2Layer.addDrawable(mSwitch);
+			else
+				this.bgLayer.addDrawable(mSwitch);
 		}
 
 		/* sap xep lai cac doi tuong trong bgLayer, objLayer */
@@ -347,9 +352,9 @@ public class PlayState extends GameState {
 		//
 		this.objLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
-		// switchLayer
+		// bg2Layter
 		//
-		this.switchLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
+		this.bg2Layer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
 		// scoreLayer
 		//
@@ -368,7 +373,7 @@ public class PlayState extends GameState {
 		//
 		this.listLayers = new ArrayList<Layer>();
 		this.listLayers.add(bgLayer);
-		this.listLayers.add(switchLayer);
+		this.listLayers.add(bg2Layer);
 		this.listLayers.add(objLayer);
 		this.listLayers.add(scoreLayer);
 		this.listLayers.add(menuLayer);
