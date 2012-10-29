@@ -58,19 +58,19 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 				color = Color.gray;
 				break;
 			case PINK :
-				color = Color.pink;
+				color = new Color(255, 0, 247);
 				break;
 			case BLUE :
-				color = Color.blue;
+				color = new Color(105, 162, 214);
 				break;
 			case GREEN :
-				color = Color.green;
+				color = new Color(74, 219, 54);
 				break;
 			case RED :
 				color = Color.red;
 				break;
 			case YELLOW :
-				color = Color.yellow;
+				color = new Color(232, 240, 24);
 				break;
 			default :
 				break;
@@ -78,11 +78,12 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, // Anti-alias!
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
+		g2.setColor(Color.black);
+		g2.fillOval(coordinate.x + 19, coordinate.y + 12, 12, 7);
 		g2.setColor(color);
 		g2.fillOval(coordinate.x + 20, coordinate.y + 13, 10, 5);
 
 	}
-
 	@Override
 	public boolean contains(Point point) {
 		Point logicCoordinate = ConversionFunction.locationToPosition(point,
