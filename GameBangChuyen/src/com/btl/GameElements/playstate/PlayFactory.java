@@ -1,6 +1,5 @@
 package com.btl.GameElements.playstate;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -33,7 +32,7 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		}
 	}
 
-	public PlayBox makeBox(Color color) {
+	public PlayBox makeBox(TerminalColor color) {
 
 		PlayBox box = new PlayBox(ConversionFunction.positionToLocation(
 				this.getPosition(), PlaySwitch.SIZE), color);

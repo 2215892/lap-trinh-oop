@@ -1,6 +1,5 @@
 package com.btl.GameElements.playstate;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -29,8 +28,7 @@ public class PlayBox implements Drawable, ModelObject {
 
 	/* Toa do logic */
 	private Point location;
-	public static final Color DEFAULT = Color.white;
-	private Color color = DEFAULT;
+	private TerminalColor color = TerminalColor.DEFAULT;
 	private boolean isMoving = false;
 	private Direction direction;
 	private Point destination;
@@ -50,7 +48,7 @@ public class PlayBox implements Drawable, ModelObject {
 	 * @param flag
 	 *            the flag
 	 */
-	public PlayBox(Point location, Color color) {
+	public PlayBox(Point location, TerminalColor color) {
 		this.setLocation(location);
 		this.setColor(color);
 	}
@@ -161,11 +159,11 @@ public class PlayBox implements Drawable, ModelObject {
 		return isMoving;
 	}
 
-	public Color getColor() {
+	public TerminalColor getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(TerminalColor color) {
 		this.color = color;
 	}
 

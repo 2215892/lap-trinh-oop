@@ -194,8 +194,8 @@ public class PlayState extends GameState {
 		++count;
 		if (count % 64 == 0) {
 			int index = rnd.nextInt(this.listFactorys.size());
-			PlayBox test = this.listFactorys.get(index)
-					.makeBox(PlayBox.DEFAULT);
+			PlayBox test = this.listFactorys.get(index).makeBox(
+					TerminalColor.DEFAULT);
 
 			objLayer.addDrawable(test);
 			listBoxs.add(test);

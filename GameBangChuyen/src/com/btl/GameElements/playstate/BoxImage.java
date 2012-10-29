@@ -1,6 +1,5 @@
 package com.btl.GameElements.playstate;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import com.btl.Model.ConversionFunction;
@@ -25,7 +24,7 @@ public abstract class BoxImage {
 	 *            the flag
 	 * @return the box image
 	 */
-	public static BufferedImage getBoxImage(Color color) {
+	public static BufferedImage getBoxImage(TerminalColor color) {
 		return BOX_IMAGE;
 	}
 }
