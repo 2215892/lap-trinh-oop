@@ -29,6 +29,7 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 
 	public ModelTerminal(final ModelTerminal terminal) {
 		this.position = terminal.getPosition();
+		this.setType(terminal.getType());
 	}
 
 	protected void setPosition(Point position) {
