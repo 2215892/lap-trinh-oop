@@ -6,7 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.btl.GameElements.PlayState;
+import com.btl.GameElements.playstate.PlayState;
 import com.btl.Model.ModelMap;
 
 // TODO: Auto-generated Javadoc
@@ -57,7 +57,7 @@ public class Main {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
 		ModelMap map = ModelMap
-				.createMap("E:\\Working project\\OOP\\bangchuyen.txt");
+				.createMap("E:\\Working project\\OOP\\testBangchuyen2.xml");
 		if (map == null)
 			JOptionPane.showMessageDialog(frame, "Error");
 		else

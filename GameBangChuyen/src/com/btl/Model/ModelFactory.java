@@ -72,7 +72,7 @@ public class ModelFactory extends GraphNode implements ModelObject {
 	 * @param position
 	 *            the new position
 	 */
-	protected final void setPosition(final Point position) {
+	public final void setPosition(final Point position) {
 		this.position = position;
 	}
 }

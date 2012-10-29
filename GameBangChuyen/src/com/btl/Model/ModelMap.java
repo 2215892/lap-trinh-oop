@@ -1,22 +1,46 @@
 package com.btl.Model;
 
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class ModelMap {
 
 	private ArrayList<ModelFactory> listFactory;
 	private ArrayList<ModelTerminal> listTerminal;
 	private ArrayList<ModelSwitch> listSwitch;
+	private ArrayList<ModelItem> listItem;
+
+	public void setListFactory(ArrayList<ModelFactory> listFactory) {
+		this.listFactory = listFactory;
+	}
+
+	public void setListTerminal(ArrayList<ModelTerminal> listTerminal) {
+		this.listTerminal = listTerminal;
+	}
+
+	public void setListSwitch(ArrayList<ModelSwitch> listSwitch) {
+		this.listSwitch = listSwitch;
+	}
+
+	public void setListItem(ArrayList<ModelItem> listItem) {
+		this.listItem = listItem;
+	}
+
+	private int minute, second;
 
 	private ModelMap() {
 		this.listFactory = new ArrayList<ModelFactory>();
 		this.listTerminal = new ArrayList<ModelTerminal>();
 		this.listSwitch = new ArrayList<ModelSwitch>();
+		this.listItem = new ArrayList<ModelItem>();
 
 	}
 
@@ -38,76 +62,195 @@ public class ModelMap {
 
 	private boolean loadMap(final String fileDir) {
 
-		BufferedReader bufferedReader = null;
-		StringBuilder sb = null;
+		File f = new File(fileDir);
 
-		/* Doc file */
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+		Document dom;
+
 		try {
-			bufferedReader = new BufferedReader(new FileReader(fileDir));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			sb = new StringBuilder();
-			String line = bufferedReader.readLine();
 
-			while (line != null) {
-				sb.append(line);
-				sb.append("\n");
-				line = bufferedReader.readLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				bufferedReader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			// Using factory get an instance of document builder
+			DocumentBuilder db = dbf.newDocumentBuilder();
 
-		String input = sb.toString();
+			// parse using builder to get DOM representation of the XML file
+			dom = db.parse(f);
 
-		if (input.equals("")) {
+		} catch (Exception e) {
 			return false;
-		} else {
-			try {
+		}
 
-				String temp;
+		// get the root element
+		Element docEle = dom.getDocumentElement();
 
-				temp = input.split("factory")[1];
-				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
-				temp = temp.split("\\nend")[0];
-				readFactory(temp);
+		// Factory
+		NodeList nlFactory = docEle.getElementsByTagName("factory");
+		getFactories(nlFactory);
 
-				temp = input.split("terminal")[1];
-				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
-				temp = temp.split("\\nend")[0];
-				readTerminal(temp);
+		// Terminal
+		NodeList nlTerminal = docEle.getElementsByTagName("terminal");
+		getTerminals(nlTerminal);
 
-				temp = input.split("switch")[1];
-				temp = temp.substring(temp.indexOf("\nbegin\n") + 7);
-				temp = temp.split("\\nend")[0];
-				readSwitch(temp);
+		// Switch
+		NodeList nlSwitch = docEle.getElementsByTagName("switch");
+		getSwitchs(nlSwitch);
 
-				return true;
-			} catch (Exception e) {
-				return false;
+		// item
+		NodeList nlItem = docEle.getElementsByTagName("itemImage");
+		getItems(nlItem);
+
+		// time
+		NodeList nlTime = docEle.getElementsByTagName("time");
+		getTime(nlTime);
+
+		return true;
+	}
+	private void getTime(NodeList nlTime) {
+		Element ele = null;
+		if (nlTime != null && nlTime.getLength() > 0) {
+			ele = (Element) nlTime.item(0);
+		}
+
+		if (ele != null) {
+			this.setMinute(getIntValue(ele, "minute"));
+			setSecond(getIntValue(ele, "second"));
+		}
+	}
+
+	private void getItems(NodeList nlItem) {
+		if (nlItem != null && nlItem.getLength() > 0) {
+			for (int i = 0; i < nlItem.getLength(); i++) {
+
+				// get the factory element
+				Element el = (Element) nlItem.item(i);
+
+				// get the ModelTerminal object
+				ModelItem e = getItem(el);
+
+				// add it to list
+				listItem.add(e);
+			}
+		}
+	}
+
+	private ModelItem getItem(Element ele) {
+
+		int x = getIntValue(ele, "x");
+		int y = getIntValue(ele, "y");
+
+		ModelItem item = new ModelItem();
+		item.setPosition(new Point(x, y));
+		item.setId(getIntValue(ele, "id"));
+		item.setType(getIntValue(ele, "type"));
+
+		return item;
+	}
+
+	private void getTerminals(NodeList nlTerminal) {
+		if (nlTerminal != null && nlTerminal.getLength() > 0) {
+			for (int i = 0; i < nlTerminal.getLength(); i++) {
+
+				// get the factory element
+				Element el = (Element) nlTerminal.item(i);
+
+				// get the ModelTerminal object
+				ModelTerminal e = getTerminal(el);
+
+				// add it to list
+				listTerminal.add(e);
+			}
+		}
+	}
+
+	private ModelTerminal getTerminal(Element ele) {
+		int x = getIntValue(ele, "x");
+		int y = getIntValue(ele, "y");
+		ModelTerminal terminal = new ModelTerminal(new Point(x, y));
+		terminal.setType(getIntValue(ele, "type"));
+
+		return terminal;
+	}
+
+	private void getSwitchs(NodeList nlSwitch) {
+		if (nlSwitch != null && nlSwitch.getLength() > 0) {
+			for (int i = 0; i < nlSwitch.getLength(); i++) {
+
+				// get the factory element
+				Element el = (Element) nlSwitch.item(i);
+
+				// get the ModelTerminal object
+				ModelSwitch e = getSwitch(el);
+
+				// add it to list
+				listSwitch.add(e);
+			}
+		}
+	}
+
+	private ModelSwitch getSwitch(Element ele) {
+		int x = getIntValue(ele, "x");
+		int y = getIntValue(ele, "y");
+
+		ModelSwitch mSwitch = new ModelSwitch(new Point(x, y));
+
+		mSwitch.setCurrentDir(getIntValue(ele, "currentdirection"));
+
+		NodeList nl = ele.getElementsByTagName("direction");
+		if (nl != null && nl.getLength() > 0) {
+			for (int i = 0; i < nl.getLength(); ++i) {
+				Element el = (Element) nl.item(i);
+				mSwitch.addDirection(string2Direction(el.getFirstChild()
+						.getNodeValue()));
 			}
 		}
 
+		return mSwitch;
 	}
-	private void readFactory(final String input) {
-		String[] factories = input.split("\n");
+	private void getFactories(NodeList nlFactory) {
+		if (nlFactory != null && nlFactory.getLength() > 0) {
+			for (int i = 0; i < nlFactory.getLength(); i++) {
 
-		for (String factory : factories) {
-			String[] args = factory.split(" ");
-			listFactory.add(new ModelFactory(new Point(Integer
-					.parseInt(args[0]), Integer.parseInt(args[1])),
-					string2Direction(args[2])));
+				// get the factory element
+				Element el = (Element) nlFactory.item(i);
+
+				// get the ModelFactory object
+				ModelFactory e = getFactory(el);
+
+				// add it to list
+				listFactory.add(e);
+			}
 		}
+	}
+
+	private ModelFactory getFactory(Element e) {
+		int x = getIntValue(e, "x");
+		int y = getIntValue(e, "y");
+		Direction d = string2Direction(getTextValue(e, "direction"));
+
+		return new ModelFactory(new Point(x, y), d);
+	}
+	/**
+	 * I take a xml element and the tag name, look for the tag and get the text
+	 * content i.e for <employee><name>John</name></employee> xml snippet if the
+	 * Element points to employee node and tagName is 'name' I will return John
+	 */
+	private String getTextValue(Element ele, String tagName) {
+		String textVal = null;
+		NodeList nl = ele.getElementsByTagName(tagName);
+		if (nl != null && nl.getLength() > 0) {
+			Element el = (Element) nl.item(0);
+			textVal = el.getFirstChild().getNodeValue();
+		}
+
+		return textVal;
+	}
+
+	/**
+	 * Calls getTextValue and returns a int value
+	 */
+	private int getIntValue(Element ele, String tagName) {
+		// in production application you would catch the exception
+		return Integer.parseInt(getTextValue(ele, tagName));
 	}
 
 	private Direction string2Direction(final String str) {
@@ -124,36 +267,28 @@ public class ModelMap {
 
 	}
 
-	private void readTerminal(final String input) {
-		String[] terminals = input.split("\n");
-
-		for (String terminal : terminals) {
-			String[] args = terminal.split(" ");
-			listTerminal.add(new ModelTerminal(new Point(Integer
-					.parseInt(args[0]), Integer.parseInt(args[1]))));
-		}
-	}
-
-	private void readSwitch(final String input) {
-		String[] switchs = input.split("\n");
-
-		for (String sw : switchs) {
-			String[] args = sw.split(" ");
-			ModelSwitch newSwitch = new ModelSwitch(new Point(
-					Integer.parseInt(args[0]), Integer.parseInt(args[1])));
-
-			newSwitch.setCurrentDir(Integer.parseInt(args[2]));
-			int size = args.length;
-			for (int i = 3; i < size; ++i) {
-				newSwitch.addDirection(string2Direction(args[i]));
-			}
-
-			listSwitch.add(newSwitch);
-		}
-	}
-
 	public ArrayList<ModelSwitch> getListSwitch() {
 		return listSwitch;
+	}
+
+	public ArrayList<ModelItem> getListItem() {
+		return listItem;
+	}
+
+	public int getMinute() {
+		return minute;
+	}
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
+	public int getSecond() {
+		return second;
+	}
+
+	public void setSecond(int second) {
+		this.second = second;
 	}
 
 }

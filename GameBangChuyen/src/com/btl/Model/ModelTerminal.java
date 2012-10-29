@@ -11,6 +11,8 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	/** The position. */
 	protected Point position;
 
+	private int type;
+
 	/**
 	 * Instantiates a new model terminal.
 	 * 
@@ -40,5 +42,13 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	 */
 	public Point getPosition() {
 		return position;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }
