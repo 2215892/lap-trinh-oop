@@ -21,7 +21,6 @@ import com.btl.Model.ModelMap;
 import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayState.
  */
@@ -47,6 +46,8 @@ public class PlayState extends GameState {
 
 	private static final int TIMER_DELAY = 30;
 
+	private int score = 0;
+
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -54,20 +55,23 @@ public class PlayState extends GameState {
 	 *            the parent
 	 */
 	public PlayState(final GamePanel panel, final ModelMap map) {
+
 		super(panel);
 		initialize();
 		initFromModelMap(map);
 
 		Timer timer = new Timer();
+
 		timer.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
-				updateGame();
+				update();
 
 				parent.repaint();
 			}
 		}, 0, TIMER_DELAY);
+
 	}
 
 	// TODO Test
@@ -93,6 +97,7 @@ public class PlayState extends GameState {
 		arrivalHandle(notMovingBoxs);
 	}
 	private void addScore(PlayScore score) {
+		this.score += score.getScore();
 		this.listScores.add(score);
 		this.scoreLayer.addDrawable(score);
 	}
@@ -180,25 +185,6 @@ public class PlayState extends GameState {
 	private void updateSwitchs() {
 		for (PlaySwitch i : listSwitchs) {
 			i.update();
-		}
-	}
-
-	private void updateGame() {
-
-		updateSwitchs();
-		updateSquares();
-		updateBoxs();
-		removeOldScore();
-
-		// TODO tesst
-		++count;
-		if (count % 64 == 0) {
-			int index = rnd.nextInt(this.listFactorys.size());
-			PlayBox test = this.listFactorys.get(index).makeBox();
-			if (test != null) {
-				objLayer.addDrawable(test);
-				listBoxs.add(test);
-			}
 		}
 	}
 
@@ -363,7 +349,6 @@ public class PlayState extends GameState {
 		/* sap xep lai cac doi tuong trong bgLayer, objLayer */
 		this.bgLayer.sort();
 		this.objLayer.sort();
-
 	}
 
 	/**
@@ -419,7 +404,7 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// khong dung den
 
 	}
 	private void switchClickedHandle(final PlaySwitch pSwitch) {
@@ -433,7 +418,7 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// khong dung den
 
 	}
 
@@ -444,7 +429,7 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// khong dung den
 
 	}
 
@@ -478,7 +463,7 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// khong dung den
 
 	}
 
@@ -489,7 +474,21 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		updateSwitchs();
+		updateSquares();
+		updateBoxs();
+		removeOldScore();
+
+		// TODO tesst
+		++count;
+		if (count % 64 == 0) {
+			int index = rnd.nextInt(this.listFactorys.size());
+			PlayBox test = this.listFactorys.get(index).makeBox();
+			if (test != null) {
+				objLayer.addDrawable(test);
+				listBoxs.add(test);
+			}
+		}
 
 	}
 
@@ -511,7 +510,8 @@ public class PlayState extends GameState {
 		}
 
 		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString(Integer.toString(count * TIMER_DELAY / 1000), 10, 10);
+		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
+				+ " Score: " + Integer.toString(score), 10, 10);
 
 	}
 }

@@ -2,7 +2,7 @@ package com.btl.Model;
 
 import java.util.Random;
 
-public class RandomEnum<E extends Enum> {
+public class RandomEnum<E extends Enum<?>> {
 
 	private static final Random RND = new Random();
 	private final E[] values;

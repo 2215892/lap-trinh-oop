@@ -18,6 +18,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	private TerminalColor color = TerminalColor.DEFAULT;
 	public static final int SIZE = PlaySquare.SIZE;
 	private static BufferedImage picture;
+	private BufferedImage buffer;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
 
 	public PlayTerminal(Point p) {
@@ -39,19 +40,21 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 		if (PlayTerminal.picture == null) {
 			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
+		}
+
+		if (buffer == null) {
+			buffer = new BufferedImage(picture.getWidth(), picture.getHeight(),
+					BufferedImage.TYPE_INT_ARGB);
+			update();
 
 		}
 	}
-	@Override
-	public void paint(Graphics g) {
-		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
-				SIZE);
-		coordinate.x -= 8;
-		coordinate.y -= (SIZE / 2 + 7);
 
-		g.drawImage(PlayTerminal.picture, coordinate.x, coordinate.y, null);
+	public void update() {
+		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 
-		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(picture, 0, 0, null);
+
 		Color color = null;
 		switch (this.getColor()) {
 			case DEFAULT :
@@ -79,9 +82,18 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2.setColor(Color.black);
-		g2.fillOval(coordinate.x + 19, coordinate.y + 12, 12, 7);
+		g2.fillOval(19, 12, 12, 7);
 		g2.setColor(color);
-		g2.fillOval(coordinate.x + 20, coordinate.y + 13, 10, 5);
+		g2.fillOval(20, 13, 10, 5);
+	}
+	@Override
+	public void paint(Graphics g) {
+		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
+				SIZE);
+		coordinate.x -= 8;
+		coordinate.y -= (SIZE / 2 + 7);
+
+		g.drawImage(buffer, coordinate.x, coordinate.y, null);
 
 	}
 	@Override
