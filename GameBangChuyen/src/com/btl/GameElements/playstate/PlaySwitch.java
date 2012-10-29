@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -96,7 +97,12 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		Point coordinate = new Point(13, 11 + SIZE / 2);
 		Direction in = input.get(0);
 		Direction out = this.getDirection();
-		g.setColor(new Color(210, 125, 14));
+
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, // Anti-alias!
+				RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2.setColor(new Color(210, 125, 14));
 
 		int x1, x2, y1, y2;
 		x1 = x2 = y1 = y2 = 0;
@@ -110,7 +116,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 
 						if (picIndex < PICCOUNT / 2) {
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x, coordinate.y);
+								g2.drawLine(x1, y1, coordinate.x, coordinate.y);
 							}
 
 							x2 = coordinate.x + 2 * SIZE - 2 * SIZE * picIndex
@@ -131,7 +137,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + SIZE,
+								g2.drawLine(x1, y1, coordinate.x + SIZE,
 										coordinate.y - SIZE / 2);
 							}
 
@@ -160,7 +166,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + SIZE,
+								g2.drawLine(x1, y1, coordinate.x + SIZE,
 										coordinate.y + SIZE / 2);
 							}
 
@@ -183,7 +189,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + 2 * SIZE,
+								g2.drawLine(x1, y1, coordinate.x + 2 * SIZE,
 										coordinate.y);
 							}
 
@@ -210,7 +216,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + SIZE,
+								g2.drawLine(x1, y1, coordinate.x + SIZE,
 										coordinate.y - SIZE / 2);
 							}
 
@@ -233,7 +239,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + 2 * SIZE,
+								g2.drawLine(x1, y1, coordinate.x + 2 * SIZE,
 										coordinate.y);
 							}
 
@@ -242,7 +248,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						} else {
 							x2 = coordinate.x + SIZE + 2 * SIZE
 									* (picIndex - PICCOUNT / 2) / PICCOUNT;
-							y2 = coordinate.y + SIZE / 2 - SIZE
+							y2 = coordinate.y - SIZE / 2 + SIZE
 									* (picIndex - PICCOUNT / 2) / PICCOUNT;
 
 						}
@@ -260,7 +266,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x, coordinate.y);
+								g2.drawLine(x1, y1, coordinate.x, coordinate.y);
 							}
 
 							x2 = coordinate.x + 2 * SIZE - 2 * SIZE * picIndex
@@ -281,7 +287,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 						if (picIndex < PICCOUNT / 2) {
 
 							if (picIndex == 0) {
-								g.drawLine(x1, y1, coordinate.x + SIZE,
+								g2.drawLine(x1, y1, coordinate.x + SIZE,
 										coordinate.y + SIZE / 2);
 							}
 
@@ -303,7 +309,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 				break;
 
 		}
-		g.drawLine(x1, y1, x2, y2);
+		g2.drawLine(x1, y1, x2, y2);
 		picIndex = (picIndex + 1) % PICCOUNT;
 
 	}
