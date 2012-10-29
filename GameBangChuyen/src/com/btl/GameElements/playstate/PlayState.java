@@ -194,11 +194,11 @@ public class PlayState extends GameState {
 		++count;
 		if (count % 64 == 0) {
 			int index = rnd.nextInt(this.listFactorys.size());
-			PlayBox test = this.listFactorys.get(index).makeBox(
-					TerminalColor.DEFAULT);
-
-			objLayer.addDrawable(test);
-			listBoxs.add(test);
+			PlayBox test = this.listFactorys.get(index).makeBox();
+			if (test != null) {
+				objLayer.addDrawable(test);
+				listBoxs.add(test);
+			}
 		}
 	}
 
@@ -231,6 +231,34 @@ public class PlayState extends GameState {
 		if (neighbor.getClass().equals(PlaySwitch.class)) {
 			((PlaySwitch) neighbor).addInput(factory.getDirection());
 			DFS((PlaySwitch) neighbor);
+		}
+	}
+
+	private void initFactory() {
+		for (PlayFactory factory : this.listFactorys) {
+			for (PlaySwitch pSwitch : this.listSwitchs) {
+				pSwitch.setFlag(0);
+			}
+
+			GraphNode neighbor = getNeighbor(factory.getPosition(),
+					factory.getDirection());
+			if (neighbor.getClass().equals(PlaySwitch.class)) {
+				DFS2((PlaySwitch) neighbor, factory);
+			} else
+				factory.addTerminal((PlayTerminal) neighbor);
+		}
+	}
+
+	private void DFS2(PlaySwitch pSwitch, PlayFactory factory) {
+		if (pSwitch.getFlag() == 1)
+			return;
+		pSwitch.setFlag(1);
+		for (Direction d : pSwitch.getListDirection()) {
+			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
+			if (temp.getClass().equals(PlaySwitch.class)) {
+				DFS2((PlaySwitch) temp, factory);
+			} else
+				factory.addTerminal((PlayTerminal) temp);
 		}
 	}
 
@@ -276,6 +304,7 @@ public class PlayState extends GameState {
 				return null;
 		}
 	}
+
 	private void DFS(PlaySwitch pSwitch) {
 		if (pSwitch.getFlag() == 1)
 			return;
@@ -289,6 +318,7 @@ public class PlayState extends GameState {
 			}
 		}
 	}
+
 	private void initFromModelMap(final ModelMap map) {
 		/* them factory tu map vao listFactory */
 		for (ModelFactory factory : map.getListFactory()) {
@@ -307,6 +337,9 @@ public class PlayState extends GameState {
 
 		/* init duong trung gian va hinh thanh graph */
 		initSquare();
+
+		/* lap danh sach ca terminal co the toi tu factory */
+		initFactory();
 
 		/* dua cac doi tuong vao bgLayer */
 		for (PlayFactory factory : this.listFactorys) {

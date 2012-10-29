@@ -3,6 +3,8 @@ package com.btl.GameElements.playstate;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
@@ -14,6 +16,9 @@ import com.btl.Model.ModelFactory;
  */
 public class PlayFactory extends ModelFactory implements Drawable {
 
+	private static Random rnd = new Random();
+
+	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 	public static final int SIZE = PlaySquare.SIZE;
 	private static BufferedImage picture;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
@@ -32,12 +37,24 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		}
 	}
 
-	public PlayBox makeBox(TerminalColor color) {
+	public void addTerminal(PlayTerminal terminal) {
+		if (terminal.getColor() != TerminalColor.DEFAULT)
+			this.listTerminals.add(terminal);
+	}
 
-		PlayBox box = new PlayBox(ConversionFunction.positionToLocation(
-				this.getPosition(), PlaySwitch.SIZE), color);
-		box.setDestination(this.getNeighbor(this.getDirection()).getPosition());
-		return box;
+	public PlayBox makeBox() {
+
+		if (this.listTerminals.size() != 0) {
+			PlayTerminal terminal = this.listTerminals.get(rnd
+					.nextInt(this.listTerminals.size()));
+			PlayBox box = new PlayBox(ConversionFunction.positionToLocation(
+					this.getPosition(), PlaySwitch.SIZE), terminal.getColor());
+			box.setDestination(this.getNeighbor(this.getDirection())
+					.getPosition());
+			return box;
+		}
+		return null;
+
 	}
 	public PlayFactory(final ModelFactory factory) {
 		super(factory);

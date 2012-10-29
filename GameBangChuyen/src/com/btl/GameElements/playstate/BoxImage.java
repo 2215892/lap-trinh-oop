@@ -13,9 +13,16 @@ public abstract class BoxImage {
 	/** The Constant RES_DIR. */
 	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
 
-	/** The Constant BOX_IMAGE. */
-	public final static BufferedImage BOX_IMAGE = ConversionFunction
-			.loadImage(RES_DIR + "box.png");
+	public final static BufferedImage RED_BOX = ConversionFunction
+			.loadImage(RES_DIR + "RED_BOX.png");
+	public final static BufferedImage BLUE_BOX = ConversionFunction
+			.loadImage(RES_DIR + "BLUE_BOX.png");
+	public final static BufferedImage GREEN_BOX = ConversionFunction
+			.loadImage(RES_DIR + "GREEN_BOX.png");
+	public final static BufferedImage YELLOW_BOX = ConversionFunction
+			.loadImage(RES_DIR + "YELLOW_BOX.png");
+	public final static BufferedImage PINK_BOX = ConversionFunction
+			.loadImage(RES_DIR + "PINK_BOX.png");
 
 	/**
 	 * Gets the box image.
@@ -25,6 +32,21 @@ public abstract class BoxImage {
 	 * @return the box image
 	 */
 	public static BufferedImage getBoxImage(TerminalColor color) {
-		return BOX_IMAGE;
+		switch (color) {
+			case BLUE :
+				return BLUE_BOX;
+			case DEFAULT :
+				return null;
+			case GREEN :
+				return GREEN_BOX;
+			case PINK :
+				return PINK_BOX;
+			case RED :
+				return RED_BOX;
+			case YELLOW :
+				return YELLOW_BOX;
+			default :
+				return null;
+		}
 	}
 }
