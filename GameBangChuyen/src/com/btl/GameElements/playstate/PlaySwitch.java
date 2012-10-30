@@ -28,6 +28,10 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public static final int PICCOUNT = PlaySquare.PICCOUNT;
 	private int picIndex = 0;
 
+	public ArrayList<Direction> getListInput() {
+		return this.input;
+	}
+
 	private BufferedImage buffer = null;
 
 	public void addInput(final Direction d) {
@@ -221,10 +225,10 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 										coordinate.y - SIZE / 2);
 							}
 
-							x2 = coordinate.x + SIZE + SIZE - 2 * SIZE
-									* picIndex / PICCOUNT;
-							y2 = coordinate.y + SIZE / 2 - SIZE / 2 - SIZE
-									* picIndex / PICCOUNT;
+							x2 = coordinate.x + SIZE + 2 * SIZE * picIndex
+									/ PICCOUNT;
+							y2 = coordinate.y + SIZE / 2 - SIZE * picIndex
+									/ PICCOUNT;
 						} else {
 							x2 = coordinate.x + 2 * SIZE - 2 * SIZE
 									* (picIndex - PICCOUNT / 2) / PICCOUNT;

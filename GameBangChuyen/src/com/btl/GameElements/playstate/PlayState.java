@@ -340,7 +340,8 @@ public class PlayState extends GameState {
 		/* Dua switch vao bg2Layer */
 
 		for (PlaySwitch mSwitch : this.listSwitchs) {
-			if (mSwitch.getListDirection().size() > 1)
+			if (!(mSwitch.getListDirection().size() == 1 && mSwitch
+					.getListInput().size() == 1))
 				this.bg2Layer.addDrawable(mSwitch);
 			else
 				this.bgLayer.addDrawable(mSwitch);

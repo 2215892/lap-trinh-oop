@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.btl.GameBoard.GamePanel;
@@ -43,13 +44,28 @@ public class PlayTitle extends GameState {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+
 		if (bnStart.contains(new Point(arg0.getX(), arg0.getY()))) {
-			ModelMap map = ModelMap
-					.createMap("E:\\Working project\\OOP\\testBangchuyen2.xml");
-			if (map == null)
-				JOptionPane.showMessageDialog(null, "Error");
-			else
-				parent.setState(new PlayState(parent, map));
+			/*
+			 * ModelMap map = ModelMap
+			 * .createMap("E:\\Working project\\OOP\\testBangchuyen2.xml"); if
+			 * (map == null) JOptionPane.showMessageDialog(null, "Error"); else
+			 * parent.setState(new PlayState(parent, map));
+			 */
+
+			final JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showOpenDialog(parent);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+				ModelMap map = ModelMap.createMap(fc.getSelectedFile()
+						.getAbsolutePath());
+				if (map == null)
+					JOptionPane.showMessageDialog(null, "Error");
+				else
+					parent.setState(new PlayState(parent, map));
+			}
+
 		}
 
 	}
