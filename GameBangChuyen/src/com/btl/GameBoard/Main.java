@@ -4,10 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-import com.btl.GameElements.playstate.PlayState;
-import com.btl.Model.ModelMap;
+import com.btl.GameElements.playtitle.PlayTitle;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,12 +54,7 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		ModelMap map = ModelMap
-				.createMap("E:\\Working project\\OOP\\testBangchuyen2.xml");
-		if (map == null)
-			JOptionPane.showMessageDialog(frame, "Error");
-		else
-			panel.setState(new PlayState(panel, map));
+		panel.setState(new PlayTitle(panel));
 
 	}
 }

@@ -71,6 +71,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 			buffer = new BufferedImage(this.picture.getWidth(null),
 					this.picture.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		}
+
 		Graphics2D g = (Graphics2D) buffer.getGraphics();
 
 		g.setComposite(AlphaComposite.Clear);
