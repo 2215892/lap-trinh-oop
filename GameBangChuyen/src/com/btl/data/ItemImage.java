@@ -108,9 +108,9 @@ public abstract class ItemImage {
 				}
 				break;
 			case 3 : /* TREE */
-				return new Point(2, 48);
+				return new Point(1, 48);
 			case 2 : /* PLATFORM */
-				return new Point(2, 8);
+				return new Point(1, 9);
 		}
 
 		return null;

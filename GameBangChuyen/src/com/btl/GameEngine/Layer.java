@@ -15,6 +15,7 @@ public class Layer {
 	/** The buffer. */
 	private BufferedImage buffer;
 	private boolean isVisible = true;
+	private int width, height;
 
 	protected ArrayList<Drawable> listDrawable;
 
@@ -27,7 +28,9 @@ public class Layer {
 	 *            the height
 	 */
 	public Layer(int width, int height) {
-		buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		this.width = width;
+		this.height = height;
+
 		listDrawable = new ArrayList<Drawable>();
 	}
 
@@ -88,6 +91,9 @@ public class Layer {
 	 * Render.
 	 */
 	public void render() {
+		if (buffer == null)
+			buffer = new BufferedImage(width, height,
+					BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = (Graphics2D) this.buffer.getGraphics();
 
 		/* Xoa nen buffer */
@@ -123,8 +129,7 @@ public class Layer {
 		if (this.isVisible)
 			return buffer;
 		else
-			return new BufferedImage(buffer.getWidth(), buffer.getHeight(),
-					BufferedImage.TYPE_INT_ARGB);
+			return null;
 	}
 
 	public ArrayList<Drawable> getListDrawable() {

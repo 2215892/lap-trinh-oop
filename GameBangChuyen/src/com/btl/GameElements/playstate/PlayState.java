@@ -74,7 +74,6 @@ public class PlayState extends GameState {
 		}, 0, TIMER_DELAY);
 
 	}
-
 	// TODO Test
 	int count = -1;
 	Random rnd = new Random();
@@ -359,6 +358,8 @@ public class PlayState extends GameState {
 		this.bgLayer.sort();
 		this.bg2Layer.sort();
 		this.objLayer.sort();
+
+		platformLayer.render();
 	}
 
 	private void initItems(ArrayList<ModelItem> listItem) {
@@ -431,6 +432,7 @@ public class PlayState extends GameState {
 		// khong dung den
 
 	}
+
 	private void switchClickedHandle(final PlaySwitch pSwitch) {
 		pSwitch.changeDirection();
 	}
@@ -528,8 +530,11 @@ public class PlayState extends GameState {
 
 		Graphics g1 = buffer.getGraphics();
 		g1.drawImage(this.background, 0, 0, null);
+		bgLayer.render();
+		objLayer.render();
+		bg2Layer.render();
+		scoreLayer.render();
 		for (Layer l : this.listLayers) {
-			l.render();
 			g1.drawImage(l.getLayer(), 0, 0, null);
 
 		}

@@ -25,24 +25,17 @@ public class DrawLayer extends Layer {
 			Point p1 = ((ModelObject) o1).getPosition();
 			Point p2 = ((ModelObject) o2).getPosition();
 
-			int xComparision = -1;
-			if (p1.x > p2.x)
-				xComparision = 1;
-			else if (p1.x == p2.x)
-				xComparision = 0;
+			int xComparision = p1.x - p2.x;
 
-			if (xComparision == 0) {
-				int yComparision = -1;
-				if (p1.y < p2.y)
-					yComparision = 1;
-				else if (p1.y == p2.y)
-					yComparision = 0;
-				return yComparision;
+			int yComparision = p2.y - p1.y;
+
+			if (yComparision == 0) {
+
+				return xComparision;
 
 			} else
-				return xComparision;
+				return yComparision;
 		}
-
 	}
 
 }
