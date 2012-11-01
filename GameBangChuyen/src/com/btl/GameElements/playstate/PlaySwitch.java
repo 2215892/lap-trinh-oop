@@ -75,17 +75,12 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		if (this.buffer == null) {
 			buffer = new BufferedImage(this.picture.getWidth(null),
 					this.picture.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+			Graphics g = buffer.getGraphics();
+			g.drawImage(picture, 0, 0, null);
+			g.dispose();
 		}
 
 		Graphics2D g = (Graphics2D) buffer.getGraphics();
-
-		g.setComposite(AlphaComposite.Clear);
-		g.fillRect(0, 0, this.picture.getWidth(null),
-				this.picture.getHeight(null));
-
-		g.setComposite(AlphaComposite.SrcOver);
-
-		g.drawImage(picture, 0, 0, null);
 
 		Point coordinate = new Point(13, 11 + SIZE / 2);
 
@@ -95,8 +90,18 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 							this.getListDirection().size() == 1),
 					coordinate.x + 1, coordinate.y - SIZE / 2, null);
 		else {
+
+			g.setComposite(AlphaComposite.Clear);
+			g.fillRect(0, 0, this.picture.getWidth(null),
+					this.picture.getHeight(null));
+
+			g.setComposite(AlphaComposite.SrcOver);
+
+			g.drawImage(picture, 0, 0, null);
 			drawLine(g);
 		}
+
+		g.dispose();
 	}
 
 	private void drawLine(Graphics g) {
