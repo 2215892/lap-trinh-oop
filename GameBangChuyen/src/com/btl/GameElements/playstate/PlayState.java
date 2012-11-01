@@ -364,7 +364,7 @@ public class PlayState extends GameState {
 	private void initItems(ArrayList<ModelItem> listItem) {
 		for (ModelItem i : listItem) {
 			PlayItem item = new PlayItem(i);
-			if (item.getId() == 2) /* PLATFORM */
+			if (item.getType() == 2) /* PLATFORM */
 				platformLayer.addDrawable(item);
 			else
 				objLayer.addDrawable(item);
