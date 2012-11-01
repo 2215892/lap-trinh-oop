@@ -1,4 +1,4 @@
-package com.btl.GameElements.playstate;
+package com.btl.data;
 
 import java.awt.image.BufferedImage;
 

@@ -11,6 +11,7 @@ import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.ModelObject;
+import com.btl.data.DirectionImage;
 
 // TODO: Auto-generated Javadoc
 /**

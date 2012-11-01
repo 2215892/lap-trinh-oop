@@ -36,8 +36,11 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 			this.setColor(TerminalColor.DEFAULT);
 		} else {
 			TerminalColor color = null;
-			while ((color = rnd.random()) != TerminalColor.DEFAULT)
-				this.setColor(color);
+			do {
+				color = rnd.random();
+			} while (color == TerminalColor.DEFAULT);
+
+			this.setColor(color);
 		}
 
 		if (PlayTerminal.picture == null) {
@@ -51,7 +54,6 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 		}
 	}
-
 	public void update() {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 

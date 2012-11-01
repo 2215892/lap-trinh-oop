@@ -1,7 +1,8 @@
-package com.btl.GameElements.playstate;
+package com.btl.data;
 
 import java.awt.image.BufferedImage;
 
+import com.btl.GameElements.playstate.TerminalColor;
 import com.btl.Model.ConversionFunction;
 
 // TODO: Auto-generated Javadoc
