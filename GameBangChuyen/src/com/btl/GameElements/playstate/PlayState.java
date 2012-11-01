@@ -17,6 +17,7 @@ import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.GraphNode;
 import com.btl.Model.ModelFactory;
+import com.btl.Model.ModelItem;
 import com.btl.Model.ModelMap;
 import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
@@ -321,6 +322,9 @@ public class PlayState extends GameState {
 			this.listSwitchs.add(new PlaySwitch(mSwitch));
 		}
 
+		/* init cac item tu listItem trong map */
+		initItems(map.getListItem());
+
 		/* init duong trung gian va hinh thanh graph */
 		initSquare();
 
@@ -347,11 +351,26 @@ public class PlayState extends GameState {
 				this.bgLayer.addDrawable(mSwitch);
 		}
 
-		/* sap xep lai cac doi tuong trong bgLayer, objLayer */
+		/*
+		 * sap xep lai cac doi tuong trong platformLayer, bgLayer, bg2Layer,
+		 * objLayer
+		 */
+		this.platformLayer.sort();
 		this.bgLayer.sort();
+		this.bg2Layer.sort();
 		this.objLayer.sort();
 	}
 
+	private void initItems(ArrayList<ModelItem> listItem) {
+		for (ModelItem i : listItem) {
+			PlayItem item = new PlayItem(i);
+			if (item.getId() == 2) /* PLATFORM */
+				platformLayer.addDrawable(item);
+			else
+				objLayer.addDrawable(item);
+		}
+
+	}
 	/**
 	 * Initialize.
 	 */

@@ -62,7 +62,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
 
-		g.drawImage(this.buffer, coordinate.x - 13, coordinate.y - 11 - SIZE
+		g.drawImage(this.buffer, coordinate.x - 13, coordinate.y - 13 - SIZE
 				/ 2, null);
 
 	}

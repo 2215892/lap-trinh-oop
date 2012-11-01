@@ -73,7 +73,7 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	public void paint(final Graphics g) {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
-		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 7
+		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 9
 				- SIZE / 2, null);
 
 	}

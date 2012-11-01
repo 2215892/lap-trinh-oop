@@ -50,7 +50,7 @@ public class PlaySquare implements Drawable, ModelObject {
 		Point coordinate = ConversionFunction
 				.positionToLocation(position, SIZE);
 
-		g.drawImage(this.buffer, coordinate.x - 8, coordinate.y - 7 - SIZE / 2,
+		g.drawImage(this.buffer, coordinate.x - 8, coordinate.y - 9 - SIZE / 2,
 				null);
 
 	}

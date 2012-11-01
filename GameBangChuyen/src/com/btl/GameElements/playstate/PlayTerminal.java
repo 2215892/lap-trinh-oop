@@ -95,7 +95,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
 		coordinate.x -= 8;
-		coordinate.y -= (SIZE / 2 + 7);
+		coordinate.y -= (SIZE / 2 + 9);
 
 		g.drawImage(buffer, coordinate.x, coordinate.y, null);
 

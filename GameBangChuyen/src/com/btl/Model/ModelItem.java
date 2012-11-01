@@ -8,6 +8,16 @@ public class ModelItem implements ModelObject {
 
 	private int type, id;
 
+	public ModelItem() {
+
+	}
+
+	public ModelItem(ModelItem item) {
+		this.setId(item.getId());
+		this.setPosition(item.getPosition());
+		this.setType(item.getType());
+	}
+
 	@Override
 	public Point getPosition() {
 		return this.position;

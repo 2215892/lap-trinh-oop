@@ -62,7 +62,7 @@ public class PlayBox implements Drawable, ModelObject {
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(BoxImage.getBoxImage(color), location.x + 2,
-				location.y - 19, null);
+				location.y - 21, null);
 
 	}
 
