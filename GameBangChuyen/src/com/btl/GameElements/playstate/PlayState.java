@@ -40,7 +40,7 @@ public class PlayState extends GameState {
 	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
 
 	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
-	private DrawLayer bgLayer, objLayer, bg2Layer;
+	private DrawLayer platformLayer, bgLayer, objLayer, bg2Layer;
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 
@@ -360,7 +360,10 @@ public class PlayState extends GameState {
 				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
 		buffer = new BufferedImage(PlayState.WIDTH, PlayState.HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
-
+		//
+		// platformLayer
+		//
+		this.platformLayer = new DrawLayer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
 		// bgLayer
 		//
@@ -390,6 +393,7 @@ public class PlayState extends GameState {
 		// listLayer
 		//
 		this.listLayers = new ArrayList<Layer>();
+		this.listLayers.add(platformLayer);
 		this.listLayers.add(bgLayer);
 		this.listLayers.add(bg2Layer);
 		this.listLayers.add(objLayer);
@@ -444,8 +448,9 @@ public class PlayState extends GameState {
 		Drawable clicked = null;
 		Point p = new Point(arg0.getX(), arg0.getY());
 
-		for (Layer i : this.listLayers) {
-			clicked = i.getClickedObj(p);
+		int size = this.listLayers.size();
+		for (int i = size - 1; i >= 0; --i) {
+			clicked = this.listLayers.get(i).getClickedObj(p);
 			if (clicked != null)
 				break;
 		}
