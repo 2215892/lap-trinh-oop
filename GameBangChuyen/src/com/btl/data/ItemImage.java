@@ -39,9 +39,9 @@ public abstract class ItemImage {
 			.loadImage(RES_DIR + "PLATFORM_4.png");
 
 	public static BufferedImage getItemImage(int id, int type) {
-		switch (id) {
+		switch (type) {
 			case 1 : /* TRUCK, AIRPLANE, SHIP */
-				switch (type) {
+				switch (id) {
 					case 1 : /* TRUCK_LEFT */
 						return TRUCK;
 					case 2 : /* TRUCK DOWN */
@@ -57,7 +57,7 @@ public abstract class ItemImage {
 				}
 				break;
 			case 3 : /* TREE */
-				switch (type) {
+				switch (id) {
 					case 1 :
 						return TREE_1;
 					case 2 :
@@ -73,7 +73,7 @@ public abstract class ItemImage {
 				}
 				break;
 			case 2 : /* PLATFORM */
-				switch (type) {
+				switch (id) {
 					case 1 :
 						return PLATFORM_1;
 					case 2 :
@@ -90,9 +90,9 @@ public abstract class ItemImage {
 	}
 
 	public static Point getItemPad(int id, int type) {
-		switch (id) {
+		switch (type) {
 			case 1 : /* TRUCK, AIRPLANE, SHIP */
-				switch (type) {
+				switch (id) {
 					case 1 : /* TRUCK_LEFT */
 						return new Point(6, 50);
 					case 2 : /* TRUCK DOWN */
