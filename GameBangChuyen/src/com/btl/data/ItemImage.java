@@ -98,13 +98,13 @@ public abstract class ItemImage {
 					case 2 : /* TRUCK DOWN */
 						return new Point(36, 50);
 					case 3 : /* PLANE_UP */
-						return new Point(32, 31);
+						return new Point(32, 38);
 					case 4 :/* PLANE_RIGHT */
-						return new Point(6, 31);
+						return new Point(6, 38);
 					case 5 :/* SHIP_UP */
-						return new Point(32, 71);
+						return new Point(36, 77);
 					case 6 :/* SHIP_RIGHT */
-						return new Point(6, 71);
+						return new Point(2, 77);
 				}
 				break;
 			case 3 : /* TREE */
