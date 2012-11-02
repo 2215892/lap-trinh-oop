@@ -501,6 +501,7 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void update() {
+		/* update game state */
 		updateSwitchs();
 		updateSquares();
 		updateBoxs();
@@ -526,19 +527,24 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void gameRender(Graphics g) {
+		/* sap xep lai layer Object */
 		this.objLayer.sort();
 
-		Graphics g1 = buffer.getGraphics();
-		g1.drawImage(this.background, 0, 0, null);
+		/* render cac layer */
 		bgLayer.render();
 		objLayer.render();
 		bg2Layer.render();
 		scoreLayer.render();
+
+		/* Ve vao buffer */
+		Graphics g1 = buffer.getGraphics();
+		g1.drawImage(this.background, 0, 0, null);
 		for (Layer l : this.listLayers) {
 			g1.drawImage(l.getLayer(), 0, 0, null);
 
 		}
 
+		/* Ve len man hinh */
 		g.drawImage(this.buffer, 0, 0, null);
 		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
 				+ " Score: " + Integer.toString(score), 10, 10);
