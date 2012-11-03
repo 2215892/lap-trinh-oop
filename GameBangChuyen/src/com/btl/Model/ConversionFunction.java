@@ -13,47 +13,16 @@ import javax.imageio.ImageIO;
  */
 public abstract class ConversionFunction {
 
-	/**
-	 * Doi toa do logic sang toa do thuc.
-	 * 
-	 * @param t
-	 *            : toa do logic can doi
-	 * @return toa do thuc
-	 */
-	public static Point logicToReal(Point t) {
-
-		Double ux = (double) (t.x + t.y);
-		Double uy = (double) (t.x - t.y) / 2;
-		return new Point(ux.intValue(), uy.intValue());
+	public static BufferedImage flipHorizontally(BufferedImage pic) {
+		BufferedImage img = new BufferedImage(pic.getWidth(null),
+				pic.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
+		g.drawImage(pic, pic.getWidth(null), 0, 0, pic.getHeight(null), 0, 0,
+				pic.getWidth(null), pic.getHeight(null), null);
+		g.dispose();
+		return img;
 	}
 
-	/**
-	 * 
-	 * @param t
-	 *            : point in real axis
-	 * @return: point in logic axis
-	 */
-	public static Point realToLogic(Point t) {
-
-		Double ux = (double) (2 * t.y + t.x) / 2;
-		Double uy = (double) (t.x - 2 * t.y) / 2;
-		return new Point(ux.intValue(), uy.intValue());
-	}
-
-	public static Point positionToLocation(Point position, int size) {
-		return new Point((position.x + position.y) * size,
-				(position.x - position.y) * size / 2);
-	}
-
-	public static Point locationToPosition(Point location, int size) {
-		int x = (location.x + 2 * location.y) / 2;
-		int y = (location.x - 2 * location.y) / 2;
-		if (x < 0 && (x % size != 0))
-			x -= size;
-		if (y < 0 && (y % size != 0))
-			y -= size;
-		return new Point(x / size, y / size);
-	}
 	/**
 	 * Load anh.
 	 * 
@@ -71,14 +40,45 @@ public abstract class ConversionFunction {
 		return img;
 	}
 
-	public static BufferedImage flipHorizontally(BufferedImage pic) {
-		BufferedImage img = new BufferedImage(pic.getWidth(null),
-				pic.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.getGraphics();
-		g.drawImage(pic, pic.getWidth(null), 0, 0, pic.getHeight(null), 0, 0,
-				pic.getWidth(null), pic.getHeight(null), null);
-		g.dispose();
-		return img;
+	public static Point locationToPosition(Point location, int size) {
+		int x = (location.x + 2 * location.y) / 2;
+		int y = (location.x - 2 * location.y) / 2;
+		if (x < 0 && (x % size != 0))
+			x -= size;
+		if (y < 0 && (y % size != 0))
+			y -= size;
+		return new Point(x / size, y / size);
+	}
+
+	/**
+	 * Doi toa do logic sang toa do thuc.
+	 * 
+	 * @param t
+	 *            : toa do logic can doi
+	 * @return toa do thuc
+	 */
+	public static Point logicToReal(Point t) {
+
+		Double ux = (double) (t.x + t.y);
+		Double uy = (double) (t.x - t.y) / 2;
+		return new Point(ux.intValue(), uy.intValue());
+	}
+	public static Point positionToLocation(Point position, int size) {
+		return new Point((position.x + position.y) * size,
+				(position.x - position.y) * size / 2);
+	}
+
+	/**
+	 * 
+	 * @param t
+	 *            : point in real axis
+	 * @return: point in logic axis
+	 */
+	public static Point realToLogic(Point t) {
+
+		Double ux = (double) (2 * t.y + t.x) / 2;
+		Double uy = (double) (t.x - 2 * t.y) / 2;
+		return new Point(ux.intValue(), uy.intValue());
 	}
 
 }

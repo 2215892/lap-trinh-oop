@@ -9,27 +9,24 @@ import java.util.ArrayList;
  */
 public class ModelSwitch extends GraphNode implements ModelObject {
 
+	/** The current dir. */
+	private int currentDir = -1; /* Khong co huong nao thi currentDir = -1 */
+
 	/** The list direction. */
 	private ArrayList<Direction> listDirection;
 
 	/** The position. */
 	private Point position;
 
-	/** The current dir. */
-	private int currentDir = -1; /* Khong co huong nao thi currentDir = -1 */
-
-	protected void setCurrentDir(int i) {
-		this.currentDir = i;
+	public ModelSwitch() {
+		listDirection = new ArrayList<Direction>();
 	}
 
-	public ArrayList<Direction> getListDirection() {
-		return listDirection;
-	}
-	protected void setListDirection(ArrayList<Direction> listDirection) {
-		this.listDirection = listDirection;
-	}
-	protected void setPosition(Point position) {
-		this.position = position;
+	public ModelSwitch(final ModelSwitch mSwitch) {
+		this();
+		this.setPosition(mSwitch.getPosition());
+		this.setCurrentDir(mSwitch.getCurrentDir());
+		this.setListDirection(mSwitch.getListDirection());
 	}
 	/**
 	 * Instantiates a new model switch.
@@ -42,18 +39,6 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		this.position = p;
 
 	}
-
-	public ModelSwitch() {
-		listDirection = new ArrayList<Direction>();
-	}
-
-	public ModelSwitch(final ModelSwitch mSwitch) {
-		this();
-		this.setPosition(mSwitch.getPosition());
-		this.setCurrentDir(mSwitch.getCurrentDir());
-		this.setListDirection(mSwitch.getListDirection());
-	}
-
 	/**
 	 * Adds the direction.
 	 * 
@@ -66,6 +51,41 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		if (this.listDirection.size() == 1) {
 			this.currentDir = 0;
 		}
+	}
+	/**
+	 * Change direction.
+	 */
+	public void changeDirection() {
+		if (this.currentDir != -1) {
+			this.currentDir = (this.currentDir + 1) % this.listDirection.size();
+		}
+	}
+
+	/**
+	 * Contains direction.
+	 * 
+	 * @param d
+	 *            the d
+	 * @return the boolean
+	 */
+	public Boolean containsDirection(Direction d) {
+		return listDirection.contains(d);
+	}
+
+	public Direction getDirection() {
+		if (this.listDirection.size() > 0)
+			return this.listDirection.get(this.currentDir);
+		else
+			return null;
+	}
+
+	public ArrayList<Direction> getListDirection() {
+		return listDirection;
+	}
+
+	@Override
+	public Point getPosition() {
+		return this.position;
 	}
 
 	/**
@@ -82,38 +102,19 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		}
 	}
 
-	/**
-	 * Contains direction.
-	 * 
-	 * @param d
-	 *            the d
-	 * @return the boolean
-	 */
-	public Boolean containsDirection(Direction d) {
-		return listDirection.contains(d);
-	}
-
-	/**
-	 * Change direction.
-	 */
-	public void changeDirection() {
-		if (this.currentDir != -1) {
-			this.currentDir = (this.currentDir + 1) % this.listDirection.size();
-		}
-	}
-
 	protected int getCurrentDir() {
 		return this.currentDir;
 	}
 
-	public Direction getDirection() {
-		if (this.listDirection.size() > 0)
-			return this.listDirection.get(this.currentDir);
-		else
-			return null;
+	protected void setCurrentDir(int i) {
+		this.currentDir = i;
 	}
 
-	public Point getPosition() {
-		return this.position;
+	protected void setListDirection(ArrayList<Direction> listDirection) {
+		this.listDirection = listDirection;
+	}
+
+	protected void setPosition(Point position) {
+		this.position = position;
 	}
 }

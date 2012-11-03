@@ -23,16 +23,16 @@ public abstract class GameState implements MouseListener {
     }
 
     /**
-     * Update each state.
-     */
-    public abstract void update();
-
-    /**
      * Render, draw graphic.
      * 
      * @param g
      *            the g
      */
     public abstract void gameRender(Graphics g);
+
+    /**
+     * Update each state.
+     */
+    public abstract void update();
 
 }

@@ -12,9 +12,9 @@ import com.btl.GameEngine.Drawable;
  */
 public class Button implements Drawable {
 
+	private BufferedImage originImg, img;
 	private Point position;
 	private int width, height;
-	private BufferedImage originImg, img;
 
 	/**
 	 * Khoi tao button.
@@ -26,29 +26,6 @@ public class Button implements Drawable {
 		this.position = p;
 		this.width = 0;
 		this.height = 0;
-	}
-
-	/**
-	 * Dat hinh anh cho button.
-	 * 
-	 * @param img
-	 *            hinh anh muon dat
-	 * @param width
-	 *            chieu rong
-	 * @param height
-	 *            chieu cao
-	 */
-	public void setImage(BufferedImage img, int width, int height) {
-		this.originImg = img;
-		this.width = width;
-		this.height = height;
-
-		this.img = new BufferedImage(this.width, this.height,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics g = this.img.getGraphics();
-		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
-		g.dispose();
-
 	}
 
 	/**
@@ -86,15 +63,38 @@ public class Button implements Drawable {
 			return false;
 	}
 
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(this.img, this.position.x, this.position.y, null);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Clickable#onClick()
 	 */
 
-	@Override
-	public void paint(Graphics g) {
-		g.drawImage(this.img, this.position.x, this.position.y, null);
+	/**
+	 * Dat hinh anh cho button.
+	 * 
+	 * @param img
+	 *            hinh anh muon dat
+	 * @param width
+	 *            chieu rong
+	 * @param height
+	 *            chieu cao
+	 */
+	public void setImage(BufferedImage img, int width, int height) {
+		this.originImg = img;
+		this.width = width;
+		this.height = height;
+
+		this.img = new BufferedImage(this.width, this.height,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics g = this.img.getGraphics();
+		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
+		g.dispose();
 
 	}
 

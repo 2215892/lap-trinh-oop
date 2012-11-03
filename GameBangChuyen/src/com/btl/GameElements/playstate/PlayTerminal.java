@@ -13,23 +13,15 @@ import com.btl.Model.ModelTerminal;
 import com.btl.Model.RandomEnum;
 
 public class PlayTerminal extends ModelTerminal implements Drawable {
-	private static RandomEnum<TerminalColor> rnd = new RandomEnum<TerminalColor>(
-			TerminalColor.class);
-	private TerminalColor color = TerminalColor.DEFAULT;
 	public static final int SIZE = PlaySquare.SIZE;
 	private static BufferedImage picture;
-	private BufferedImage buffer;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
+	private static RandomEnum<TerminalColor> rnd = new RandomEnum<TerminalColor>(
+			TerminalColor.class);
+	private BufferedImage buffer;
+	private TerminalColor color = TerminalColor.DEFAULT;
 
 	private boolean isWaiting = true;
-
-	public PlayTerminal(Point p) {
-		super(p);
-
-		if (PlayTerminal.picture == null) {
-			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
-		}
-	}
 
 	public PlayTerminal(ModelTerminal terminal) {
 		super(terminal);
@@ -57,6 +49,66 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 		}
 	}
+
+	public PlayTerminal(Point p) {
+		super(p);
+
+		if (PlayTerminal.picture == null) {
+			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
+		}
+	}
+	public boolean boxArrived(PlayBox box) {
+		if (box.getColor() == this.getColor()) {
+			TerminalColor color = null;
+			do {
+				color = rnd.random();
+			} while (color == TerminalColor.DEFAULT || color == getColor());
+
+			this.setColor(color);
+			update();
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	@Override
+	public boolean contains(Point point) {
+		Point logicCoordinate = ConversionFunction.locationToPosition(point,
+				SIZE);
+
+		if (logicCoordinate.equals(getPosition()))
+			return true;
+
+		return false;
+	}
+	public TerminalColor getColor() {
+		return color;
+	}
+
+	public boolean isWaiting() {
+		return isWaiting;
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
+				SIZE);
+		coordinate.x -= 8;
+		coordinate.y -= (SIZE / 2 + 9);
+
+		g.drawImage(buffer, coordinate.x, coordinate.y, null);
+
+	}
+
+	public void setColor(TerminalColor color) {
+		this.color = color;
+	}
+
+	public void setWaiting(boolean isWaiting) {
+		this.isWaiting = isWaiting;
+	}
+
 	public void update() {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 
@@ -92,58 +144,6 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		g2.fillOval(19, 12, 12, 7);
 		g2.setColor(color);
 		g2.fillOval(20, 13, 10, 5);
-	}
-	@Override
-	public void paint(Graphics g) {
-		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
-				SIZE);
-		coordinate.x -= 8;
-		coordinate.y -= (SIZE / 2 + 9);
-
-		g.drawImage(buffer, coordinate.x, coordinate.y, null);
-
-	}
-	@Override
-	public boolean contains(Point point) {
-		Point logicCoordinate = ConversionFunction.locationToPosition(point,
-				SIZE);
-
-		if (logicCoordinate.equals(getPosition()))
-			return true;
-
-		return false;
-	}
-
-	public TerminalColor getColor() {
-		return color;
-	}
-
-	public void setColor(TerminalColor color) {
-		this.color = color;
-	}
-
-	public boolean boxArrived(PlayBox box) {
-		if (box.getColor() == this.getColor()) {
-			TerminalColor color = null;
-			do {
-				color = rnd.random();
-			} while (color == TerminalColor.DEFAULT || color == getColor());
-
-			this.setColor(color);
-			update();
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	public boolean isWaiting() {
-		return isWaiting;
-	}
-
-	public void setWaiting(boolean isWaiting) {
-		this.isWaiting = isWaiting;
 	}
 
 }

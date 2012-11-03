@@ -35,6 +35,23 @@ public class Layer {
 	}
 
 	/**
+	 * Them doi tuong drawable cho layer quan ly.
+	 * 
+	 * @param drawable
+	 *            doi tuong can them
+	 */
+	public void addDrawable(Drawable drawable) {
+		this.listDrawable.add(drawable);
+	}
+
+	/**
+	 * Lam rong layer.
+	 */
+	public void empty() {
+		this.listDrawable.clear();
+	}
+
+	/**
 	 * Lay doi tuong bi click chuot.
 	 * 
 	 * @param p
@@ -52,12 +69,27 @@ public class Layer {
 	}
 
 	/**
-	 * Lam rong layer.
+	 * Lay hinh anh cua layer.
+	 * 
+	 * @return the layer
 	 */
-	public void empty() {
-		this.listDrawable.clear();
+	public BufferedImage getLayer() {
+		if (this.isVisible)
+			return buffer;
+		else
+			return null;
 	}
 
+	public ArrayList<Drawable> getListDrawable() {
+		return this.listDrawable;
+	}
+
+	/**
+	 * Hide.
+	 */
+	public void hide() {
+		this.isVisible = false;
+	}
 	/**
 	 * Checks if is visible.
 	 * 
@@ -65,16 +97,6 @@ public class Layer {
 	 */
 	public boolean isVisible() {
 		return this.isVisible;
-	}
-
-	/**
-	 * Them doi tuong drawable cho layer quan ly.
-	 * 
-	 * @param drawable
-	 *            doi tuong can them
-	 */
-	public void addDrawable(Drawable drawable) {
-		this.listDrawable.add(drawable);
 	}
 
 	/**
@@ -105,33 +127,11 @@ public class Layer {
 
 		g.dispose();
 	}
+
 	/**
 	 * Show.
 	 */
 	public void show() {
 		this.isVisible = true;
-	}
-
-	/**
-	 * Hide.
-	 */
-	public void hide() {
-		this.isVisible = false;
-	}
-
-	/**
-	 * Lay hinh anh cua layer.
-	 * 
-	 * @return the layer
-	 */
-	public BufferedImage getLayer() {
-		if (this.isVisible)
-			return buffer;
-		else
-			return null;
-	}
-
-	public ArrayList<Drawable> getListDrawable() {
-		return this.listDrawable;
 	}
 }

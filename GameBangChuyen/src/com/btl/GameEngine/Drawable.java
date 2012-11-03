@@ -10,14 +10,6 @@ import java.awt.Point;
 public interface Drawable {
 
     /**
-     * Paint.
-     * 
-     * @param g
-     *            the g
-     */
-    public void paint(Graphics g);
-
-    /**
      * Contains.
      * 
      * @param point
@@ -25,5 +17,13 @@ public interface Drawable {
      * @return true, if successful
      */
     public boolean contains(Point point);
+
+    /**
+     * Paint.
+     * 
+     * @param g
+     *            the g
+     */
+    public void paint(Graphics g);
 
 }

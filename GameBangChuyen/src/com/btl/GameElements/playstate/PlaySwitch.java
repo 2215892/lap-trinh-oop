@@ -21,24 +21,21 @@ import com.btl.data.DirectionImage;
  */
 public class PlaySwitch extends ModelSwitch implements Drawable {
 
+	public static final int PICCOUNT = PlaySquare.PICCOUNT;
 	/** The Constant SIZE. */
 	public final static int SIZE = 16;
-	private final static int WIDTH = 60;
 	private final static int HEIGHT = 50;
-	private ArrayList<Direction> input = new ArrayList<Direction>();
-	public static final int PICCOUNT = PlaySquare.PICCOUNT;
-	private int picIndex = 0;
-
-	public ArrayList<Direction> getListInput() {
-		return this.input;
-	}
-
+	private final static int WIDTH = 60;
+	public BufferedImage picture = null;
 	private BufferedImage buffer = null;
 
-	public void addInput(final Direction d) {
-		this.input.add(d);
+	private ArrayList<Direction> input = new ArrayList<Direction>();
+
+	private int picIndex = 0;
+
+	public PlaySwitch(ModelSwitch mSwitch) {
+		super(mSwitch);
 	}
-	public BufferedImage picture = null;
 	/**
 	 * Instantiates a new play switch.
 	 * 
@@ -48,8 +45,28 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public PlaySwitch(Point p) {
 		super(p);
 	}
-	public PlaySwitch(ModelSwitch mSwitch) {
-		super(mSwitch);
+	public void addInput(final Direction d) {
+		this.input.add(d);
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point point) {
+
+		Point logicCoordinate = ConversionFunction.locationToPosition(point,
+				SIZE);
+
+		if (logicCoordinate.equals(getPosition()))
+			return true;
+
+		return false;
+	}
+
+	public ArrayList<Direction> getListInput() {
+		return this.input;
 	}
 
 	/*
@@ -103,7 +120,6 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 
 		g.dispose();
 	}
-
 	private void drawLine(Graphics g) {
 		Point coordinate = new Point(13, 11 + SIZE / 2);
 		Direction in = input.get(0);
@@ -324,6 +340,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		picIndex = (picIndex + 1) % PICCOUNT;
 
 	}
+
 	private BufferedImage getArrow(final Direction d, boolean singleDirection) {
 		switch (d) {
 			case UP :
@@ -355,7 +372,6 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 				return null;
 		}
 	}
-
 	private void initPicture() {
 		this.picture = new BufferedImage(WIDTH, HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
@@ -391,21 +407,5 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 				g.drawImage(DirectionImage.SDOWN, 0, 0, null);
 		}
 		g.dispose();
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point point) {
-
-		Point logicCoordinate = ConversionFunction.locationToPosition(point,
-				SIZE);
-
-		if (logicCoordinate.equals(getPosition()))
-			return true;
-
-		return false;
 	}
 }

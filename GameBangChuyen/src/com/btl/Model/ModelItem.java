@@ -18,28 +18,28 @@ public class ModelItem implements ModelObject {
 		this.setType(item.getType());
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public Point getPosition() {
 		return this.position;
-	}
-
-	public final void setPosition(Point position) {
-		this.position = position;
 	}
 
 	public int getType() {
 		return type;
 	}
 
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getId() {
-		return id;
-	}
-
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public final void setPosition(Point position) {
+		this.position = position;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

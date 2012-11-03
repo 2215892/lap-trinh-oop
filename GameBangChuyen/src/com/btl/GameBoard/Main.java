@@ -13,9 +13,6 @@ import com.btl.GameElements.playtitle.PlayTitle;
  */
 public class Main {
 
-	private JFrame frame;
-	private GamePanel panel;
-
 	/**
 	 * Launch the application.
 	 * 
@@ -24,6 +21,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Main window = new Main();
@@ -34,6 +32,9 @@ public class Main {
 			}
 		});
 	}
+	private JFrame frame;
+
+	private GamePanel panel;
 
 	/**
 	 * Create the application.

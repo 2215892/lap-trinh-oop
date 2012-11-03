@@ -7,21 +7,11 @@ import java.awt.Point;
  * A factory for creating Model objects.
  */
 public class ModelFactory extends GraphNode implements ModelObject {
-	/** The position. */
-	private Point position;
-
 	/** The direction. */
 	private Direction direction;
 
-	/**
-	 * Instantiates a new model factory.
-	 * 
-	 * @param p
-	 *            the p
-	 */
-	public ModelFactory(final Point p) {
-		setPosition(p);
-	}
+	/** The position. */
+	private Point position;
 
 	public ModelFactory() {
 
@@ -33,18 +23,19 @@ public class ModelFactory extends GraphNode implements ModelObject {
 		this.setDirection(factory.getDirection());
 	}
 
+	/**
+	 * Instantiates a new model factory.
+	 * 
+	 * @param p
+	 *            the p
+	 */
+	public ModelFactory(final Point p) {
+		setPosition(p);
+	}
+
 	public ModelFactory(final Point p, final Direction d) {
 		setPosition(p);
 		setDirection(d);
-	}
-
-	/**
-	 * Gets the position.
-	 * 
-	 * @return the position
-	 */
-	public final Point getPosition() {
-		return position;
 	}
 
 	/**
@@ -54,6 +45,16 @@ public class ModelFactory extends GraphNode implements ModelObject {
 	 */
 	public final Direction getDirection() {
 		return direction;
+	}
+
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
+	@Override
+	public final Point getPosition() {
+		return position;
 	}
 
 	/**

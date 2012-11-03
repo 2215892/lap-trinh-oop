@@ -27,30 +27,41 @@ import com.btl.Model.ModelTerminal;
  */
 public class PlayState extends GameState {
 
-	private static final int WIDTH = 700;
 	private static final int HEIGHT = 700;
+	private static final int TIMER_DELAY = 30;
+
+	private static final int WIDTH = 700;
 
 	private BufferedImage background = null;
 
+	private int boxStep = 0;
+	private Button btnContinue;
+	private Button btnEndGame;
+	private Button btnPause;
 	private BufferedImage buffer;
 
+	private boolean isFullBox = false;
+	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
+	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
+	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayScore> listScores = new ArrayList<PlayScore>();
 	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();
-	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
-	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
+
 	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
-
-	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
+	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 	private DrawLayer platformLayer, bgLayer, objLayer, bg2Layer;
-	private ArrayList<Layer> listLayers;
-	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
-	private Timer timerLogic;
-	private Timer timerRender;
-
-	private static final int TIMER_DELAY = 30;
 
 	private int score = 0;
 
+	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
+
+	private Timer timerLogic;
+	private Timer timerRender;
+	// TODO Test
+	int count = -1;
+
+	Random rnd = new Random();
+	// TODO TEst
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -85,75 +96,140 @@ public class PlayState extends GameState {
 		}, 0, TIMER_DELAY);
 
 	}
-	// TODO Test
-	int count = -1;
-	Random rnd = new Random();
-	// TODO TEst
 
-	private void updateBoxs() {
-		ArrayList<PlayBox> notMovingBoxs = new ArrayList<PlayBox>();
-		ArrayList<PlayBox> onSwitchBoxs = new ArrayList<PlayBox>();
-		for (PlayBox i : listBoxs) {
-			i.update();
-			if (!(i.isMoving())) { /* Chi kiem tra box da den dich */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
+		/* sap xep lai layer Object */
+		this.objLayer.sort();
 
-				if (!(setBoxDestination(i)))
-					notMovingBoxs.add(i);
-				else
-					onSwitchBoxs.add(i);
-			}
+		/* render cac layer */
+		bgLayer.render();
+		objLayer.render();
+		bg2Layer.render();
+		scoreLayer.render();
+
+		/* Ve vao buffer */
+		Graphics g1 = buffer.getGraphics();
+		g1.drawImage(this.background, 0, 0, null);
+		for (Layer l : this.listLayers) {
+			g1.drawImage(l.getLayer(), 0, 0, null);
+
 		}
 
-		collisionHandle(onSwitchBoxs);
-		arrivalHandle(notMovingBoxs);
+		/* Ve len man hinh */
+		g.drawImage(this.buffer, 0, 0, null);
+		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
+				+ " Score: " + Integer.toString(score), 10, 10);
+
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// khong dung den
+
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// khong dung den
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// khong dung den
+
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		Drawable clicked = null;
+		Point p = new Point(arg0.getX(), arg0.getY());
+
+		int size = this.listLayers.size();
+		for (int i = size - 1; i >= 0; --i) {
+			clicked = this.listLayers.get(i).getClickedObj(p);
+			if (clicked != null)
+				break;
+		}
+		if (clicked != null) {
+			if (clicked.getClass().equals(PlaySwitch.class))
+				switchClickedHandle((PlaySwitch) clicked);
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// khong dung den
+
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameBoard.GameState#update()
+	 */
+	@Override
+	public void update() {
+
+		++count;
+
+		/* update game state */
+		updateSwitchs();
+		updateSquares();
+		updateBoxs();
+		removeOldScore();
+
+		/* Neu chua tao du box thi tao them */
+		if (!isFullBox) {
+
+			if (boxStep % 64 == 0) {
+				makeNewBox();
+
+			}
+			boxStep++;
+		}
+
+	}
+
+	private void addBox(PlayBox box) {
+		objLayer.addDrawable(box);
+		listBoxs.add(box);
+	}
+
 	private void addScore(PlayScore score) {
 		this.score += score.getScore();
 		this.listScores.add(score);
 		this.scoreLayer.addDrawable(score);
-	}
-
-	private void removeScore(PlayScore score) {
-		this.listScores.remove(score);
-		this.scoreLayer.removeDrawable(score);
-	}
-
-	private void collisionHandle(final ArrayList<PlayBox> notMovingBoxs) {
-		ArrayList<PlayBox> collidedBoxs = new ArrayList<PlayBox>();
-		int size = notMovingBoxs.size();
-		for (int i = 0; i < size; ++i) {
-			for (int j = i + 1; j < size; ++j) {
-				PlayBox boxA = notMovingBoxs.get(i);
-				PlayBox boxB = notMovingBoxs.get(j);
-				if (boxA.getLocation().equals(boxB.getLocation())) {
-					collidedBoxs.add(boxA);
-					collidedBoxs.add(boxB);
-					addScore(new PlayScore(boxA.getPosition(), -10000));
-				}
-
-			}
-		}
-
-		for (PlayBox i : collidedBoxs) {
-
-			removeBox(i);
-
-			/* cho mot terminal cung mau doi box */
-			for (PlayTerminal terminal : listTerminals) {
-				if (terminal.getColor() == i.getColor()
-						&& !terminal.isWaiting()) {
-					terminal.setWaiting(true);
-					break;
-				}
-			}
-
-			isFullBox = false;
-		}
-
-	}
-	private void removeBox(PlayBox box) {
-		this.listBoxs.remove(box);
-		this.objLayer.removeDrawable(box);
 	}
 
 	private void arrivalHandle(ArrayList<PlayBox> notMovingBoxs) {
@@ -213,82 +289,52 @@ public class PlayState extends GameState {
 			}
 		}
 	}
-	private boolean setBoxDestination(PlayBox box) {
-		/* Lay doi tuong tai vi tri cua box o layer Switch */
-		Drawable drawable = this.bg2Layer.getClickedObj(box.getLocation());
-		if (drawable == null)
-			drawable = this.bgLayer.getClickedObj(box.getLocation());
 
-		if (drawable != null) {
+	private void collisionHandle(final ArrayList<PlayBox> notMovingBoxs) {
+		ArrayList<PlayBox> collidedBoxs = new ArrayList<PlayBox>();
+		int size = notMovingBoxs.size();
+		for (int i = 0; i < size; ++i) {
+			for (int j = i + 1; j < size; ++j) {
+				PlayBox boxA = notMovingBoxs.get(i);
+				PlayBox boxB = notMovingBoxs.get(j);
+				if (boxA.getLocation().equals(boxB.getLocation())) {
+					collidedBoxs.add(boxA);
+					collidedBoxs.add(boxB);
+					addScore(new PlayScore(boxA.getPosition(), -10000));
+				}
 
-			/* Neu tim thay switch ben duoi box */
-			if (drawable.getClass().equals(PlaySwitch.class)) {
-				PlaySwitch pSwitch = (PlaySwitch) drawable;
-
-				/* Dat dich cho box */
-				box.setDestination(pSwitch.getNeighbor(pSwitch.getDirection())
-						.getPosition());
-				return true;
 			}
 		}
-		return false;
-	}
 
-	private void updateSquares() {
-		for (PlaySquare i : listSquares) {
-			i.update();
-		}
-	}
-	private void updateSwitchs() {
-		for (PlaySwitch i : listSwitchs) {
-			i.update();
-		}
-	}
+		for (PlayBox i : collidedBoxs) {
 
-	private void removeOldScore() {
-		ArrayList<PlayScore> listDelete = new ArrayList<PlayScore>();
-		for (PlayScore i : this.listScores) {
-			if (i.isDone())
-				listDelete.add(i);
-		}
-		for (PlayScore i : listDelete) {
-			removeScore(i);
-		}
-	}
+			removeBox(i);
 
-	private void initSquare() {
-		for (PlaySwitch pSwitch : this.listSwitchs) {
-			pSwitch.setFlag(0);
-		}
-
-		for (PlayFactory factory : this.listFactorys) {
-			initFromFactory(factory);
-		}
-
-	}
-
-	private void initFromFactory(final PlayFactory factory) {
-		GraphNode neighbor = getNeighbor(factory.getPosition(),
-				factory.getDirection());
-		factory.addNeighbor(neighbor);
-		if (neighbor.getClass().equals(PlaySwitch.class)) {
-			((PlaySwitch) neighbor).addInput(factory.getDirection());
-			DFS((PlaySwitch) neighbor);
-		}
-	}
-
-	private void initFactory() {
-		for (PlayFactory factory : this.listFactorys) {
-			for (PlaySwitch pSwitch : this.listSwitchs) {
-				pSwitch.setFlag(0);
+			/* cho mot terminal cung mau doi box */
+			for (PlayTerminal terminal : listTerminals) {
+				if (terminal.getColor() == i.getColor()
+						&& !terminal.isWaiting()) {
+					terminal.setWaiting(true);
+					break;
+				}
 			}
 
-			GraphNode neighbor = getNeighbor(factory.getPosition(),
-					factory.getDirection());
-			if (neighbor.getClass().equals(PlaySwitch.class)) {
-				DFS2((PlaySwitch) neighbor, factory);
-			} else
-				factory.addTerminal((PlayTerminal) neighbor);
+			isFullBox = false;
+		}
+
+	}
+
+	private void DFS(PlaySwitch pSwitch) {
+		if (pSwitch.getFlag() == 1)
+			return;
+		pSwitch.setFlag(1);
+		for (Direction d : pSwitch.getListDirection()) {
+			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
+			pSwitch.addNeighbor(temp);
+			if (temp.getClass().equals(PlaySwitch.class)) {
+				((PlaySwitch) temp).addInput(d);
+				DFS((PlaySwitch) temp);
+			}
 		}
 	}
 
@@ -319,7 +365,6 @@ public class PlayState extends GameState {
 
 		} while (true);
 	}
-
 	private GraphNode getNode(final Point p) {
 		for (PlaySwitch i : this.listSwitchs) {
 			if (i.getPosition().equals(p))
@@ -333,6 +378,7 @@ public class PlayState extends GameState {
 		return null;
 
 	}
+
 	private Point goDirection(final Point oldPosition, Direction d) {
 		switch (d) {
 			case RIGHT :
@@ -348,20 +394,30 @@ public class PlayState extends GameState {
 		}
 	}
 
-	private void DFS(PlaySwitch pSwitch) {
-		if (pSwitch.getFlag() == 1)
-			return;
-		pSwitch.setFlag(1);
-		for (Direction d : pSwitch.getListDirection()) {
-			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
-			pSwitch.addNeighbor(temp);
-			if (temp.getClass().equals(PlaySwitch.class)) {
-				((PlaySwitch) temp).addInput(d);
-				DFS((PlaySwitch) temp);
+	private void initFactory() {
+		for (PlayFactory factory : this.listFactorys) {
+			for (PlaySwitch pSwitch : this.listSwitchs) {
+				pSwitch.setFlag(0);
 			}
+
+			GraphNode neighbor = getNeighbor(factory.getPosition(),
+					factory.getDirection());
+			if (neighbor.getClass().equals(PlaySwitch.class)) {
+				DFS2((PlaySwitch) neighbor, factory);
+			} else
+				factory.addTerminal((PlayTerminal) neighbor);
 		}
 	}
 
+	private void initFromFactory(final PlayFactory factory) {
+		GraphNode neighbor = getNeighbor(factory.getPosition(),
+				factory.getDirection());
+		factory.addNeighbor(neighbor);
+		if (neighbor.getClass().equals(PlaySwitch.class)) {
+			((PlaySwitch) neighbor).addInput(factory.getDirection());
+			DFS((PlaySwitch) neighbor);
+		}
+	}
 	private void initFromModelMap(final ModelMap map) {
 		/* them factory tu map vao listFactory */
 		for (ModelFactory factory : map.getListFactory()) {
@@ -418,17 +474,6 @@ public class PlayState extends GameState {
 
 		platformLayer.render();
 	}
-
-	private void initItems(ArrayList<ModelItem> listItem) {
-		for (ModelItem i : listItem) {
-			PlayItem item = new PlayItem(i);
-			if (item.getType() == 2) /* PLATFORM */
-				platformLayer.addDrawable(item);
-			else
-				objLayer.addDrawable(item);
-		}
-
-	}
 	/**
 	 * Initialize.
 	 */
@@ -479,109 +524,29 @@ public class PlayState extends GameState {
 		this.listLayers.add(hiddenMenuLayer);
 
 	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// khong dung den
 
-	}
-
-	private void switchClickedHandle(final PlaySwitch pSwitch) {
-		pSwitch.changeDirection();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// khong dung den
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// khong dung den
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		Drawable clicked = null;
-		Point p = new Point(arg0.getX(), arg0.getY());
-
-		int size = this.listLayers.size();
-		for (int i = size - 1; i >= 0; --i) {
-			clicked = this.listLayers.get(i).getClickedObj(p);
-			if (clicked != null)
-				break;
-		}
-		if (clicked != null) {
-			if (clicked.getClass().equals(PlaySwitch.class))
-				switchClickedHandle((PlaySwitch) clicked);
+	private void initItems(ArrayList<ModelItem> listItem) {
+		for (ModelItem i : listItem) {
+			PlayItem item = new PlayItem(i);
+			if (item.getType() == 2) /* PLATFORM */
+				platformLayer.addDrawable(item);
+			else
+				objLayer.addDrawable(item);
 		}
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// khong dung den
+	private void initSquare() {
+		for (PlaySwitch pSwitch : this.listSwitchs) {
+			pSwitch.setFlag(0);
+		}
 
-	}
-
-	private boolean isFullBox = false;
-
-	private int boxStep = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameBoard.GameState#update()
-	 */
-	@Override
-	public void update() {
-
-		++count;
-
-		/* update game state */
-		updateSwitchs();
-		updateSquares();
-		updateBoxs();
-		removeOldScore();
-
-		/* Neu chua tao du box thi tao them */
-		if (!isFullBox) {
-
-			if (boxStep % 64 == 0) {
-				makeNewBox();
-
-			}
-			boxStep++;
+		for (PlayFactory factory : this.listFactorys) {
+			initFromFactory(factory);
 		}
 
 	}
+
 	private void makeNewBox() {
 		ArrayList<PlayBox> boxList = new ArrayList<PlayBox>();
 		PlayBox box = null;
@@ -608,39 +573,78 @@ public class PlayState extends GameState {
 			boxStep--;
 		}
 	}
-	private void addBox(PlayBox box) {
-		objLayer.addDrawable(box);
-		listBoxs.add(box);
+
+	private void removeBox(PlayBox box) {
+		this.listBoxs.remove(box);
+		this.objLayer.removeDrawable(box);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-		/* sap xep lai layer Object */
-		this.objLayer.sort();
+	private void removeOldScore() {
+		ArrayList<PlayScore> listDelete = new ArrayList<PlayScore>();
+		for (PlayScore i : this.listScores) {
+			if (i.isDone())
+				listDelete.add(i);
+		}
+		for (PlayScore i : listDelete) {
+			removeScore(i);
+		}
+	}
 
-		/* render cac layer */
-		bgLayer.render();
-		objLayer.render();
-		bg2Layer.render();
-		scoreLayer.render();
+	private void removeScore(PlayScore score) {
+		this.listScores.remove(score);
+		this.scoreLayer.removeDrawable(score);
+	}
 
-		/* Ve vao buffer */
-		Graphics g1 = buffer.getGraphics();
-		g1.drawImage(this.background, 0, 0, null);
-		for (Layer l : this.listLayers) {
-			g1.drawImage(l.getLayer(), 0, 0, null);
+	private boolean setBoxDestination(PlayBox box) {
+		/* Lay doi tuong tai vi tri cua box o layer Switch */
+		Drawable drawable = this.bg2Layer.getClickedObj(box.getLocation());
+		if (drawable == null)
+			drawable = this.bgLayer.getClickedObj(box.getLocation());
 
+		if (drawable != null) {
+
+			/* Neu tim thay switch ben duoi box */
+			if (drawable.getClass().equals(PlaySwitch.class)) {
+				PlaySwitch pSwitch = (PlaySwitch) drawable;
+
+				/* Dat dich cho box */
+				box.setDestination(pSwitch.getNeighbor(pSwitch.getDirection())
+						.getPosition());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void switchClickedHandle(final PlaySwitch pSwitch) {
+		pSwitch.changeDirection();
+	}
+	private void updateBoxs() {
+		ArrayList<PlayBox> notMovingBoxs = new ArrayList<PlayBox>();
+		ArrayList<PlayBox> onSwitchBoxs = new ArrayList<PlayBox>();
+		for (PlayBox i : listBoxs) {
+			i.update();
+			if (!(i.isMoving())) { /* Chi kiem tra box da den dich */
+
+				if (!(setBoxDestination(i)))
+					notMovingBoxs.add(i);
+				else
+					onSwitchBoxs.add(i);
+			}
 		}
 
-		/* Ve len man hinh */
-		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
-				+ " Score: " + Integer.toString(score), 10, 10);
+		collisionHandle(onSwitchBoxs);
+		arrivalHandle(notMovingBoxs);
+	}
+	private void updateSquares() {
+		for (PlaySquare i : listSquares) {
+			i.update();
+		}
+	}
 
+	private void updateSwitchs() {
+		for (PlaySwitch i : listSwitchs) {
+			i.update();
+		}
 	}
 }

@@ -10,14 +10,6 @@ import com.btl.Model.ModelObject;
 
 public class DrawLayer extends Layer {
 
-	public DrawLayer(int width, int height) {
-		super(width, height);
-	}
-
-	public void sort() {
-		Collections.sort(this.listDrawable, new ObjComparator());
-	}
-
 	private class ObjComparator implements Comparator<Drawable> {
 
 		@Override
@@ -36,6 +28,14 @@ public class DrawLayer extends Layer {
 			} else
 				return yComparision;
 		}
+	}
+
+	public DrawLayer(int width, int height) {
+		super(width, height);
+	}
+
+	public void sort() {
+		Collections.sort(this.listDrawable, new ObjComparator());
 	}
 
 }

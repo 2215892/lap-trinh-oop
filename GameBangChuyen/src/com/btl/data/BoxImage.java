@@ -11,19 +11,19 @@ import com.btl.Model.ConversionFunction;
  */
 public abstract class BoxImage {
 
-	/** The Constant RES_DIR. */
 	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
 
-	public final static BufferedImage RED_BOX = ConversionFunction
-			.loadImage(RES_DIR + "RED_BOX.png");
 	public final static BufferedImage BLUE_BOX = ConversionFunction
 			.loadImage(RES_DIR + "BLUE_BOX.png");
+
 	public final static BufferedImage GREEN_BOX = ConversionFunction
 			.loadImage(RES_DIR + "GREEN_BOX.png");
-	public final static BufferedImage YELLOW_BOX = ConversionFunction
-			.loadImage(RES_DIR + "YELLOW_BOX.png");
 	public final static BufferedImage PINK_BOX = ConversionFunction
 			.loadImage(RES_DIR + "PINK_BOX.png");
+	public final static BufferedImage RED_BOX = ConversionFunction
+			.loadImage(RES_DIR + "RED_BOX.png");
+	public final static BufferedImage YELLOW_BOX = ConversionFunction
+			.loadImage(RES_DIR + "YELLOW_BOX.png");
 
 	/**
 	 * Gets the box image.

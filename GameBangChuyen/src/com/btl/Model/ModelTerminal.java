@@ -8,10 +8,19 @@ import java.awt.Point;
  */
 public class ModelTerminal extends GraphNode implements ModelObject {
 
+	private int type;
+
 	/** The position. */
 	protected Point position;
 
-	private int type;
+	public ModelTerminal() {
+
+	}
+
+	public ModelTerminal(final ModelTerminal terminal) {
+		this.position = terminal.getPosition();
+		this.setType(terminal.getType());
+	}
 
 	/**
 	 * Instantiates a new model terminal.
@@ -23,24 +32,12 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 		position = p;
 	}
 
-	public ModelTerminal() {
-
-	}
-
-	public ModelTerminal(final ModelTerminal terminal) {
-		this.position = terminal.getPosition();
-		this.setType(terminal.getType());
-	}
-
-	protected void setPosition(Point position) {
-		this.position = position;
-	}
-
 	/**
 	 * Gets the position.
 	 * 
 	 * @return the position
 	 */
+	@Override
 	public Point getPosition() {
 		return position;
 	}
@@ -51,5 +48,9 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	protected void setPosition(Point position) {
+		this.position = position;
 	}
 }

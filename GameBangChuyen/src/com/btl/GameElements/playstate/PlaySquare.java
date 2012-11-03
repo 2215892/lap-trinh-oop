@@ -18,14 +18,16 @@ import com.btl.data.DirectionImage;
  * The Class PlaySquare.
  */
 public class PlaySquare implements Drawable, ModelObject {
-	private Direction direction;
-	private Point position;
-	private BufferedImage picture = null;
-	private int picIndex = 0;
 	public static final int PICCOUNT = 8;
-
 	/** The Constant SIZE. */
 	public final static int SIZE = PlaySwitch.SIZE;
+	private BufferedImage buffer = null;
+	private Direction direction;
+	private int picIndex = 0;
+
+	private BufferedImage picture = null;
+
+	private Point position;
 
 	/**
 	 * Instantiates a new play square.
@@ -43,6 +45,20 @@ public class PlaySquare implements Drawable, ModelObject {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point point) {
+		return false;
+	}
+
+	@Override
+	public Point getPosition() {
+		return this.position;
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -54,8 +70,6 @@ public class PlaySquare implements Drawable, ModelObject {
 				null);
 
 	}
-
-	private BufferedImage buffer = null;
 
 	public void update() {
 		if (this.picture == null)
@@ -113,20 +127,6 @@ public class PlaySquare implements Drawable, ModelObject {
 		g.dispose();
 
 		picIndex = (picIndex + 1) % PICCOUNT;
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point point) {
-		return false;
-	}
-
-	@Override
-	public Point getPosition() {
-		return this.position;
 	}
 
 }

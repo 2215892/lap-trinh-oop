@@ -5,13 +5,13 @@ package com.btl.Model;
  */
 public enum Direction {
 
-    /** Len tren. */
-    UP,
-    /** Sang phai. */
-    RIGHT,
     /** Xuong duoi. */
     DOWN,
     /** Sang trai. */
-    LEFT;
+    LEFT,
+    /** Sang phai. */
+    RIGHT,
+    /** Len tren. */
+    UP;
 
 }

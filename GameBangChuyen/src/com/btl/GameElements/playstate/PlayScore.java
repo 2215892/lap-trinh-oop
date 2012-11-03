@@ -15,18 +15,14 @@ import com.btl.Model.ConversionFunction;
 public class PlayScore implements Drawable {
 
 	private static Random rnd = new Random();
-	private int score;
-	private float alpha = 1.0f;
 	private static final int TIME_SPAN = 50;
-	private Point position;
+	private float alpha = 1.0f;
 	private int count = 0;
 	private int height;
-
 	private boolean isDone = false;
-	public boolean isDone() {
-		return isDone;
-	}
+	private Point position;
 
+	private int score;
 	public PlayScore() {
 		this.height = 20 + rnd.nextInt(25);
 	}
@@ -37,20 +33,21 @@ public class PlayScore implements Drawable {
 		this.setScore(score);
 	}
 
+	@Override
+	public boolean contains(Point point) {
+		return false;
+	}
+
 	public Point getPosition() {
 		return position;
 	}
 
-	public void setPosition(Point position) {
-		this.position = position;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public int getScore() {
 		return this.score;
+	}
+
+	public boolean isDone() {
+		return isDone;
 	}
 
 	@Override
@@ -84,9 +81,12 @@ public class PlayScore implements Drawable {
 			height++;
 		}
 	}
-	@Override
-	public boolean contains(Point point) {
-		return false;
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

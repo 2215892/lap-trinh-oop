@@ -19,10 +19,10 @@ public class PlayItem extends ModelItem implements Drawable {
 		initPicture();
 	}
 
-	private void initPicture() {
-		buffer = ItemImage.getItemImage(getId(), getType());
-		pad = ItemImage.getItemPad(getId(), getType());
-
+	@Override
+	public boolean contains(Point point) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -34,10 +34,10 @@ public class PlayItem extends ModelItem implements Drawable {
 					null);
 
 	}
-	@Override
-	public boolean contains(Point point) {
-		// TODO Auto-generated method stub
-		return false;
+	private void initPicture() {
+		buffer = ItemImage.getItemImage(getId(), getType());
+		pad = ItemImage.getItemPad(getId(), getType());
+
 	}
 
 }

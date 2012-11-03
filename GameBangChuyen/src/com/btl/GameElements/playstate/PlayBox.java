@@ -17,30 +17,22 @@ public class PlayBox implements Drawable, ModelObject {
 
 	/** The Constant SIZE. */
 	public static final int SIZE = PlaySquare.SIZE;
-	private int step = 1;
-
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-	/* Toa do logic */
-	private Point location;
 	private TerminalColor color = TerminalColor.DEFAULT;
-	private boolean isMoving = false;
-	private Direction direction;
+
 	private Point destination;
 
+	private Direction direction;
+
+	private boolean isMoving = false;
+	/* Toa do logic */
+	private Point location;
+	private int step = 1;
 	/**
 	 * Instantiates a new play box.
 	 */
 	public PlayBox() {
 
 	}
-
 	/**
 	 * Instantiates a new play box.
 	 * 
@@ -57,6 +49,49 @@ public class PlayBox implements Drawable, ModelObject {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point point) {
+		/* TODO tam khong cho click */
+		return false;
+	}
+
+	public TerminalColor getColor() {
+		return color;
+	}
+
+	/**
+	 * Gets the location.
+	 * 
+	 * @return the location
+	 */
+	public Point getLocation() {
+		return location;
+	}
+
+	@Override
+	public Point getPosition() {
+		return new Point(ConversionFunction.locationToPosition(this.location,
+				SIZE));
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	/**
+	 * Checks if is moving.
+	 * 
+	 * @return true, if is moving
+	 */
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -64,6 +99,38 @@ public class PlayBox implements Drawable, ModelObject {
 		g.drawImage(BoxImage.getBoxImage(color), location.x + 2,
 				location.y - 21, null);
 
+	}
+
+	public void setColor(TerminalColor color) {
+		this.color = color;
+	}
+
+	public boolean setDestination(final Point position) {
+		if (this.isMoving())
+			return false;
+		else {
+			this.destination = position;
+			this.direction = caculateDirection(
+					ConversionFunction.locationToPosition(this.location, SIZE),
+					this.destination);
+			this.isMoving = true;
+			return true;
+		}
+
+	}
+
+	/**
+	 * Sets the location.
+	 * 
+	 * @param location
+	 *            the new location
+	 */
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
 	}
 
 	public void update() {
@@ -96,20 +163,6 @@ public class PlayBox implements Drawable, ModelObject {
 		}
 	}
 
-	public boolean setDestination(final Point position) {
-		if (this.isMoving())
-			return false;
-		else {
-			this.destination = position;
-			this.direction = caculateDirection(
-					ConversionFunction.locationToPosition(this.location, SIZE),
-					this.destination);
-			this.isMoving = true;
-			return true;
-		}
-
-	}
-
 	private Direction caculateDirection(Point from, Point to) {
 		if (from.x < to.x) {
 			return Direction.DOWN;
@@ -119,59 +172,6 @@ public class PlayBox implements Drawable, ModelObject {
 			return Direction.RIGHT;
 		} else
 			return Direction.LEFT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point point) {
-		/* TODO tam khong cho click */
-		return false;
-	}
-
-	/**
-	 * Gets the location.
-	 * 
-	 * @return the location
-	 */
-	public Point getLocation() {
-		return location;
-	}
-
-	/**
-	 * Sets the location.
-	 * 
-	 * @param location
-	 *            the new location
-	 */
-	public void setLocation(Point location) {
-		this.location = location;
-	}
-
-	/**
-	 * Checks if is moving.
-	 * 
-	 * @return true, if is moving
-	 */
-	public boolean isMoving() {
-		return isMoving;
-	}
-
-	public TerminalColor getColor() {
-		return color;
-	}
-
-	public void setColor(TerminalColor color) {
-		this.color = color;
-	}
-
-	@Override
-	public Point getPosition() {
-		return new Point(ConversionFunction.locationToPosition(this.location,
-				SIZE));
 	}
 
 }

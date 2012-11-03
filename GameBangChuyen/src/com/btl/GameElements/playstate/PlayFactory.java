@@ -16,12 +16,20 @@ import com.btl.Model.ModelFactory;
  */
 public class PlayFactory extends ModelFactory implements Drawable {
 
-	private static Random rnd = new Random();
-
-	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 	public static final int SIZE = PlaySquare.SIZE;
+
 	private static BufferedImage picture;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
+	private static Random rnd = new Random();
+	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
+
+	public PlayFactory(final ModelFactory factory) {
+		super(factory);
+
+		if (PlayFactory.picture == null) {
+			PlayFactory.picture = ConversionFunction.loadImage(resDir);
+		}
+	}
 
 	/**
 	 * Instantiates a new play factory.
@@ -40,6 +48,21 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	public void addTerminal(PlayTerminal terminal) {
 		if (terminal.getColor() != TerminalColor.DEFAULT)
 			this.listTerminals.add(terminal);
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public final boolean contains(final Point point) {
+		Point logicCoordinate = ConversionFunction.locationToPosition(point,
+				SIZE);
+
+		if (logicCoordinate.equals(getPosition()))
+			return true;
+
+		return false;
 	}
 
 	public PlayBox makeBox() {
@@ -64,13 +87,6 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		return null;
 
 	}
-	public PlayFactory(final ModelFactory factory) {
-		super(factory);
-
-		if (PlayFactory.picture == null) {
-			PlayFactory.picture = ConversionFunction.loadImage(resDir);
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -84,21 +100,5 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 9
 				- SIZE / 2, null);
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public final boolean contains(final Point point) {
-		Point logicCoordinate = ConversionFunction.locationToPosition(point,
-				SIZE);
-
-		if (logicCoordinate.equals(getPosition()))
-			return true;
-
-		return false;
 	}
 }

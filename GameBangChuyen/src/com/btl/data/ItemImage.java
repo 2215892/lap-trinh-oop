@@ -9,25 +9,8 @@ public abstract class ItemImage {
 
 	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
 
-	public final static BufferedImage TRUCK = ConversionFunction
-			.loadImage(RES_DIR + "TRUCK.png");
 	public final static BufferedImage AIRPLANE = ConversionFunction
 			.loadImage(RES_DIR + "AIRPLANE.png");
-	public final static BufferedImage SHIP = ConversionFunction
-			.loadImage(RES_DIR + "SHIP.png");
-
-	public final static BufferedImage TREE_1 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_1.png");
-	public final static BufferedImage TREE_2 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_2.png");
-	public final static BufferedImage TREE_3 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_3.png");
-	public final static BufferedImage TREE_4 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_4.png");
-	public final static BufferedImage TREE_5 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_5.png");
-	public final static BufferedImage TREE_6 = ConversionFunction
-			.loadImage(RES_DIR + "TREE_6.png");
 
 	public final static BufferedImage PLATFORM_1 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_1.png");
@@ -35,8 +18,26 @@ public abstract class ItemImage {
 			.loadImage(RES_DIR + "PLATFORM_2.png");
 	public final static BufferedImage PLATFORM_3 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_3.png");
+
 	public final static BufferedImage PLATFORM_4 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_4.png");
+	public final static BufferedImage SHIP = ConversionFunction
+			.loadImage(RES_DIR + "SHIP.png");
+	public final static BufferedImage TREE_1 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_1.png");
+	public final static BufferedImage TREE_2 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_2.png");
+	public final static BufferedImage TREE_3 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_3.png");
+
+	public final static BufferedImage TREE_4 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_4.png");
+	public final static BufferedImage TREE_5 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_5.png");
+	public final static BufferedImage TREE_6 = ConversionFunction
+			.loadImage(RES_DIR + "TREE_6.png");
+	public final static BufferedImage TRUCK = ConversionFunction
+			.loadImage(RES_DIR + "TRUCK.png");
 
 	public static BufferedImage getItemImage(int id, int type) {
 		switch (type) {

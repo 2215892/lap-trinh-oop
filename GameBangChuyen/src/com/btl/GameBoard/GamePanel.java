@@ -17,6 +17,19 @@ public class GamePanel extends JPanel {
 
 	private GameState currentState = null;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		if (this.currentState != null)
+			this.currentState.gameRender(g);
+	}
+
 	/**
 	 * Sets the state.
 	 * 
@@ -30,19 +43,6 @@ public class GamePanel extends JPanel {
 		this.currentState = state;
 		this.addMouseListener(this.currentState);
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		if (this.currentState != null)
-			this.currentState.gameRender(g);
 	}
 
 }

@@ -27,9 +27,15 @@ public class PlayTitle extends GameState {
 	}
 
 	@Override
+	public void gameRender(Graphics g) {
+		bnStart.paint(g);
+
+	}
+	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -79,12 +85,6 @@ public class PlayTitle extends GameState {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void gameRender(Graphics g) {
-		bnStart.paint(g);
 
 	}
 
