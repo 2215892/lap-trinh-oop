@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
+import com.btl.GameElements.playtitle.PlayTitle;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.Model.ConversionFunction;
@@ -194,6 +195,8 @@ public class PlayState extends GameState {
 		} else if (clicked == btnContinue) {
 			hiddenMenuLayer.hide();
 			resume();
+		} else if (clicked == btnEndGame) {
+			parent.setState(new PlayTitle(parent));
 		}
 
 	}

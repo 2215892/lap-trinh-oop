@@ -3,6 +3,7 @@ package com.btl.GameBoard;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,6 +44,14 @@ public class GamePanel extends JPanel {
 		this.currentState = state;
 		this.addMouseListener(this.currentState);
 
-	}
+		SwingUtilities.invokeLater(new Runnable() {
 
+			@Override
+			public void run() {
+				repaint();
+
+			}
+		});
+
+	}
 }

@@ -21,6 +21,7 @@ public class PlayTitle extends GameState {
 	Button bnStart;
 	public PlayTitle(GamePanel parent) {
 		super(parent);
+		System.gc();
 
 		bnStart = new Button(new Point(200, 200));
 		bnStart.setImage(ButtonImage.START_BUTTON, 200, 100);
