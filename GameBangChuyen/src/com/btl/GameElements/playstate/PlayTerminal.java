@@ -11,11 +11,11 @@ import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelTerminal;
 import com.btl.Model.RandomEnum;
+import com.btl.data.DirectionImage;
 
 public class PlayTerminal extends ModelTerminal implements Drawable {
 	public static final int SIZE = PlaySquare.SIZE;
-	private static BufferedImage picture;
-	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
+	private static BufferedImage picture = DirectionImage.SQUARE;;
 	private static RandomEnum<TerminalColor> rnd = new RandomEnum<TerminalColor>(
 			TerminalColor.class);
 	private BufferedImage buffer;
@@ -38,10 +38,6 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 			this.setColor(color);
 		}
 
-		if (PlayTerminal.picture == null) {
-			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
-		}
-
 		if (buffer == null) {
 			buffer = new BufferedImage(picture.getWidth(), picture.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
@@ -52,11 +48,8 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	public PlayTerminal(Point p) {
 		super(p);
-
-		if (PlayTerminal.picture == null) {
-			PlayTerminal.picture = ConversionFunction.loadImage(resDir);
-		}
 	}
+
 	public boolean boxArrived(PlayBox box) {
 		if (box.getColor() == this.getColor()) {
 			TerminalColor color = null;
@@ -92,6 +85,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	@Override
 	public void paint(Graphics g) {
+
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
 		coordinate.x -= 8;

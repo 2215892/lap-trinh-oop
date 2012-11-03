@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 
@@ -81,4 +82,14 @@ public abstract class ConversionFunction {
 		return new Point(ux.intValue(), uy.intValue());
 	}
 
+	public static String getCurrentDirectory() {
+		String decodedPath = null;
+		try {
+			decodedPath = (URLDecoder.decode(ClassLoader.getSystemClassLoader()
+					.getResource(".").getPath(), "UTF-8"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return decodedPath;
+	}
 }

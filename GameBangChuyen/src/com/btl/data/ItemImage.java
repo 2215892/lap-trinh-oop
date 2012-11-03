@@ -7,7 +7,7 @@ import com.btl.Model.ConversionFunction;
 
 public abstract class ItemImage {
 
-	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
+	public final static String RES_DIR = ButtonImage.RES_DIR;
 
 	public final static BufferedImage AIRPLANE = ConversionFunction
 			.loadImage(RES_DIR + "AIRPLANE.png");

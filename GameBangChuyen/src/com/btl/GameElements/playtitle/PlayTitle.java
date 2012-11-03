@@ -11,8 +11,8 @@ import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameElements.playstate.Button;
 import com.btl.GameElements.playstate.PlayState;
-import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
+import com.btl.data.ButtonImage;
 
 public class PlayTitle extends GameState {
 
@@ -21,9 +21,7 @@ public class PlayTitle extends GameState {
 		super(parent);
 
 		bnStart = new Button(new Point(200, 200));
-		bnStart.setImage(ConversionFunction
-				.loadImage("E:\\Working project\\OOP\\res\\TESTSTART.png"),
-				200, 100);
+		bnStart.setImage(ButtonImage.START_BUTTON, 200, 100);
 	}
 
 	@Override

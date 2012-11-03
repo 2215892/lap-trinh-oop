@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 import com.btl.Model.ConversionFunction;
 
 public abstract class ButtonImage {
-	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
+	public final static String RES_DIR = ConversionFunction
+			.getCurrentDirectory() + "res//";
 
 	public final static BufferedImage PAUSE_BUTTON = ConversionFunction
 			.loadImage(RES_DIR + "PAUSE_BUTTON.png");
@@ -15,4 +16,7 @@ public abstract class ButtonImage {
 
 	public final static BufferedImage CONTINUE_BUTTON = ConversionFunction
 			.loadImage(RES_DIR + "CONTINUE_BUTTON.png");
+
+	public final static BufferedImage START_BUTTON = ConversionFunction
+			.loadImage(RES_DIR + "TESTSTART.png");
 }

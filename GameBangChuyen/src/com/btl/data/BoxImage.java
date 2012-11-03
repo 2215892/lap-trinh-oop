@@ -11,7 +11,7 @@ import com.btl.Model.ConversionFunction;
  */
 public abstract class BoxImage {
 
-	public final static String RES_DIR = "E:\\Working project\\OOP\\res\\";
+	public final static String RES_DIR = ButtonImage.RES_DIR;
 
 	public final static BufferedImage BLUE_BOX = ConversionFunction
 			.loadImage(RES_DIR + "BLUE_BOX.png");

@@ -9,6 +9,7 @@ import java.util.Random;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelFactory;
+import com.btl.data.DirectionImage;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -19,16 +20,11 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	public static final int SIZE = PlaySquare.SIZE;
 
 	private static BufferedImage picture;
-	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
 	private static Random rnd = new Random();
 	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 
 	public PlayFactory(final ModelFactory factory) {
 		super(factory);
-
-		if (PlayFactory.picture == null) {
-			PlayFactory.picture = ConversionFunction.loadImage(resDir);
-		}
 	}
 
 	/**
@@ -39,10 +35,6 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	 */
 	public PlayFactory(final Point p) {
 		super(p);
-
-		if (PlayFactory.picture == null) {
-			PlayFactory.picture = ConversionFunction.loadImage(resDir);
-		}
 	}
 
 	public void addTerminal(PlayTerminal terminal) {
@@ -95,6 +87,9 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	 */
 	@Override
 	public void paint(final Graphics g) {
+		if (PlayFactory.picture == null) {
+			PlayFactory.picture = DirectionImage.SQUARE;
+		}
 		Point coordinate = ConversionFunction.positionToLocation(getPosition(),
 				SIZE);
 		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 9

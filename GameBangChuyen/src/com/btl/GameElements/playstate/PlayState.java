@@ -30,7 +30,8 @@ import com.btl.data.ButtonImage;
 public class PlayState extends GameState {
 
 	private static final int HEIGHT = 700;
-	private static final int TIMER_DELAY = 40;
+	private static final int TIMER_RENDER_DELAY = 30;
+	private static final int TIMER_LOGIC_DELAY = 30;
 
 	private static final int WIDTH = 700;
 
@@ -88,7 +89,7 @@ public class PlayState extends GameState {
 				update();
 
 			}
-		}, 0, TIMER_DELAY);
+		}, 0, TIMER_LOGIC_DELAY);
 
 		timerRender = new Timer();
 
@@ -98,7 +99,7 @@ public class PlayState extends GameState {
 			public void run() {
 				parent.repaint();
 			}
-		}, 0, TIMER_DELAY);
+		}, 0, TIMER_RENDER_DELAY);
 	}
 
 	/*
@@ -126,8 +127,9 @@ public class PlayState extends GameState {
 
 		/* Ve len man hinh */
 		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
-				+ " Score: " + Integer.toString(score), 10, 10);
+		g.drawString(
+				"Time: " + Integer.toString(count * TIMER_LOGIC_DELAY / 1000)
+						+ " Score: " + Integer.toString(score), 10, 10);
 
 	}
 
