@@ -114,7 +114,7 @@ public class PlayState extends GameState {
 			for (int j = i + 1; j < size; ++j) {
 				PlayBox boxA = notMovingBoxs.get(i);
 				PlayBox boxB = notMovingBoxs.get(j);
-				if (boxA.getPosition().equals(boxB.getPosition())) {
+				if (boxA.getLocation().equals(boxB.getLocation())) {
 					collidedBoxs.add(boxA);
 					collidedBoxs.add(boxB);
 					addScore(new PlayScore(boxA.getPosition(), -10000));
@@ -126,9 +126,20 @@ public class PlayState extends GameState {
 		for (PlayBox i : collidedBoxs) {
 
 			removeBox(i);
-		}
-	}
 
+			/* cho mot terminal cung mau doi box */
+			for (PlayTerminal terminal : listTerminals) {
+				if (terminal.getColor() == i.getColor()
+						&& !terminal.isWaiting()) {
+					terminal.setWaiting(true);
+					break;
+				}
+			}
+
+			isFullBox = false;
+		}
+
+	}
 	private void removeBox(PlayBox box) {
 		this.listBoxs.remove(box);
 		this.objLayer.removeDrawable(box);
@@ -146,12 +157,47 @@ public class PlayState extends GameState {
 				if (drawable.getClass().equals(PlayTerminal.class)) {
 					PlayTerminal terminal = (PlayTerminal) drawable;
 
-					if (terminal.getColor().equals(box.getColor()))
+					if (terminal.boxArrived(box)) {
+						/* Neu box den cung mau */
+
+						/* Neu terminal dang cho tao box */
+						if (terminal.isWaiting()) {
+							/*
+							 * cho terminal cung mau da duoc tao box sang trang
+							 * thai cho
+							 */
+							for (PlayTerminal t : listTerminals) {
+								if (t.getColor() == box.getColor()
+										&& !t.isWaiting()) {
+									t.setWaiting(true);
+									break;
+								}
+							}
+						} else
+							terminal.setWaiting(true);
+
+						/* Hien diem */
 						addScore(new PlayScore(terminal.getPosition(), 5000));
-					else
+
+					} else {
+						/*
+						 * Neu den nham terminal thi chuyen terminal duoc tao
+						 * box ay sang trang thai cho
+						 */
+						for (PlayTerminal t : listTerminals) {
+							if (t.getColor() == box.getColor()
+									&& !t.isWaiting()) {
+								t.setWaiting(true);
+								break;
+							}
+						}
+
+						/* Hien diem */
 						addScore(new PlayScore(terminal.getPosition(), -5000));
+					}
 
 					removeBox(box);
+					isFullBox = false;
 				}
 			}
 		}
@@ -494,6 +540,10 @@ public class PlayState extends GameState {
 
 	}
 
+	private boolean isFullBox = false;
+
+	private int boxStep = 0;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -501,23 +551,55 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void update() {
+
+		++count;
+
 		/* update game state */
 		updateSwitchs();
 		updateSquares();
 		updateBoxs();
 		removeOldScore();
 
-		// TODO tesst
-		++count;
-		if (count % 64 == 0) {
-			int index = rnd.nextInt(this.listFactorys.size());
-			PlayBox test = this.listFactorys.get(index).makeBox();
-			if (test != null) {
-				objLayer.addDrawable(test);
-				listBoxs.add(test);
+		/* Neu chua tao du box thi tao them */
+		if (!isFullBox) {
+
+			if (boxStep % 64 == 0) {
+				makeNewBox();
+
 			}
+			boxStep++;
 		}
 
+	}
+	private void makeNewBox() {
+		ArrayList<PlayBox> boxList = new ArrayList<PlayBox>();
+		PlayBox box = null;
+		for (PlayFactory i : listFactorys) {
+			box = i.makeBox();
+			if (box != null)
+				boxList.add(box);
+		}
+
+		if (boxList.size() != 0) {
+			int index = rnd.nextInt(boxList.size());
+			box = boxList.get(index);
+
+			for (PlayTerminal t : listTerminals) {
+				if (t.getColor() == box.getColor() && t.isWaiting()) {
+					t.setWaiting(false);
+					break;
+				}
+			}
+			addBox(box);
+
+		} else {
+			isFullBox = true;
+			boxStep--;
+		}
+	}
+	private void addBox(PlayBox box) {
+		objLayer.addDrawable(box);
+		listBoxs.add(box);
 	}
 
 	/*
@@ -548,6 +630,11 @@ public class PlayState extends GameState {
 		g.drawImage(this.buffer, 0, 0, null);
 		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
 				+ " Score: " + Integer.toString(score), 10, 10);
+
+		for (int i = 0; i < listTerminals.size(); ++i) {
+			PlayTerminal t = listTerminals.get(i);
+			g.drawString(t.getColor() + " : " + t.isWaiting(), 10, 20 + 10 * i);
+		}
 
 	}
 }

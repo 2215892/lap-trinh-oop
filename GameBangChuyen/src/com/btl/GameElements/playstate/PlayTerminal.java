@@ -21,6 +21,8 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	private BufferedImage buffer;
 	private static final String resDir = "E:\\Working project\\OOP\\res\\SQUARE.png";
 
+	private boolean isWaiting = true;
+
 	public PlayTerminal(Point p) {
 		super(p);
 
@@ -34,6 +36,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 		if (this.getType() == 0) {
 			this.setColor(TerminalColor.DEFAULT);
+			isWaiting = false;
 		} else {
 			TerminalColor color = null;
 			do {
@@ -117,6 +120,30 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	public void setColor(TerminalColor color) {
 		this.color = color;
+	}
+
+	public boolean boxArrived(PlayBox box) {
+		if (box.getColor() == this.getColor()) {
+			TerminalColor color = null;
+			do {
+				color = rnd.random();
+			} while (color == TerminalColor.DEFAULT || color == getColor());
+
+			this.setColor(color);
+			update();
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public boolean isWaiting() {
+		return isWaiting;
+	}
+
+	public void setWaiting(boolean isWaiting) {
+		this.isWaiting = isWaiting;
 	}
 
 }

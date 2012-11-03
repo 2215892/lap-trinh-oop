@@ -44,15 +44,23 @@ public class PlayFactory extends ModelFactory implements Drawable {
 
 	public PlayBox makeBox() {
 
-		if (this.listTerminals.size() != 0) {
-			PlayTerminal terminal = this.listTerminals.get(rnd
-					.nextInt(this.listTerminals.size()));
+		ArrayList<PlayTerminal> terminalWaiting = new ArrayList<PlayTerminal>();
+
+		for (PlayTerminal terminal : this.listTerminals) {
+			if (terminal.isWaiting())
+				terminalWaiting.add(terminal);
+		}
+
+		if (terminalWaiting.size() != 0) {
+			PlayTerminal terminal = terminalWaiting.get(rnd
+					.nextInt(terminalWaiting.size()));
 			PlayBox box = new PlayBox(ConversionFunction.positionToLocation(
 					this.getPosition(), PlaySwitch.SIZE), terminal.getColor());
 			box.setDestination(this.getNeighbor(this.getDirection())
 					.getPosition());
 			return box;
 		}
+
 		return null;
 
 	}
