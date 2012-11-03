@@ -1,5 +1,6 @@
 package com.btl.GameElements.playstate;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ import com.btl.Model.ModelItem;
 import com.btl.Model.ModelMap;
 import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
+import com.btl.data.ButtonImage;
 
 /**
  * The Class PlayState.
@@ -28,11 +30,9 @@ import com.btl.Model.ModelTerminal;
 public class PlayState extends GameState {
 
 	private static final int HEIGHT = 700;
-	private static final int TIMER_DELAY = 30;
+	private static final int TIMER_DELAY = 40;
 
 	private static final int WIDTH = 700;
-
-	private BufferedImage background = null;
 
 	private int boxStep = 0;
 	private Button btnContinue;
@@ -74,6 +74,11 @@ public class PlayState extends GameState {
 		initialize();
 		initFromModelMap(map);
 
+		resume();
+
+	}
+
+	private void resume() {
 		timerLogic = new Timer();
 
 		timerLogic.schedule(new TimerTask() {
@@ -94,7 +99,6 @@ public class PlayState extends GameState {
 				parent.repaint();
 			}
 		}, 0, TIMER_DELAY);
-
 	}
 
 	/*
@@ -115,7 +119,6 @@ public class PlayState extends GameState {
 
 		/* Ve vao buffer */
 		Graphics g1 = buffer.getGraphics();
-		g1.drawImage(this.background, 0, 0, null);
 		for (Layer l : this.listLayers) {
 			g1.drawImage(l.getLayer(), 0, 0, null);
 
@@ -178,8 +181,28 @@ public class PlayState extends GameState {
 		if (clicked != null) {
 			if (clicked.getClass().equals(PlaySwitch.class))
 				switchClickedHandle((PlaySwitch) clicked);
+			if (clicked.getClass().equals(Button.class))
+				buttonClickedHandle((Button) clicked);
 		}
 
+	}
+
+	private void buttonClickedHandle(Button clicked) {
+		if (clicked == btnPause) {
+			pause();
+			hiddenMenuLayer.show();
+			hiddenMenuLayer.render();
+			parent.repaint();
+		} else if (clicked == btnContinue) {
+			hiddenMenuLayer.hide();
+			resume();
+		}
+
+	}
+
+	private void pause() {
+		timerLogic.cancel();
+		timerRender.cancel();
 	}
 
 	/*
@@ -478,8 +501,6 @@ public class PlayState extends GameState {
 	 * Initialize.
 	 */
 	private void initialize() {
-		background = ConversionFunction
-				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
 		buffer = new BufferedImage(PlayState.WIDTH, PlayState.HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
 		//
@@ -522,9 +543,39 @@ public class PlayState extends GameState {
 		this.listLayers.add(scoreLayer);
 		this.listLayers.add(menuLayer);
 		this.listLayers.add(hiddenMenuLayer);
+		//
+		// khoi tao cac button
+		//
+		btnPause = new Button(new Point(650, 5));
+		btnPause.setImage(ButtonImage.PAUSE_BUTTON, 28, 27);
+		btnEndGame = new Button(new Point(100, 300));
+		btnEndGame.setImage(ButtonImage.ENDGAME_BUTTON, 200, 100);
+		btnContinue = new Button(new Point(400, 300));
+		btnContinue.setImage(ButtonImage.CONTINUE_BUTTON, 200, 100);
+
+		menuLayer.addDrawable(btnPause);
+		hiddenMenuLayer.addDrawable(btnContinue);
+		hiddenMenuLayer.addDrawable(btnEndGame);
+		Button temp = new Button(new Point(0, 0));
+		temp.setImage(null, 700, 700);
+		hiddenMenuLayer.addDrawable(temp);
+
+		BufferedImage tempImage = new BufferedImage(WIDTH, HEIGHT,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics g = tempImage.getGraphics();
+		g.setColor(new Color(0, 0, 0, 230));
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.dispose();
+
+		hiddenMenuLayer.setBackground(tempImage);
+
+		BufferedImage background = ConversionFunction
+				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
+		platformLayer.setBackground(background);
+
+		menuLayer.render();
 
 	}
-
 	private void initItems(ArrayList<ModelItem> listItem) {
 		for (ModelItem i : listItem) {
 			PlayItem item = new PlayItem(i);

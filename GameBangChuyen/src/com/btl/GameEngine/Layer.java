@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Layer {
 
 	/** The buffer. */
-	private BufferedImage buffer;
+	private BufferedImage buffer, background;
 	private boolean isVisible = true;
 	private int width, height;
 
@@ -121,6 +121,11 @@ public class Layer {
 		/* Xoa nen buffer */
 		g.setBackground(new Color(255, 255, 255, 0));
 		g.clearRect(0, 0, buffer.getWidth(), buffer.getHeight());
+
+		if (background != null) {
+			g.drawImage(background, 0, 0, null);
+		}
+
 		for (int i = 0; i < this.listDrawable.size(); ++i) {
 			this.listDrawable.get(i).paint(g);
 		}
@@ -133,5 +138,9 @@ public class Layer {
 	 */
 	public void show() {
 		this.isVisible = true;
+	}
+
+	public void setBackground(BufferedImage background) {
+		this.background = background;
 	}
 }

@@ -27,7 +27,7 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		super(terminal);
 
 		if (this.getType() == 0) {
-			this.setColor(TerminalColor.DEFAULT);
+			this.setColor(null);
 			isWaiting = false;
 		} else {
 			TerminalColor color = null;
@@ -112,38 +112,40 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 	public void update() {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 
-		g2.drawImage(picture, 0, 0, null);
+		if (this.color != null) {
+			g2.drawImage(picture, 0, 0, null);
 
-		Color color = null;
-		switch (this.getColor()) {
-			case DEFAULT :
-				color = Color.gray;
-				break;
-			case PINK :
-				color = new Color(255, 0, 247);
-				break;
-			case BLUE :
-				color = new Color(105, 162, 214);
-				break;
-			case GREEN :
-				color = new Color(74, 219, 54);
-				break;
-			case RED :
-				color = Color.red;
-				break;
-			case YELLOW :
-				color = new Color(232, 240, 24);
-				break;
-			default :
-				break;
+			Color color = null;
+			switch (this.getColor()) {
+				case DEFAULT :
+					color = Color.gray;
+					break;
+				case PINK :
+					color = new Color(255, 0, 247);
+					break;
+				case BLUE :
+					color = new Color(105, 162, 214);
+					break;
+				case GREEN :
+					color = new Color(74, 219, 54);
+					break;
+				case RED :
+					color = Color.red;
+					break;
+				case YELLOW :
+					color = new Color(232, 240, 24);
+					break;
+				default :
+					break;
+			}
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, // Anti-alias!
+					RenderingHints.VALUE_ANTIALIAS_ON);
+
+			g2.setColor(Color.black);
+			g2.fillOval(19, 12, 12, 7);
+			g2.setColor(color);
+			g2.fillOval(20, 13, 10, 5);
 		}
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, // Anti-alias!
-				RenderingHints.VALUE_ANTIALIAS_ON);
-
-		g2.setColor(Color.black);
-		g2.fillOval(19, 12, 12, 7);
-		g2.setColor(color);
-		g2.fillOval(20, 13, 10, 5);
 	}
 
 }
