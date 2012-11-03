@@ -44,6 +44,8 @@ public class PlayState extends GameState {
 	private DrawLayer platformLayer, bgLayer, objLayer, bg2Layer;
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
+	private Timer timerLogic;
+	private Timer timerRender;
 
 	private static final int TIMER_DELAY = 30;
 
@@ -61,14 +63,23 @@ public class PlayState extends GameState {
 		initialize();
 		initFromModelMap(map);
 
-		Timer timer = new Timer();
+		timerLogic = new Timer();
 
-		timer.schedule(new TimerTask() {
+		timerLogic.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
 				update();
 
+			}
+		}, 0, TIMER_DELAY);
+
+		timerRender = new Timer();
+
+		timerRender.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
 				parent.repaint();
 			}
 		}, 0, TIMER_DELAY);
@@ -630,11 +641,6 @@ public class PlayState extends GameState {
 		g.drawImage(this.buffer, 0, 0, null);
 		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
 				+ " Score: " + Integer.toString(score), 10, 10);
-
-		for (int i = 0; i < listTerminals.size(); ++i) {
-			PlayTerminal t = listTerminals.get(i);
-			g.drawString(t.getColor() + " : " + t.isWaiting(), 10, 20 + 10 * i);
-		}
 
 	}
 }
