@@ -3,6 +3,7 @@ package com.btl.GameElements.playtitle;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameElements.playstate.Button;
 import com.btl.GameElements.playstate.PlayState;
+import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
 import com.btl.data.ButtonImage;
 
@@ -50,14 +52,9 @@ public class PlayTitle extends GameState {
 	public void mousePressed(MouseEvent arg0) {
 
 		if (bnStart.contains(new Point(arg0.getX(), arg0.getY()))) {
-			/*
-			 * ModelMap map = ModelMap
-			 * .createMap("E:\\Working project\\OOP\\testBangchuyen2.xml"); if
-			 * (map == null) JOptionPane.showMessageDialog(null, "Error"); else
-			 * parent.setState(new PlayState(parent, map));
-			 */
-
 			final JFileChooser fc = new JFileChooser();
+			fc.setCurrentDirectory(new File(ConversionFunction
+					.getCurrentDirectory() + "custom map//"));
 			int returnVal = fc.showOpenDialog(parent);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -73,7 +70,6 @@ public class PlayTitle extends GameState {
 		}
 
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub

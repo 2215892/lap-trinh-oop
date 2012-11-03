@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
+
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameEngine.Drawable;
@@ -30,8 +32,7 @@ import com.btl.data.ButtonImage;
 public class PlayState extends GameState {
 
 	private static final int HEIGHT = 700;
-	private static final int TIMER_RENDER_DELAY = 30;
-	private static final int TIMER_LOGIC_DELAY = 30;
+	private static final int TIMER_DELAY = 30;
 
 	private static final int WIDTH = 700;
 
@@ -56,13 +57,10 @@ public class PlayState extends GameState {
 
 	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
 
-	private Timer timerLogic;
-	private Timer timerRender;
-	// TODO Test
+	private Timer timer;
 	int count = -1;
 
 	Random rnd = new Random();
-	// TODO TEst
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -80,28 +78,27 @@ public class PlayState extends GameState {
 	}
 
 	private void resume() {
-		timerLogic = new Timer();
+		timer = new Timer();
 
-		timerLogic.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
 				update();
 
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						parent.repaint();
+
+					}
+				});
+
 			}
-		}, 0, TIMER_LOGIC_DELAY);
+		}, 0, TIMER_DELAY);
 
-		timerRender = new Timer();
-
-		timerRender.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				parent.repaint();
-			}
-		}, 0, TIMER_RENDER_DELAY);
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -127,9 +124,8 @@ public class PlayState extends GameState {
 
 		/* Ve len man hinh */
 		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString(
-				"Time: " + Integer.toString(count * TIMER_LOGIC_DELAY / 1000)
-						+ " Score: " + Integer.toString(score), 10, 10);
+		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
+				+ " Score: " + Integer.toString(score), 10, 10);
 
 	}
 
@@ -203,8 +199,7 @@ public class PlayState extends GameState {
 	}
 
 	private void pause() {
-		timerLogic.cancel();
-		timerRender.cancel();
+		timer.cancel();
 	}
 
 	/*
