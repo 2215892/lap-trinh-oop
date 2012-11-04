@@ -17,7 +17,6 @@ import com.btl.GameBoard.GameState;
 import com.btl.GameElements.playtitle.PlayTitle;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
-import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.GraphNode;
 import com.btl.Model.ModelFactory;
@@ -26,6 +25,7 @@ import com.btl.Model.ModelMap;
 import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
 import com.btl.data.ButtonImage;
+import com.btl.data.OtherImage;
 
 /**
  * The Class PlayState.
@@ -609,8 +609,7 @@ public class PlayState extends GameState {
 		gameOverMenuLayer.addDrawable(temp);
 		gameOverMenuLayer.setBackground(tempImage);
 
-		BufferedImage background = ConversionFunction
-				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
+		BufferedImage background = OtherImage.BG;
 		platformLayer.setBackground(background);
 
 		menuLayer.render();
