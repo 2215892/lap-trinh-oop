@@ -62,7 +62,8 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		ArrayList<PlayTerminal> terminalWaiting = new ArrayList<PlayTerminal>();
 
 		for (PlayTerminal terminal : this.listTerminals) {
-			if (terminal.isWaiting())
+			if (terminal.isWaiting()
+					&& terminal.getColor() != TerminalColor.DEFAULT)
 				terminalWaiting.add(terminal);
 		}
 

@@ -8,7 +8,7 @@ import java.awt.Point;
  */
 public class ModelTerminal extends GraphNode implements ModelObject {
 
-	private int type;
+	private int type, boxCount;
 
 	/** The position. */
 	protected Point position;
@@ -20,6 +20,7 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	public ModelTerminal(final ModelTerminal terminal) {
 		this.position = terminal.getPosition();
 		this.setType(terminal.getType());
+		this.setBoxCount(terminal.getBoxCount());
 	}
 
 	/**
@@ -52,5 +53,13 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 
 	protected void setPosition(Point position) {
 		this.position = position;
+	}
+
+	public int getBoxCount() {
+		return boxCount;
+	}
+
+	public void setBoxCount(int boxCount) {
+		this.boxCount = boxCount;
 	}
 }

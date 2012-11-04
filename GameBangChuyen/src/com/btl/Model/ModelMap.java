@@ -183,6 +183,7 @@ public class ModelMap {
 		int y = getIntValue(ele, "y");
 		ModelTerminal terminal = new ModelTerminal(new Point(x, y));
 		terminal.setType(getIntValue(ele, "type"));
+		terminal.setBoxCount(getIntValue(ele, "boxnumber"));
 
 		return terminal;
 	}

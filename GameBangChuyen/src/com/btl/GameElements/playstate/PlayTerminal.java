@@ -52,13 +52,20 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	public boolean boxArrived(PlayBox box) {
 		if (box.getColor() == this.getColor()) {
+			this.setBoxCount(this.getBoxCount() - 1);
+
 			TerminalColor color = null;
-			do {
-				color = rnd.random();
-			} while (color == TerminalColor.DEFAULT || color == getColor());
+			if (this.getBoxCount() != 0) {
+				do {
+					color = rnd.random();
+				} while (color == TerminalColor.DEFAULT || color == getColor());
+
+			} else
+				color = TerminalColor.DEFAULT;
 
 			this.setColor(color);
 			update();
+
 			return true;
 		} else {
 			return false;
