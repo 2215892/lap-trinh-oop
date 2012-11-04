@@ -56,7 +56,9 @@ public class PlayState extends GameState {
 
 	private int score = 0;
 
-	private Layer scoreLayer, menuLayer, hiddenMenuLayer;
+	private int maxSecond, currentSecond;
+
+	private Layer scoreLayer, menuLayer, pauseMenuLayer, gameOverMenuLayer;
 
 	private Timer timer;
 	int count = -1;
@@ -125,9 +127,17 @@ public class PlayState extends GameState {
 
 		/* Ve len man hinh */
 		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString("Time: " + Integer.toString(count * TIMER_DELAY / 1000)
-				+ " Score: " + Integer.toString(score), 10, 10);
+		g.drawString("Time: " + secondToString(currentSecond) + " Score: "
+				+ Integer.toString(score), 10, 10);
 
+	}
+
+	private String secondToString(int second) {
+
+		int m = second / 60;
+		int s = second % 60;
+
+		return new String(Integer.toString(m) + ":" + Integer.toString(s));
 	}
 
 	/*
@@ -189,15 +199,30 @@ public class PlayState extends GameState {
 	private void buttonClickedHandle(Button clicked) {
 		if (clicked == btnPause) {
 			pause();
-			hiddenMenuLayer.show();
-			hiddenMenuLayer.render();
+			pauseMenuLayer.show();
+			pauseMenuLayer.render();
 			parent.repaint();
 		} else if (clicked == btnContinue) {
-			hiddenMenuLayer.hide();
+			pauseMenuLayer.hide();
 			resume();
 		} else if (clicked == btnEndGame) {
 			parent.setState(new PlayTitle(parent));
 		}
+
+	}
+
+	private void onGameEnd() {
+		pause();
+		gameOverMenuLayer.show();
+		gameOverMenuLayer.render();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				parent.repaint();
+
+			}
+		});
 
 	}
 
@@ -223,8 +248,12 @@ public class PlayState extends GameState {
 	 */
 	@Override
 	public void update() {
-
 		++count;
+		currentSecond = maxSecond - count * TIMER_DELAY / 1000;
+
+		if (currentSecond == 0 || (isFullBox && listBoxs.size() == 0)) {
+			onGameEnd();
+		}
 
 		/* update game state */
 		updateSwitchs();
@@ -243,7 +272,6 @@ public class PlayState extends GameState {
 		}
 
 	}
-
 	private void addBox(PlayBox box) {
 		objLayer.addDrawable(box);
 		listBoxs.add(box);
@@ -442,6 +470,8 @@ public class PlayState extends GameState {
 		}
 	}
 	private void initFromModelMap(final ModelMap map) {
+		this.maxSecond = map.getSecond() + map.getMinute() * 60;
+
 		/* them factory tu map vao listFactory */
 		for (ModelFactory factory : map.getListFactory()) {
 			this.listFactorys.add(new PlayFactory(factory));
@@ -528,10 +558,15 @@ public class PlayState extends GameState {
 		//
 		this.menuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
 		//
-		// hiddenMenuLayer
+		// pauseMenuLayer
 		//
-		this.hiddenMenuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
-		this.hiddenMenuLayer.hide();
+		this.pauseMenuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
+		this.pauseMenuLayer.hide();
+		//
+		// gameOverMenuLayer
+		//
+		this.gameOverMenuLayer = new Layer(PlayState.WIDTH, PlayState.HEIGHT);
+		this.gameOverMenuLayer.hide();
 		//
 		// listLayer
 		//
@@ -542,7 +577,8 @@ public class PlayState extends GameState {
 		this.listLayers.add(objLayer);
 		this.listLayers.add(scoreLayer);
 		this.listLayers.add(menuLayer);
-		this.listLayers.add(hiddenMenuLayer);
+		this.listLayers.add(pauseMenuLayer);
+		this.listLayers.add(gameOverMenuLayer);
 		//
 		// khoi tao cac button
 		//
@@ -554,11 +590,11 @@ public class PlayState extends GameState {
 		btnContinue.setImage(ButtonImage.CONTINUE_BUTTON, 200, 100);
 
 		menuLayer.addDrawable(btnPause);
-		hiddenMenuLayer.addDrawable(btnContinue);
-		hiddenMenuLayer.addDrawable(btnEndGame);
+		pauseMenuLayer.addDrawable(btnContinue);
+		pauseMenuLayer.addDrawable(btnEndGame);
 		Button temp = new Button(new Point(0, 0));
 		temp.setImage(null, 700, 700);
-		hiddenMenuLayer.addDrawable(temp);
+		pauseMenuLayer.addDrawable(temp);
 
 		BufferedImage tempImage = new BufferedImage(WIDTH, HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
@@ -567,7 +603,11 @@ public class PlayState extends GameState {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.dispose();
 
-		hiddenMenuLayer.setBackground(tempImage);
+		pauseMenuLayer.setBackground(tempImage);
+
+		gameOverMenuLayer.addDrawable(btnEndGame);
+		gameOverMenuLayer.addDrawable(temp);
+		gameOverMenuLayer.setBackground(tempImage);
 
 		BufferedImage background = ConversionFunction
 				.loadImage("E:\\Working project\\OOP\\res\\BG.bmp");
