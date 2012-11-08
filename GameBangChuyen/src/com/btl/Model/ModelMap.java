@@ -11,14 +11,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class ModelMap {
+import com.btl.data.XmlReader;
+
+public class ModelMap extends XmlReader {
 
 	public static ModelMap createMap(final String fileDir) {
 		ModelMap map = new ModelMap();
-		if (map.loadMap(fileDir)) {
-			return map;
-		} else
+		try {
+			if (map.loadMap(fileDir)) {
+				return map;
+			} else
+				return null;
+		} catch (Exception e) {
 			return null;
+		}
 	}
 	private ArrayList<ModelFactory> listFactory;
 	private ArrayList<ModelItem> listItem;
@@ -106,14 +112,6 @@ public class ModelMap {
 
 		return new ModelFactory(new Point(x, y), d);
 	}
-	/**
-	 * Calls getTextValue and returns a int value
-	 */
-	private int getIntValue(Element ele, String tagName) {
-		// in production application you would catch the exception
-		return Integer.parseInt(getTextValue(ele, tagName));
-	}
-
 	private ModelItem getItem(Element ele) {
 
 		int x = getIntValue(ele, "x");
@@ -202,22 +200,6 @@ public class ModelMap {
 				listTerminal.add(e);
 			}
 		}
-	}
-
-	/**
-	 * I take a xml element and the tag name, look for the tag and get the text
-	 * content i.e for <employee><name>John</name></employee> xml snippet if the
-	 * Element points to employee node and tagName is 'name' I will return John
-	 */
-	private String getTextValue(Element ele, String tagName) {
-		String textVal = null;
-		NodeList nl = ele.getElementsByTagName(tagName);
-		if (nl != null && nl.getLength() > 0) {
-			Element el = (Element) nl.item(0);
-			textVal = el.getFirstChild().getNodeValue();
-		}
-
-		return textVal;
 	}
 
 	private void getTime(NodeList nlTime) {

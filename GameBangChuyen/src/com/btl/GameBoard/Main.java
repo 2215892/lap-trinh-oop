@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import com.btl.GameElements.playtitle.PlayTitle;
+import com.btl.GameElements.playtitle.MapSelect;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,7 +55,7 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new PlayTitle(panel));
+		panel.setState(new MapSelect(panel));
 
 	}
 }

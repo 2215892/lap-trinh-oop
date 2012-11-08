@@ -15,21 +15,28 @@ import com.btl.GameElements.playstate.PlayState;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
 import com.btl.data.ButtonImage;
+import com.btl.data.SaveFile;
 
 public class PlayTitle extends GameState {
 
 	Button bnStart;
+	Button bnTest;
+	SaveFile save = SaveFile.create();
+
 	public PlayTitle(GamePanel parent) {
 		super(parent);
 		System.gc();
 
 		bnStart = new Button(new Point(200, 200));
 		bnStart.setImage(ButtonImage.START_BUTTON, 200, 100);
+		bnTest = new Button(new Point(10, 10));
+		bnTest.setImage(ButtonImage.ENDGAME_BUTTON, 200, 100);
 	}
 
 	@Override
 	public void gameRender(Graphics g) {
 		bnStart.paint(g);
+		bnTest.paint(g);
 
 	}
 	@Override
@@ -51,8 +58,8 @@ public class PlayTitle extends GameState {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-
-		if (bnStart.contains(new Point(arg0.getX(), arg0.getY()))) {
+		Point c = new Point(arg0.getX(), arg0.getY());
+		if (bnStart.contains(c)) {
 			final JFileChooser fc = new JFileChooser();
 			fc.setCurrentDirectory(new File(ConversionFunction
 					.getCurrentDirectory() + "custom map//"));
@@ -65,9 +72,12 @@ public class PlayTitle extends GameState {
 				if (map == null)
 					JOptionPane.showMessageDialog(null, "Error");
 				else
-					parent.setState(new PlayState(parent, map));
+					parent.setState(new PlayState(parent, map, 100));
 			}
 
+		} else if (bnTest.contains(c)) {
+			save.setHighscore(2, 3000);
+			save.save();
 		}
 
 	}

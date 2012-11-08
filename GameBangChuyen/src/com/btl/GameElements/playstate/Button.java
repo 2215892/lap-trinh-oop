@@ -65,7 +65,8 @@ public class Button implements Drawable {
 
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(this.img, this.position.x, this.position.y, null);
+		if (img != null)
+			g.drawImage(this.img, this.position.x, this.position.y, null);
 
 	}
 

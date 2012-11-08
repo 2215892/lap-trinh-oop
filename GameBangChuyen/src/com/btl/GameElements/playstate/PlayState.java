@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
-import com.btl.GameElements.playtitle.PlayTitle;
+import com.btl.GameElements.playtitle.MapSelect;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.Model.Direction;
@@ -61,7 +61,9 @@ public class PlayState extends GameState {
 	private Layer scoreLayer, menuLayer, pauseMenuLayer, gameOverMenuLayer;
 
 	private Timer timer;
-	int count = -1;
+	private int count = 0;
+
+	private int highscore;
 
 	Random rnd = new Random();
 	/**
@@ -70,9 +72,10 @@ public class PlayState extends GameState {
 	 * @param panel
 	 *            the parent
 	 */
-	public PlayState(final GamePanel panel, final ModelMap map) {
+	public PlayState(final GamePanel panel, final ModelMap map, int highscore) {
 
 		super(panel);
+		this.highscore = highscore;
 		initialize();
 		initFromModelMap(map);
 
@@ -129,6 +132,9 @@ public class PlayState extends GameState {
 		g.drawImage(this.buffer, 0, 0, null);
 		g.drawString("Time: " + secondToString(currentSecond) + " Score: "
 				+ Integer.toString(score), 10, 10);
+		if (highscore != -1) {
+			g.drawString(" High Score: " + Integer.toString(highscore), 200, 10);
+		}
 
 	}
 
@@ -206,7 +212,7 @@ public class PlayState extends GameState {
 			pauseMenuLayer.hide();
 			resume();
 		} else if (clicked == btnEndGame) {
-			parent.setState(new PlayTitle(parent));
+			parent.setState(new MapSelect(parent));
 		}
 
 	}
