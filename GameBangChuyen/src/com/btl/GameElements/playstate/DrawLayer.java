@@ -16,17 +16,18 @@ public class DrawLayer extends Layer {
 		public int compare(Drawable o1, Drawable o2) {
 			Point p1 = ((ModelObject) o1).getPosition();
 			Point p2 = ((ModelObject) o2).getPosition();
-
-			int xComparision = p1.x - p2.x;
-
-			int yComparision = p2.y - p1.y;
-
-			if (yComparision == 0) {
-
-				return xComparision;
-
-			} else
-				return yComparision;
+			/*
+			 * int xComparision = p1.x - p2.x;
+			 * 
+			 * int yComparision = p2.y - p1.y;
+			 * 
+			 * if (yComparision == 0) {
+			 * 
+			 * return xComparision;
+			 * 
+			 * } else return yComparision;
+			 */
+			return (p1.x - p2.x + p2.y - p1.y);
 		}
 	}
 
