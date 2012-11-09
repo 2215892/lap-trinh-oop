@@ -16,7 +16,7 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 	private ArrayList<Direction> listDirection;
 
 	/** The position. */
-	private Point position;
+	protected Point position;
 
 	public ModelSwitch() {
 		listDirection = new ArrayList<Direction>();
@@ -102,11 +102,11 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		}
 	}
 
-	protected int getCurrentDir() {
+	public int getCurrentDir() {
 		return this.currentDir;
 	}
 
-	protected void setCurrentDir(int i) {
+	public void setCurrentDir(int i) {
 		this.currentDir = i;
 	}
 
@@ -117,4 +117,5 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 	protected void setPosition(Point position) {
 		this.position = position;
 	}
+
 }

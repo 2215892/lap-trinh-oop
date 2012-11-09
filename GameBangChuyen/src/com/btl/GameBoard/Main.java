@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import com.btl.GameElements.playtitle.MapSelect;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Main.
@@ -55,7 +53,7 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new MapSelect(panel));
+		panel.setState(new MapCreation(panel));
 
 	}
 }

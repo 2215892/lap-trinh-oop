@@ -12,9 +12,11 @@ import com.btl.GameEngine.Drawable;
  */
 public class Button implements Drawable {
 
-	private BufferedImage originImg, img;
-	private Point position;
-	private int width, height;
+	private BufferedImage originImg;
+	protected BufferedImage img;
+	protected Point position;
+	protected int width;
+	protected int height;
 
 	/**
 	 * Khoi tao button.

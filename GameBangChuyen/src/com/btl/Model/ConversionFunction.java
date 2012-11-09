@@ -2,6 +2,7 @@ package com.btl.Model;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -91,5 +92,38 @@ public abstract class ConversionFunction {
 			e.printStackTrace();
 		}
 		return decodedPath;
+	}
+
+	/**
+	 * chuyen tu toa do ao sang toa do thuc bien mot hinh vuong trong toa do ao
+	 * sang toa do thuc.
+	 * 
+	 * @param s
+	 *            the s
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 * @return the polygon
+	 */
+	public static Polygon polygon(Point s, int width, int height) {
+		Point temp;
+		Polygon poly = new Polygon();
+
+		temp = ConversionFunction.logicToReal(new Point(s.x, s.y));
+		poly.addPoint(temp.x, temp.y);
+
+		temp = ConversionFunction.logicToReal(new Point(s.x + width, s.y));
+		poly.addPoint(temp.x, temp.y);
+
+		temp = ConversionFunction.logicToReal(new Point(s.x + width, s.y
+				- height));
+		poly.addPoint(temp.x, temp.y);
+
+		temp = ConversionFunction.logicToReal(new Point(s.x, s.y - height));
+		poly.addPoint(temp.x, temp.y);
+
+		return poly;
+
 	}
 }

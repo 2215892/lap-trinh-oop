@@ -11,7 +11,7 @@ public class ModelFactory extends GraphNode implements ModelObject {
 	private Direction direction;
 
 	/** The position. */
-	private Point position;
+	protected Point position;
 
 	public ModelFactory() {
 

@@ -74,12 +74,11 @@ public class Layer {
 	 * @return the layer
 	 */
 	public BufferedImage getLayer() {
-		if (this.isVisible)
+		if (this.isVisible) {
 			return buffer;
-		else
+		} else
 			return null;
 	}
-
 	public ArrayList<Drawable> getListDrawable() {
 		return this.listDrawable;
 	}
@@ -143,4 +142,12 @@ public class Layer {
 	public void setBackground(BufferedImage background) {
 		this.background = background;
 	}
+
+	/**
+	 * khi ma muon xoa het cac Drawable cua Layer.
+	 */
+	public void emptyLayer() {
+		listDrawable.clear();
+	}
+
 }
