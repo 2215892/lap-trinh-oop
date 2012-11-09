@@ -1031,7 +1031,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		g1 = bgImage.getGraphics();
 
 		BufferedImage img = OtherImage.BG;
-		g1.drawImage(img, 0, 0, null);
+		g1.drawImage(img, 0, 0,parent.width,parent.height,null);
 		g1.setColor(Color.black);
 		/* ve luoi o vuong */
 		for (int i = logicHeightN / MapCreationManager.SQUARE_SIDE - 1; i <= logicHeightP

@@ -248,6 +248,7 @@ public class AuxiliaryFunction {
 			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
 					* unit);
 			TerminalMap temp = new TerminalMap(tg, unit);
+			temp.setBoxBumber(i.getBoxCount());
 			result.add(temp);
 		}
 		return result;
