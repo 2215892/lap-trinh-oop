@@ -1,6 +1,5 @@
 package com.btl.data;
 
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -179,7 +178,7 @@ public abstract class ItemImage {
 	 *            anh can xem loai
 	 * @return loai cua anh
 	 */
-	public static int getType(Image image) {
+	public static int getType(BufferedImage image) {
 		if ((image == TREE_1) || (image == TREE_2) || (image == TREE_3)
 				|| (image == TREE_4) || (image == TREE_5) || (image == TREE_6))
 			return TREE_TYPE;
@@ -201,7 +200,7 @@ public abstract class ItemImage {
 	 *            the image
 	 * @return the id
 	 */
-	public static int getId(Image image) {
+	public static int getId(BufferedImage image) {
 		if (image == TREE_1)
 			return 1;
 		else if (image == TREE_2)
@@ -248,8 +247,8 @@ public abstract class ItemImage {
 	 *            canh o vuong ve
 	 * @return list cac o vuong bi phu
 	 */
-	public static ArrayList<Point> getSquareCovered(Image terminalImage,
-			Point position, int side) {
+	public static ArrayList<Point> getSquareCovered(
+			BufferedImage terminalImage, Point position, int side) {
 		ArrayList<Point> list = new ArrayList<Point>();
 		if (terminalImage == TRUCK) {
 			for (int i = 1; i < 5; i++)
