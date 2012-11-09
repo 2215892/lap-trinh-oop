@@ -378,11 +378,14 @@ public class MapDeleting {
 		/* remove bieu tuong cua t di */
 
 		ItemMap ter = AuxiliaryFunction.findItem(t.getPosition(), itemMapLayer);
-		ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
+		if (ter != null){
+			ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
 				ter.getEntryPoint(), map.getSide());
-		for (Point i : list)
-			AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
-		itemMapLayer.removeDrawable(ter);
+			for (Point i : list)
+				AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
+			itemMapLayer.removeDrawable(ter);
+		}
+		
 	}
 
 	/**
@@ -398,9 +401,9 @@ public class MapDeleting {
 		itemMapLayer.removeDrawable(ter);
 		factoryLayer.render();
 		/* cap nhat lai cac diem do factory va terminal phu */
-		FactoryIcon fc = (FactoryIcon) ter;
-		ArrayList<Point> list = ItemImage.getSquareCovered(fc.getImage(),
-				fc.getEntryPoint(), map.getSide());
+		//FactoryIcon fc = (FactoryIcon) ter;
+		ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
+				ter.getEntryPoint(), map.getSide());
 		for (Point i : list)
 			AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
 

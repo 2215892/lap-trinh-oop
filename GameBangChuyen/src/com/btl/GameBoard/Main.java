@@ -55,8 +55,6 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new MapCreation(panel, ConversionFunction
-				.getCurrentDirectory() + "/map/1"));
-
+		panel.setState(new MapCreation(panel));
 	}
 }
