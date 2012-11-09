@@ -494,7 +494,7 @@ public class AuxiliaryFunction {
 
 		for (ModelItem i : itemList) {
 			BufferedImage image = ItemImage
-					.getItemImage(i.getType(), i.getId());
+					.getItemImage(i.getId(), i.getType());
 			Point position = new Point(i.getPosition().x * side,
 					i.getPosition().y * side);
 			ItemMap item = null;

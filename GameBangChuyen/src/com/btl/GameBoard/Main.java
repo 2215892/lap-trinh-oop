@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import com.btl.Model.ConversionFunction;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Main.
@@ -53,7 +55,8 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new MapCreation(panel));
+		panel.setState(new MapCreation(panel, ConversionFunction
+				.getCurrentDirectory() + "/map/1"));
 
 	}
 }
