@@ -290,6 +290,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			parent.repaint();
 		} else if (temp.getControlCode() == MapCreationManager.SAVE) {
 			handleMenuSave();
+			
 			instantButton.normalRender();
 			handleButtonList.get(0).activeRender();
 			menuLayer.render();
@@ -297,6 +298,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			control = MapCreationManager.DEFAULT;
 		} else if (temp.getControlCode() == MapCreationManager.EDIT){
 			handleEditMap();
+			
 			instantButton.normalRender();
 			handleButtonList.get(0).activeRender();
 			menuLayer.render();
@@ -1207,6 +1209,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			try {
 				/* tao ao giac an cho nguoi dung */
 				Thread.sleep(100);
+				System.out.println("da thuc hien sleep xong");
 			} catch (InterruptedException e) {
 
 				e.printStackTrace();
