@@ -108,6 +108,11 @@ public class Button implements Drawable {
 
 	}
 
+	public void setImage(BufferedImage img) {
+		if (img != null)
+			setImage(img, img.getWidth(), img.getHeight());
+	}
+
 	public Point getPosition() {
 		return position;
 	}
