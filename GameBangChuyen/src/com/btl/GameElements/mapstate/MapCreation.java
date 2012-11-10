@@ -611,7 +611,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			Point temp = getSquare();
 			/* kiem tra xem co an vao menu ko */
 			if (temp != null) {
-				if ((!((active.x == temp.x) && (active.y == temp.y)))
+				if (active != null
+						&& (!((active.x == temp.x) && (active.y == temp.y)))
 						&& (active != null)) {
 					last = active;
 					active = temp;
