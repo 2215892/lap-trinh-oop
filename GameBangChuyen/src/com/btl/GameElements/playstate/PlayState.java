@@ -589,11 +589,11 @@ public class PlayState extends GameState {
 		// khoi tao cac button
 		//
 		btnPause = new Button(new Point(650, 5));
-		btnPause.setImage(ButtonImage.PAUSE_BUTTON, 28, 27);
+		btnPause.setImage(ButtonImage.PAUSE_BUTTON);
 		btnEndGame = new Button(new Point(100, 300));
-		btnEndGame.setImage(ButtonImage.BTN_END_GAME, 200, 100);
+		btnEndGame.setImage(ButtonImage.BTN_END_GAME);
 		btnContinue = new Button(new Point(400, 300));
-		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME, 200, 100);
+		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME);
 
 		menuLayer.addDrawable(btnPause);
 		pauseMenuLayer.addDrawable(btnContinue);
