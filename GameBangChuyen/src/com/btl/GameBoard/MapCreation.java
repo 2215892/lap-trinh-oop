@@ -1335,4 +1335,11 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	public ArrayList<Point> getSquareCovedList() {
 		return squareCovedList;
 	}
+
+	@Override
+	public void changeState(GameState state) {
+		parent.removeMouseMotionListener(this);
+		parent.setState(state);
+
+	}
 }

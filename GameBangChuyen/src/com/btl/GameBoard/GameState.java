@@ -22,6 +22,10 @@ public abstract class GameState implements MouseListener {
 		this.parent = parent;
 	}
 
+	public void changeState(GameState state) {
+		parent.setState(state);
+	}
+
 	/**
 	 * Render, draw graphic.
 	 * 
