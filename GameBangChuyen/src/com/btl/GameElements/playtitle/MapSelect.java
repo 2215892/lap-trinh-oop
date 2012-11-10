@@ -16,8 +16,8 @@ public class MapSelect extends GameState {
 	private SaveFile saveFile = SaveFile.create();
 	private MapButton[] mButtons = new MapButton[4];
 
-	public MapSelect(GamePanel parent) {
-		super(parent);
+	public MapSelect(GamePanel parent, GameState lastState) {
+		super(parent, lastState);
 
 		for (int i = 1; i <= 3; ++i) {
 			mButtons[i] = new MapButton(new Point(60 * i, 40), i,
@@ -51,7 +51,7 @@ public class MapSelect extends GameState {
 					ModelMap map = ModelMap.createMap(ConversionFunction
 							.getCurrentDirectory() + "map//" + btn.getId());
 					if (map != null) {
-						PlayState playState = new PlayState(parent, map,
+						PlayState playState = new PlayState(parent, this, map,
 								saveFile.getHighscore(btn.getId()));
 						parent.setState(playState);
 					}

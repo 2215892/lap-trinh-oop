@@ -12,14 +12,17 @@ public abstract class GameState implements MouseListener {
 	/** The parent. */
 	protected GamePanel parent;
 
+	protected GameState lastState;
+
 	/**
 	 * Instantiates a new game state.
 	 * 
 	 * @param parent
 	 *            the parent
 	 */
-	public GameState(GamePanel parent) {
+	public GameState(GamePanel parent, GameState lastState) {
 		this.parent = parent;
+		this.lastState = lastState;
 	}
 
 	public void changeState(GameState state) {

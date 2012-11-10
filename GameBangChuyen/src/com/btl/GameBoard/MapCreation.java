@@ -136,8 +136,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @param parent
 	 *            - the parent
 	 */
-	public MapCreation(GamePanel parent) {
-		super(parent);
+	public MapCreation(GamePanel parent, GameState lastState) {
+		super(parent, lastState);
 		ini();
 		parent.repaint();
 		loaded = true;
@@ -151,8 +151,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @param fileName
 	 *            - địa chỉ map cần edit
 	 */
-	public MapCreation(GamePanel parent, String fileName) {
-		super(parent);
+	public MapCreation(GamePanel parent, String fileName, GameState lastState) {
+		super(parent, lastState);
 		this.fileName = fileName;
 
 		ini();

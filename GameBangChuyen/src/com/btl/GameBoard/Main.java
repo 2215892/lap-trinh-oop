@@ -55,6 +55,6 @@ public class Main {
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new GameTitle(panel));
+		panel.setState(new GameTitle(panel, null));
 	}
 }

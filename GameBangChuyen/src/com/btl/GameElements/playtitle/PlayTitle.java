@@ -23,8 +23,8 @@ public class PlayTitle extends GameState {
 	Button bnTest;
 	SaveFile save = SaveFile.create();
 
-	public PlayTitle(GamePanel parent) {
-		super(parent);
+	public PlayTitle(GamePanel parent, GameState lastState) {
+		super(parent, lastState);
 		System.gc();
 
 		bnStart = new Button(new Point(200, 200));
@@ -72,7 +72,7 @@ public class PlayTitle extends GameState {
 				if (map == null)
 					JOptionPane.showMessageDialog(null, "Error");
 				else
-					parent.setState(new PlayState(parent, map, 100));
+					parent.setState(new PlayState(parent, this, map, 100));
 			}
 
 		} else if (bnTest.contains(c)) {

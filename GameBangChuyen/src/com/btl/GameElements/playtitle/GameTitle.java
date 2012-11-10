@@ -24,8 +24,8 @@ public class GameTitle extends GameState {
 	Button btnStart, btnCreateMap, btnHighScore, btnAbout, btnHelp;
 	Layer layer;
 
-	public GameTitle(GamePanel parent) {
-		super(parent);
+	public GameTitle(GamePanel parent, GameState lastState) {
+		super(parent, lastState);
 		initialize();
 	}
 
@@ -93,11 +93,11 @@ public class GameTitle extends GameState {
 				if (map == null)
 					JOptionPane.showMessageDialog(null, "Error");
 				else
-					changeState(new PlayState(parent, map, 100));
+					changeState(new PlayState(parent, this, map, 100));
 			}
 
 		} else if (clicked == btnCreateMap) {
-			changeState(new MapCreation(parent));
+			changeState(new MapCreation(parent, this));
 		} else if (clicked == btnHighScore) {
 			// TODO
 		} else if (clicked == btnHelp) {

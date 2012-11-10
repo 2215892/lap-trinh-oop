@@ -72,9 +72,10 @@ public class PlayState extends GameState {
 	 * @param panel
 	 *            the parent
 	 */
-	public PlayState(final GamePanel panel, final ModelMap map, int highscore) {
+	public PlayState(final GamePanel panel, final GameState lastState,
+			final ModelMap map, int highscore) {
 
-		super(panel);
+		super(panel, lastState);
 		this.highscore = highscore;
 		initialize();
 		initFromModelMap(map);
@@ -212,7 +213,7 @@ public class PlayState extends GameState {
 			pauseMenuLayer.hide();
 			resume();
 		} else if (clicked == btnEndGame) {
-			parent.setState(new MapSelect(parent));
+			parent.setState(new MapSelect(parent, this));
 		}
 
 	}
