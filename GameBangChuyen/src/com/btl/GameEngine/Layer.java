@@ -122,7 +122,7 @@ public class Layer {
 		g.clearRect(0, 0, buffer.getWidth(), buffer.getHeight());
 
 		if (background != null) {
-			g.drawImage(background, 0, 0, null);
+			g.drawImage(background, 0, 0, this.width, this.height, null);
 		}
 
 		for (int i = 0; i < this.listDrawable.size(); ++i) {
