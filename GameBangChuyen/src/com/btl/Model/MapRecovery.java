@@ -2,8 +2,8 @@ package com.btl.Model;
 
 import java.awt.Point;
 
-import com.btl.GameBoard.MapCreation;
 import com.btl.GameElements.mapstate.FactoryMap;
+import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;

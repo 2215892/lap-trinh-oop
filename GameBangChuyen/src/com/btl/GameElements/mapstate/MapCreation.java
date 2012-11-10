@@ -1,4 +1,4 @@
-package com.btl.GameBoard;
+package com.btl.GameElements.mapstate;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,20 +13,8 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import com.btl.GameElements.mapstate.ButtonForDraw;
-import com.btl.GameElements.mapstate.ButtonForHandle;
-import com.btl.GameElements.mapstate.DrawingButton;
-import com.btl.GameElements.mapstate.FactoryIcon;
-import com.btl.GameElements.mapstate.FactoryMap;
-import com.btl.GameElements.mapstate.ItemMap;
-import com.btl.GameElements.mapstate.MapCreationManager;
-import com.btl.GameElements.mapstate.MenuItem;
-import com.btl.GameElements.mapstate.MouseOverSquare;
-import com.btl.GameElements.mapstate.SquareMap;
-import com.btl.GameElements.mapstate.SwitchMap;
-import com.btl.GameElements.mapstate.TerminalIcon;
-import com.btl.GameElements.mapstate.TerminalMap;
-import com.btl.GameElements.mapstate.Time;
+import com.btl.GameBoard.GamePanel;
+import com.btl.GameBoard.GameState;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
@@ -307,7 +295,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 
 		else if (temp.getControlCode() == MapCreationManager.BACK) {
-			// TODO xu li khi ma nguoi choi an nut BACK
+			changeState(lastState);
 		}
 
 	}

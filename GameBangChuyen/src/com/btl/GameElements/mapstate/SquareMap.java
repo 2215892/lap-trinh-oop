@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import com.btl.GameBoard.MapCreation;
 import com.btl.Model.AuxiliaryFunction;
 import com.btl.Model.ConversionFunction;
 import com.btl.data.ItemImage;

@@ -14,7 +14,6 @@ import javax.swing.SwingUtilities;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
-import com.btl.GameElements.playtitle.MapSelect;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.Model.Direction;
@@ -213,7 +212,7 @@ public class PlayState extends GameState {
 			pauseMenuLayer.hide();
 			resume();
 		} else if (clicked == btnEndGame) {
-			parent.setState(new MapSelect(parent, this));
+			parent.setState(lastState);
 		}
 
 	}

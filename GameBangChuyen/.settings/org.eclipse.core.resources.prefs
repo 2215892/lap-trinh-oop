@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/com/btl/GameBoard/MapCreation.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/ButtonForDraw.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/ButtonForHandle.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/DrawingButton.java=UTF-8
@@ -7,6 +6,7 @@ encoding//src/com/btl/GameElements/mapstate/FactoryButton.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/FactoryIcon.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/FactoryMap.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/ItemMap.java=UTF-8
+encoding//src/com/btl/GameElements/mapstate/MapCreation.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/MapCreationManager.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/MenuItem.java=UTF-8
 encoding//src/com/btl/GameElements/mapstate/MouseOverSquare.java=UTF-8

@@ -17,9 +17,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.btl.GameBoard.MapCreation;
 import com.btl.GameElements.mapstate.FactoryMap;
 import com.btl.GameElements.mapstate.ItemMap;
+import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.mapstate.TerminalMap;
 import com.btl.GameElements.playstate.DrawLayer;

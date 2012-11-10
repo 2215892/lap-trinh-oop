@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
-import com.btl.GameBoard.MapCreation;
+import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.playstate.Button;
 import com.btl.GameElements.playstate.PlayState;
 import com.btl.GameEngine.Layer;

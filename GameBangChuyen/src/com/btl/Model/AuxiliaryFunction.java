@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import com.btl.GameBoard.MapCreation;
 import com.btl.GameElements.mapstate.FactoryMap;
 import com.btl.GameElements.mapstate.ItemMap;
+import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.mapstate.SquareMap;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.mapstate.TerminalIcon;

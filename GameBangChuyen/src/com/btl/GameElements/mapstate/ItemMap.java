@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import com.btl.GameBoard.MapCreation;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ModelObject;
 import com.btl.data.ItemImage;
