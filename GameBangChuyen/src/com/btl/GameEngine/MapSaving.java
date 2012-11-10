@@ -24,6 +24,7 @@ import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.mapstate.TerminalMap;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.Model.AuxiliaryFunction;
+import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 // TODO: Auto - generated Javadoc
 
@@ -83,6 +84,8 @@ public class MapSaving {
 		this.unit = map.getSide();
 		this.mapCreation = map;
 		chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new File(ConversionFunction
+				.getCurrentDirectory() + "custom map//"));
 		terminalTrap = new ArrayList<TerminalMap>();
 		/* thuc hien duyet cac switch khong co huong thanh cac trap */
 		handleTrap();

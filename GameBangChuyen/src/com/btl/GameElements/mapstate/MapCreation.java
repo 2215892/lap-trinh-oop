@@ -1230,6 +1230,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 		if (check) {
 			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory(new File(ConversionFunction
+					.getCurrentDirectory() + "custom map//"));
 			chooser.showOpenDialog(parent);
 			File selectedFile = chooser.getSelectedFile();
 			if (selectedFile != null) {
