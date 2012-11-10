@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import com.btl.GameBoard.MapCreation;
-import com.btl.GameElements.mapstate.FactoryIcon;
 import com.btl.GameElements.mapstate.FactoryMap;
 import com.btl.GameElements.mapstate.ItemMap;
 import com.btl.GameElements.mapstate.SquareMap;
@@ -378,14 +377,15 @@ public class MapDeleting {
 		/* remove bieu tuong cua t di */
 
 		ItemMap ter = AuxiliaryFunction.findItem(t.getPosition(), itemMapLayer);
-		if (ter != null){
+		if (ter != null) {
 			ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
-				ter.getEntryPoint(), map.getSide());
+					ter.getEntryPoint(), map.getSide());
 			for (Point i : list)
-				AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
+				AuxiliaryFunction.removePointFromList(map.getSquareCovedList(),
+						i);
 			itemMapLayer.removeDrawable(ter);
 		}
-		
+
 	}
 
 	/**
@@ -401,7 +401,7 @@ public class MapDeleting {
 		itemMapLayer.removeDrawable(ter);
 		factoryLayer.render();
 		/* cap nhat lai cac diem do factory va terminal phu */
-		//FactoryIcon fc = (FactoryIcon) ter;
+		// FactoryIcon fc = (FactoryIcon) ter;
 		ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
 				ter.getEntryPoint(), map.getSide());
 		for (Point i : list)

@@ -63,6 +63,7 @@ public class SquareMap extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
 	 */
+	@Override
 	public void paint(Graphics g) {
 		if (isValid)
 			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,

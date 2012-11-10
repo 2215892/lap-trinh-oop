@@ -117,6 +117,7 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * @param g
 	 *            - đối tượng graphics
 	 */
+	@Override
 	public abstract void paint(Graphics g);
 
 	/**
@@ -149,6 +150,7 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.Model.ModelObject#getPosition()
 	 */
+	@Override
 	public Point getPosition() {
 		return nearestPoint;
 	}

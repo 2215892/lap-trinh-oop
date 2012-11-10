@@ -290,22 +290,22 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			parent.repaint();
 		} else if (temp.getControlCode() == MapCreationManager.SAVE) {
 			handleMenuSave();
-			
+
 			instantButton.normalRender();
 			handleButtonList.get(0).activeRender();
 			menuLayer.render();
 			parent.repaint();
 			control = MapCreationManager.DEFAULT;
-		} else if (temp.getControlCode() == MapCreationManager.EDIT){
+		} else if (temp.getControlCode() == MapCreationManager.EDIT) {
 			handleEditMap();
-			
+
 			instantButton.normalRender();
 			handleButtonList.get(0).activeRender();
 			menuLayer.render();
 			parent.repaint();
 			control = MapCreationManager.DEFAULT;
 		}
-		
+
 		else if (temp.getControlCode() == MapCreationManager.BACK) {
 			// TODO xu li khi ma nguoi choi an nut BACK
 		}
@@ -459,7 +459,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 				TerminalMap clickedTer = AuxiliaryFunction.findTerminal(tg,
 						terminalLayer);
 				ItemMap ter = AuxiliaryFunction.findItem(tg, itemMapLayer);
-				if ((clickedTer != null) && (ter != null) && (control == MapCreationManager.DEFAULT))
+				if ((clickedTer != null) && (ter != null)
+						&& (control == MapCreationManager.DEFAULT))
 					handleBoxNumberInput(clickedTer);
 				last = active;
 				active = tg; // gan gia tri cua active cho o vua kich
@@ -1033,7 +1034,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		g1 = bgImage.getGraphics();
 
 		BufferedImage img = OtherImage.BG;
-		g1.drawImage(img, 0, 0,parent.width,parent.height,null);
+		g1.drawImage(img, 0, 0, parent.width, parent.height, null);
 		g1.setColor(Color.black);
 		/* ve luoi o vuong */
 		for (int i = logicHeightN / MapCreationManager.SQUARE_SIDE - 1; i <= logicHeightP
@@ -1138,30 +1139,29 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		AuxiliaryFunction.loadDrawingLayer(itemMapLayer, itemList,
 				MapCreationManager.SQUARE_SIDE);
 		/* luu nhung o vuong bi phu lai */
-		for (Drawable i : factoryLayer.getListDrawable()){
-			FactoryMap f = (FactoryMap)i;
-			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(), itemMapLayer);
-			if (item != null){
-				for (Point j : ItemImage.getSquareCovered(item.getImage(), 
-					f.getPosition(), MapCreationManager.SQUARE_SIDE))
-				squareCovedList.add(j);
+		for (Drawable i : factoryLayer.getListDrawable()) {
+			FactoryMap f = (FactoryMap) i;
+			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
+					itemMapLayer);
+			if (item != null) {
+				for (Point j : ItemImage.getSquareCovered(item.getImage(),
+						f.getPosition(), MapCreationManager.SQUARE_SIDE))
+					squareCovedList.add(j);
 			}
-			
-			
+
 		}
-		for (Drawable i : terminalLayer.getListDrawable()){
-			TerminalMap f = (TerminalMap)i;
-			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(), itemMapLayer);
-			if (item != null){
-				for (Point j : ItemImage.getSquareCovered(item.getImage(), 
-					f.getPosition(), MapCreationManager.SQUARE_SIDE))
-				squareCovedList.add(j);
+		for (Drawable i : terminalLayer.getListDrawable()) {
+			TerminalMap f = (TerminalMap) i;
+			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
+					itemMapLayer);
+			if (item != null) {
+				for (Point j : ItemImage.getSquareCovered(item.getImage(),
+						f.getPosition(), MapCreationManager.SQUARE_SIDE))
+					squareCovedList.add(j);
 			}
-			
-			
+
 		}
-	
-		
+
 	}
 
 	/**
@@ -1193,16 +1193,16 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 		return true;
 	}
-	
+
 	/**
-	 * Hàm xử lý file 
+	 * Hàm xử lý file
+	 * 
 	 * @return true nếu map không bị lỗi
 	 */
-	///////////// them doan nay vao
-	private boolean handleMenuSave(){
+	// /////////// them doan nay vao
+	private boolean handleMenuSave() {
 		/* kiem tra xem co switch nao bi loi hay khong */
-		ArrayList<SwitchMap> wrongSwitch = AuxiliaryFunction
-				.falseSwitch(this);
+		ArrayList<SwitchMap> wrongSwitch = AuxiliaryFunction.falseSwitch(this);
 		ArrayList<FactoryMap> wrongFactory = AuxiliaryFunction
 				.isolatedFactory(this);
 		if ((wrongSwitch.size() == 0) && (wrongFactory.size() == 0)) {
@@ -1220,50 +1220,49 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		} else { // khi ma co switch bi loi, hien thi no nen
 			String message = "Loi khong the luu vi map co "
 					+ "nhung factory khong co cua ra hoac switch khong co diem den";
-			JOptionPane.showMessageDialog(parent, message, "action failed",
-					1);
+			JOptionPane.showMessageDialog(parent, message, "action failed", 1);
 			return false;
 		}
 	}
-	
+
 	/**
 	 * ham xu li Edit mot file
 	 */
-	/////////////// them doan nay vao,import them vao jchooser va File
-	private void handleEditMap(){
-		/* hien thong bao luu file cu*/
+	// ///////////// them doan nay vao,import them vao jchooser va File
+	private void handleEditMap() {
+		/* hien thong bao luu file cu */
 		String message = " Ban co muon luu map dang ve ? ";
 		boolean check = true;
-		/*neu map khong giong*/
-		if (!AuxiliaryFunction.isEmpty(this)){
+		/* neu map khong giong */
+		if (!AuxiliaryFunction.isEmpty(this)) {
 			int result = JOptionPane.showConfirmDialog(parent, message);
 			if (result == JOptionPane.OK_OPTION)
-			check = handleMenuSave();
+				check = handleMenuSave();
 		}
-		if (check){
+		if (check) {
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog(parent);
 			File selectedFile = chooser.getSelectedFile();
-			if (selectedFile != null){
-					fileName = selectedFile.getPath();
-					/*thuc hien doc file */
-					deleteAll();
-					loadElementFromFile(fileName);
-					
-					MapRecovery maprecovery = MapRecovery.createMapRecovery(switchLayer,
-							factoryLayer, terminalLayer, MapCreationManager.SQUARE_SIDE,
-							MapCreationManager.SQUARE_SIDE, this);
-					switchLayer = maprecovery.getSwitchLayer();
-					factoryLayer = maprecovery.getFactoryLayer();
-					terminalLayer = maprecovery.getTerminalLayer();
-					switchLayer.render();
-					AuxiliaryFunction.showWrongFactory(this);
-					AuxiliaryFunction.showWrongSwitch(this);
-					parent.repaint();
-				}
+			if (selectedFile != null) {
+				fileName = selectedFile.getPath();
+				/* thuc hien doc file */
+				deleteAll();
+				loadElementFromFile(fileName);
+
+				MapRecovery maprecovery = MapRecovery.createMapRecovery(
+						switchLayer, factoryLayer, terminalLayer,
+						MapCreationManager.SQUARE_SIDE,
+						MapCreationManager.SQUARE_SIDE, this);
+				switchLayer = maprecovery.getSwitchLayer();
+				factoryLayer = maprecovery.getFactoryLayer();
+				terminalLayer = maprecovery.getTerminalLayer();
+				switchLayer.render();
+				AuxiliaryFunction.showWrongFactory(this);
+				AuxiliaryFunction.showWrongSwitch(this);
+				parent.repaint();
+			}
 		}
 	}
-	
 
 	/**
 	 * Gets the switch layer.

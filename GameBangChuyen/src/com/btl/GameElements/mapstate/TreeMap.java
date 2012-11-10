@@ -55,6 +55,7 @@ public class TreeMap extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
 	 */
+	@Override
 	public void paint(Graphics g) {
 		g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height, null);
 		if (!isValid) {

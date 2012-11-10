@@ -46,7 +46,7 @@ public class MapCreationManager {
 
 	/** The Constant BACK. */
 	public static final int BACK = 10;
-	
+
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
 
@@ -79,7 +79,7 @@ public class MapCreationManager {
 
 	/** The back button. */
 	private ButtonForHandle deleteButton, deleteAllButton, saveButton,
-			backButton,editButton;
+			backButton, editButton;
 
 	/** The item list layer. */
 	private DrawLayer[] itemListLayer;
@@ -147,11 +147,10 @@ public class MapCreationManager {
 
 		int defaultX = (DEFAULT - 1) * ICON_WIDTH;
 		int defaultY = 0;
-		
-		
-		int editFileX =(EDIT -1)*ICON_WIDTH;
+
+		int editFileX = (EDIT - 1) * ICON_WIDTH;
 		int editFileY = 0;
-		
+
 		graphicButtonList = new ArrayList<ButtonForDraw>();
 		handleButtonList = new ArrayList<ButtonForHandle>();
 
@@ -218,10 +217,10 @@ public class MapCreationManager {
 		backButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		backButton.setName("BACK");
 		handleButtonList.add(backButton);
-		
-		editButton = new ButtonForHandle(new Point(editFileX, editFileY), 
+
+		editButton = new ButtonForHandle(new Point(editFileX, editFileY),
 				ButtonImage.EDIT_BUTTON_IMAGE,
-				ButtonImage.ACTIVE_EDIT_BUTTON_IMAGE ,EDIT);
+				ButtonImage.ACTIVE_EDIT_BUTTON_IMAGE, EDIT);
 		editButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		editButton.setName("Edit a map");
 		handleButtonList.add(editButton);

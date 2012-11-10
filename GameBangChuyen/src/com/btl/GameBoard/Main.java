@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import com.btl.Model.ConversionFunction;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Main.

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.btl.GameBoard.MapCreation;
-import com.btl.GameElements.mapstate.FactoryIcon;
 import com.btl.GameElements.mapstate.FactoryMap;
 import com.btl.GameElements.mapstate.ItemMap;
 import com.btl.GameElements.mapstate.SquareMap;
@@ -499,11 +498,10 @@ public class AuxiliaryFunction {
 			Point position = new Point(i.getPosition().x * side,
 					i.getPosition().y * side);
 			ItemMap item = null;
-			if (i.getType() == ItemImage.VEHICLE_TYPE){
-					Point temp = nearestPointToEntryPoint(position, image, side);
+			if (i.getType() == ItemImage.VEHICLE_TYPE) {
+				Point temp = nearestPointToEntryPoint(position, image, side);
 				item = new TerminalIcon(temp, side, image);
-			}
-			else if (i.getType() == ItemImage.PLATFORM_TYPE)
+			} else if (i.getType() == ItemImage.PLATFORM_TYPE)
 				item = new SquareMap(position, side, image);
 			else if (i.getType() == ItemImage.TREE_TYPE)
 				item = new TreeMap(position, side, image);
@@ -684,14 +682,16 @@ public class AuxiliaryFunction {
 		} while (check);
 		return number;
 	}
-	
+
 	/**
 	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa
-	 * @param map - map đang vẽ
+	 * 
+	 * @param map
+	 *            - map đang vẽ
 	 * @return true nếu map chưa được vẽ gì
 	 */
-	public static boolean isEmpty(MapCreation map){
-		
+	public static boolean isEmpty(MapCreation map) {
+
 		if (map.getFactorylayer().getListDrawable().size() == 0)
 			return true;
 		return false;

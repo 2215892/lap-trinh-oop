@@ -9,30 +9,30 @@ import java.awt.event.MouseListener;
  */
 public abstract class GameState implements MouseListener {
 
-    /** The parent. */
-    protected GamePanel parent;
+	/** The parent. */
+	protected GamePanel parent;
 
-    /**
-     * Instantiates a new game state.
-     * 
-     * @param parent
-     *            the parent
-     */
-    public GameState(GamePanel parent) {
-	this.parent = parent;
-    }
+	/**
+	 * Instantiates a new game state.
+	 * 
+	 * @param parent
+	 *            the parent
+	 */
+	public GameState(GamePanel parent) {
+		this.parent = parent;
+	}
 
-    /**
-     * Render, draw graphic.
-     * 
-     * @param g
-     *            the g
-     */
-    public abstract void gameRender(Graphics g);
+	/**
+	 * Render, draw graphic.
+	 * 
+	 * @param g
+	 *            the g
+	 */
+	public abstract void gameRender(Graphics g);
 
-    /**
-     * Update each state.
-     */
-    public abstract void update();
+	/**
+	 * Update each state.
+	 */
+	public abstract void update();
 
 }

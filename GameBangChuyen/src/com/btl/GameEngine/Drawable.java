@@ -9,21 +9,21 @@ import java.awt.Point;
  */
 public interface Drawable {
 
-    /**
-     * Contains.
-     * 
-     * @param point
-     *            the point
-     * @return true, if successful
-     */
-    public boolean contains(Point point);
+	/**
+	 * Contains.
+	 * 
+	 * @param point
+	 *            the point
+	 * @return true, if successful
+	 */
+	public boolean contains(Point point);
 
-    /**
-     * Paint.
-     * 
-     * @param g
-     *            the g
-     */
-    public void paint(Graphics g);
+	/**
+	 * Paint.
+	 * 
+	 * @param g
+	 *            the g
+	 */
+	public void paint(Graphics g);
 
 }

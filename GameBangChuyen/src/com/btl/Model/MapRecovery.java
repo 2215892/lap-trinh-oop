@@ -34,9 +34,6 @@ public class MapRecovery {
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
 
-	/** map cần khôi phục. */
-	private MapCreation map;
-
 	/**
 	 * Hàm khởi tạo đối tượng.
 	 * 
@@ -56,7 +53,6 @@ public class MapRecovery {
 		this.terminalLayer = terminalLayer;
 		this.height = map.getSide();
 		this.width = map.getSide();
-		this.map = map;
 		recoverFullMap();
 		System.out.println("completed!");
 	}

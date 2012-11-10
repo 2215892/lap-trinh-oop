@@ -59,10 +59,10 @@ public abstract class ButtonImage {
 			.loadImage(RES_DIR + "BACK_BUTTON_IMAGE.png");
 	public final static BufferedImage ACTIVE_BACK_BUTTON_IMAGE = ConversionFunction
 			.loadImage(RES_DIR + "ACTIVE_BACK_BUTTON_IMAGE.png");
-	
-	public final static BufferedImage EDIT_BUTTON_IMAGE = ConversionFunction.
-			loadImage(RES_DIR+"EDIT_BUTTON_IMAGE.png");
-	
+
+	public final static BufferedImage EDIT_BUTTON_IMAGE = ConversionFunction
+			.loadImage(RES_DIR + "EDIT_BUTTON_IMAGE.png");
+
 	public final static BufferedImage ACTIVE_EDIT_BUTTON_IMAGE = ConversionFunction
-			.loadImage(RES_DIR+"ACTIVE_EDIT_BUTTON_IMAGE.png");
+			.loadImage(RES_DIR + "ACTIVE_EDIT_BUTTON_IMAGE.png");
 }
