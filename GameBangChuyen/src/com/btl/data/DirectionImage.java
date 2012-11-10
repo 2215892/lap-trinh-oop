@@ -11,7 +11,8 @@ import com.btl.Model.ConversionFunction;
 public abstract class DirectionImage {
 
 	/** The dir. */
-	public static String dir = ButtonImage.RES_DIR;
+	public static String dir = ConversionFunction.getCurrentDirectory()
+			+ "res\\";
 
 	public final static BufferedImage ALEFT = ConversionFunction.loadImage(dir
 			+ "ALEFT.png");

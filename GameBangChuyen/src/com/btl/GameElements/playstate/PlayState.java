@@ -591,9 +591,9 @@ public class PlayState extends GameState {
 		btnPause = new Button(new Point(650, 5));
 		btnPause.setImage(ButtonImage.PAUSE_BUTTON, 28, 27);
 		btnEndGame = new Button(new Point(100, 300));
-		btnEndGame.setImage(ButtonImage.ENDGAME_BUTTON, 200, 100);
+		btnEndGame.setImage(ButtonImage.BTN_END_GAME, 200, 100);
 		btnContinue = new Button(new Point(400, 300));
-		btnContinue.setImage(ButtonImage.CONTINUE_BUTTON, 200, 100);
+		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME, 200, 100);
 
 		menuLayer.addDrawable(btnPause);
 		pauseMenuLayer.addDrawable(btnContinue);

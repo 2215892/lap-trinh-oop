@@ -28,9 +28,9 @@ public class PlayTitle extends GameState {
 		System.gc();
 
 		bnStart = new Button(new Point(200, 200));
-		bnStart.setImage(ButtonImage.START_BUTTON, 200, 100);
+		bnStart.setImage(ButtonImage.BTN_START_GAME, 200, 100);
 		bnTest = new Button(new Point(10, 10));
-		bnTest.setImage(ButtonImage.ENDGAME_BUTTON, 200, 100);
+		bnTest.setImage(ButtonImage.BTN_END_GAME, 200, 100);
 	}
 
 	@Override

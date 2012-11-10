@@ -6,19 +6,43 @@ import com.btl.Model.ConversionFunction;
 
 public abstract class ButtonImage {
 	public final static String RES_DIR = ConversionFunction
-			.getCurrentDirectory() + "res/";
+			.getCurrentDirectory() + "res\\button\\";
 
 	public final static BufferedImage PAUSE_BUTTON = ConversionFunction
 			.loadImage(RES_DIR + "PAUSE_BUTTON.png");
 
-	public final static BufferedImage ENDGAME_BUTTON = ConversionFunction
-			.loadImage(RES_DIR + "ENDGAME_BUTTON.png");
+	public final static BufferedImage BTN_NEXT_LEVEL = ConversionFunction
+			.loadImage(RES_DIR + "BTN_NEXT_LEVEL.png");
 
-	public final static BufferedImage CONTINUE_BUTTON = ConversionFunction
-			.loadImage(RES_DIR + "CONTINUE_BUTTON.png");
+	public final static BufferedImage BTN_REPLAY = ConversionFunction
+			.loadImage(RES_DIR + "BTN_REPLAY.png");
 
-	public final static BufferedImage START_BUTTON = ConversionFunction
-			.loadImage(RES_DIR + "TESTSTART.png");
+	public final static BufferedImage BTN_START_GAME = ConversionFunction
+			.loadImage(RES_DIR + "BTN_START_GAME.png");
+
+	public final static BufferedImage BTN_END_GAME = ConversionFunction
+			.loadImage(RES_DIR + "BTN_END_GAME.png");
+
+	public final static BufferedImage BTN_CAMPAIGN = ConversionFunction
+			.loadImage(RES_DIR + "BTN_CAMPAIGN.png");
+
+	public final static BufferedImage BTN_ABOUT = ConversionFunction
+			.loadImage(RES_DIR + "BTN_ABOUT.png");
+
+	public final static BufferedImage BTN_CONTINUE_GAME = ConversionFunction
+			.loadImage(RES_DIR + "BTN_CONTINUE_GAME.png");
+
+	public final static BufferedImage BTN_CREATE_MAP = ConversionFunction
+			.loadImage(RES_DIR + "BTN_CREATE_MAP.png");
+
+	public final static BufferedImage BTN_CUSTOM_GAME = ConversionFunction
+			.loadImage(RES_DIR + "BTN_CUSTOM_GAME.png");
+
+	public final static BufferedImage BTN_HELP = ConversionFunction
+			.loadImage(RES_DIR + "BTN_HELP.png");
+
+	public final static BufferedImage BTN_HIGH_SCORE = ConversionFunction
+			.loadImage(RES_DIR + "BTN_HIGH_SCORE.png");
 
 	public final static BufferedImage FACTORY_BUTTON_IMAGE = ConversionFunction
 			.loadImage(RES_DIR + "FACTORY_BUTTON_IMAGE.jpg");
