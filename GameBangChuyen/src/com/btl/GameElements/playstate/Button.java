@@ -14,7 +14,7 @@ public class Button implements Drawable {
 
 	private BufferedImage originImg;
 	protected BufferedImage img;
-	protected Point position;
+	private Point position;
 	protected int width;
 	protected int height;
 
@@ -25,7 +25,13 @@ public class Button implements Drawable {
 	 *            toa do cua button
 	 */
 	public Button(Point p) {
-		this.position = p;
+		this.setPosition(p);
+		this.width = 0;
+		this.height = 0;
+	}
+
+	public Button() {
+		this.setPosition(new Point(0, 0));
 		this.width = 0;
 		this.height = 0;
 	}
@@ -58,8 +64,8 @@ public class Button implements Drawable {
 	public boolean contains(Point p) {
 
 		/* Kiem tra p co nam trong nut khong */
-		if ((this.position.x <= p.x && (this.position.x + this.width) >= p.x)
-				&& (this.position.y <= p.y && (this.position.y + this.height) >= p.y)) {
+		if ((this.getPosition().x <= p.x && (this.getPosition().x + this.width) >= p.x)
+				&& (this.getPosition().y <= p.y && (this.getPosition().y + this.height) >= p.y)) {
 			return true;
 		} else
 			return false;
@@ -68,7 +74,8 @@ public class Button implements Drawable {
 	@Override
 	public void paint(Graphics g) {
 		if (img != null)
-			g.drawImage(this.img, this.position.x, this.position.y, null);
+			g.drawImage(this.img, this.getPosition().x, this.getPosition().y,
+					null);
 
 	}
 
@@ -99,6 +106,14 @@ public class Button implements Drawable {
 		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
 		g.dispose();
 
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 
 }

@@ -85,12 +85,12 @@ public class DrawingButton extends Button {
 	public void paint(Graphics g) {
 		/* khi ma hien thi moi ve */
 		if (visible) {
-			g.drawImage(this.img, this.position.x, this.position.y, null);
+			g.drawImage(this.img, this.getPosition().x, this.getPosition().y, null);
 			if (hover) {
 				g.setColor(hoverColor);
-				g.fillRect(position.x, position.y, width, height);
+				g.fillRect(getPosition().x, getPosition().y, width, height);
 				g.setColor(Color.red);
-				g.drawString(name, position.x, position.y + height + 8);
+				g.drawString(name, getPosition().x, getPosition().y + height + 8);
 			}
 		}
 
