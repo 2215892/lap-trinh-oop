@@ -3,19 +3,12 @@ package com.btl.GameElements.playtitle;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.playstate.Button;
-import com.btl.GameElements.playstate.PlayState;
 import com.btl.GameEngine.Layer;
-import com.btl.Model.ConversionFunction;
-import com.btl.Model.ModelMap;
 import com.btl.data.ButtonImage;
 import com.btl.data.OtherImage;
 import com.btl.data.SoundEffect;
@@ -81,33 +74,21 @@ public class GameTitle extends GameState {
 		Button clicked = (Button) layer.getClickedObj(new Point(arg0.getX(),
 				arg0.getY()));
 
-		if (clicked != null)
+		if (clicked != null) {
+
 			SoundEffect.BUTTONCLICK.play();
 
-		if (clicked == btnStart) {
-			final JFileChooser fc = new JFileChooser();
-			fc.setCurrentDirectory(new File(ConversionFunction
-					.getCurrentDirectory() + "custom map//"));
-			int returnVal = fc.showOpenDialog(parent);
-
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-				ModelMap map = ModelMap.createMap(fc.getSelectedFile()
-						.getAbsolutePath());
-				if (map == null)
-					JOptionPane.showMessageDialog(null, "Error");
-				else
-					changeState(new PlayState(parent, this, map));
+			if (clicked == btnStart) {
+				changeState(new StartGameTitle(parent, this));
+			} else if (clicked == btnCreateMap) {
+				changeState(new MapCreation(parent, this));
+			} else if (clicked == btnHighScore) {
+				// TODO
+			} else if (clicked == btnHelp) {
+				// TODO
+			} else if (clicked == btnAbout) {
+				// TODO
 			}
-
-		} else if (clicked == btnCreateMap) {
-			changeState(new MapCreation(parent, this));
-		} else if (clicked == btnHighScore) {
-			// TODO
-		} else if (clicked == btnHelp) {
-			// TODO
-		} else if (clicked == btnAbout) {
-			// TODO
 		}
 
 	}
