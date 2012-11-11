@@ -1,5 +1,6 @@
 package com.btl.GameBoard;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -13,12 +14,17 @@ public class GamePanel extends JPanel {
 
 	public static final int WIDTH = 1;
 	public int width = 700;
-	public int height = 700;
+	public int height = 500;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public GamePanel() {
+		super();
+		this.setPreferredSize(new Dimension(width, height));
+	}
 
 	private GameState currentState = null;
 

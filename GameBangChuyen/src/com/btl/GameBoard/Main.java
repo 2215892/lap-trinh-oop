@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import com.btl.GameElements.playtitle.GameTitle;
+import com.btl.GameElements.playtitle.MapSelect;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,13 +48,14 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		panel = new GamePanel();
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
-		panel.setState(new GameTitle(panel, null));
+		frame.pack();
+
+		panel.setState(new MapSelect(panel, null));
 	}
 }

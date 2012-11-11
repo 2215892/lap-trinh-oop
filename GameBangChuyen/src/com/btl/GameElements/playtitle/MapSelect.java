@@ -14,14 +14,15 @@ import com.btl.data.SaveFile;
 public class MapSelect extends GameState {
 
 	private SaveFile saveFile = SaveFile.create();
-	private MapButton[] mButtons = new MapButton[4];
+	private static final int LEVEL_COUNT = 15;
+	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
 
 	public MapSelect(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
 
-		for (int i = 1; i <= 3; ++i) {
-			mButtons[i] = new MapButton(new Point(60 * i, 40), i,
-					saveFile.getLock(i));
+		for (int i = 0; i < LEVEL_COUNT; ++i) {
+			mButtons[i] = new MapButton(new Point(100 + 100 * (i % 5),
+					100 + 100 * (i / 5)), i + 1, saveFile.getLock(i + 1));
 		}
 	}
 
