@@ -162,17 +162,17 @@ public class PlayState extends GameState {
 		Font font = new Font("TimesRoman", Font.PLAIN, 16);
 		g2.setFont(font);
 		g2.drawString(" Score: " + Integer.toString(score) + "         Time: "
-				+ secondToString(currentSecond), 10, 20);
+				+ secondToString(currentSecond), 10, 25);
 		if (highscore != -1) {
-			g2.drawString(" High Score: ", 350, 20);
+			g2.drawString(" High Score: ", 350, 25);
 			font = new Font("TimesRoman", Font.BOLD, 18);
 			g2.setFont(font);
 			if (highscore >= score) {
 				g2.setColor(Color.GRAY);
-				g2.drawString(Integer.toString(highscore), 450, 20);
+				g2.drawString(Integer.toString(highscore), 450, 25);
 			} else {
 				g2.setColor(Color.GREEN);
-				g2.drawString(Integer.toString(score), 450, 20);
+				g2.drawString(Integer.toString(score), 450, 25);
 			}
 
 		}
