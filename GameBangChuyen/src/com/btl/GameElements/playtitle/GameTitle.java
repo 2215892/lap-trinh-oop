@@ -81,18 +81,19 @@ public class GameTitle extends GameState {
 			if (clicked == btnStart) {
 				changeState(new StartGameTitle(parent, this));
 
-		} else if (clicked == btnCreateMap) {
-			changeState(new MapCreation(parent, this));
-		} else if (clicked == btnHighScore) {
-			// TODO
-		} else if (clicked == btnHelp) {
-			changeState(new About(parent,this,"help.txt"));
-		} else if (clicked == btnAbout) {
-				changeState(new About(parent,this,"about.txt"));
-
+			} else if (clicked == btnCreateMap) {
+				changeState(new MapCreation(parent, this));
+			} else if (clicked == btnHighScore) {
+				// TODO
+			} else if (clicked == btnHelp) {
+				changeState(new About(parent, this, "help.txt"));
+			} else if (clicked == btnAbout) {
+				changeState(new About(parent, this, "about.txt"));
+			}
 		}
 
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
