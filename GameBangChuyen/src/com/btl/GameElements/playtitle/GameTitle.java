@@ -22,8 +22,8 @@ import com.btl.data.SoundEffect;
 
 public class GameTitle extends GameState {
 
-	Button btnStart, btnCreateMap, btnHighScore, btnAbout, btnHelp;
-	Layer layer;
+	private Button btnStart, btnCreateMap, btnHighScore, btnAbout, btnHelp;
+	private Layer layer;
 
 	public GameTitle(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
