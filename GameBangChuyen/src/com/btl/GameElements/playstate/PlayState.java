@@ -51,6 +51,8 @@ public class PlayState extends GameState {
 	private Button btnReplay;
 	private BufferedImage buffer;
 
+	private ModelMap map;
+
 	private boolean isFullBox = false;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
@@ -86,6 +88,9 @@ public class PlayState extends GameState {
 			final ModelMap map) {
 
 		super(panel, lastState);
+
+		this.map = map;
+
 		initialize();
 		initFromModelMap(map);
 
@@ -272,8 +277,6 @@ public class PlayState extends GameState {
 			else
 				id = nextId - 1;
 
-			ModelMap map = ModelMap.createMap(ConversionFunction
-					.getCurrentDirectory() + "map//" + id);
 			if (map != null) {
 
 				PlayState playState = new PlayState(parent, lastState, map,
