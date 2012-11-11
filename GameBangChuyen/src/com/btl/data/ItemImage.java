@@ -28,7 +28,7 @@ public abstract class ItemImage {
 	public static final int VEHICLE_TYPE = 1;
 
 	public final static String RES_DIR = ConversionFunction
-			.getCurrentDirectory() + "res\\";
+			.getCurrentDirectory() + "res\\item\\";
 
 	public final static BufferedImage AIRPLANE = ConversionFunction
 			.loadImage(RES_DIR + "AIRPLANE.png");

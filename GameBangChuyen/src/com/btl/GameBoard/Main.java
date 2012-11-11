@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import com.btl.GameElements.playtitle.GameTitle;
+import com.btl.data.OtherImage;
 import com.btl.data.SoundEffect;
 
 // TODO: Auto-generated Javadoc
@@ -46,15 +47,21 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Conveyor Game");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setIconImage(OtherImage.ICON);
 
 		panel = new GamePanel();
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-
+		frame.setResizable(false);
 		frame.pack();
 		panel.setState(new GameTitle(panel,null));
+
+		frame.setLocationRelativeTo(null);
+
+		panel.setState(new GameTitle(panel, null));
+
 		SoundEffect.BACKGROUND.loop();
 	}
 }

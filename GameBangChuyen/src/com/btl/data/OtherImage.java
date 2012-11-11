@@ -10,4 +10,7 @@ public abstract class OtherImage {
 
 	public final static BufferedImage BG = ConversionFunction.loadImage(RES_DIR
 			+ "BG.bmp");
+
+	public final static BufferedImage ICON = ConversionFunction
+			.loadImage(RES_DIR + "ICON.png");
 }

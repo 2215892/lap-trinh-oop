@@ -12,7 +12,7 @@ public abstract class DirectionImage {
 
 	/** The dir. */
 	public static String dir = ConversionFunction.getCurrentDirectory()
-			+ "res\\";
+			+ "res\\direction\\";
 
 	public final static BufferedImage ALEFT = ConversionFunction.loadImage(dir
 			+ "ALEFT.png");

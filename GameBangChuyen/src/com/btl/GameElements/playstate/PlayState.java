@@ -1,8 +1,11 @@
 package com.btl.GameElements.playstate;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -48,6 +51,8 @@ public class PlayState extends GameState {
 	private Button btnReplay;
 	private BufferedImage buffer;
 
+	private ModelMap map;
+
 	private boolean isFullBox = false;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
@@ -83,6 +88,9 @@ public class PlayState extends GameState {
 			final ModelMap map) {
 
 		super(panel, lastState);
+
+		this.map = map;
+
 		initialize();
 		initFromModelMap(map);
 
@@ -146,20 +154,38 @@ public class PlayState extends GameState {
 
 		/* Ve len man hinh */
 		g.drawImage(this.buffer, 0, 0, null);
-		g.drawString("Time: " + secondToString(currentSecond) + " Score: "
-				+ Integer.toString(score), 10, 10);
+
+		/* Viet chu, thong tin len man hinh */
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		Font font = new Font("TimesRoman", Font.PLAIN, 16);
+		g2.setFont(font);
+		g2.drawString(" Score: " + Integer.toString(score) + "         Time: "
+				+ secondToString(currentSecond), 10, 25);
 		if (highscore != -1) {
-			g.drawString(" High Score: " + Integer.toString(highscore), 200, 10);
+			g2.drawString(" High Score: ", 350, 25);
+			font = new Font("TimesRoman", Font.BOLD, 18);
+			g2.setFont(font);
+			if (highscore >= score) {
+				g2.setColor(Color.GRAY);
+				g2.drawString(Integer.toString(highscore), 450, 25);
+			} else {
+				g2.setColor(Color.GREEN);
+				g2.drawString(Integer.toString(score), 450, 25);
+			}
+
 		}
 
 	}
-
 	private String secondToString(int second) {
 
 		int m = second / 60;
 		int s = second % 60;
 
-		return new String(Integer.toString(m) + ":" + Integer.toString(s));
+		return s < 10 ? new String(Integer.toString(m) + ":0"
+				+ Integer.toString(s)) : new String(Integer.toString(m) + ":"
+				+ Integer.toString(s));
 	}
 
 	/*
@@ -251,8 +277,6 @@ public class PlayState extends GameState {
 			else
 				id = nextId - 1;
 
-			ModelMap map = ModelMap.createMap(ConversionFunction
-					.getCurrentDirectory() + "map//" + id);
 			if (map != null) {
 
 				PlayState playState = new PlayState(parent, lastState, map,
@@ -655,13 +679,13 @@ public class PlayState extends GameState {
 		//
 		btnPause = new Button(new Point(650, 5));
 		btnPause.setImage(ButtonImage.PAUSE_BUTTON);
-		btnEndGame = new Button(new Point(100, 100));
+		btnEndGame = new Button(new Point(245, 160));
 		btnEndGame.setImage(ButtonImage.BTN_END_GAME);
-		btnContinue = new Button(new Point(100, 300));
+		btnContinue = new Button(new Point(245, 280));
 		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME);
-		btnReplay = new Button(new Point(100, 200));
+		btnReplay = new Button(new Point(245, 220));
 		btnReplay.setImage(ButtonImage.BTN_REPLAY);
-		btnNextLevel = new Button(new Point(100, 300));
+		btnNextLevel = new Button(new Point(245, 280));
 		btnNextLevel.setImage(ButtonImage.BTN_NEXT_LEVEL);
 
 		menuLayer.addDrawable(btnPause);
