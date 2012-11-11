@@ -32,19 +32,19 @@ public class GameTitle extends GameState {
 
 	private void initialize() {
 
-		btnStart = new Button(new Point(100, 100));
+		btnStart = new Button(new Point(245, 100));
 		btnStart.setImage(ButtonImage.BTN_START_GAME);
 
-		btnCreateMap = new Button(new Point(100, 200));
+		btnCreateMap = new Button(new Point(245, 160));
 		btnCreateMap.setImage(ButtonImage.BTN_CREATE_MAP);
 
-		btnHighScore = new Button(new Point(100, 300));
+		btnHighScore = new Button(new Point(245, 220));
 		btnHighScore.setImage(ButtonImage.BTN_HIGH_SCORE);
 
-		btnAbout = new Button(new Point(100, 400));
+		btnAbout = new Button(new Point(245, 280));
 		btnAbout.setImage(ButtonImage.BTN_ABOUT);
 
-		btnHelp = new Button(new Point(100, 500));
+		btnHelp = new Button(new Point(245, 340));
 		btnHelp.setImage(ButtonImage.BTN_HELP);
 
 		layer = new Layer(parent.width, parent.height);
