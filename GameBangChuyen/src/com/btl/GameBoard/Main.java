@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import com.btl.GameElements.playtitle.MapSelect;
+import com.btl.data.SoundEffect;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,5 +58,7 @@ public class Main {
 		frame.pack();
 
 		panel.setState(new MapSelect(panel, null));
+
+		SoundEffect.BACKGROUND.loop();
 	}
 }

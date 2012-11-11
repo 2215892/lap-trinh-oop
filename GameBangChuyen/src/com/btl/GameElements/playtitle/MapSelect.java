@@ -10,6 +10,7 @@ import com.btl.GameElements.playstate.PlayState;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
 import com.btl.data.SaveFile;
+import com.btl.data.SoundEffect;
 
 public class MapSelect extends GameState {
 
@@ -48,6 +49,7 @@ public class MapSelect extends GameState {
 		for (MapButton btn : mButtons) {
 			if (btn != null && btn.contains(p)) {
 
+				SoundEffect.BUTTONCLICK.play();
 				if (!saveFile.getLock(btn.getId())) {
 					ModelMap map = ModelMap.createMap(ConversionFunction
 							.getCurrentDirectory() + "map//" + btn.getId());

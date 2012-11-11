@@ -25,6 +25,7 @@ import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
 import com.btl.data.ButtonImage;
 import com.btl.data.OtherImage;
+import com.btl.data.SoundEffect;
 
 /**
  * The Class PlayState.
@@ -203,6 +204,8 @@ public class PlayState extends GameState {
 	}
 
 	private void buttonClickedHandle(Button clicked) {
+		if (clicked != null)
+			SoundEffect.BUTTONCLICK.play();
 		if (clicked == btnPause) {
 			pause();
 			pauseMenuLayer.show();
@@ -303,7 +306,7 @@ public class PlayState extends GameState {
 
 					if (terminal.boxArrived(box)) {
 						/* Neu box den cung mau */
-
+						SoundEffect.RIGHTBOX.play();
 						/* Neu terminal dang cho tao box */
 						if (terminal.isWaiting()) {
 							/*
@@ -324,6 +327,8 @@ public class PlayState extends GameState {
 						addScore(new PlayScore(terminal.getPosition(), 5000));
 
 					} else {
+						SoundEffect.WRONGBOX.play();
+
 						/*
 						 * Neu den nham terminal thi chuyen terminal duoc tao
 						 * box ay sang trang thai cho
@@ -713,6 +718,7 @@ public class PlayState extends GameState {
 	}
 
 	private void switchClickedHandle(final PlaySwitch pSwitch) {
+		SoundEffect.BUTTONCLICK.play();
 		pSwitch.changeDirection();
 	}
 	private void updateBoxs() {
