@@ -14,7 +14,7 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	protected Point position;
 
 	public ModelTerminal() {
-
+		type = 1;
 	}
 
 	public ModelTerminal(final ModelTerminal terminal) {
@@ -31,6 +31,7 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	 */
 	public ModelTerminal(Point p) {
 		position = p;
+		type = 1;
 	}
 
 	/**

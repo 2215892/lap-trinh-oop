@@ -31,6 +31,7 @@ import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
 import com.btl.data.ItemImage;
 import com.btl.data.OtherImage;
+
 // TODO: Auto - generated Javadoc
 /**
  * đây là class dùng để vẽ map cho game, người chơi dùng chuột để chọn những thứ
@@ -127,34 +128,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	public MapCreation(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
 		ini();
-		parent.repaint();
-		loaded = true;
-	}
-
-	/**
-	 * hàm khởi tạo cho mục đích Edit một map có sẵn.
-	 * 
-	 * @param parent
-	 *            - panel để vẽ vào
-	 * @param fileName
-	 *            - địa chỉ map cần edit
-	 */
-	public MapCreation(GamePanel parent, String fileName, GameState lastState) {
-		super(parent, lastState);
-		this.fileName = fileName;
-
-		ini();
-		loadElementFromFile(fileName);
-
-		MapRecovery maprecovery = MapRecovery.createMapRecovery(switchLayer,
-				factoryLayer, terminalLayer, MapCreationManager.SQUARE_SIDE,
-				MapCreationManager.SQUARE_SIDE, this);
-		switchLayer = maprecovery.getSwitchLayer();
-		factoryLayer = maprecovery.getFactoryLayer();
-		terminalLayer = maprecovery.getTerminalLayer();
-		switchLayer.render();
-		AuxiliaryFunction.showWrongFactory(this);
-		AuxiliaryFunction.showWrongSwitch(this);
 		parent.repaint();
 		loaded = true;
 	}
@@ -294,10 +267,25 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			control = MapCreationManager.DEFAULT;
 		}
 
-		else if (temp.getControlCode() == MapCreationManager.BACK) {
-			changeState(lastState);
+		else if (temp.getControlCode() == MapCreationManager.BACK)
+			handleMenuBack();
+
+	}
+
+	/**
+	 * Xử lý khi người chơi ấn nút Back
+	 */
+	private void handleMenuBack() {
+		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */
+		if (!AuxiliaryFunction.isEmpty(this)) {
+
+			String message = "Luu thay doi truoc khi thoat? ";
+			int confirm = JOptionPane.showConfirmDialog(parent, message);
+			if (confirm == JOptionPane.OK_OPTION)
+				handleMenuSave();
 		}
 
+		changeState(lastState);
 	}
 
 	/** tọa độ của chuột ở tọa độ thực. */
@@ -364,6 +352,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 
 	}
+
 	/*
 	 * (non - Javadoc)
 	 * 
@@ -545,6 +534,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 				deleteManager.deleteItemMap(item);
 		}
 		AuxiliaryFunction.showWrongSwitch(this);
+		AuxiliaryFunction.showWrongFactory(this);
 		switchLayer.render();
 		parent.repaint();
 	}
@@ -558,11 +548,11 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		String message = "neu an nut nay ban se phai ve lai tu dau ";
 		int option = JOptionPane.showConfirmDialog(parent, message);
 		switch (option) {
-			case JOptionPane.OK_OPTION :
-				deleteAll();
-				break;
-			default :
-				break;
+		case JOptionPane.OK_OPTION:
+			deleteAll();
+			break;
+		default:
+			break;
 		}
 
 	}
@@ -712,6 +702,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		AuxiliaryFunction.showWrongSwitch(this);
 		parent.repaint();
 	}
+
 	/**
 	 * xử lý khi last là ô vuông chứa Factory.
 	 */
@@ -1239,11 +1230,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 				/* thuc hien doc file */
 				deleteAll();
 				loadElementFromFile(fileName);
-
 				MapRecovery maprecovery = MapRecovery.createMapRecovery(
-						switchLayer, factoryLayer, terminalLayer,
-						MapCreationManager.SQUARE_SIDE,
-						MapCreationManager.SQUARE_SIDE, this);
+						switchLayer, factoryLayer, terminalLayer, this);
 				switchLayer = maprecovery.getSwitchLayer();
 				factoryLayer = maprecovery.getFactoryLayer();
 				terminalLayer = maprecovery.getTerminalLayer();
@@ -1332,5 +1320,10 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		parent.removeMouseMotionListener(this);
 		parent.setState(state);
 
+	}
+
+	public GamePanel getParent() {
+		// TODO Auto-generated method stub
+		return parent;
 	}
 }

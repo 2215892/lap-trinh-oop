@@ -14,6 +14,7 @@ import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.Model.AuxiliaryFunction;
 import com.btl.Model.Direction;
 import com.btl.data.ItemImage;
+
 // TODO: Auto - generated Javadoc
 
 /**
@@ -362,6 +363,7 @@ public class MapDeleting {
 
 		}
 	}
+
 	/**
 	 * xử lý xóa terminal đã chọn.
 	 * 

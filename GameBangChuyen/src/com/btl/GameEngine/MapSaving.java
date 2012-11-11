@@ -1,5 +1,6 @@
 package com.btl.GameEngine;
 
+import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.Model.AuxiliaryFunction;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
+
 // TODO: Auto - generated Javadoc
 
 /**
@@ -274,6 +276,7 @@ public class MapSaving {
 
 		}
 	}
+
 	/**
 	 * tạo thẻ tag cho đối tượng itemMap.
 	 * 
@@ -313,10 +316,13 @@ public class MapSaving {
 	 */
 	private boolean checkValid(SwitchMap sw) {
 		SwitchMap tg;
+		FactoryMap f;
 		// lay currentDir cua sw
 		int cL = sw.getCurrentDir();
 		// tim switch phia tren no
 		tg = AuxiliaryFunction.upNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x - unit,
+				sw.getPosition().y), factoryLayer);
 		if ((tg != null) && (tg.getListDirection().size() > 0)) {
 
 			/* so sanh huong cua hai cai */
@@ -327,8 +333,14 @@ public class MapSaving {
 			}
 
 		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
 		/* tim switch phia duoi no' */
 		tg = AuxiliaryFunction.downNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x + unit,
+				sw.getPosition().y), factoryLayer);
 		if ((tg != null) && (tg.getListDirection().size() > 0)) {
 
 			for (Direction i : tg.getListDirection()) {
@@ -336,8 +348,15 @@ public class MapSaving {
 					return true;
 			}
 		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
 		/* tim swicth ben phai no */
 		tg = AuxiliaryFunction.rightNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(
+				new Point(sw.getPosition().x, sw.getPosition().y + unit),
+				factoryLayer);
 		if ((tg != null) && (tg.getListDirection().size() > 0)) {
 			// khi ma neighbor trc no co huong(tuc la khong phai la trap)
 
@@ -348,8 +367,15 @@ public class MapSaving {
 			}
 
 		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
 		/* tim switch ben trai no */
 		tg = AuxiliaryFunction.leftNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(
+				new Point(sw.getPosition().x, sw.getPosition().y - unit),
+				factoryLayer);
 		if ((tg != null) && (tg.getListDirection().size() > 0)) {
 
 			for (Direction i : tg.getListDirection()) {
@@ -359,8 +385,13 @@ public class MapSaving {
 			}
 
 		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
 		return false;
 	}
+
 	/**
 	 * Gets the file name.
 	 * 

@@ -7,6 +7,7 @@ import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
+import javax.swing.SwingUtilities;
 
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
@@ -33,6 +34,8 @@ public class MapRecovery {
 
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
+	
+	MapCreation map;
 
 	/**
 	 * Hàm khởi tạo đối tượng.
@@ -53,6 +56,7 @@ public class MapRecovery {
 		this.terminalLayer = terminalLayer;
 		this.height = map.getSide();
 		this.width = map.getSide();
+		this.map = map;
 		recoverFullMap();
 		System.out.println("completed!");
 	}
@@ -97,6 +101,7 @@ public class MapRecovery {
 						this.factoryLayer) == null)) {
 			/* khong vi pham trong qua trinh duyet thi them vao */
 			switchLayer.addDrawable(temp);
+			
 			temp = createNeighborSwitch(temp.getPosition(), f.getDirection());
 		}
 		/*
@@ -147,6 +152,8 @@ public class MapRecovery {
 			}
 		}
 	}
+
+
 	/**
 	 * Tạo một neighbor switch ứng với hướng xác định.
 	 * 
@@ -188,8 +195,7 @@ public class MapRecovery {
 	 * @return map đối tượng khởi tạo
 	 */
 	public static MapRecovery createMapRecovery(DrawLayer switchLayer,
-			DrawLayer factoryLayer, DrawLayer terminalLayer, int width,
-			int height, MapCreation map) {
+			DrawLayer factoryLayer, DrawLayer terminalLayer, MapCreation map) {
 		MapRecovery temp = new MapRecovery(switchLayer, factoryLayer,
 				terminalLayer, map);
 		return temp;
