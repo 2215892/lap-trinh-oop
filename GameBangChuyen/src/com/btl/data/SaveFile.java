@@ -42,6 +42,8 @@ public class SaveFile extends XmlReader {
 		catch (Exception e) {
 			instance = new SaveFile();
 		}
+
+		instance.setLock(1, false);
 	}
 
 	public static SaveFile create() {
@@ -94,11 +96,9 @@ public class SaveFile extends XmlReader {
 			transformer.transform(source, result);
 
 		} catch (ParserConfigurationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

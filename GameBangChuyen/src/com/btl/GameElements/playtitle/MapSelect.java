@@ -10,18 +10,21 @@ import com.btl.GameElements.playstate.PlayState;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
 import com.btl.data.SaveFile;
+import com.btl.data.SoundEffect;
 
 public class MapSelect extends GameState {
 
 	private SaveFile saveFile = SaveFile.create();
-	private MapButton[] mButtons = new MapButton[4];
+	public static final int LEVEL_COUNT = 15;
+	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
+	private boolean needUpdate = false;
 
 	public MapSelect(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
 
-		for (int i = 1; i <= 3; ++i) {
-			mButtons[i] = new MapButton(new Point(60 * i, 40), i,
-					saveFile.getLock(i));
+		for (int i = 0; i < LEVEL_COUNT; ++i) {
+			mButtons[i] = new MapButton(new Point(100 + 100 * (i % 5),
+					100 + 100 * (i / 5)), i + 1, saveFile.getLock(i + 1));
 		}
 	}
 
@@ -46,13 +49,19 @@ public class MapSelect extends GameState {
 		Point p = new Point(arg0.getX(), arg0.getY());
 		for (MapButton btn : mButtons) {
 			if (btn != null && btn.contains(p)) {
-
-				if (!saveFile.getLock(btn.getId())) {
+				int id = btn.getId();
+				SoundEffect.BUTTONCLICK.play();
+				if (!saveFile.getLock(id)) {
 					ModelMap map = ModelMap.createMap(ConversionFunction
-							.getCurrentDirectory() + "map//" + btn.getId());
+							.getCurrentDirectory() + "map//" + id);
 					if (map != null) {
+						int nextId = -1;
+						if (id < LEVEL_COUNT)
+							nextId = id + 1;
 						PlayState playState = new PlayState(parent, this, map,
-								saveFile.getHighscore(btn.getId()));
+								saveFile.getHighscore(id), nextId);
+						needUpdate = true;
+
 						parent.setState(playState);
 					}
 
@@ -63,7 +72,6 @@ public class MapSelect extends GameState {
 		}
 
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -73,8 +81,11 @@ public class MapSelect extends GameState {
 	@Override
 	public void gameRender(Graphics g) {
 		for (MapButton btn : mButtons) {
-			if (btn != null)
+			if (btn != null) {
+				if (needUpdate)
+					btn.update();
 				btn.paint(g);
+			}
 		}
 
 	}

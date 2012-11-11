@@ -11,6 +11,12 @@ public abstract class ButtonImage {
 	public final static BufferedImage PAUSE_BUTTON = ConversionFunction
 			.loadImage(RES_DIR + "PAUSE_BUTTON.png");
 
+	public final static BufferedImage BTN_LEVEL = ConversionFunction
+			.loadImage(RES_DIR + "BTN_LEVEL.png");
+
+	public final static BufferedImage BTN_LEVEL_LOCK = ConversionFunction
+			.loadImage(RES_DIR + "BTN_LEVEL_LOCK.png");
+
 	public final static BufferedImage BTN_NEXT_LEVEL = ConversionFunction
 			.loadImage(RES_DIR + "BTN_NEXT_LEVEL.png");
 

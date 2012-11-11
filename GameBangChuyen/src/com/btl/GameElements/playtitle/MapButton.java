@@ -1,11 +1,16 @@
 package com.btl.GameElements.playtitle;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import com.btl.GameElements.playstate.Button;
+import com.btl.data.ButtonImage;
+import com.btl.data.SaveFile;
 
 public class MapButton extends Button {
 
@@ -17,20 +22,39 @@ public class MapButton extends Button {
 		setId(id);
 		setLock(isLock);
 
-		BufferedImage img = new BufferedImage(50, 50,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.getGraphics();
-		g.setColor(Color.gray);
-		g.fillRect(0, 0, 50, 50);
-		g.setColor(Color.red);
-		String text = Integer.toString(getId());
-		if (isLock)
-			text += "Locked";
-		g.drawString(text, 0, 15);
-		g.dispose();
-		this.setImage(img, 50, 50);
+		update();
 	}
 
+	public void update() {
+		this.setLock(SaveFile.create().getLock(getId()));
+		BufferedImage temp;
+		if (isLock()) {
+			temp = ButtonImage.BTN_LEVEL_LOCK;
+		} else {
+			temp = ButtonImage.BTN_LEVEL;
+		}
+
+		BufferedImage img = new BufferedImage(temp.getWidth(),
+				temp.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) img.getGraphics();
+		g.drawImage(temp, 0, 0, null);
+		g.setColor(Color.GRAY);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		String text = Integer.toString(getId());
+
+		Font font = new Font("TimesRoman", Font.BOLD, 18);
+		g.setFont(font);
+		FontMetrics fm = g.getFontMetrics(font);
+		int keyWidth = fm.stringWidth(text);
+		int keyHeight = fm.getHeight();
+		int x = img.getWidth() / 2;
+		int y = img.getHeight() / 2;
+		g.drawString(text, x - (keyWidth / 2), y + (keyHeight / 4));
+
+		g.dispose();
+		this.setImage(img);
+	}
 	public int getId() {
 		return id;
 	}

@@ -18,6 +18,7 @@ import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelMap;
 import com.btl.data.ButtonImage;
 import com.btl.data.OtherImage;
+import com.btl.data.SoundEffect;
 
 public class GameTitle extends GameState {
 
@@ -80,6 +81,9 @@ public class GameTitle extends GameState {
 		Button clicked = (Button) layer.getClickedObj(new Point(arg0.getX(),
 				arg0.getY()));
 
+		if (clicked != null)
+			SoundEffect.BUTTONCLICK.play();
+
 		if (clicked == btnStart) {
 			final JFileChooser fc = new JFileChooser();
 			fc.setCurrentDirectory(new File(ConversionFunction
@@ -93,7 +97,7 @@ public class GameTitle extends GameState {
 				if (map == null)
 					JOptionPane.showMessageDialog(null, "Error");
 				else
-					changeState(new PlayState(parent, this, map, 100));
+					changeState(new PlayState(parent, this, map));
 			}
 
 		} else if (clicked == btnCreateMap) {
