@@ -13,8 +13,8 @@ import javax.swing.SwingUtilities;
 public class GamePanel extends JPanel {
 
 	public static final int WIDTH = 1;
-	public int width = 700;
-	public int height = 500;
+	public int width = 685;
+	public int height = 485;
 
 	/**
 	 * 
