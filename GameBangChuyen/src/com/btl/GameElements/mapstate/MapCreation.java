@@ -139,9 +139,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		/* khoi tao load cac image cho cac soil,waa */
 		parent.addMouseMotionListener(this);
 
-		bufferImage = new BufferedImage(parent.height, parent.width,
+		bufferImage = new BufferedImage(parent.width, parent.height,
 				BufferedImage.TYPE_INT_ARGB);
-		bgImage = new BufferedImage(parent.height, parent.width,
+		bgImage = new BufferedImage(parent.width, parent.height,
 				BufferedImage.TYPE_INT_ARGB);
 
 		logicHeightN = -parent.height;

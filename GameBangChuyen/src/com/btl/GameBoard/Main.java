@@ -2,10 +2,8 @@ package com.btl.GameBoard;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-
-import com.btl.GameElements.playtitle.MapSelect;
+import com.btl.GameElements.playtitle.GameTitle;
 import com.btl.data.SoundEffect;
 
 // TODO: Auto-generated Javadoc
@@ -56,9 +54,7 @@ public class Main {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
 		frame.pack();
-
-		panel.setState(new MapSelect(panel, null));
-
+		panel.setState(new GameTitle(panel,null));
 		SoundEffect.BACKGROUND.loop();
 	}
 }

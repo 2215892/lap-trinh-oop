@@ -105,9 +105,9 @@ public class GameTitle extends GameState {
 		} else if (clicked == btnHighScore) {
 			// TODO
 		} else if (clicked == btnHelp) {
-			// TODO
+			changeState(new About(parent,this,"help.txt"));
 		} else if (clicked == btnAbout) {
-			// TODO
+				changeState(new About(parent,this,"about.txt"));
 		}
 
 	}

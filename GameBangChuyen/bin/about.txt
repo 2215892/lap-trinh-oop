@@ -1,0 +1,3 @@
+﻿Tên game: Game Băng Chuyền
+Tác giả: Mai Tiến Khải và Nghiêm Xuân Đức
+Game này được viết ra cho bài tập lớn môn OOP của, theo yêu cầu của thầy Cao Tuấn Dũng
