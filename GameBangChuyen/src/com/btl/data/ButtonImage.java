@@ -14,6 +14,9 @@ public abstract class ButtonImage {
 	public final static BufferedImage BTN_LEVEL = ConversionFunction
 			.loadImage(RES_DIR + "BTN_LEVEL.png");
 
+	public final static BufferedImage BTN_BACK = ConversionFunction
+			.loadImage(RES_DIR + "BTN_BACK.png");
+
 	public final static BufferedImage BTN_LEVEL_LOCK = ConversionFunction
 			.loadImage(RES_DIR + "BTN_LEVEL_LOCK.png");
 
