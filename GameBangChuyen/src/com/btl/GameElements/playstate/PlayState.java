@@ -14,8 +14,10 @@ import javax.swing.SwingUtilities;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
+import com.btl.GameElements.playtitle.MapSelect;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
+import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.GraphNode;
 import com.btl.Model.ModelFactory;
@@ -25,6 +27,7 @@ import com.btl.Model.ModelSwitch;
 import com.btl.Model.ModelTerminal;
 import com.btl.data.ButtonImage;
 import com.btl.data.OtherImage;
+import com.btl.data.SaveFile;
 import com.btl.data.SoundEffect;
 
 /**
@@ -41,6 +44,8 @@ public class PlayState extends GameState {
 	private Button btnContinue;
 	private Button btnEndGame;
 	private Button btnPause;
+	private Button btnNextLevel;
+	private Button btnReplay;
 	private BufferedImage buffer;
 
 	private boolean isFullBox = false;
@@ -60,10 +65,12 @@ public class PlayState extends GameState {
 
 	private Layer scoreLayer, menuLayer, pauseMenuLayer, gameOverMenuLayer;
 
+	private SaveFile saveFile = SaveFile.create();
+
 	private Timer timer;
 	private int count = 0;
 
-	private int highscore;
+	private int highscore = -1;
 
 	Random rnd = new Random();
 	/**
@@ -73,15 +80,23 @@ public class PlayState extends GameState {
 	 *            the parent
 	 */
 	public PlayState(final GamePanel panel, final GameState lastState,
-			final ModelMap map, int highscore) {
+			final ModelMap map) {
 
 		super(panel, lastState);
-		this.highscore = highscore;
 		initialize();
 		initFromModelMap(map);
 
 		resume();
 
+	}
+
+	private int nextId = -1;
+
+	public PlayState(final GamePanel panel, final GameState lastState,
+			final ModelMap map, int highscore, int nextID) {
+		this(panel, lastState, map);
+		this.highscore = highscore;
+		this.nextId = nextID;
 	}
 
 	private void resume() {
@@ -216,11 +231,54 @@ public class PlayState extends GameState {
 			resume();
 		} else if (clicked == btnEndGame) {
 			parent.setState(lastState);
+		} else if (clicked == btnNextLevel) {
+			ModelMap map = ModelMap.createMap(ConversionFunction
+					.getCurrentDirectory() + "map//" + nextId);
+			if (map != null) {
+				int id = nextId;
+				if (nextId < MapSelect.LEVEL_COUNT)
+					nextId++;
+				else
+					nextId = -1;
+				PlayState playState = new PlayState(parent, lastState, map,
+						saveFile.getHighscore(id), nextId);
+				changeState(playState);
+			}
+		} else if (clicked == btnReplay) {
+			int id = 0;
+			if (nextId == -1)
+				id = MapSelect.LEVEL_COUNT;
+			else
+				id = nextId - 1;
+
+			ModelMap map = ModelMap.createMap(ConversionFunction
+					.getCurrentDirectory() + "map//" + id);
+			if (map != null) {
+
+				PlayState playState = new PlayState(parent, lastState, map,
+						highscore, nextId);
+				changeState(playState);
+			}
 		}
 
 	}
-
 	private void onGameEnd() {
+
+		if (highscore != -1) {
+			int id = 0;
+			if (nextId == -1)
+				id = MapSelect.LEVEL_COUNT;
+			else {
+				id = nextId - 1;
+				if ((isFullBox && listBoxs.size() == 0))
+					saveFile.setLock(nextId, false);
+			}
+
+			if (score > highscore)
+				saveFile.setHighscore(id, score);
+
+		}
+
 		pause();
 		gameOverMenuLayer.show();
 		gameOverMenuLayer.render();
@@ -595,12 +653,15 @@ public class PlayState extends GameState {
 		//
 		btnPause = new Button(new Point(650, 5));
 		btnPause.setImage(ButtonImage.PAUSE_BUTTON);
-		btnEndGame = new Button(new Point(100, 300));
+		btnEndGame = new Button(new Point(100, 100));
 		btnEndGame.setImage(ButtonImage.BTN_END_GAME);
 		btnContinue = new Button(new Point(400, 300));
 		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME);
+		btnReplay = new Button(new Point(100, 200));
+		btnReplay.setImage(ButtonImage.BTN_REPLAY);
 
 		menuLayer.addDrawable(btnPause);
+		pauseMenuLayer.addDrawable(btnReplay);
 		pauseMenuLayer.addDrawable(btnContinue);
 		pauseMenuLayer.addDrawable(btnEndGame);
 		Button temp = new Button(new Point(0, 0));
@@ -616,6 +677,7 @@ public class PlayState extends GameState {
 
 		pauseMenuLayer.setBackground(tempImage);
 
+		gameOverMenuLayer.addDrawable(btnReplay);
 		gameOverMenuLayer.addDrawable(btnEndGame);
 		gameOverMenuLayer.addDrawable(temp);
 		gameOverMenuLayer.setBackground(tempImage);

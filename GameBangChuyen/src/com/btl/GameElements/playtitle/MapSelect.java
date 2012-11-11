@@ -15,7 +15,7 @@ import com.btl.data.SoundEffect;
 public class MapSelect extends GameState {
 
 	private SaveFile saveFile = SaveFile.create();
-	private static final int LEVEL_COUNT = 15;
+	public static final int LEVEL_COUNT = 15;
 	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
 
 	public MapSelect(GamePanel parent, GameState lastState) {
@@ -48,14 +48,17 @@ public class MapSelect extends GameState {
 		Point p = new Point(arg0.getX(), arg0.getY());
 		for (MapButton btn : mButtons) {
 			if (btn != null && btn.contains(p)) {
-
+				int id = btn.getId();
 				SoundEffect.BUTTONCLICK.play();
-				if (!saveFile.getLock(btn.getId())) {
+				if (!saveFile.getLock(id)) {
 					ModelMap map = ModelMap.createMap(ConversionFunction
-							.getCurrentDirectory() + "map//" + btn.getId());
+							.getCurrentDirectory() + "map//" + id);
 					if (map != null) {
+						int nextId = -1;
+						if (id < LEVEL_COUNT)
+							nextId = id + 1;
 						PlayState playState = new PlayState(parent, this, map,
-								saveFile.getHighscore(btn.getId()));
+								saveFile.getHighscore(id), nextId);
 						parent.setState(playState);
 					}
 
@@ -66,7 +69,6 @@ public class MapSelect extends GameState {
 		}
 
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub

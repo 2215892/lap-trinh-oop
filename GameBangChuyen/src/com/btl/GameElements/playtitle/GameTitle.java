@@ -97,7 +97,7 @@ public class GameTitle extends GameState {
 				if (map == null)
 					JOptionPane.showMessageDialog(null, "Error");
 				else
-					changeState(new PlayState(parent, this, map, 100));
+					changeState(new PlayState(parent, this, map));
 			}
 
 		} else if (clicked == btnCreateMap) {
