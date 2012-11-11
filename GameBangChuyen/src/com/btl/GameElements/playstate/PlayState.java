@@ -159,7 +159,9 @@ public class PlayState extends GameState {
 		int m = second / 60;
 		int s = second % 60;
 
-		return new String(Integer.toString(m) + ":" + Integer.toString(s));
+		return s < 10 ? new String(Integer.toString(m) + ":0"
+				+ Integer.toString(s)) : new String(Integer.toString(m) + ":"
+				+ Integer.toString(s));
 	}
 
 	/*
