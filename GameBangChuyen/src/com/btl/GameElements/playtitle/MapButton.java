@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 import com.btl.GameElements.playstate.Button;
 import com.btl.data.ButtonImage;
+import com.btl.data.SaveFile;
 
 public class MapButton extends Button {
 
@@ -20,8 +21,13 @@ public class MapButton extends Button {
 		super(p);
 		setId(id);
 		setLock(isLock);
-		BufferedImage temp = null;
 
+		update();
+	}
+
+	public void update() {
+		this.setLock(SaveFile.create().getLock(getId()));
+		BufferedImage temp;
 		if (isLock()) {
 			temp = ButtonImage.BTN_LEVEL_LOCK;
 		} else {

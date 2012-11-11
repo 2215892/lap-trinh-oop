@@ -256,27 +256,29 @@ public class PlayState extends GameState {
 			if (map != null) {
 
 				PlayState playState = new PlayState(parent, lastState, map,
-						highscore, nextId);
+						saveFile.getHighscore(id), nextId);
 				changeState(playState);
 			}
 		}
 
 	}
 	private void onGameEnd() {
-
 		if (highscore != -1) {
 			int id = 0;
 			if (nextId == -1)
 				id = MapSelect.LEVEL_COUNT;
 			else {
 				id = nextId - 1;
-				if ((isFullBox && listBoxs.size() == 0))
+				if ((isFullBox && listBoxs.size() == 0)) {
 					saveFile.setLock(nextId, false);
+					gameOverMenuLayer.addDrawable(btnNextLevel);
+				}
 			}
 
 			if (score > highscore)
 				saveFile.setHighscore(id, score);
 
+			saveFile.save();
 		}
 
 		pause();
@@ -655,10 +657,12 @@ public class PlayState extends GameState {
 		btnPause.setImage(ButtonImage.PAUSE_BUTTON);
 		btnEndGame = new Button(new Point(100, 100));
 		btnEndGame.setImage(ButtonImage.BTN_END_GAME);
-		btnContinue = new Button(new Point(400, 300));
+		btnContinue = new Button(new Point(100, 300));
 		btnContinue.setImage(ButtonImage.BTN_CONTINUE_GAME);
 		btnReplay = new Button(new Point(100, 200));
 		btnReplay.setImage(ButtonImage.BTN_REPLAY);
+		btnNextLevel = new Button(new Point(100, 300));
+		btnNextLevel.setImage(ButtonImage.BTN_NEXT_LEVEL);
 
 		menuLayer.addDrawable(btnPause);
 		pauseMenuLayer.addDrawable(btnReplay);

@@ -17,6 +17,7 @@ public class MapSelect extends GameState {
 	private SaveFile saveFile = SaveFile.create();
 	public static final int LEVEL_COUNT = 15;
 	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
+	private boolean needUpdate = false;
 
 	public MapSelect(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
@@ -59,6 +60,8 @@ public class MapSelect extends GameState {
 							nextId = id + 1;
 						PlayState playState = new PlayState(parent, this, map,
 								saveFile.getHighscore(id), nextId);
+						needUpdate = true;
+
 						parent.setState(playState);
 					}
 
@@ -78,8 +81,11 @@ public class MapSelect extends GameState {
 	@Override
 	public void gameRender(Graphics g) {
 		for (MapButton btn : mButtons) {
-			if (btn != null)
+			if (btn != null) {
+				if (needUpdate)
+					btn.update();
 				btn.paint(g);
+			}
 		}
 
 	}
