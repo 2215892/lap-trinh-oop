@@ -9,8 +9,9 @@ import com.oop.gamepanel.Drawable;
 import com.oop.mapcreation.buttons.ButtonForDraw;
 import com.oop.mapcreation.buttons.DrawingButton;
 
+// TODO: Auto-generated Javadoc
 /**
- * class n?�? dùng đ�?định nghĩa các đối tượng l?�?một item trong menu cho các
+ * class này dùng để định nghĩa các đối tượng là một item trong menu cho các
  * button.
  * 
  * @author mai tien khai
@@ -20,40 +21,40 @@ public class MenuItem implements Drawable {
 	/** The hover color. */
 	public final Color hoverColor = new Color(255, 0, 0, 100);
 
-	/** ảnh hiện th?�?cho item. */
+	/** ảnh hiện thị cho item. */
 	private BufferedImage itemImage;
 
-	/** chiều cao của ảnh hiển th?�? */
+	/** chiều cao của ảnh hiển thị. */
 	private int height;
 
-	/** chiều rộng của ảnh hiển th?�? */
+	/** chiều rộng của ảnh hiển thị. */
 	private int width;
 
 	/** xem item có ẩn hay không. */
 	private boolean isHidden;
 
-	/** v?�?trí đ�?vẽ item. */
+	/** vị trí để vẽ item. */
 	private Point position;
 
 	/** button chua menuitem nay. */
 	private ButtonForDraw button;
 
-	/** biến kiểm tra trang thái chuột có hover v?�? item hay không. */
+	/** biến kiểm tra trang thái chuột có hover vào item hay không. */
 	private boolean hover;
 
 	/**
 	 * Khởi tạo một đối tượng MenuItem.
 	 * 
 	 * @param itemImage
-	 *            - ảnh hiển th?�?
+	 *            - ảnh hiển thị.
 	 * @param position
-	 *            - v?�?trí của ảnh hiển th?�?góc trái trên cùng).
+	 *            - vị trí của ảnh hiển thị(góc trái trên cùng).
 	 * @param width
-	 *            - chiều rộng ảnh hiển th?�?
+	 *            - chiều rộng ảnh hiển thị.
 	 * @param height
-	 *            - chiều cao ảnh hiển th?�?
+	 *            - chiều cao ảnh hiển thị.
 	 * @param button
-	 *            - button tương ứng của Menu Item n?�?.
+	 *            - button tương ứng của Menu Item này.
 	 */
 	public MenuItem(BufferedImage itemImage, Point position, int width,
 			int height, ButtonForDraw button) {
@@ -69,9 +70,6 @@ public class MenuItem implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -98,9 +96,6 @@ public class MenuItem implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
 	@Override
 	public boolean contains(Point p) {
 		/* khi ma item menu hien ra thi moi tinh la click chuot vao hay khong */
@@ -124,14 +119,14 @@ public class MenuItem implements Drawable {
 	}
 
 	/**
-	 * Gửi yêu cầu cho Button chọn Item n?�?.
+	 * Gửi yêu cầu cho Button chọn Item này.
 	 */
 	public void choose() {
 		button.selectItem(this);
 	}
 
 	/**
-	 * Hiển th?�?MenuItem.
+	 * Hiển thị MenuItem.
 	 */
 	public void show() {
 		isHidden = false;
@@ -145,7 +140,7 @@ public class MenuItem implements Drawable {
 	}
 
 	/**
-	 * Khi được ấn v?�? thì ẩn đi menu của Button tương ứng.
+	 * Khi được ấn vào thì ẩn đi menu của Button tương ứng.
 	 */
 	public void hideButtonMenu() {
 		button.hideMenu();

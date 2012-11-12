@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import com.oop.model.Helper;
 import com.oop.play.TerminalColor;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp BoxImage. Cung cấp hình ảnh các box cho trò chơi
  */

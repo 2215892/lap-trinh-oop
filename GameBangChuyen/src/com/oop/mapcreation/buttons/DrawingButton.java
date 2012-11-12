@@ -6,24 +6,24 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import com.oop.gamepanel.Button;
+
 // TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 /**
- * class n?�? mục đích tạo ra các đối tượng button trong phần vẽ map n?�?, tất cả
- * các class cho button trong phần vẽ map đều phải extends class n?�?.
+ * class này mục đích tạo ra các đối tượng button trong phần vẽ map này, tất cả
+ * các class cho button trong phần vẽ map đều phải extends class này.
  * 
  * @author mai tien khai
  * 
  */
 public class DrawingButton extends Button {
 
-	/** m?�? của button khi m?�?chuột đi v?�?. */
+	/** màu của button khi mà chuột đi vào. */
 	public final Color hoverColor = new Color(255, 0, 0, 100);
 
-	/** ảnh hiện th?�?của Button khi ?�?trạng thái bình thường. */
+	/** ảnh hiện thị của Button khi ở trạng thái bình thường. */
 	private BufferedImage normalRender;
 
-	/** ảnh hiển th?�?của Button khi ?�?trạng thái kích hoạt. */
+	/** ảnh hiển thị của Button khi ở trạng thái kích hoạt. */
 	private BufferedImage activeRender;
 
 	/** Biến kiểm tra xem trạng thái của Button có phải normal hau không. */
@@ -41,14 +41,14 @@ public class DrawingButton extends Button {
 	private boolean visible = true;
 
 	/**
-	 * H?�? khởi tạo của button.
+	 * Hàm khởi tạo của button.
 	 * 
 	 * @param p
-	 *            - tọa đ�?đặt Button
+	 *            - tọa độ đặt Button
 	 * @param normalImage
-	 *            - ảnh hiển th?�?của Button ?�?trạng thái bình thường
+	 *            - ảnh hiển thị của Button ở trạng thái bình thường
 	 * @param activeImage
-	 *            - ảnh hiển th?�?của Button ?�?trạng thái kích hoạt (khi ấn v?�?)
+	 *            - ảnh hiển thị của Button ở trạng thái kích hoạt (khi ấn vào)
 	 * @param controlCode
 	 *            - mã điều khiển của Button
 	 */
@@ -77,14 +77,6 @@ public class DrawingButton extends Button {
 		this.width = width;
 	}
 
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.Button#paint(java.awt.Graphics)
-	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameElements.playstate.Button#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		/* khi ma hien thi moi ve */
@@ -112,7 +104,7 @@ public class DrawingButton extends Button {
 	}
 
 	/**
-	 * Chuyển v?�?trạng thái bình thường cho Button.
+	 * Chuyển về trạng thái bình thường cho Button.
 	 */
 	public void normalRender() {
 		normal = true;

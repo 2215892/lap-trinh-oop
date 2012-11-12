@@ -29,6 +29,7 @@ import com.oop.model.AuxiliaryFunction;
 import com.oop.model.Direction;
 import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
  * đây là class dùng để vẽ map cho game, người chơi dùng chuột để chọn những thứ
  * cần vẽ, tất cả những thứ cần vẽ đều nằm trong class này.
@@ -188,11 +189,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @see com.btl.GameBoard.GameState#update()
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameBoard.GameState#update()
-	 */
 	@Override
 	public void update() {
 		// TODO st
@@ -210,7 +206,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * xử lí khi người chơi ấn chuột vào các Button.
+	 * xử lí khi người chơi ấn chuột vào cấc Button.
 	 */
 	private void handleMenuLayer() {
 		Drawable clickedObj;
@@ -246,7 +242,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 	}
 	/**
-	 * Đưa các Button về trạng thái ban đầu (Button chọn l?�?Button)
+	 * Đưa các Button về trạng thái ban đầu (Button chọn là Button)
 	 */
 	public void setInitialMenuState() {
 		handleButtonList.get(0).activeRender();
@@ -255,16 +251,11 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		menuLayer.render();
 	}
 
-	/** tọa đ�?của chuột ?�?tọa đ�?thực. */
+	/** tọa độ của chuột ở tọa độ thực. */
 	private Point pointClicked;
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
@@ -295,10 +286,10 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * hiện message box đ�?điền s?�?box tối đa terminal có th?�?chứa.
+	 * hiện message box để điền số box tối đa terminal có thể chứa.
 	 * 
 	 * @param clickedTer
-	 *            - Terminal cần thông tin s?�?box
+	 *            - Terminal cần thông tin số box
 	 */
 	private void handleBoxNumberInput(TerminalMap clickedTer) {
 		String message = "Nhap vao so box toi da chay vao : ";
@@ -330,11 +321,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto - generated method stub
@@ -343,11 +329,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
@@ -374,11 +355,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
@@ -452,15 +428,15 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * thêm các item v?�? menu Layer ví dụ thêm một cây v?�? map khi người chơi
-	 * vẽ thêm một cây. Trong trường hợp đối tượng vẽ l?�?biểu tượng của factory
-	 * hay terminal(máy bay, xe tải...) thì cần thêm các đối tượng ô vuông của
-	 * chúng nữa (FactoryMap, TerminalMap)
+	 * thêm các item vào menu Layer ví dụ thêm một cây vào map khi người chơi vẽ
+	 * thêm một cây. Trong trường hợp đối tượng vẽ là biểu tượng của factory hay
+	 * terminal(máy bay, xe tải...) thì cần thêm các đối tượng ô vuông của chúng
+	 * nữa (FactoryMap, TerminalMap)
 	 * 
 	 * @param choosenButton
-	 *            - button ứng với item vẽ (ví dụ vẽ cây thì l?�?button Tree)
+	 *            - button ứng với item vẽ (ví dụ vẽ cây thì là button Tree)
 	 * @param position
-	 *            - v?�?trí ô vuông vẽ v?�?
+	 *            - vị trí ô vuông vẽ vào
 	 */
 	private void addItem(ButtonForDraw choosenButton, Point position) {
 		ItemMap item = choosenButton.generateItem(position,
@@ -506,12 +482,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @see
 	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO something
@@ -520,13 +490,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent
-	 * )
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see
 	 * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent
@@ -574,7 +537,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * xử lý khi last l?�?một switch.
+	 * xử lý khi last là một switch.
 	 */
 	private void handleSwitchDrag() {
 		/* neu last chua co huong nay thi them vao, neu last chua co huong nao */
@@ -648,7 +611,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * xử lý khi last l?�?ô vuông chứa Factory.
+	 * xử lý khi last là ô vuông chứa Factory.
 	 */
 	private void handleFactoryDrag() {
 
@@ -682,8 +645,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * kiểm tra xem drag chuột có hợp l?�?không drag hợp l?�?khi ô active
-	 * l?�?các ô k?�?cạnh với last.
+	 * kiểm tra xem drag chuột có hợp lệ không drag hợp lệ khi ô active là các ô
+	 * kề cạnh với last.
 	 * 
 	 * @return true nếu drag đúng
 	 */
@@ -737,12 +700,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see
 	 * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
@@ -830,10 +787,10 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * xử lý hiển th?�?trạng thái của ô vuông có th?�?vẽ drag chuột từ ô vuông
-	 * n?�? hay không.
+	 * xử lý hiển thị trạng thái của ô vuông có thể vẽ drag chuột từ ô vuông này
+	 * hay không.
 	 * 
-	 * @param - position v?�?trí ô vuông chuột đi v?�?
+	 * @param - position vị trí ô vuông chuột đi vào
 	 */
 	private void handleMoseMoveSwitch(Point position) {
 		MouseOverSquare temp = new MouseOverSquare(position,
@@ -858,11 +815,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	/*
 	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
 	 */
@@ -913,7 +865,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * Chèn các button v?�? giao diện.
+	 * Chèn các button vào giao diện.
 	 */
 	public void fillMenu() {
 		/* add cac doi tuong cua menu vao layer */
@@ -925,7 +877,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * Đ�?cac button v?�?trạng thái chưa được ấn.
+	 * Để cac button về trạng thái chưa được ấn.
 	 */
 	private void resetMenu() {
 		for (ButtonForDraw i : graphicButtonList) {
@@ -938,7 +890,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * Cho các button v?�?trạng thái chưa có chuột đi v?�?.
+	 * Cho các button về trạng thái chưa có chuột đi vào.
 	 */
 	private void resetButtonHover() {
 		for (ButtonForDraw i : graphicButtonList)
@@ -949,7 +901,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * chuyển trạng thái hover cho các itemMenu như chưa được hover chuột v?�?.
+	 * chuyển trạng thái hover cho các itemMenu như chưa được hover chuột vào.
 	 */
 	private void resetMenuItemHover() {
 		for (DrawLayer i : itemListLayer) {
@@ -961,7 +913,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * vẽ lưới ô vuông v?�? ảnh nền.
+	 * vẽ lưới ô vuông vào ảnh nền.
 	 */
 	private void iniBgImage() {
 
@@ -997,7 +949,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		g1.dispose();
 	}
 
-	/** tọa đ�?chuột theo trục x. */
+	/** tọa độ chuột theo trục x. */
 	private int mX;
 
 	/** tọa độc chuột theo trục y. */
@@ -1006,7 +958,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	/**
 	 * Tìm ô vuông chứa chuột.
 	 * 
-	 * @return điểm góc trái trên cùng của ô vuông trong lưới ô vuông ấn v?�?
+	 * @return điểm góc trái trên cùng của ô vuông trong lưới ô vuông ấn vào
 	 */
 	public Point getSquare() {
 		/* can phai luu y khi ma kich chuot vao phan menu thi return null */
@@ -1042,11 +994,11 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * tìm Item m?�?ấn chuột v?�? (ví dụ cây cối, c?�? xe tải ...)
+	 * tìm Item mà ấn chuột vào (ví dụ cây cối, cỏ, xe tải ...)
 	 * 
 	 * @param p
-	 *            - v?�?trí cần tìm
-	 * @return MenuItem của Button m?�?tại v?�?trí chuột
+	 *            - vị trí cần tìm
+	 * @return MenuItem của Button mà tại vị trí chuột
 	 */
 	private MenuItem getItemClicked(Point p) {
 		for (int i = 0; i < itemListLayer.length; i++) {
@@ -1058,7 +1010,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * Kiểm tra xem có Button n?�? có Menu tương ứng của nó đươc show ra hay
+	 * Kiểm tra xem có Button nào có Menu tương ứng của nó đươc show ra hay
 	 * không.
 	 * 
 	 * @return true nếu tất các menu của các Button đêu ẩn
@@ -1143,11 +1095,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		return squareCovedList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameBoard.GameState#changeState(com.btl.GameBoard.GameState)
-	 */
 	@Override
 	public void changeState(GameState state) {
 		parent.removeMouseMotionListener(this);
@@ -1155,11 +1102,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	}
 
-	/**
-	 * Gets the parent.
-	 * 
-	 * @return the parent
-	 */
 	public GamePanel getParent() {
 		// TODO Auto-generated method stub
 		return parent;

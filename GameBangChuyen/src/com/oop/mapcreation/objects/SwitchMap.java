@@ -6,26 +6,27 @@ import java.awt.Point;
 import java.awt.Polygon;
 
 import com.oop.gamepanel.Drawable;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
+import com.oop.model.Helper;
 import com.oop.model.ModelSwitch;
 
+// TODO: Auto-generated Javadoc
 /**
- * class n?�? l?�?đối tượng switch trong map vẽ, được kế thừa từ ModelSwitch nó
- * hiển th?�?trên hình vẽ ô vuông hiển th?�?cho Switch, ô vuông hiển th?�?hướng
+ * class này là đối tượng switch trong map vẽ, được kế thừa từ ModelSwitch nó
+ * hiển thị trên hình vẽ ô vuông hiển thị cho Switch, ô vuông hiển thị hướng
  * hiện thời của switch.
  * 
  * @author mai tien khai
  */
 public class SwitchMap extends ModelSwitch implements Drawable {
 
-	/** hiện th?�?khi m?�?switch không đi tới một terminal n?�?. */
+	/** hiện thị khi mà switch không đi tới một terminal nào. */
 	public final Color WRONG_COLOR = Color.PINK;
 
-	/** m?�? của ô hiển th?�? */
+	/** màu của ô hiển thị. */
 	private Color switchColor = Color.orange;
 
-	/** m?�? hiển th?�? */
+	/** màu hiển thị. */
 	private Color renderColor;
 
 	/** chiều cao logic ô switch. */
@@ -35,20 +36,20 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	private int width;
 
 	/**
-	 * dùng đ�?kiểm tra khi box đi theo switch n?�? có đi mãi không dừng hay
+	 * dùng để kiểm tra khi box đi theo switch này có đi mãi không dừng hay
 	 * không.
 	 */
 	private boolean infinity;
 
 	/**
-	 * H?�? khởi tạo đối tượng n?�?.
+	 * Hàm khởi tạo đối tượng này.
 	 * 
 	 * @param p
-	 *            - v?�?trí ô click chuột v?�?
+	 *            - vị trí ô click chuột vào
 	 * @param width
-	 *            - chiều rộng logic ô hiển th?�?
+	 *            - chiều rộng logic ô hiển thị
 	 * @param height
-	 *            - chiều cao logic ô hiển th?�?
+	 *            - chiều cao logic ô hiển thị
 	 */
 	public SwitchMap(Point p, int width, int height) {
 		super(p);
@@ -63,9 +64,6 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		if (!infinity)
@@ -74,7 +72,7 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 			g.setColor(WRONG_COLOR);
 		g.fillPolygon(Helper.polygon(this.position, width, height));
 
-		// Point realPosition = ConversionFunction.logicToReal(position);
+		// Point realPosition = Helper.logicToReal(position);
 		Double realSquareSide = (double) width * 2 / (Math.sqrt(5));
 		int side = realSquareSide.intValue();
 		// Point topLeft = new Point(realPosition.x - side,realPosition.y);
@@ -161,9 +159,6 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
 	@Override
 	public boolean contains(Point p) {
 
@@ -177,7 +172,7 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	}
 
 	/**
-	 * đặt m?�? ?�?trạng thái mặc định.
+	 * đặt màu ở trạng thái mặc định.
 	 */
 	public void setDefaultColor() {
 		renderColor = switchColor;

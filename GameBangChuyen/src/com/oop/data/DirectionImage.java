@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp DirectionImage. Cung cấp ảnh cho các đối tượng PlaySwitch, PlaySquare,
  * PlayFactory, PlayTerminal

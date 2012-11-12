@@ -12,42 +12,42 @@ import com.oop.model.ModelObject;
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
- * class n?�? l?�?abtract class cha của tất cả các class của các đối tượng hình
- * ảnh hiển th?�?ra m?�? hình class n?�? định nghĩa tất cả các phương thức
- * (abstract method) m?�?các đối tượng vẽ cấn thực thi đ�?có th?�?hiển ra m?�? hình
- * vẽ tất cả các class con như TreeMap(đ�?vẽ cây ),TerminalIcon (đ�?vẽ
- * terminal)... đều phải extends class n?�?
+ * class này là abtract class cha của tất cả các class của các đối tượng hình
+ * ảnh hiển thị ra màn hình class này định nghĩa tất cả các phương thức
+ * (abstract method) mà các đối tượng vẽ cấn thực thi để có thể hiển ra màn hình
+ * vẽ tất cả các class con như TreeMap(để vẽ cây ),TerminalIcon (để vẽ
+ * terminal)... đều phải extends class này
  * 
  * @author mai tien khai
  * 
  */
 public abstract class ItemMap implements Drawable, ModelObject {
 
-	/** điểm gần nhất xo với mắt nhìn v?�? lưới ô vuông. */
+	/** điểm gần nhất xo với mắt nhìn vào lưới ô vuông. */
 	protected Point nearestPoint;
 
-	/** điểm đầu v?�? cho đối tượng vẽ. */
+	/** điểm đầu vào cho đối tượng vẽ. */
 	protected Point position;
 
 	/**
-	 * v?�?trí góc trái trên cùng đ�?đặt ảnh v?�? của đối tượng hiển th?�?trên m?�?
+	 * vị trí góc trái trên cùng để đặt ảnh vào của đối tượng hiển thị trên màn
 	 * hình.
 	 */
 	protected Point topLeftPoint;
 
-	/** anh cần vẽ ra m?�? hình. */
+	/** anh cần vẽ ra màn hình. */
 	protected BufferedImage image;
 
 	/** chiều cao của ảnh cần vẽ. */
 	protected int height;
 
-	/** chiều rộng của ảnh cần vẽ ra m?�? hình. */
+	/** chiều rộng của ảnh cần vẽ ra màn hình. */
 	protected int width;
 
-	/** cạnh lưới ô vuông của bản đ�?cần vẽ. */
+	/** cạnh lưới ô vuông của bản đồ cần vẽ. */
 	protected int side;
 
-	/** biến kiểm tra xem có th?�?vẽ với v?�?trí đầu v?�? position hay không. */
+	/** biến kiểm tra xem có thể vẽ với vị trí đầu vào position hay không. */
 	protected boolean isValid;
 	/** loại của ảnh vẽ ra, ví dụ : cây, ô vuông, terminal ... */
 	protected int type;
@@ -55,18 +55,18 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	/** id của ảnh vẽ ra. */
 	protected int imageId;
 
-	/** M?�? hiển th?�?v?�?trí n?�? không được phép vẽ ảnh. */
+	/** Màu hiển thị vị trí này không được phép vẽ ảnh. */
 	protected final Color INVALID_COLOR = new Color(255, 0, 0, 150);
 
 	/**
-	 * H?�? khởi tạo đối tượng.
+	 * Hàm khởi tạo đối tượng.
 	 * 
 	 * @param position
-	 *            - điểm đầu v?�?(click chuột).
+	 *            - điểm đầu vào(click chuột).
 	 * @param side
 	 *            - cạnh lưới ô vuông của map đang vẽ.
 	 * @param image
-	 *            - ảnh hiển th?�?
+	 *            - ảnh hiển thị.
 	 */
 	public ItemMap(Point position, int side, BufferedImage image) {
 		this.position = position;
@@ -82,7 +82,7 @@ public abstract class ItemMap implements Drawable, ModelObject {
 
 	/**
 	 * tính kích thước tương ứng với size của cạnh ô vuông trong lưới ô vuông,
-	 * giả sử cạnh chuẩn l?�?19.
+	 * giả sử cạnh chuẩn là 19.
 	 */
 	private void calculateImageDimension() {
 		Double tempHeight = (double) side * image.getHeight(null) / 19;
@@ -91,29 +91,20 @@ public abstract class ItemMap implements Drawable, ModelObject {
 		width = tempWidth.intValue();
 	}
 
-	/**
-	 * tính điểm góc trái trên cùng đ�?vẽ ảnh.
-	 */
+	/** tính điểm góc trái trên cùng để vẽ ảnh. */
 	protected abstract void calculateTopLeft();
 
-	/**
-	 * tính v?�?trí ô vuông gần mắt nhất nhìn từ ảnh.
-	 */
+	/** tính vị trí ô vuông gần mắt nhất nhìn từ ảnh. */
 	protected abstract void calculateNearestPoint();
 
 	/** xác định loại ảnh cần vẽ : tree, factory... */
 	protected abstract void identifyImageType();
 
-	/**
-	 * tính id của ảnh.
-	 * 
-	 * @param map
-	 *            - map đang vẽ
-	 */
+	/** Tính xem vị trí này có thể đặt ảnh hay không */
 	public abstract void calculateValidation(MapCreation map);
 
 	/**
-	 * phương thức cho việc vẽ ảnh ra m?�? hình.
+	 * phương thức cho việc vẽ ảnh ra màn hình.
 	 * 
 	 * @param g
 	 *            - đối tượng graphics
@@ -136,14 +127,11 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
 	@Override
 	public abstract boolean contains(Point p);
 
 	/**
-	 * tính id của ảnh từ ảnh nhập v?�?.
+	 * tính id của ảnh từ ảnh nhập vào.
 	 */
 	protected void calculateImageId() {
 		imageId = ItemImage.getId(image);
@@ -152,9 +140,6 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.Model.ModelObject#getPosition()
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.Model.ModelObject#getPosition()
 	 */
 	@Override

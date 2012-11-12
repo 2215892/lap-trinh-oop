@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 
 import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp SaveFile. Quản lý việc lưu, nạp save file, đọc thông tin, ghi thông tin
  * từ save file. Luôn ch�?có một đối tượng SaveFile.

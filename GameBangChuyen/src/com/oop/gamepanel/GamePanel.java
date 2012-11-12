@@ -14,10 +14,10 @@ public class GamePanel extends JPanel {
 
 	/** The Constant WIDTH. */
 	public static final int WIDTH = 1;
-	
+
 	/** The width. */
 	public int width = 685;
-	
+
 	/** The height. */
 	public int height = 485;
 
@@ -36,11 +36,6 @@ public class GamePanel extends JPanel {
 
 	private GameState currentState = null;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

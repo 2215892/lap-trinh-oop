@@ -9,19 +9,20 @@ import com.oop.model.Helper;
 import com.oop.model.ModelFactory;
 import com.oop.model.ModelObject;
 
+// TODO: Auto-generated Javadoc
 /**
- * class n?�? l?�?đối tượng factory trong map vẽ, được kế thừa từ ModelFactory nó
- * hiển th?�?trên hình vẽ ô vuông hiển th?�?cho Factory, khi chơi game box chạy ra
- * từ ô n?�?.
+ * class này là đối tượng factory trong map vẽ, được kế thừa từ ModelFactory nó
+ * hiển thị trên hình vẽ ô vuông hiển thị cho Factory, khi chơi game box chạy ra
+ * từ ô này.
  * 
  * @author mai tien khai
  */
 public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 
-	/** m?�? của ô factory không có switch đi ra. */
+	/** màu của ô factory không có switch đi ra. */
 	public final Color WRONG_COLOR = Color.pink;
 
-	/** m?�? hiển thi ô factory trên lưới ô vuông. */
+	/** màu hiển thi ô factory trên lưới ô vuông. */
 	private Color factoryColor = Color.black;
 
 	/** chiều cao của ô vuông Factory. */
@@ -34,14 +35,14 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	private boolean outlet;
 
 	/**
-	 * H?�? khởi tạo đối tượng n?�?.
+	 * Hàm khởi tạo đối tượng này.
 	 * 
 	 * @param p
-	 *            - v?�?trí ô click chuột v?�?
+	 *            - vị trí ô click chuột vào
 	 * @param width
-	 *            - chiều rộng logic ô hiển th?�?
+	 *            - chiều rộng logic ô hiển thị
 	 * @param height
-	 *            - chiều cao logic ô hiển th?�?
+	 *            - chiều cao logic ô hiển thị
 	 */
 	public FactoryMap(Point p, int width, int height) {
 		super(p);
@@ -53,9 +54,6 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -70,9 +68,6 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

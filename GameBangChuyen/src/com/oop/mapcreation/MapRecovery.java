@@ -1,19 +1,20 @@
-package com.oop.model;
+package com.oop.mapcreation;
 
 import java.awt.Point;
 
 import com.oop.gamepanel.DrawLayer;
 import com.oop.gamepanel.Drawable;
-import com.oop.mapcreation.MapCreation;
 import com.oop.mapcreation.objects.FactoryMap;
 import com.oop.mapcreation.objects.SwitchMap;
+import com.oop.model.AuxiliaryFunction;
+import com.oop.model.Direction;
 
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
- * class n�? thực hiện cho việc khôi phục lại map đầy đủ từ map đã save phục vụ
- * cho việc sửa Map đã lưu vì khi lưu lại Map đã b�?b�?đi các switch trung gian.
+ * class này thực hiện cho việc khôi phục lại map đầy đủ từ map đã save phục vụ
+ * cho việc sửa Map đã lưu vì khi lưu lại Map đã bị bỏ đi các switch trung gian.
  * 
  * @author mai tien khai
  */
@@ -34,11 +35,10 @@ public class MapRecovery {
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
 
-	/** The map. */
 	MapCreation map;
 
 	/**
-	 * H�? khởi tạo đối tượng.
+	 * Hàm khởi tạo đối tượng.
 	 * 
 	 * @param switchLayer
 	 *            - switchLayer load được từ map muốn edit
@@ -47,7 +47,7 @@ public class MapRecovery {
 	 * @param terminalLayer
 	 *            - terminallayer load được từ map muốn edit
 	 * @param map
-	 *            - map đ�?vẽ
+	 *            - map để vẽ
 	 */
 	private MapRecovery(DrawLayer switchLayer, DrawLayer factoryLayer,
 			DrawLayer terminalLayer, MapCreation map) {
@@ -60,7 +60,7 @@ public class MapRecovery {
 	}
 
 	/**
-	 * H�? khôi phục lại map.
+	 * Hàm khôi phục lại map.
 	 */
 	public void recoverFullMap() {
 		/* khoi tao cac bien check */
@@ -79,10 +79,10 @@ public class MapRecovery {
 	}
 
 	/**
-	 * Thực hiện khôi phục từ nh�?máy.
+	 * Thực hiện khôi phục từ nhà máy.
 	 * 
 	 * @param f
-	 *            - nh�?máy xuất phát
+	 *            - nhà máy xuất phát
 	 */
 	private void recoverFromFactory(FactoryMap f) {
 		/** temp la o ke voi factory theo huong factory */
@@ -155,7 +155,7 @@ public class MapRecovery {
 	 * Tạo một neighbor switch ứng với hướng xác định.
 	 * 
 	 * @param p
-	 *            - v�?trí của ô cần tạo neighbor
+	 *            - vị trí của ô cần tạo neighbor
 	 * @param d
 	 *            - hướng tạo neighbor
 	 * @return switch cần tạo
@@ -175,16 +175,20 @@ public class MapRecovery {
 	}
 
 	/**
-	 * H�? khởi tạo tĩnh cho đổi tượng n�?.
+	 * Hàm khởi tạo tĩnh cho đổi tượng này.
 	 * 
 	 * @param switchLayer
-	 *            - truyền v�? h�? khởi tạo
+	 *            - truyền vào hàm khởi tạo
 	 * @param factoryLayer
-	 *            - truyền v�? h�? khởi tạo
+	 *            - truyền vào hàm khởi tạo
 	 * @param terminalLayer
-	 *            - truyền v�? h�? khởi tạo
+	 *            - truyền vào hàm khởi tạo
+	 * @param width
+	 *            the width - truyền vào hàm khởi tạo
+	 * @param height
+	 *            the height - truyền vào hàm khởi tạo
 	 * @param map
-	 *            the map - truyền v�? h�? khởi tạo
+	 *            the map - truyền vào hàm khởi tạo
 	 * @return map đối tượng khởi tạo
 	 */
 	public static MapRecovery createMapRecovery(DrawLayer switchLayer,

@@ -10,9 +10,9 @@ import com.oop.model.ModelTerminal;
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
- * class n?�? l?�?đối tượng terminal trong map vẽ, được kế thừa từ ModelTerminal
- * nó hiển th?�?trên hình vẽ ô vuông hiển th?�?cho termional, khi chơi game box
- * chạy v?�? ô n?�? sẽ được điểm.
+ * class này là đối tượng terminal trong map vẽ, được kế thừa từ ModelTerminal
+ * nó hiển thị trên hình vẽ ô vuông hiển thị cho termional, khi chơi game box
+ * chạy vào ô này sẽ được điểm.
  * 
  * @author mai tien khai
  * 
@@ -22,7 +22,7 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	/** The no box. */
 	private final int NO_BOX = 2;
 
-	/** m?�? hiển th?�?của ô vuông terminl. */
+	/** màu hiển thị của ô vuông terminl. */
 	public final Color terminalColor = Color.yellow;
 
 	/** The no box. */
@@ -32,10 +32,10 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	private int side;
 
 	/**
-	 * H?�? khởi tạo đối tượng.
+	 * Hàm khởi tạo đối tượng.
 	 * 
 	 * @param p
-	 *            - v?�?trí ô hiển th?�?
+	 *            - vị trí ô hiển thị
 	 * @param side
 	 *            - cạnh lưới ô vuông
 	 */
@@ -50,9 +50,6 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(terminalColor);
@@ -62,9 +59,6 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

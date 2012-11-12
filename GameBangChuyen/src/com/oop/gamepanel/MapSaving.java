@@ -31,7 +31,7 @@ import com.oop.model.Direction;
 // TODO: Auto - generated Javadoc
 
 /**
- * class n?�? phục vụ cho việc lưu trữ thông tin map đang vẽ, thực hiện các thuật
+ * class n?�? phục vụ cho việc lưu trữ thông tin map đang vẽ, thực hiện các thuật
  * toán rút gọn thông tin lưu trữ.
  * 
  * @author mai tien khai
@@ -53,7 +53,7 @@ public class MapSaving {
 	/** The item map layer của map. */
 	private DrawLayer itemMapLayer;
 
-	/** Đơn v?�?(= side/SQUARE_SIDE). */
+	/** Đơn v?�?(= side/SQUARE_SIDE). */
 	private int unit;
 
 	/** đối tượng đ�?chọn đường dẫn cho file map. */
@@ -62,7 +62,7 @@ public class MapSaving {
 	/** file đ�?save. */
 	private File fileSave;
 
-	/** The terminal trap của map ( khi box v?�? đây sẽ mất điểm). */
+	/** The terminal trap của map ( khi box v?�? đây sẽ mất điểm). */
 	private ArrayList<TerminalMap> terminalTrap;
 
 	/** Map cần lưu. */
@@ -100,7 +100,7 @@ public class MapSaving {
 	}
 
 	/**
-	 * thực hiện lưu các trap(l?�?các switch không có hướng).
+	 * thực hiện lưu các trap(l?�?các switch không có hướng).
 	 */
 	private void handleTrap() {
 		for (Drawable i : switchLayer.getListDrawable()) {
@@ -116,7 +116,7 @@ public class MapSaving {
 	}
 
 	/**
-	 * thực hiện việc lưu v?�? file.
+	 * thực hiện việc lưu v?�? file.
 	 * 
 	 * @throws TransformerException
 	 *             the transformer exception
@@ -140,7 +140,7 @@ public class MapSaving {
 				DocumentBuilder docBuilder;
 				docBuilder = docFactory.newDocumentBuilder();
 				// root elements
-				/* thêm thẻ SaveFile v?�? */
+				/* thêm thẻ SaveFile v?�? */
 
 				Document doc = docBuilder.newDocument();
 				Element map = doc.createElement("map");

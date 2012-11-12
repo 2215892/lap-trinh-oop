@@ -153,6 +153,8 @@ public abstract class ButtonImage {
 	/** The Constant ACTIVE_EDIT_BUTTON_IMAGE. */
 	public final static BufferedImage ACTIVE_EDIT_BUTTON_IMAGE = Helper
 			.loadImage(RES_DIR + "ACTIVE_EDIT_BUTTON_IMAGE.png");
+	
+	/** The Constant NEW_BUTTON_IMAGE. */
 	public final static BufferedImage NEW_BUTTON_IMAGE = Helper
 			.loadImage(RES_DIR+"NEW_BUTTON_IMAGE.jpg");
 }

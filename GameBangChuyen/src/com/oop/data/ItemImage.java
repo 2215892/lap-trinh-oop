@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.oop.model.Helper;
 import com.oop.model.Direction;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp ItemImage. Cung cấp hình ảnh v�?các item
  */
@@ -294,7 +295,7 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * Tính các ô vuông b�?phủ khi chèn item v�? map
+	 * Tính các ô vuông b�?phủ khi chèn item v�? map.
 	 * 
 	 * @param terminalImage
 	 *            ảnh terminal cần chèn

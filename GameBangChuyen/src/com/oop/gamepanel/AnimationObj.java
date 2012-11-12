@@ -19,11 +19,6 @@ public abstract class AnimationObj implements Drawable {
 		return this.isRunning;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
