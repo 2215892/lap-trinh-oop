@@ -14,12 +14,11 @@ import com.oop.model.ModelTerminal;
 import com.oop.model.RandomEnum;
 import com.oop.play.TerminalColor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayTerminal.
  */
 public class PlayTerminal extends ModelTerminal implements Drawable {
-	
+
 	/** The Constant SIZE. */
 	public static final int SIZE = PlaySquare.SIZE;
 	private static BufferedImage picture = DirectionImage.SQUARE;;
@@ -98,21 +97,17 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		}
 
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
+
 	@Override
 	public boolean contains(Point point) {
-		Point logicCoordinate = Helper.locationToPosition(point,
-				SIZE);
+		Point logicCoordinate = Helper.locationToPosition(point, SIZE);
 
 		if (logicCoordinate.equals(getPosition()))
 			return true;
 
 		return false;
 	}
-	
+
 	/**
 	 * Gets the color.
 	 * 
@@ -131,14 +126,10 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		return isWaiting;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 
-		Point coordinate = Helper.positionToLocation(getPosition(),
-				SIZE);
+		Point coordinate = Helper.positionToLocation(getPosition(), SIZE);
 		coordinate.x -= 8;
 		coordinate.y -= (SIZE / 2 + 9);
 

@@ -2,7 +2,6 @@ package com.oop.gamepanel;
 
 import java.awt.Graphics;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnimationObj.
  */
@@ -19,6 +18,11 @@ public abstract class AnimationObj implements Drawable {
 		return this.isRunning;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub

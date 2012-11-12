@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GamePanel.
  */
@@ -36,6 +35,11 @@ public class GamePanel extends JPanel {
 
 	private GameState currentState = null;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

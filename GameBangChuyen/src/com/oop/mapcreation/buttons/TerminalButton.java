@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 
 import com.oop.mapcreation.TerminalIcon;
 import com.oop.mapcreation.objects.ItemMap;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 
 /**
  * class này là class cho button để vẽ terminal, đây là một concrete class khi
@@ -37,6 +35,13 @@ public class TerminalButton extends ButtonForDraw {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ButtonForDraw#generateItem(java.awt.Point, int)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForDraw#generateItem(java.awt.Point,
+	 * int)
 	 */
 	@Override
 	public ItemMap generateItem(Point position, int side) {

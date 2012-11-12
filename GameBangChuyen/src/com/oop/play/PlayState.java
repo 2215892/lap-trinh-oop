@@ -26,9 +26,9 @@ import com.oop.gamepanel.GamePanel;
 import com.oop.gamepanel.GameState;
 import com.oop.gamepanel.Layer;
 import com.oop.menu.MapSelect;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
 import com.oop.model.GraphNode;
+import com.oop.model.Helper;
 import com.oop.model.ModelFactory;
 import com.oop.model.ModelItem;
 import com.oop.model.ModelMap;
@@ -42,7 +42,6 @@ import com.oop.play.objects.PlaySquare;
 import com.oop.play.objects.PlaySwitch;
 import com.oop.play.objects.PlayTerminal;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayState.
  */
@@ -89,7 +88,7 @@ public class PlayState extends GameState {
 
 	/** The rnd. */
 	Random rnd = new Random();
-	
+
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -159,10 +158,11 @@ public class PlayState extends GameState {
 		}, 0, TIMER_DELAY);
 
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
 	public void gameRender(Graphics g) {
@@ -228,6 +228,7 @@ public class PlayState extends GameState {
 		// khong dung den
 
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -249,6 +250,7 @@ public class PlayState extends GameState {
 		// khong dung den
 
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -288,8 +290,8 @@ public class PlayState extends GameState {
 		} else if (clicked == btnEndGame) {
 			parent.setState(lastState);
 		} else if (clicked == btnNextLevel) {
-			ModelMap map = ModelMap.createMap(Helper
-					.getCurrentDirectory() + "map//" + nextId);
+			ModelMap map = ModelMap.createMap(Helper.getCurrentDirectory()
+					+ "map//" + nextId);
 			if (map != null) {
 				int id = nextId;
 				if (nextId < MapSelect.LEVEL_COUNT)
@@ -367,10 +369,11 @@ public class PlayState extends GameState {
 		// khong dung den
 
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#update()
+	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {

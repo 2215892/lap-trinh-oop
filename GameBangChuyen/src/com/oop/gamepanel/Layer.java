@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Layer.
  */
@@ -80,7 +79,7 @@ public class Layer {
 		} else
 			return null;
 	}
-	
+
 	/**
 	 * Gets the list drawable.
 	 * 

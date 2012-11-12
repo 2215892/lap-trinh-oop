@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 
 import com.oop.mapcreation.FactoryIcon;
 import com.oop.mapcreation.objects.ItemMap;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 
 /**
  * class này là class cho button để vẽ factory, đây là một concrete class khi ấn
@@ -34,12 +32,11 @@ public class FactoryButton extends ButtonForDraw {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ButtonForDraw#generateItem(java.awt.Point, int)
-	 */
-	/* (non-Javadoc)
-	 * @see com.oop.mapcreation.buttons.ButtonForDraw#generateItem(java.awt.Point, int)
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForDraw#generateItem(java.awt.Point,
+	 * int)
 	 */
 	@Override
 	public ItemMap generateItem(Point position, int side) {

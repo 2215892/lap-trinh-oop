@@ -3,7 +3,6 @@ package com.oop.model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ModelSwitch.
  */
@@ -102,8 +101,10 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		return listDirection;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.Model.ModelObject#getPosition()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
 	 */
 	@Override
 	public Point getPosition() {

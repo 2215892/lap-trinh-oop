@@ -4,75 +4,74 @@ import java.awt.image.BufferedImage;
 
 import com.oop.model.Helper;
 
-// TODO: Auto-generated Javadoc
 /**
  * Lớp ButtonImage. Cung cấp ảnh cho các nút.
  */
 public abstract class ButtonImage {
 
 	/** The Constant RES_DIR. */
-	public final static String RES_DIR = Helper
-			.getCurrentDirectory() + "res\\button\\";
+	public final static String RES_DIR = Helper.getCurrentDirectory()
+			+ "res\\button\\";
 
 	/** The Constant PAUSE_BUTTON. */
-	public final static BufferedImage PAUSE_BUTTON = Helper
-			.loadImage(RES_DIR + "PAUSE_BUTTON.png");
+	public final static BufferedImage PAUSE_BUTTON = Helper.loadImage(RES_DIR
+			+ "PAUSE_BUTTON.png");
 
 	/** The Constant BTN_LEVEL. */
-	public final static BufferedImage BTN_LEVEL = Helper
-			.loadImage(RES_DIR + "BTN_LEVEL.png");
+	public final static BufferedImage BTN_LEVEL = Helper.loadImage(RES_DIR
+			+ "BTN_LEVEL.png");
 
 	/** The Constant BTN_BACK. */
-	public final static BufferedImage BTN_BACK = Helper
-			.loadImage(RES_DIR + "BTN_BACK.png");
+	public final static BufferedImage BTN_BACK = Helper.loadImage(RES_DIR
+			+ "BTN_BACK.png");
 
 	/** The Constant BTN_LEVEL_LOCK. */
-	public final static BufferedImage BTN_LEVEL_LOCK = Helper
-			.loadImage(RES_DIR + "BTN_LEVEL_LOCK.png");
+	public final static BufferedImage BTN_LEVEL_LOCK = Helper.loadImage(RES_DIR
+			+ "BTN_LEVEL_LOCK.png");
 
 	/** The Constant BTN_NEXT_LEVEL. */
-	public final static BufferedImage BTN_NEXT_LEVEL = Helper
-			.loadImage(RES_DIR + "BTN_NEXT_LEVEL.png");
+	public final static BufferedImage BTN_NEXT_LEVEL = Helper.loadImage(RES_DIR
+			+ "BTN_NEXT_LEVEL.png");
 
 	/** The Constant BTN_REPLAY. */
-	public final static BufferedImage BTN_REPLAY = Helper
-			.loadImage(RES_DIR + "BTN_REPLAY.png");
+	public final static BufferedImage BTN_REPLAY = Helper.loadImage(RES_DIR
+			+ "BTN_REPLAY.png");
 
 	/** The Constant BTN_START_GAME. */
-	public final static BufferedImage BTN_START_GAME = Helper
-			.loadImage(RES_DIR + "BTN_START_GAME.png");
+	public final static BufferedImage BTN_START_GAME = Helper.loadImage(RES_DIR
+			+ "BTN_START_GAME.png");
 
 	/** The Constant BTN_END_GAME. */
-	public final static BufferedImage BTN_END_GAME = Helper
-			.loadImage(RES_DIR + "BTN_END_GAME.png");
+	public final static BufferedImage BTN_END_GAME = Helper.loadImage(RES_DIR
+			+ "BTN_END_GAME.png");
 
 	/** The Constant BTN_CAMPAIGN. */
-	public final static BufferedImage BTN_CAMPAIGN = Helper
-			.loadImage(RES_DIR + "BTN_CAMPAIGN.png");
+	public final static BufferedImage BTN_CAMPAIGN = Helper.loadImage(RES_DIR
+			+ "BTN_CAMPAIGN.png");
 
 	/** The Constant BTN_ABOUT. */
-	public final static BufferedImage BTN_ABOUT = Helper
-			.loadImage(RES_DIR + "BTN_ABOUT.png");
+	public final static BufferedImage BTN_ABOUT = Helper.loadImage(RES_DIR
+			+ "BTN_ABOUT.png");
 
 	/** The Constant BTN_CONTINUE_GAME. */
 	public final static BufferedImage BTN_CONTINUE_GAME = Helper
 			.loadImage(RES_DIR + "BTN_CONTINUE_GAME.png");
 
 	/** The Constant BTN_CREATE_MAP. */
-	public final static BufferedImage BTN_CREATE_MAP = Helper
-			.loadImage(RES_DIR + "BTN_CREATE_MAP.png");
+	public final static BufferedImage BTN_CREATE_MAP = Helper.loadImage(RES_DIR
+			+ "BTN_CREATE_MAP.png");
 
 	/** The Constant BTN_CUSTOM_GAME. */
 	public final static BufferedImage BTN_CUSTOM_GAME = Helper
 			.loadImage(RES_DIR + "BTN_CUSTOM_GAME.png");
 
 	/** The Constant BTN_HELP. */
-	public final static BufferedImage BTN_HELP = Helper
-			.loadImage(RES_DIR + "BTN_HELP.png");
+	public final static BufferedImage BTN_HELP = Helper.loadImage(RES_DIR
+			+ "BTN_HELP.png");
 
 	/** The Constant BTN_HIGH_SCORE. */
-	public final static BufferedImage BTN_HIGH_SCORE = Helper
-			.loadImage(RES_DIR + "BTN_HIGH_SCORE.png");
+	public final static BufferedImage BTN_HIGH_SCORE = Helper.loadImage(RES_DIR
+			+ "BTN_HIGH_SCORE.png");
 
 	/** The Constant FACTORY_BUTTON_IMAGE. */
 	public final static BufferedImage FACTORY_BUTTON_IMAGE = Helper
@@ -153,8 +152,8 @@ public abstract class ButtonImage {
 	/** The Constant ACTIVE_EDIT_BUTTON_IMAGE. */
 	public final static BufferedImage ACTIVE_EDIT_BUTTON_IMAGE = Helper
 			.loadImage(RES_DIR + "ACTIVE_EDIT_BUTTON_IMAGE.png");
-	
+
 	/** The Constant NEW_BUTTON_IMAGE. */
 	public final static BufferedImage NEW_BUTTON_IMAGE = Helper
-			.loadImage(RES_DIR+"NEW_BUTTON_IMAGE.jpg");
+			.loadImage(RES_DIR + "NEW_BUTTON_IMAGE.jpg");
 }

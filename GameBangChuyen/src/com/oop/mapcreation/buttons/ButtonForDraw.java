@@ -8,7 +8,6 @@ import com.oop.gamepanel.Layer;
 import com.oop.mapcreation.MenuItem;
 import com.oop.mapcreation.objects.ItemMap;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này mục đich tạo ra các đối tượng button phục vụ cho việc vẽ ra màn
  * hình ví dụ như ấn vào button này để hiện ra các cây rồi chọn câu để vẽ..

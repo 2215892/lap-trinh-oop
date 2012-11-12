@@ -3,13 +3,12 @@ package com.oop.model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GraphNode.
  */
 public abstract class GraphNode implements ModelObject {
 	private ArrayList<ModelObject> listNeighbor = new ArrayList<ModelObject>();
-	
+
 	/** The flag. */
 	protected int flag = 0;
 

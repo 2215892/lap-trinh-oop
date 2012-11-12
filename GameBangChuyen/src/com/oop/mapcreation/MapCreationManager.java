@@ -20,8 +20,7 @@ import com.oop.mapcreation.buttons.SaveButton;
 import com.oop.mapcreation.buttons.SquareButton;
 import com.oop.mapcreation.buttons.TerminalButton;
 import com.oop.mapcreation.buttons.TreeButton;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
+
 /**
  * class này mục đích cung cấp các hằng số và các đối tượng khởi tạo cho class
  * MapCreation ví dụ như: vị trí của các Button, các mã điều khiển của Button...
@@ -64,7 +63,7 @@ public class MapCreationManager {
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
 
-	/** Mã điều khiển nút ve một map mới */
+	/** Mã điều khiển nút ve một map mới. */
 	public static final int NEW = 10;
 	/** The Constant SQUARE_SIDE. */
 	public static final int SQUARE_SIDE = 18;
@@ -111,6 +110,9 @@ public class MapCreationManager {
 
 	/**
 	 * Hàm khởi tạo đối tượng MapCreationManager.
+	 * 
+	 * @param parent
+	 *            the parent
 	 */
 	public MapCreationManager(GamePanel parent) {
 		itemListLayer = new DrawLayer[4];

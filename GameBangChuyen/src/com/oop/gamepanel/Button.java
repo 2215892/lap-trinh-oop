@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Button.
  */
@@ -62,6 +61,11 @@ public class Button implements Drawable {
 		g.dispose();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
+	 */
 	@Override
 	public boolean contains(Point p) {
 
@@ -73,6 +77,11 @@ public class Button implements Drawable {
 			return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (img != null)

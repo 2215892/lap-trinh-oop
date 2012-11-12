@@ -11,11 +11,10 @@ import java.util.ArrayList;
 
 import com.oop.data.DirectionImage;
 import com.oop.gamepanel.Drawable;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
+import com.oop.model.Helper;
 import com.oop.model.ModelSwitch;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlaySwitch.
  */
@@ -27,7 +26,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public final static int SIZE = 16;
 	private final static int HEIGHT = 50;
 	private final static int WIDTH = 60;
-	
+
 	/** The picture. */
 	public BufferedImage picture = null;
 	private BufferedImage buffer = null;
@@ -54,7 +53,7 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public PlaySwitch(Point p) {
 		super(p);
 	}
-	
+
 	/**
 	 * Adds the input.
 	 * 
@@ -64,16 +63,16 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public void addInput(final Direction d) {
 		this.input.add(d);
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point point) {
 
-		Point logicCoordinate = Helper.locationToPosition(point,
-				SIZE);
+		Point logicCoordinate = Helper.locationToPosition(point, SIZE);
 
 		if (logicCoordinate.equals(getPosition()))
 			return true;
@@ -93,12 +92,11 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
-		Point coordinate = Helper.positionToLocation(getPosition(),
-				SIZE);
+		Point coordinate = Helper.positionToLocation(getPosition(), SIZE);
 
 		g.drawImage(this.buffer, coordinate.x - 13, coordinate.y - 13 - SIZE
 				/ 2, null);
@@ -379,18 +377,14 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 					return DirectionImage.ALEFT;
 			case RIGHT :
 				if (singleDirection)
-					return Helper
-							.flipHorizontally(DirectionImage.AUP1);
+					return Helper.flipHorizontally(DirectionImage.AUP1);
 				else
-					return Helper
-							.flipHorizontally(DirectionImage.AUP);
+					return Helper.flipHorizontally(DirectionImage.AUP);
 			case DOWN :
 				if (singleDirection)
-					return Helper
-							.flipHorizontally(DirectionImage.ALEFT1);
+					return Helper.flipHorizontally(DirectionImage.ALEFT1);
 				else
-					return Helper
-							.flipHorizontally(DirectionImage.ALEFT);
+					return Helper.flipHorizontally(DirectionImage.ALEFT);
 
 			default :
 				return null;

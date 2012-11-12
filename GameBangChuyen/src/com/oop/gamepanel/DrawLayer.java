@@ -6,7 +6,6 @@ import java.util.Comparator;
 
 import com.oop.model.ModelObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DrawLayer.
  */

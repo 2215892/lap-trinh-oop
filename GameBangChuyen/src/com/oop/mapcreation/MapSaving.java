@@ -1,4 +1,4 @@
-package com.oop.gamepanel;
+package com.oop.mapcreation;
 
 import java.awt.Point;
 import java.io.File;
@@ -18,20 +18,18 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.oop.mapcreation.MapCreation;
+import com.oop.gamepanel.DrawLayer;
+import com.oop.gamepanel.Drawable;
 import com.oop.mapcreation.objects.FactoryMap;
 import com.oop.mapcreation.objects.ItemMap;
 import com.oop.mapcreation.objects.SwitchMap;
 import com.oop.mapcreation.objects.TerminalMap;
 import com.oop.model.AuxiliaryFunction;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
-
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
+import com.oop.model.Helper;
 
 /**
- * class n?�? phục vụ cho việc lưu trữ thông tin map đang vẽ, thực hiện các thuật
+ * class này phục vụ cho việc lưu trữ thông tin map đang vẽ, thực hiện các thuật
  * toán rút gọn thông tin lưu trữ.
  * 
  * @author mai tien khai
@@ -53,16 +51,16 @@ public class MapSaving {
 	/** The item map layer của map. */
 	private DrawLayer itemMapLayer;
 
-	/** Đơn v?�?(= side/SQUARE_SIDE). */
+	/** Đơn vị (= side/SQUARE_SIDE). */
 	private int unit;
 
-	/** đối tượng đ�?chọn đường dẫn cho file map. */
+	/** đối tượng để chọn đường dẫn cho file map. */
 	private JFileChooser chooser;
 
-	/** file đ�?save. */
+	/** file để save. */
 	private File fileSave;
 
-	/** The terminal trap của map ( khi box v?�? đây sẽ mất điểm). */
+	/** The terminal trap của map ( khi box vào đây sẽ mất điểm). */
 	private ArrayList<TerminalMap> terminalTrap;
 
 	/** Map cần lưu. */
@@ -86,8 +84,8 @@ public class MapSaving {
 		this.unit = map.getSide();
 		this.mapCreation = map;
 		chooser = new JFileChooser();
-		chooser.setCurrentDirectory(new File(Helper
-				.getCurrentDirectory() + "custom map//"));
+		chooser.setCurrentDirectory(new File(Helper.getCurrentDirectory()
+				+ "custom map//"));
 		terminalTrap = new ArrayList<TerminalMap>();
 		/* thuc hien duyet cac switch khong co huong thanh cac trap */
 		handleTrap();
@@ -100,7 +98,7 @@ public class MapSaving {
 	}
 
 	/**
-	 * thực hiện lưu các trap(l?�?các switch không có hướng).
+	 * thực hiện lưu các trap(là các switch không có hướng).
 	 */
 	private void handleTrap() {
 		for (Drawable i : switchLayer.getListDrawable()) {
@@ -116,7 +114,7 @@ public class MapSaving {
 	}
 
 	/**
-	 * thực hiện việc lưu v?�? file.
+	 * thực hiện việc lưu vào file.
 	 * 
 	 * @throws TransformerException
 	 *             the transformer exception
@@ -140,7 +138,7 @@ public class MapSaving {
 				DocumentBuilder docBuilder;
 				docBuilder = docFactory.newDocumentBuilder();
 				// root elements
-				/* thêm thẻ SaveFile v?�? */
+				/* thêm thẻ SaveFile vào */
 
 				Document doc = docBuilder.newDocument();
 				Element map = doc.createElement("map");

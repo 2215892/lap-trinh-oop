@@ -9,9 +9,6 @@ import com.oop.mapcreation.objects.SwitchMap;
 import com.oop.model.AuxiliaryFunction;
 import com.oop.model.Direction;
 
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
-
 /**
  * class này thực hiện cho việc khôi phục lại map đầy đủ từ map đã save phục vụ
  * cho việc sửa Map đã lưu vì khi lưu lại Map đã bị bỏ đi các switch trung gian.
@@ -35,6 +32,7 @@ public class MapRecovery {
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
 
+	/** The map. */
 	MapCreation map;
 
 	/**
@@ -183,10 +181,6 @@ public class MapRecovery {
 	 *            - truyền vào hàm khởi tạo
 	 * @param terminalLayer
 	 *            - truyền vào hàm khởi tạo
-	 * @param width
-	 *            the width - truyền vào hàm khởi tạo
-	 * @param height
-	 *            the height - truyền vào hàm khởi tạo
 	 * @param map
 	 *            the map - truyền vào hàm khởi tạo
 	 * @return map đối tượng khởi tạo

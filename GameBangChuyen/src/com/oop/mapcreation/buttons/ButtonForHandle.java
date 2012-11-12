@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import com.oop.mapcreation.MapCreation;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này là các class cho các button điều khiển, ví dụ xóa, quay lai,
  * save...
@@ -31,7 +30,7 @@ public abstract class ButtonForHandle extends DrawingButton {
 			BufferedImage activeImage, int controlCode) {
 		super(p, normalImage, activeImage, controlCode);
 	}
-	
+
 	/**
 	 * Chức năng của Button.
 	 * 

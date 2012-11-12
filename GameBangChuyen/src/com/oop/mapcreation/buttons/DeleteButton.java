@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import com.oop.mapcreation.MapCreation;
 import com.oop.model.AuxiliaryFunction;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DeleteButton.
  */
@@ -29,6 +28,13 @@ public class DeleteButton extends ButtonForHandle {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
+	 */
 	@Override
 	public void handle(MapCreation map) {
 		AuxiliaryFunction.handleMenuDelete(map);

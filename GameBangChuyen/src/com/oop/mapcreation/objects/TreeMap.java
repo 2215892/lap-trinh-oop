@@ -8,8 +8,6 @@ import com.oop.data.ItemImage;
 import com.oop.mapcreation.MapCreation;
 import com.oop.model.AuxiliaryFunction;
 import com.oop.model.Helper;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 
 /**
  * class này là class của các đối tượng hiển thị ảnh cây trên lưới ô vuông vẽ
@@ -38,11 +36,8 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
-	 */
-	/* (non-Javadoc)
 	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
 	 */
 	@Override
@@ -55,11 +50,8 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
-	 */
-	/* (non-Javadoc)
 	 * @see com.oop.mapcreation.objects.ItemMap#paint(java.awt.Graphics)
 	 */
 	public void paint(Graphics g) {
@@ -74,11 +66,8 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#contains(java.awt.Point)
-	 */
-	/* (non-Javadoc)
 	 * @see com.oop.mapcreation.objects.ItemMap#contains(java.awt.Point)
 	 */
 	@Override
@@ -88,11 +77,8 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
-	 */
-	/* (non-Javadoc)
 	 * @see com.oop.mapcreation.objects.ItemMap#calculateNearestPoint()
 	 */
 	@Override
@@ -101,11 +87,8 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#identifyImageType()
-	 */
-	/* (non-Javadoc)
 	 * @see com.oop.mapcreation.objects.ItemMap#identifyImageType()
 	 */
 	@Override
@@ -114,14 +97,11 @@ public class TreeMap extends ItemMap {
 	}
 
 	/*
-	 * (non - Javadoc)
+	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
-	 * )
-	 */
-	/* (non-Javadoc)
-	 * @see com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation.MapCreation)
+	 * com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation
+	 * .MapCreation)
 	 */
 	@Override
 	public void calculateValidation(MapCreation map) {

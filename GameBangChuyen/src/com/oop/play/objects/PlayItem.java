@@ -9,7 +9,6 @@ import com.oop.gamepanel.Drawable;
 import com.oop.model.Helper;
 import com.oop.model.ModelItem;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayItem.
  */
@@ -29,8 +28,10 @@ public class PlayItem extends ModelItem implements Drawable {
 		initPicture();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point point) {
@@ -38,8 +39,10 @@ public class PlayItem extends ModelItem implements Drawable {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {

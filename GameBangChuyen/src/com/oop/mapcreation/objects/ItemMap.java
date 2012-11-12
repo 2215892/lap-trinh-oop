@@ -9,8 +9,7 @@ import com.oop.data.ItemImage;
 import com.oop.gamepanel.Drawable;
 import com.oop.mapcreation.MapCreation;
 import com.oop.model.ModelObject;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
+
 /**
  * class này là abtract class cha của tất cả các class của các đối tượng hình
  * ảnh hiển thị ra màn hình class này định nghĩa tất cả các phương thức
@@ -100,7 +99,12 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	/** xác định loại ảnh cần vẽ : tree, factory... */
 	protected abstract void identifyImageType();
 
-	/** Tính xem vị trí này có thể đặt ảnh hay không */
+	/**
+	 * Tính xem vị trí này có thể đặt ảnh hay không.
+	 * 
+	 * @param map
+	 *            the map
+	 */
 	public abstract void calculateValidation(MapCreation map);
 
 	/**
@@ -127,6 +131,11 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
+	 */
 	@Override
 	public abstract boolean contains(Point p);
 
@@ -141,6 +150,11 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.Model.ModelObject#getPosition()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
 	 */
 	@Override
 	public Point getPosition() {

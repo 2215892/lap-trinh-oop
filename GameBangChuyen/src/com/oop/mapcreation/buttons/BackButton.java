@@ -27,6 +27,13 @@ public class BackButton extends ButtonForHandle {
 		super(p, normalImage, activeImage, controlCode);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
+	 */
 	@Override
 	public void handle(MapCreation map) {
 		AuxiliaryFunction.handleMenuBack(map);

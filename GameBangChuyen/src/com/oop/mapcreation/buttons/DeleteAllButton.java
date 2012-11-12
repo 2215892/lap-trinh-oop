@@ -29,6 +29,13 @@ public class DeleteAllButton extends ButtonForHandle {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
+	 */
 	@Override
 	public void handle(MapCreation map) {
 		AuxiliaryFunction.handleMenuDeleteAll(map);

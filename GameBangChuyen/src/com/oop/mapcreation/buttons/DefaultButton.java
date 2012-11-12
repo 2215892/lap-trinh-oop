@@ -27,6 +27,13 @@ public class DefaultButton extends ButtonForHandle {
 		super(p, normalImage, activeImage, controlCode);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
+	 */
 	@Override
 	public void handle(MapCreation map) {
 		// TODO Auto-generated method stub

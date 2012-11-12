@@ -9,7 +9,6 @@ import com.oop.gamepanel.Drawable;
 import com.oop.mapcreation.buttons.ButtonForDraw;
 import com.oop.mapcreation.buttons.DrawingButton;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này dùng để định nghĩa các đối tượng là một item trong menu cho các
  * button.
@@ -72,6 +71,11 @@ public class MenuItem implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (!isHidden) {
@@ -95,6 +99,11 @@ public class MenuItem implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

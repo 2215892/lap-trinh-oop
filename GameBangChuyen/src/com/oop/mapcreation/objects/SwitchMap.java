@@ -10,7 +10,6 @@ import com.oop.model.Direction;
 import com.oop.model.Helper;
 import com.oop.model.ModelSwitch;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này là đối tượng switch trong map vẽ, được kế thừa từ ModelSwitch nó
  * hiển thị trên hình vẽ ô vuông hiển thị cho Switch, ô vuông hiển thị hướng
@@ -63,6 +62,11 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -158,6 +162,11 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

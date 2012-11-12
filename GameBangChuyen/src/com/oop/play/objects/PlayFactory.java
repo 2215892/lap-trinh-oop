@@ -12,7 +12,6 @@ import com.oop.model.Helper;
 import com.oop.model.ModelFactory;
 import com.oop.play.TerminalColor;
 
-// TODO: Auto-generated Javadoc
 /**
  * A factory for creating Play objects.
  */
@@ -55,15 +54,15 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		if (terminal.getColor() != TerminalColor.DEFAULT)
 			this.listTerminals.add(terminal);
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public final boolean contains(final Point point) {
-		Point logicCoordinate = Helper.locationToPosition(point,
-				SIZE);
+		Point logicCoordinate = Helper.locationToPosition(point, SIZE);
 
 		if (logicCoordinate.equals(getPosition()))
 			return true;
@@ -103,15 +102,14 @@ public class PlayFactory extends ModelFactory implements Drawable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(final Graphics g) {
 		if (PlayFactory.picture == null) {
 			PlayFactory.picture = DirectionImage.SQUARE;
 		}
-		Point coordinate = Helper.positionToLocation(getPosition(),
-				SIZE);
+		Point coordinate = Helper.positionToLocation(getPosition(), SIZE);
 		g.drawImage(PlayFactory.picture, coordinate.x - 8, coordinate.y - 9
 				- SIZE / 2, null);
 

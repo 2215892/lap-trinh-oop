@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import com.oop.mapcreation.MapCreation;
 import com.oop.model.AuxiliaryFunction;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EditButton.
  */
@@ -30,6 +29,13 @@ public class EditButton extends ButtonForHandle {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
+	 */
 	@Override
 	public void handle(MapCreation map) {
 		AuxiliaryFunction.handleEditMap(map);

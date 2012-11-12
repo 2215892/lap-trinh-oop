@@ -3,7 +3,6 @@ package com.oop.gamepanel;
 import java.awt.Graphics;
 import java.awt.Point;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface Drawable.
  */

@@ -7,8 +7,7 @@ import java.awt.Point;
 import com.oop.gamepanel.Drawable;
 import com.oop.model.Helper;
 import com.oop.model.ModelTerminal;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
+
 /**
  * class này là đối tượng terminal trong map vẽ, được kế thừa từ ModelTerminal
  * nó hiển thị trên hình vẽ ô vuông hiển thị cho termional, khi chơi game box
@@ -50,6 +49,11 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(terminalColor);
@@ -60,6 +64,11 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

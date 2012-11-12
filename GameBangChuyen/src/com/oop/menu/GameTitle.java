@@ -13,7 +13,6 @@ import com.oop.gamepanel.GameState;
 import com.oop.gamepanel.Layer;
 import com.oop.mapcreation.MapCreation;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GameTitle.
  */
@@ -141,7 +140,7 @@ public class GameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
 	public void gameRender(Graphics g) {
@@ -153,7 +152,7 @@ public class GameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#update()
+	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {

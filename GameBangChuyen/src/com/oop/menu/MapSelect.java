@@ -16,14 +16,13 @@ import com.oop.model.Helper;
 import com.oop.model.ModelMap;
 import com.oop.play.PlayState;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MapSelect.
  */
 public class MapSelect extends GameState {
 
 	private SaveFile saveFile = SaveFile.create();
-	
+
 	/** The Constant LEVEL_COUNT. */
 	public static final int LEVEL_COUNT = 15;
 	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
@@ -62,8 +61,10 @@ public class MapSelect extends GameState {
 		btnBack.setImage(ButtonImage.BTN_BACK);
 		layer.addDrawable(btnBack);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -72,15 +73,19 @@ public class MapSelect extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -89,7 +94,9 @@ public class MapSelect extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -123,9 +130,12 @@ public class MapSelect extends GameState {
 		}
 
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
@@ -133,8 +143,10 @@ public class MapSelect extends GameState {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
 	public void gameRender(Graphics g) {
@@ -151,9 +163,11 @@ public class MapSelect extends GameState {
 		g.drawImage(layer.getLayer(), 0, 0, null);
 
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.btl.GameBoard.GameState#update()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {

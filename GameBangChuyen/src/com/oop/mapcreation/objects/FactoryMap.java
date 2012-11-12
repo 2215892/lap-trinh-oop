@@ -9,7 +9,6 @@ import com.oop.model.Helper;
 import com.oop.model.ModelFactory;
 import com.oop.model.ModelObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này là đối tượng factory trong map vẽ, được kế thừa từ ModelFactory nó
  * hiển thị trên hình vẽ ô vuông hiển thị cho Factory, khi chơi game box chạy ra
@@ -56,6 +55,11 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (outlet)
@@ -69,6 +73,11 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

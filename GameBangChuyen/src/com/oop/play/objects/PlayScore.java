@@ -12,7 +12,6 @@ import java.util.Random;
 import com.oop.gamepanel.Drawable;
 import com.oop.model.Helper;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayScore.
  */
@@ -27,7 +26,7 @@ public class PlayScore implements Drawable {
 	private Point position;
 
 	private int score;
-	
+
 	/**
 	 * Instantiates a new play score.
 	 */
@@ -49,8 +48,10 @@ public class PlayScore implements Drawable {
 		this.setScore(score);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point point) {
@@ -84,8 +85,10 @@ public class PlayScore implements Drawable {
 		return isDone;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -103,8 +106,8 @@ public class PlayScore implements Drawable {
 			} else {
 				g2d.setColor(Color.blue);
 			}
-			Point coordinate = Helper.positionToLocation(
-					getPosition(), PlaySwitch.SIZE);
+			Point coordinate = Helper.positionToLocation(getPosition(),
+					PlaySwitch.SIZE);
 
 			String text = Integer.toString(score);
 			if (score > 0)
@@ -128,7 +131,7 @@ public class PlayScore implements Drawable {
 	public void setPosition(Point position) {
 		this.position = position;
 	}
-	
+
 	/**
 	 * Sets the score.
 	 * 

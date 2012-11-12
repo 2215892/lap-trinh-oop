@@ -6,8 +6,7 @@ import java.awt.Point;
 
 import com.oop.gamepanel.Drawable;
 import com.oop.model.Helper;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
+
 /**
  * class này định nghĩa đối tượng hiện thị phản ánh tính vẽ được hay không tại
  * vị trí di chuyển của chuột trên lưới ô vuông. Nhưng chỉ trong trường hợp là
@@ -58,6 +57,11 @@ public class MouseOverSquare implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (isValid)
@@ -82,6 +86,11 @@ public class MouseOverSquare implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

@@ -36,6 +36,13 @@ public class TreeButton extends ButtonForDraw {
 	 * 
 	 * @see com.btl.GameElement.ButtonForDraw#generateItem(java.awt.Point, int)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForDraw#generateItem(java.awt.Point,
+	 * int)
+	 */
 	@Override
 	public ItemMap generateItem(Point position, int side) {
 		TreeMap tree = new TreeMap(position, side, selectedItem.getImage());

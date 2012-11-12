@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import com.oop.model.Direction;
 import com.oop.model.Helper;
 
-// TODO: Auto-generated Javadoc
 /**
  * Lớp ItemImage. Cung cấp hình ảnh vẽ các item
  */

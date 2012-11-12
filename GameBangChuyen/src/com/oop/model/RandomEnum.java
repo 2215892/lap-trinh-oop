@@ -2,7 +2,6 @@ package com.oop.model;
 
 import java.util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RandomEnum.
  * 

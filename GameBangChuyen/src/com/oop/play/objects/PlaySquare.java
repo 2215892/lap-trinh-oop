@@ -9,16 +9,15 @@ import java.awt.image.BufferedImage;
 
 import com.oop.data.DirectionImage;
 import com.oop.gamepanel.Drawable;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
+import com.oop.model.Helper;
 import com.oop.model.ModelObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlaySquare.
  */
 public class PlaySquare implements Drawable, ModelObject {
-	
+
 	/** The Constant PICCOUNT. */
 	public static final int PICCOUNT = 8;
 	/** The Constant SIZE. */
@@ -47,29 +46,31 @@ public class PlaySquare implements Drawable, ModelObject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point point) {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.Model.ModelObject#getPosition()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
 	 */
 	@Override
 	public Point getPosition() {
 		return this.position;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
-		Point coordinate = Helper
-				.positionToLocation(position, SIZE);
+		Point coordinate = Helper.positionToLocation(position, SIZE);
 
 		g.drawImage(this.buffer, coordinate.x - 8, coordinate.y - 9 - SIZE / 2,
 				null);
@@ -104,17 +105,15 @@ public class PlaySquare implements Drawable, ModelObject {
 			case UP :
 				x1 = coordinate.x + SIZE - SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y + SIZE / 2 - SIZE / 2 * picIndex / PICCOUNT;
-				g.drawImage(Helper
-						.flipHorizontally(DirectionImage.LINE), x1 - 2, y1 - 9,
-						null);
+				g.drawImage(Helper.flipHorizontally(DirectionImage.LINE),
+						x1 - 2, y1 - 9, null);
 
 				break;
 			case DOWN :
 				x1 = coordinate.x + SIZE * picIndex / PICCOUNT;
 				y1 = coordinate.y + SIZE * picIndex / PICCOUNT / 2;
-				g.drawImage(Helper
-						.flipHorizontally(DirectionImage.LINE), x1 - 2, y1 - 9,
-						null);
+				g.drawImage(Helper.flipHorizontally(DirectionImage.LINE),
+						x1 - 2, y1 - 9, null);
 				break;
 			case RIGHT :
 				x1 = coordinate.x + SIZE * picIndex / PICCOUNT;

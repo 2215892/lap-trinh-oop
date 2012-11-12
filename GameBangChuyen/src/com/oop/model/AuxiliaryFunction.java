@@ -16,11 +16,11 @@ import com.oop.data.ItemImage;
 import com.oop.gamepanel.DrawLayer;
 import com.oop.gamepanel.Drawable;
 import com.oop.gamepanel.Layer;
-import com.oop.gamepanel.MapDeleting;
-import com.oop.gamepanel.MapSaving;
 import com.oop.mapcreation.MapCreation;
 import com.oop.mapcreation.MapCreationManager;
+import com.oop.mapcreation.MapDeleting;
 import com.oop.mapcreation.MapRecovery;
+import com.oop.mapcreation.MapSaving;
 import com.oop.mapcreation.TerminalIcon;
 import com.oop.mapcreation.objects.FactoryMap;
 import com.oop.mapcreation.objects.ItemMap;
@@ -28,9 +28,6 @@ import com.oop.mapcreation.objects.SquareMap;
 import com.oop.mapcreation.objects.SwitchMap;
 import com.oop.mapcreation.objects.TerminalMap;
 import com.oop.mapcreation.objects.TreeMap;
-
-// TODO: Auto-generated Javadoc
-//TODO: Auto - generated Javadoc
 
 /**
  * class này cung cấp các hàm tĩnh phục vụ cho việc vẽ Map.
@@ -459,7 +456,7 @@ public class AuxiliaryFunction {
 
 	/**
 	 * Hàm chuyển đổi giữa entryPoint(trong ItemMap) và nearestPoint (trong
-	 * ItemMap)
+	 * ItemMap).
 	 * 
 	 * @param nearestPoint
 	 *            the nearest point
@@ -693,7 +690,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa
+	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa.
 	 * 
 	 * @param map
 	 *            - map đang vẽ
@@ -708,6 +705,9 @@ public class AuxiliaryFunction {
 
 	/**
 	 * xử lí khi mà ấn vào button DELETE.
+	 * 
+	 * @param map
+	 *            the map
 	 */
 	public static void handleMenuDelete(MapCreation map) {
 		Point temp = map.getSquare();
@@ -747,6 +747,9 @@ public class AuxiliaryFunction {
 	/**
 	 * xử lý xóa toàn bộ thông tin về map đang vẽ để vẽ lại từ đầu(khi ấn vào
 	 * button DELETEALL).
+	 * 
+	 * @param map
+	 *            the map
 	 */
 	public static void handleMenuDeleteAll(MapCreation map) {
 		/* hien thong bao ve viec xoa het */
@@ -764,6 +767,9 @@ public class AuxiliaryFunction {
 
 	/**
 	 * làm rỗng các Layer vẽ.
+	 * 
+	 * @param map
+	 *            the map
 	 */
 	public static void deleteAll(MapCreation map) {
 
@@ -777,8 +783,10 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm xử lý file
+	 * Hàm xử lý file.
 	 * 
+	 * @param map
+	 *            the map
 	 * @return true nếu map không bị lỗi
 	 */
 	public static boolean handleMenuSave(MapCreation map) {
@@ -807,7 +815,10 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm xử lý edit một file map
+	 * Hàm xử lý edit một file map.
+	 * 
+	 * @param map
+	 *            the map
 	 */
 	public static void handleEditMap(MapCreation map) {
 		/* hien thong bao luu file cu */
@@ -900,7 +911,10 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Xử lý khi người chơi ấn nút Back
+	 * Xử lý khi người chơi ấn nút Back.
+	 * 
+	 * @param map
+	 *            the map
 	 */
 	public static void handleMenuBack(MapCreation map) {
 		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */

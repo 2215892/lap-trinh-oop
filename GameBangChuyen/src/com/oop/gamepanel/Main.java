@@ -9,7 +9,6 @@ import com.oop.data.OtherImage;
 import com.oop.data.SoundEffect;
 import com.oop.menu.GameTitle;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
  */

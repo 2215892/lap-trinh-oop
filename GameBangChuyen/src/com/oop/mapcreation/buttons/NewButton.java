@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import com.oop.mapcreation.MapCreation;
 import com.oop.model.AuxiliaryFunction;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NewButton.
  */
@@ -29,22 +28,26 @@ public class NewButton extends ButtonForHandle {
 	public NewButton(Point p, BufferedImage normalImage,
 			BufferedImage activeImage, int controlCode) {
 		super(p, normalImage, activeImage, controlCode);
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation.MapCreation)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.oop.mapcreation.buttons.ButtonForHandle#handle(com.oop.mapcreation
+	 * .MapCreation)
 	 */
 	@Override
 	public void handle(MapCreation map) {
-		/*nhac nguoi choi luu file cu*/
+		/* nhac nguoi choi luu file cu */
 		String message = "Ban co muon luu file nay truoc khi chuyen sang ve file moi hay khong ? ";
 		int check = JOptionPane.showConfirmDialog(map.getParent(), message);
 		boolean saveState = true;
-		if (check == JOptionPane.OK_OPTION){
+		if (check == JOptionPane.OK_OPTION) {
 			saveState = AuxiliaryFunction.handleMenuSave(map);
 		}
-		if (saveState){
+		if (saveState) {
 			AuxiliaryFunction.deleteAll(map);
 			map.setFileName(null);
 		}

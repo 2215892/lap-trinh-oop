@@ -5,12 +5,11 @@ import java.awt.Point;
 
 import com.oop.data.BoxImage;
 import com.oop.gamepanel.Drawable;
-import com.oop.model.Helper;
 import com.oop.model.Direction;
+import com.oop.model.Helper;
 import com.oop.model.ModelObject;
 import com.oop.play.TerminalColor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PlayBox.
  */
@@ -34,7 +33,7 @@ public class PlayBox implements Drawable, ModelObject {
 	public PlayBox() {
 
 	}
-	
+
 	/**
 	 * Instantiates a new play box.
 	 * 
@@ -51,7 +50,7 @@ public class PlayBox implements Drawable, ModelObject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point point) {
@@ -77,13 +76,14 @@ public class PlayBox implements Drawable, ModelObject {
 		return location;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.Model.ModelObject#getPosition()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
 	 */
 	@Override
 	public Point getPosition() {
-		return new Point(Helper.locationToPosition(this.location,
-				SIZE));
+		return new Point(Helper.locationToPosition(this.location, SIZE));
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class PlayBox implements Drawable, ModelObject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -192,8 +192,7 @@ public class PlayBox implements Drawable, ModelObject {
 				default :
 			}
 			if (this.getLocation().equals(
-					Helper.positionToLocation(this.destination,
-							SIZE))) {
+					Helper.positionToLocation(this.destination, SIZE))) {
 				this.direction = null;
 				this.isMoving = false;
 			}

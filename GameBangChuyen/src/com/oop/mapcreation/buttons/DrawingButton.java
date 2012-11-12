@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 import com.oop.gamepanel.Button;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này mục đích tạo ra các đối tượng button trong phần vẽ map này, tất cả
  * các class cho button trong phần vẽ map đều phải extends class này.
@@ -77,6 +76,11 @@ public class DrawingButton extends Button {
 		this.width = width;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Button#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		/* khi ma hien thi moi ve */

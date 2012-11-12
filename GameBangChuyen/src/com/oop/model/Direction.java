@@ -1,6 +1,5 @@
 package com.oop.model;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum Direction.
  */

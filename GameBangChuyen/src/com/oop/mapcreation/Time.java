@@ -6,7 +6,6 @@ import java.awt.Point;
 
 import com.oop.gamepanel.Drawable;
 
-// TODO: Auto-generated Javadoc
 /**
  * class này để hiển thị thời gian chơi cho game.
  * 
@@ -73,6 +72,11 @@ public class Time implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.white);
@@ -88,6 +92,11 @@ public class Time implements Drawable {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {

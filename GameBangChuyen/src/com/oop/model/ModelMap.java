@@ -13,7 +13,6 @@ import org.w3c.dom.NodeList;
 
 import com.oop.data.XmlReader;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ModelMap.
  */
@@ -116,7 +115,7 @@ public class ModelMap extends XmlReader {
 	public void setListFactory(ArrayList<ModelFactory> listFactory) {
 		this.listFactory = listFactory;
 	}
-	
+
 	/**
 	 * Sets the list item.
 	 * 

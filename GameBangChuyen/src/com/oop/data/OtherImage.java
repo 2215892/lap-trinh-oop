@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 import com.oop.model.Helper;
 
-// TODO: Auto-generated Javadoc
 /**
  * Lớp OtherImage. Cung cập một số hình ảnh cho chương trình
  */

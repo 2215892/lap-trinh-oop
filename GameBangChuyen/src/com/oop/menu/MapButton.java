@@ -12,7 +12,6 @@ import com.oop.data.ButtonImage;
 import com.oop.data.SaveFile;
 import com.oop.gamepanel.Button;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MapButton.
  */
@@ -72,7 +71,7 @@ public class MapButton extends Button {
 		g.dispose();
 		this.setImage(img);
 	}
-	
+
 	/**
 	 * Gets the id.
 	 * 

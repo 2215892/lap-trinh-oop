@@ -19,7 +19,6 @@ import com.oop.model.Helper;
 import com.oop.model.ModelMap;
 import com.oop.play.PlayState;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StartGameTitle.
  */
@@ -109,8 +108,8 @@ public class StartGameTitle extends GameState {
 				changeState(new MapSelect(parent, this));
 			} else if (clicked == btnCustom) {
 				final JFileChooser fc = new JFileChooser();
-				fc.setCurrentDirectory(new File(Helper
-						.getCurrentDirectory() + "custom map//"));
+				fc.setCurrentDirectory(new File(Helper.getCurrentDirectory()
+						+ "custom map//"));
 				int returnVal = fc.showOpenDialog(parent);
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -143,7 +142,7 @@ public class StartGameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
 	public void gameRender(Graphics g) {
@@ -155,7 +154,7 @@ public class StartGameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.btl.GameBoard.GameState#update()
+	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {

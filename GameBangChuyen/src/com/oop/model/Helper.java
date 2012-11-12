@@ -10,7 +10,6 @@ import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ConversionFunction.
  */
@@ -82,7 +81,7 @@ public abstract class Helper {
 		Double uy = (double) (t.x - t.y) / 2;
 		return new Point(ux.intValue(), uy.intValue());
 	}
-	
+
 	/**
 	 * Position to location.
 	 * 
@@ -150,8 +149,7 @@ public abstract class Helper {
 		temp = Helper.logicToReal(new Point(s.x + width, s.y));
 		poly.addPoint(temp.x, temp.y);
 
-		temp = Helper.logicToReal(new Point(s.x + width, s.y
-				- height));
+		temp = Helper.logicToReal(new Point(s.x + width, s.y - height));
 		poly.addPoint(temp.x, temp.y);
 
 		temp = Helper.logicToReal(new Point(s.x, s.y - height));

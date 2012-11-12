@@ -3,7 +3,6 @@ package com.oop.gamepanel;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GameState.
  */

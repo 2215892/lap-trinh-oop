@@ -2,7 +2,6 @@ package com.oop.model;
 
 import java.awt.Point;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ModelItem.
  */
@@ -40,8 +39,10 @@ public class ModelItem implements ModelObject {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.Model.ModelObject#getPosition()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
 	 */
 	@Override
 	public Point getPosition() {

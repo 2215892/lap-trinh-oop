@@ -17,7 +17,6 @@ import com.oop.gamepanel.GamePanel;
 import com.oop.gamepanel.GameState;
 import com.oop.gamepanel.Layer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HighScore.
  */
@@ -105,7 +104,9 @@ public class HighScore extends GameState {
 		layer.addDrawable(highscore);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -114,7 +115,9 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -123,7 +126,9 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -132,7 +137,9 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -150,8 +157,11 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
@@ -159,7 +169,9 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
@@ -169,7 +181,9 @@ public class HighScore extends GameState {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override

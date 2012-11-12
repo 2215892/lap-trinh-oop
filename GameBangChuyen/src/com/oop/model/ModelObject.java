@@ -2,7 +2,6 @@ package com.oop.model;
 
 import java.awt.Point;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ModelObject.
  */
