@@ -45,11 +45,13 @@ public class MapCreationManager {
 	public static final int SAVE = 8;
 
 	/** The Constant BACK. */
-	public static final int BACK = 10;
+	public static final int BACK = 11;
 
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
-
+	
+	/**Mã điều khiển nút ve một map mới*/
+	public static final int NEW = 10;
 	/** The Constant SQUARE_SIDE. */
 	public static final int SQUARE_SIDE = 18;
 
@@ -79,7 +81,7 @@ public class MapCreationManager {
 
 	/** The back button. */
 	private ButtonForHandle deleteButton, deleteAllButton, saveButton,
-			backButton, editButton;
+			backButton, editButton, newButton;
 
 	/** The item list layer. */
 	private DrawLayer[] itemListLayer;
@@ -150,7 +152,10 @@ public class MapCreationManager {
 
 		int editFileX = (EDIT - 1) * ICON_WIDTH;
 		int editFileY = 0;
-
+		
+		int newButtonX = (NEW -1)*ICON_WIDTH;
+		int newButtonY = 0;
+		
 		graphicButtonList = new ArrayList<ButtonForDraw>();
 		handleButtonList = new ArrayList<ButtonForHandle>();
 
@@ -224,6 +229,13 @@ public class MapCreationManager {
 		editButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		editButton.setName("Edit a map");
 		handleButtonList.add(editButton);
+		
+		newButton = new NewButton(new Point(newButtonX,newButtonY),
+				ButtonImage.NEW_BUTTON_IMAGE,
+				ButtonImage.NEW_BUTTON_IMAGE,NEW);
+		newButton.setDimension(ICON_WIDTH, ICON_WIDTH);
+		newButton.setName("Create new canvas to draw");
+		handleButtonList.add(newButton);
 	}
 
 	/**

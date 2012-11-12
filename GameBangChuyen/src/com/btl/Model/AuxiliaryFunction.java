@@ -763,7 +763,7 @@ public class AuxiliaryFunction {
 	/**
 	 * làm rỗng các Layer vẽ.
 	 */
-	private static void deleteAll(MapCreation map) {
+	public static void deleteAll(MapCreation map) {
 
 		map.getItemMapLayer().emptyLayer();
 		map.getTerminallayer().emptyLayer();
@@ -788,7 +788,6 @@ public class AuxiliaryFunction {
 			try {
 				/* tao ao giac an cho nguoi dung */
 				Thread.sleep(100);
-				System.out.println("da thuc hien sleep xong");
 			} catch (InterruptedException e) {
 
 				e.printStackTrace();
