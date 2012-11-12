@@ -4,10 +4,10 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import com.oop.mapcreation.MapCreation;
+
 // TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 /**
- * class n�? l�?các class cho các button điều khiển, ví dụ xóa, quay lai,
+ * class này là các class cho các button điều khiển, ví dụ xóa, quay lai,
  * save...
  * 
  * @author mai tien khai
@@ -16,14 +16,14 @@ import com.oop.mapcreation.MapCreation;
 public abstract class ButtonForHandle extends DrawingButton {
 
 	/**
-	 * H�? khởi tạo của button.
+	 * Hàm khởi tạo của button.
 	 * 
 	 * @param p
-	 *            - tọa đ�?đặt Button
+	 *            - tọa độ đặt Button
 	 * @param normalImage
-	 *            - ảnh hiển th�?của Button �?trạng thái bình thường
+	 *            - ảnh hiển thị của Button ở trạng thái bình thường
 	 * @param activeImage
-	 *            - ảnh hiển th�?của Button �?trạng thái kích hoạt (khi ấn v�?)
+	 *            - ảnh hiển thị của Button ở trạng thái kích hoạt (khi ấn vào)
 	 * @param controlCode
 	 *            - mã điều khiển của Button
 	 */
@@ -31,11 +31,13 @@ public abstract class ButtonForHandle extends DrawingButton {
 			BufferedImage activeImage, int controlCode) {
 		super(p, normalImage, activeImage, controlCode);
 	}
+	
 	/**
-	 * Chức năng của Button
-	 * @param map - map đang vẽ
+	 * Chức năng của Button.
+	 * 
+	 * @param map
+	 *            - map đang vẽ
 	 */
 	public abstract void handle(MapCreation map);
-	
 
 }

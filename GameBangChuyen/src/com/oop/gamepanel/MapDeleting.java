@@ -18,8 +18,8 @@ import com.oop.model.Direction;
 // TODO: Auto - generated Javadoc
 
 /**
- * class n?�? phục vụ cho việc thực thi thuật toán xóa trên map đang vẽ, duyệt đ�?
- * th?�?
+ * class n?�? phục vụ cho việc thực thi thuật toán xóa trên map đang vẽ, duyệt
+ * đ�? th?�?.
  * 
  * @author mai tien khai
  */
@@ -53,7 +53,7 @@ public class MapDeleting {
 	private DrawLayer itemMapLayer;
 
 	/**
-	 * H?�? khởi tạo đối tượng.
+	 * H?�? khởi tạo đối tượng.
 	 * 
 	 * @param mapCreation
 	 *            - map đang vẽ
@@ -92,7 +92,7 @@ public class MapDeleting {
 	}
 
 	/**
-	 * xử lý khi xoá một switch(thực hiện duyệt đ�?th?�?.
+	 * xử lý khi xoá một switch(thực hiện duyệt đ�?th?�?.
 	 * 
 	 * @param sw
 	 *            the sw
@@ -109,7 +109,7 @@ public class MapDeleting {
 	private boolean[] deleteSwitch;
 
 	/**
-	 * Duyệt đ�?th?�?v?�?xóa những switch cô lập.
+	 * Duyệt đ�?th?�?v?�?xóa những switch cô lập.
 	 */
 	private void traverseAndDelete() {
 
@@ -161,7 +161,7 @@ public class MapDeleting {
 	}
 
 	/**
-	 * duyệt đ�?thì từ một nh?�?máy.
+	 * duyệt đ�?thì từ một nh?�?máy.
 	 * 
 	 * @param f
 	 *            - factory bắt đầu duyệt
@@ -281,7 +281,7 @@ public class MapDeleting {
 	 * xóa một terminal.
 	 * 
 	 * @param p
-	 *            - v?�?trí cần xóa
+	 *            - v?�?trí cần xóa
 	 */
 	private void deleteElementT(Point p) {
 		/* xoa trong terminalLayer */
@@ -299,11 +299,11 @@ public class MapDeleting {
 	}
 
 	/**
-	 * H?�? tính ch?�?s?�?của switch trong swichLayer.
+	 * H?�? tính ch?�?s?�?của switch trong swichLayer.
 	 * 
 	 * @param sw
-	 *            - switch cần lấy ch?�?s?�?
-	 * @return ch?�?s?�?của switch trong list nếu tìm thấy, không thấy trả v?�?- 1
+	 *            - switch cần lấy ch?�?s?�?
+	 * @return ch?�?s?�?của switch trong list nếu tìm thấy, không thấy trả v?�?- 1
 	 */
 	private int getIndex(SwitchMap sw) {
 		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
@@ -316,7 +316,7 @@ public class MapDeleting {
 	}
 
 	/**
-	 * Duyệt đ�?th?�?từ switch.
+	 * Duyệt đ�?th?�?từ switch.
 	 * 
 	 * @param sw
 	 *            - switch bắt đầu
@@ -391,7 +391,7 @@ public class MapDeleting {
 	}
 
 	/**
-	 * Xóa nh?�?máy chọn.
+	 * Xóa nh?�?máy chọn.
 	 * 
 	 * @param f
 	 *            - factory cần xóa

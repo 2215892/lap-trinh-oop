@@ -4,11 +4,12 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import com.oop.model.Helper;
 import com.oop.model.Direction;
+import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
- * Lớp ItemImage. Cung cấp hình ảnh v�?các item
+ * Lớp ItemImage. Cung cấp hình ảnh vẽ các item
  */
 public abstract class ItemImage {
 
@@ -40,68 +41,68 @@ public abstract class ItemImage {
 	public static final int VEHICLE_TYPE = 1;
 
 	/** The Constant RES_DIR. */
-	public final static String RES_DIR = Helper
-			.getCurrentDirectory() + "res\\item\\";
+	public final static String RES_DIR = Helper.getCurrentDirectory()
+			+ "res\\item\\";
 
 	/** The Constant AIRPLANE. */
-	public final static BufferedImage AIRPLANE = Helper
-			.loadImage(RES_DIR + "AIRPLANE.png");
+	public final static BufferedImage AIRPLANE = Helper.loadImage(RES_DIR
+			+ "AIRPLANE.png");
 
 	/** The Constant AIRPLANE_RIGHT. */
 	public static final BufferedImage AIRPLANE_RIGHT = Helper
 			.flipHorizontally(AIRPLANE);
 
 	/** The Constant PLATFORM_1. */
-	public final static BufferedImage PLATFORM_1 = Helper
-			.loadImage(RES_DIR + "PLATFORM_1.png");
+	public final static BufferedImage PLATFORM_1 = Helper.loadImage(RES_DIR
+			+ "PLATFORM_1.png");
 
 	/** The Constant PLATFORM_2. */
-	public final static BufferedImage PLATFORM_2 = Helper
-			.loadImage(RES_DIR + "PLATFORM_2.png");
+	public final static BufferedImage PLATFORM_2 = Helper.loadImage(RES_DIR
+			+ "PLATFORM_2.png");
 
 	/** The Constant PLATFORM_3. */
-	public final static BufferedImage PLATFORM_3 = Helper
-			.loadImage(RES_DIR + "PLATFORM_3.png");
+	public final static BufferedImage PLATFORM_3 = Helper.loadImage(RES_DIR
+			+ "PLATFORM_3.png");
 
 	/** The Constant PLATFORM_4. */
-	public final static BufferedImage PLATFORM_4 = Helper
-			.loadImage(RES_DIR + "PLATFORM_4.png");
+	public final static BufferedImage PLATFORM_4 = Helper.loadImage(RES_DIR
+			+ "PLATFORM_4.png");
 
 	/** The Constant SHIP. */
-	public final static BufferedImage SHIP = Helper
-			.loadImage(RES_DIR + "SHIP.png");
+	public final static BufferedImage SHIP = Helper.loadImage(RES_DIR
+			+ "SHIP.png");
 
 	/** The Constant SHIP_RIGHT. */
 	public static final BufferedImage SHIP_RIGHT = Helper
 			.flipHorizontally(SHIP);
 
 	/** The Constant TREE_1. */
-	public final static BufferedImage TREE_1 = Helper
-			.loadImage(RES_DIR + "TREE_1.png");
+	public final static BufferedImage TREE_1 = Helper.loadImage(RES_DIR
+			+ "TREE_1.png");
 
 	/** The Constant TREE_2. */
-	public final static BufferedImage TREE_2 = Helper
-			.loadImage(RES_DIR + "TREE_2.png");
+	public final static BufferedImage TREE_2 = Helper.loadImage(RES_DIR
+			+ "TREE_2.png");
 
 	/** The Constant TREE_3. */
-	public final static BufferedImage TREE_3 = Helper
-			.loadImage(RES_DIR + "TREE_3.png");
+	public final static BufferedImage TREE_3 = Helper.loadImage(RES_DIR
+			+ "TREE_3.png");
 
 	/** The Constant TREE_4. */
-	public final static BufferedImage TREE_4 = Helper
-			.loadImage(RES_DIR + "TREE_4.png");
+	public final static BufferedImage TREE_4 = Helper.loadImage(RES_DIR
+			+ "TREE_4.png");
 
 	/** The Constant TREE_5. */
-	public final static BufferedImage TREE_5 = Helper
-			.loadImage(RES_DIR + "TREE_5.png");
+	public final static BufferedImage TREE_5 = Helper.loadImage(RES_DIR
+			+ "TREE_5.png");
 
 	/** The Constant TREE_6. */
-	public final static BufferedImage TREE_6 = Helper
-			.loadImage(RES_DIR + "TREE_6.png");
+	public final static BufferedImage TREE_6 = Helper.loadImage(RES_DIR
+			+ "TREE_6.png");
 
 	/** The Constant TRUCK. */
-	public final static BufferedImage TRUCK = Helper
-			.loadImage(RES_DIR + "TRUCK.png");
+	public final static BufferedImage TRUCK = Helper.loadImage(RES_DIR
+			+ "TRUCK.png");
 
 	/** The Constant TRUCK_DOWN. */
 	public static final BufferedImage TRUCK_DOWN = Helper
@@ -205,7 +206,7 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * Xác định hướng cho các ảnh, dùng cho các ảnh thuộc h�?terminal, factory.
+	 * Xác định hướng cho các ảnh, dùng cho các ảnh thuộc họ terminal, factory.
 	 * 
 	 * @param image
 	 *            ảnh cần xác định hướng
@@ -233,7 +234,7 @@ public abstract class ItemImage {
 	 * 
 	 * @param image
 	 *            ảnh cần xét
-	 * @return giá tr�?type của ảnh
+	 * @return giá trị type của ảnh
 	 */
 	public static int getType(BufferedImage image) {
 		if ((image == TREE_1) || (image == TREE_2) || (image == TREE_3)
@@ -294,15 +295,15 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * Tính các ô vuông b�?phủ khi chèn item v�? map
+	 * Tính các ô vuông bị phủ khi chèn item vẽ map.
 	 * 
 	 * @param terminalImage
 	 *            ảnh terminal cần chèn
 	 * @param position
-	 *            v�?trí terminal
+	 *            vị trí terminal
 	 * @param side
 	 *            cạnh của ô vuông vẽ
-	 * @return danh sách ô vuông b�?phủ
+	 * @return danh sách ô vuông bị phủ
 	 */
 	public static ArrayList<Point> getSquareCovered(
 			BufferedImage terminalImage, Point position, int side) {

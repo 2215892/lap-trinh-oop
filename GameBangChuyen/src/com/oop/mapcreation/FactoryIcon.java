@@ -14,6 +14,7 @@ import com.oop.mapcreation.objects.TerminalMap;
 import com.oop.model.AuxiliaryFunction;
 import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
  * class này là class của các đối tượng hiển thị ảnh của factory trên lưới ô
  * vuông vẽ map Thực hiện các tính toán liên quan đến vẽ ảnh và tính toán sự hợp
@@ -43,11 +44,6 @@ public class FactoryIcon extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#calculateTopLeft()
-	 */
 	@Override
 	protected void calculateTopLeft() {
 		Point temp = null;
@@ -71,11 +67,6 @@ public class FactoryIcon extends ItemMap {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -103,11 +94,6 @@ public class FactoryIcon extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#calculateNearestPoint()
-	 */
 	@Override
 	protected void calculateNearestPoint() {
 		Point temp = null;
@@ -132,11 +118,6 @@ public class FactoryIcon extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#identifyImageType()
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#identifyImageType()
-	 */
 	@Override
 	public void identifyImageType() {
 		type = ItemImage.VEHICLE_TYPE;
@@ -146,11 +127,6 @@ public class FactoryIcon extends ItemMap {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ItemMap#contains(java.awt.Point)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#contains(java.awt.Point)
 	 */
 	@Override
 	public boolean contains(Point p) {
@@ -164,12 +140,6 @@ public class FactoryIcon extends ItemMap {
 	 * @see
 	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
 	 * )
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameElements.mapstate.ItemMap#calculateValidation(com.btl.
-	 * GameElements.mapstate.MapCreation)
 	 */
 	@Override
 	public void calculateValidation(MapCreation map) {

@@ -9,8 +9,8 @@ import com.oop.model.Helper;
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
- * class n?�? định nghĩa đối tượng hiện th?�?phản ánh tính vẽ được hay không tại
- * v?�?trí di chuyển của chuột trên lưới ô vuông. Nhưng ch?�?trong trường hợp l?�?
+ * class này định nghĩa đối tượng hiện thị phản ánh tính vẽ được hay không tại
+ * vị trí di chuyển của chuột trên lưới ô vuông. Nhưng chỉ trong trường hợp là
  * vẽ switch
  * 
  * @author mai tien khai
@@ -18,29 +18,29 @@ import com.oop.model.Helper;
  */
 public class MouseOverSquare implements Drawable {
 
-	/** m?�? hiển th?�?có th?�?vẽ được switch ?�?đây. */
+	/** màu hiển thị có thể vẽ được switch ở đây. */
 	public static Color VALID_COLOR = new Color(0, 0, 255, 150);
 
-	/** m?�? hiển th?�?không th?�?vẽ được switch ?�?đây. */
+	/** màu hiển thị không thể vẽ được switch ở đây. */
 	public static Color INVALID_COLOR = new Color(255, 0, 0, 150);
 
-	/** vi tri góc trái trên cung của ô chuột move v?�?. */
+	/** vi tri góc trái trên cung của ô chuột move vào. */
 	private Point position;
 
-	/** chiều d?�? logic ô vuông cần hiển th?�? */
+	/** chiều dài logic ô vuông cần hiển thị. */
 	private int height;
 
-	/** chiều rộng logic của ô vuông cần hiển th?�? */
+	/** chiều rộng logic của ô vuông cần hiển thị. */
 	private int width;
 
-	/** tinh hợp l?�?của ô vuông định vẽ switch. */
+	/** tinh hợp lệ của ô vuông định vẽ switch. */
 	private boolean isValid;
 
 	/**
 	 * Khởi tạo đối tượng.
 	 * 
 	 * @param position
-	 *            - v?�?trí ô hiển th?�?
+	 *            - vị trí ô hiển thị
 	 * @param width
 	 *            - chiều rộng logic
 	 * @param height
@@ -56,9 +56,6 @@ public class MouseOverSquare implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -84,9 +81,6 @@ public class MouseOverSquare implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

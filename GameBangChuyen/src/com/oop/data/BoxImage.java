@@ -5,41 +5,42 @@ import java.awt.image.BufferedImage;
 import com.oop.model.Helper;
 import com.oop.play.TerminalColor;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp BoxImage. Cung cấp hình ảnh các box cho trò chơi
  */
 public abstract class BoxImage {
 
 	/** The Constant RES_DIR. */
-	public final static String RES_DIR = Helper
-			.getCurrentDirectory() + "res\\box\\";
+	public final static String RES_DIR = Helper.getCurrentDirectory()
+			+ "res\\box\\";
 
 	/** The Constant BLUE_BOX. */
-	public final static BufferedImage BLUE_BOX = Helper
-			.loadImage(RES_DIR + "BLUE_BOX.png");
+	public final static BufferedImage BLUE_BOX = Helper.loadImage(RES_DIR
+			+ "BLUE_BOX.png");
 
 	/** The Constant GREEN_BOX. */
-	public final static BufferedImage GREEN_BOX = Helper
-			.loadImage(RES_DIR + "GREEN_BOX.png");
+	public final static BufferedImage GREEN_BOX = Helper.loadImage(RES_DIR
+			+ "GREEN_BOX.png");
 
 	/** The Constant PINK_BOX. */
-	public final static BufferedImage PINK_BOX = Helper
-			.loadImage(RES_DIR + "PINK_BOX.png");
+	public final static BufferedImage PINK_BOX = Helper.loadImage(RES_DIR
+			+ "PINK_BOX.png");
 
 	/** The Constant RED_BOX. */
-	public final static BufferedImage RED_BOX = Helper
-			.loadImage(RES_DIR + "RED_BOX.png");
+	public final static BufferedImage RED_BOX = Helper.loadImage(RES_DIR
+			+ "RED_BOX.png");
 
 	/** The Constant YELLOW_BOX. */
-	public final static BufferedImage YELLOW_BOX = Helper
-			.loadImage(RES_DIR + "YELLOW_BOX.png");
+	public final static BufferedImage YELLOW_BOX = Helper.loadImage(RES_DIR
+			+ "YELLOW_BOX.png");
 
 	/**
-	 * Lấy ảnh hộp tương ứng với m�?.
+	 * Lấy ảnh hộp tương ứng với màu.
 	 * 
 	 * @param color
-	 *            m�? của hộp
-	 * @return ảnh hộp tương ứng với m�?
+	 *            màu của hộp
+	 * @return ảnh hộp tương ứng với màu
 	 */
 	public static BufferedImage getBoxImage(TerminalColor color) {
 		switch (color) {

@@ -23,9 +23,9 @@ import com.oop.mapcreation.buttons.TreeButton;
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
- * class n?�? mục đích cung cấp các hằng s?�?v?�?các đối tượng khởi tạo cho class
- * MapCreation ví dụ như: v?�?trí của các Button, các mã điều khiển của Button...
- * class n?�? cũng tạo ra cac menu của từng button cho việc vẽ map trong class
+ * class này mục đích cung cấp các hằng số và các đối tượng khởi tạo cho class
+ * MapCreation ví dụ như: vị trí của các Button, các mã điều khiển của Button...
+ * class này cũng tạo ra cac menu của từng button cho việc vẽ map trong class
  * MapCreation
  * 
  * @author mai tien khai
@@ -63,8 +63,8 @@ public class MapCreationManager {
 
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
-	
-	/**Mã điều khiển nút ve một map mới*/
+
+	/** Mã điều khiển nút ve một map mới */
 	public static final int NEW = 10;
 	/** The Constant SQUARE_SIDE. */
 	public static final int SQUARE_SIDE = 18;
@@ -110,10 +110,7 @@ public class MapCreationManager {
 	private ButtonForHandle defaultButton;
 
 	/**
-	 * H?�? khởi tạo đối tượng MapCreationManager.
-	 * 
-	 * @param parent
-	 *            the parent
+	 * Hàm khởi tạo đối tượng MapCreationManager.
 	 */
 	public MapCreationManager(GamePanel parent) {
 		itemListLayer = new DrawLayer[4];
@@ -169,10 +166,10 @@ public class MapCreationManager {
 
 		int editFileX = (EDIT - 1) * ICON_WIDTH;
 		int editFileY = 0;
-		
-		int newButtonX = (NEW -1)*ICON_WIDTH;
+
+		int newButtonX = (NEW - 1) * ICON_WIDTH;
 		int newButtonY = 0;
-		
+
 		graphicButtonList = new ArrayList<ButtonForDraw>();
 		handleButtonList = new ArrayList<ButtonForHandle>();
 
@@ -246,10 +243,9 @@ public class MapCreationManager {
 		editButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		editButton.setName("Edit a map");
 		handleButtonList.add(editButton);
-		
-		newButton = new NewButton(new Point(newButtonX,newButtonY),
-				ButtonImage.NEW_BUTTON_IMAGE,
-				ButtonImage.NEW_BUTTON_IMAGE,NEW);
+
+		newButton = new NewButton(new Point(newButtonX, newButtonY),
+				ButtonImage.NEW_BUTTON_IMAGE, ButtonImage.NEW_BUTTON_IMAGE, NEW);
 		newButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		newButton.setName("Create new canvas to draw");
 		handleButtonList.add(newButton);

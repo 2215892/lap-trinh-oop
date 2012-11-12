@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Button.
@@ -12,14 +11,14 @@ import java.awt.image.BufferedImage;
 public class Button implements Drawable {
 
 	private BufferedImage originImg;
-	
+
 	/** The img. */
 	protected BufferedImage img;
 	private Point position;
-	
+
 	/** The width. */
 	protected int width;
-	
+
 	/** The height. */
 	protected int height;
 
@@ -63,11 +62,6 @@ public class Button implements Drawable {
 		g.dispose();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Clickable#contains(java.awt.Point)
-	 */
 	@Override
 	public boolean contains(Point p) {
 
@@ -79,9 +73,6 @@ public class Button implements Drawable {
 			return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		if (img != null)
@@ -89,12 +80,6 @@ public class Button implements Drawable {
 					null);
 
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Clickable#onClick()
-	 */
 
 	/**
 	 * Dat hinh anh cho button.

@@ -20,6 +20,7 @@ import com.oop.gamepanel.MapDeleting;
 import com.oop.gamepanel.MapSaving;
 import com.oop.mapcreation.MapCreation;
 import com.oop.mapcreation.MapCreationManager;
+import com.oop.mapcreation.MapRecovery;
 import com.oop.mapcreation.TerminalIcon;
 import com.oop.mapcreation.objects.FactoryMap;
 import com.oop.mapcreation.objects.ItemMap;
@@ -28,8 +29,11 @@ import com.oop.mapcreation.objects.SwitchMap;
 import com.oop.mapcreation.objects.TerminalMap;
 import com.oop.mapcreation.objects.TreeMap;
 
+// TODO: Auto-generated Javadoc
+//TODO: Auto - generated Javadoc
+
 /**
- * class n�? cung cấp các h�? tĩnh phục vụ cho việc vẽ Map.
+ * class này cung cấp các hàm tĩnh phục vụ cho việc vẽ Map.
  * 
  * @author mai tien khai
  */
@@ -39,10 +43,10 @@ public class AuxiliaryFunction {
 	 * Tìm SwitchMap trong một Layer.
 	 * 
 	 * @param position
-	 *            - v�?trí cần tìm
+	 *            - vị trí cần tìm
 	 * @param switchLayer
 	 *            - layer chứa switch cần tìm
-	 * @return switchMap với v�?trí position
+	 * @return switchMap với vị trí position
 	 */
 	public static SwitchMap findSwitch(Point position, Layer switchLayer) {
 
@@ -59,10 +63,10 @@ public class AuxiliaryFunction {
 	 * Tìm cac FactoryMap trong một Layer.
 	 * 
 	 * @param position
-	 *            - v�?trí cần tìm
+	 *            - vị trí cần tìm
 	 * @param factoryLayer
 	 *            - layer chứa factory cần tìm
-	 * @return factoryMap với v�?trí position
+	 * @return factoryMap với vị trí position
 	 */
 	public static FactoryMap findFactory(Point position, Layer factoryLayer) {
 		ArrayList<Drawable> factoryList = factoryLayer.getListDrawable();
@@ -80,10 +84,10 @@ public class AuxiliaryFunction {
 	 * Tìm cac TerminalMap trong một Layer.
 	 * 
 	 * @param position
-	 *            - v�?trí cần tìm
+	 *            - vị trí cần tìm
 	 * @param terminalLayer
 	 *            - layer chứa terminal cần tìm
-	 * @return TerminalMap với v�?trí position
+	 * @return TerminalMap với vị trí position
 	 */
 	public static TerminalMap findTerminal(Point position, Layer terminalLayer) {
 		ArrayList<Drawable> terminalList = terminalLayer.getListDrawable();
@@ -117,7 +121,7 @@ public class AuxiliaryFunction {
 	 *            - điểm thứ nhất
 	 * @param p2
 	 *            - điểm thứ hai
-	 * @return true nếu hai điểm cùng tọa đ�?
+	 * @return true nếu hai điểm cùng tọa độ
 	 */
 	public static boolean checkPoint(Point p1, Point p2) {
 		if ((p1.x == p2.x) && (p1.y == p2.y))
@@ -172,13 +176,13 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? tính ch�?s�?của switch trong một layer.
+	 * Hàm tính chỉ số của switch trong một layer.
 	 * 
 	 * @param sw
-	 *            - switch cần tìm ch�?s�?
+	 *            - switch cần tìm chỉ số
 	 * @param switchLayer
 	 *            - layer cần tìm
-	 * @return ch�?s�?cần tìm, nếu không có switch trả v�?- 1
+	 * @return chỉ số cần tìm, nếu không có switch trả về - 1
 	 */
 	public static int getIndex(SwitchMap sw, Layer switchLayer) {
 		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
@@ -191,13 +195,13 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? tạo các SwitchMap từ các ModelSwitch(dùng trong đọc file map).
+	 * Hàm tạo các SwitchMap từ các ModelSwitch(dùng trong đọc file map).
 	 * 
 	 * @param switchList
 	 *            - list ModelSwitch
 	 * @param unit
 	 *            - cạnh lưới ô vuông
-	 * @return Một list các SwitchMap từ ModelSwitch đầu v�?
+	 * @return Một list các SwitchMap từ ModelSwitch đầu vào
 	 */
 	public static ArrayList<SwitchMap> loadSwitch(
 			ArrayList<ModelSwitch> switchList, int unit) {
@@ -215,13 +219,13 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? tạo các FactoryMap từ các ModelFactory(dùng trong đọc file map).
+	 * Hàm tạo các FactoryMap từ các ModelFactory(dùng trong đọc file map).
 	 * 
 	 * @param factoryList
 	 *            - list các ModelFactory
 	 * @param unit
 	 *            - cạnh lưới ô vuông
-	 * @return Một list các FactoryMap từ ModelFactory đầu v�?
+	 * @return Một list các FactoryMap từ ModelFactory đầu vào
 	 */
 	public static ArrayList<FactoryMap> loadFactory(
 			ArrayList<ModelFactory> factoryList, int unit) {
@@ -237,13 +241,13 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? tạo các TerminalMap từ các ModelTerminal (dùng trong đọc file map).
+	 * Hàm tạo các TerminalMap từ các ModelTerminal (dùng trong đọc file map).
 	 * 
 	 * @param terminalList
 	 *            list các ModelTerminal
 	 * @param unit
 	 *            - cạnh lưới ô vuông
-	 * @return Một list các SwitchMap từ ModelTerminal đầu v�?
+	 * @return Một list các SwitchMap từ ModelTerminal đầu vào
 	 */
 	public static ArrayList<TerminalMap> loadTerminal(
 			ArrayList<ModelTerminal> terminalList, int unit) {
@@ -283,14 +287,14 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Đếm s�?các đối tượng bên cạnh switch(ch�?tính terminalMap, FactoryMap,
+	 * Đếm số các đối tượng bên cạnh switch(chỉ tính terminalMap, FactoryMap,
 	 * SwitchMap).
 	 * 
 	 * @param sw
 	 *            - switch cần đếm
 	 * @param map
 	 *            - map đang vẽ
-	 * @return s�?neighbor
+	 * @return số neighbor
 	 */
 	public static int countNeighbor(SwitchMap sw, MapCreation map) {
 		Layer switchLayer = map.getSwitchLayer();
@@ -327,14 +331,14 @@ public class AuxiliaryFunction {
 	 * Kiểm tra một ô đã có factory, terminal hay switch hay không.
 	 * 
 	 * @param p
-	 *            - v�?trí cần xét
+	 *            - vị trí cần xét
 	 * @param switchLayer
 	 *            - layer chứa switch
 	 * @param factoryLayer
 	 *            - layer chứa factory
 	 * @param terminalLayer
 	 *            - layer chứa terminal
-	 * @return true nếu chưa có các đối tượng n�?
+	 * @return true nếu chưa có các đối tượng này
 	 */
 	public static boolean isEmptySquare(Point p, Layer switchLayer,
 			Layer factoryLayer, Layer terminalLayer) {
@@ -347,7 +351,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Tính chiều cáo của ảnh khi biết chiều rộng m�?đảm bảo đúng t�?l�?
+	 * Tính chiều cáo của ảnh khi biết chiều rộng mà đảm bảo đúng tỉ lệ.
 	 * 
 	 * @param width
 	 *            - chiều rộng của ảnh
@@ -405,13 +409,13 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Kiểm tra xem v�?trí có thuộc layer n�? không (trong một map).
+	 * Kiểm tra xem vị trí có thuộc layer nào không (trong một map).
 	 * 
 	 * @param mapCreation
 	 *            - map đang vẽ
 	 * @param position
-	 *            - v�?trí cần kiểm tra
-	 * @return true nếu không thấy v�?trí n�?
+	 *            - vị trí cần kiểm tra
+	 * @return true nếu không thấy vị trí này
 	 */
 	public static boolean checkIdenticalPostition(MapCreation mapCreation,
 			Point position) {
@@ -425,7 +429,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * kiem tra xem xem một switch có neighbor n�? hay không.
+	 * kiem tra xem xem một switch có neighbor nào hay không.
 	 * 
 	 * @param sw
 	 *            - switch cần kiểm tra
@@ -454,8 +458,8 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? chuyển đổi giữa entryPoint(trong ItemMap) v�?nearestPoint (trong
-	 * ItemMap).
+	 * Hàm chuyển đổi giữa entryPoint(trong ItemMap) và nearestPoint (trong
+	 * ItemMap)
 	 * 
 	 * @param nearestPoint
 	 *            the nearest point
@@ -484,10 +488,10 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * load itemlist (đọc từ file map) v�? drawingLayer.
+	 * load itemlist (đọc từ file map) vào drawingLayer.
 	 * 
 	 * @param itemMapLayer
-	 *            - layer load v�?
+	 *            - layer load vào
 	 * @param itemList
 	 *            - các item đọc được từ file
 	 * @param side
@@ -515,11 +519,11 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Tìm những switch m�?sẽ l�? cho box chạy đến vô hạn.
+	 * Tìm những switch mà sẽ làm cho box chạy đến vô hạn.
 	 * 
 	 * @param map
 	 *            - map cần load
-	 * @return arrayList của các switch b�?lỗi
+	 * @return arrayList của các switch bị lỗi
 	 */
 	public static ArrayList<SwitchMap> falseSwitch(MapCreation map) {
 		ArrayList<SwitchMap> result = new ArrayList<SwitchMap>();
@@ -566,7 +570,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hiển th�?các switch m�?khi box đi tới sẽ chạy đến vô hạn.
+	 * Hiển thị các switch mà khi box đi tới sẽ chạy đến vô hạn.
 	 * 
 	 * @param map
 	 *            - map đang vẽ
@@ -600,7 +604,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hiển th�?các Factory không có switch đi ra.
+	 * Hiển thị các Factory không có switch đi ra.
 	 * 
 	 * @param map
 	 *            - map đang vẽ
@@ -619,7 +623,7 @@ public class AuxiliaryFunction {
 	 * Tìm item trong một layer.
 	 * 
 	 * @param position
-	 *            - v�?trí cần tìm
+	 *            - vị trí cần tìm
 	 * @param itemMapLayer
 	 *            - layer chứa item cần tìm
 	 * @return item tìm thấy
@@ -652,15 +656,15 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Lấy một s�?nhập v�? từ messageBox.
+	 * Lấy một số nhập vào từ messageBox.
 	 * 
 	 * @param message
-	 *            - thông tin hiển th�?trong messagebox
+	 *            - thông tin hiển thị trong messagebox
 	 * @param initialValue
-	 *            - giá tr�?đặt mặ định
+	 *            - giá trị đặt mặ định
 	 * @param parent
 	 *            - component cho đối tượng cha
-	 * @return s�?đọc được do người dùng nhập v�?
+	 * @return số đọc được do người dùng nhập vào
 	 */
 	public static int getInputNumber(String message, int initialValue,
 			Component parent) {
@@ -689,7 +693,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? kiểm tra xem Map đã được vẽ gì hay chưa.
+	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa
 	 * 
 	 * @param map
 	 *            - map đang vẽ
@@ -703,7 +707,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * xử lí khi m�?ấn v�? button DELETE.
+	 * xử lí khi mà ấn vào button DELETE.
 	 */
 	public static void handleMenuDelete(MapCreation map) {
 		Point temp = map.getSquare();
@@ -741,7 +745,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * xử lý xóa to�? b�?thông tin v�?map đang vẽ đ�?vẽ lại từ đầu(khi ấn v�?
+	 * xử lý xóa toàn bộ thông tin về map đang vẽ để vẽ lại từ đầu(khi ấn vào
 	 * button DELETEALL).
 	 */
 	public static void handleMenuDeleteAll(MapCreation map) {
@@ -759,7 +763,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * l�? rỗng các Layer vẽ.
+	 * làm rỗng các Layer vẽ.
 	 */
 	public static void deleteAll(MapCreation map) {
 
@@ -773,9 +777,9 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? xử lý file
+	 * Hàm xử lý file
 	 * 
-	 * @return true nếu map không b�?lỗi
+	 * @return true nếu map không bị lỗi
 	 */
 	public static boolean handleMenuSave(MapCreation map) {
 		/* kiem tra xem co switch nao bi loi hay khong */
@@ -803,7 +807,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * H�? xử lý edit một file map
+	 * Hàm xử lý edit một file map
 	 */
 	public static void handleEditMap(MapCreation map) {
 		/* hien thong bao luu file cu */
@@ -818,8 +822,8 @@ public class AuxiliaryFunction {
 		}
 		if (check) {
 			JFileChooser chooser = new JFileChooser();
-			chooser.setCurrentDirectory(new File(Helper
-					.getCurrentDirectory() + "custom map//"));
+			chooser.setCurrentDirectory(new File(Helper.getCurrentDirectory()
+					+ "custom map//"));
 			chooser.showOpenDialog(map.getParent());
 			File selectedFile = chooser.getSelectedFile();
 			if (selectedFile != null) {

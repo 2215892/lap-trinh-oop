@@ -2,29 +2,27 @@ package com.oop.mapcreation.buttons;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-// TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 
 import com.oop.mapcreation.objects.ItemMap;
 import com.oop.mapcreation.objects.TreeMap;
 
 /**
- * class n�? l�?class cho button đ�?vẽ cây, đây l�?một concrete class khi ấn v�?
- * button n�? người chơi sẽ tạo ra được một đối tượng cây đ�?vẽ ra map.
+ * class này là class cho button để vẽ cây, đây là một concrete class khi ấn vào
+ * button này người chơi sẽ tạo ra được một đối tượng cây để vẽ ra map.
  * 
  * @author mai tien khai
  */
 public class TreeButton extends ButtonForDraw {
 
 	/**
-	 * H�? khởi tạo của button.
+	 * Hàm khởi tạo của button.
 	 * 
 	 * @param p
-	 *            - tọa đ�?đặt Button
+	 *            - tọa độ đặt Button
 	 * @param normalImage
-	 *            - ảnh hiển th�?của Button �?trạng thái bình thường
+	 *            - ảnh hiển thị của Button ở trạng thái bình thường
 	 * @param activeImage
-	 *            - ảnh hiển th�?của Button �?trạng thái kích hoạt (khi ấn v�?)
+	 *            - ảnh hiển thị của Button ở trạng thái kích hoạt (khi ấn vào)
 	 * @param controlCode
 	 *            - mã điều khiển của Button
 	 */
@@ -37,9 +35,6 @@ public class TreeButton extends ButtonForDraw {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ButtonForDraw#generateItem(java.awt.Point, int)
-	 */
-	/* (non-Javadoc)
-	 * @see com.btl.GameElements.mapstate.ButtonForDraw#generateItem(java.awt.Point, int)
 	 */
 	@Override
 	public ItemMap generateItem(Point position, int side) {

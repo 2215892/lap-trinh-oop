@@ -7,21 +7,21 @@ import com.oop.gamepanel.Drawable;
 import com.oop.gamepanel.Layer;
 import com.oop.mapcreation.MenuItem;
 import com.oop.mapcreation.objects.ItemMap;
+
 // TODO: Auto-generated Javadoc
-// TODO: Auto - generated Javadoc
 /**
- * class n?�? mục đich tạo ra các đối tượng button phục vụ cho việc vẽ ra m?�?
- * hình ví dụ như ấn v?�? button n?�? đ�?hiện ra các cây rồi chọn câu đ�?vẽ..
+ * class này mục đich tạo ra các đối tượng button phục vụ cho việc vẽ ra màn
+ * hình ví dụ như ấn vào button này để hiện ra các cây rồi chọn câu để vẽ..
  * 
  * @author mai tien khai
  * 
  */
 public abstract class ButtonForDraw extends DrawingButton {
 
-	/** Hiển th?�?của cac item(ví dụ cây, xe tải ...) đi kèm */
+	/** Hiển thị của cac item(ví dụ cây, xe tải ...) đi kèm */
 	protected Layer itemLayer;
 
-	/** layer đ�?add đối tượng cần vẽ v?�? layer. */
+	/** layer để add đối tượng cần vẽ vào layer. */
 	protected Layer drawingLayer;
 
 	/** kiểm tra xem trạng thái của các menu ẩn hay hiện. */
@@ -31,14 +31,14 @@ public abstract class ButtonForDraw extends DrawingButton {
 	protected MenuItem selectedItem;
 
 	/**
-	 * H?�? khởi tạo của button.
+	 * Hàm khởi tạo của button.
 	 * 
 	 * @param p
-	 *            - tọa đ�?đặt Button
+	 *            - tọa độ đặt Button
 	 * @param normalImage
-	 *            - ảnh hiển th?�?của Button ?�?trạng thái bình thường
+	 *            - ảnh hiển thị của Button ở trạng thái bình thường
 	 * @param activeImage
-	 *            - ảnh hiển th?�?của Button ?�?trạng thái kích hoạt (khi ấn v?�?)
+	 *            - ảnh hiển thị của Button ở trạng thái kích hoạt (khi ấn vào)
 	 * @param controlCode
 	 *            - mã điều khiển của Button
 	 */
@@ -52,18 +52,18 @@ public abstract class ButtonForDraw extends DrawingButton {
 	}
 
 	/**
-	 * Phương thức abstract sinh ra một item tương ứng đ�?vẽ v?�? map.
+	 * Phương thức abstract sinh ra một item tương ứng để vẽ vào map.
 	 * 
 	 * @param position
 	 *            - vi tri cuat item cần sinh ra
 	 * @param side
 	 *            - cạnh lưới ô vuông của map đang vẽ
-	 * @return một item map đ�?vẽ
+	 * @return một item map để vẽ
 	 */
 	public abstract ItemMap generateItem(Point position, int side);
 
 	/**
-	 * Hiển th?�?menu của Button ra đ�?người dùng chọn.
+	 * Hiển thị menu của Button ra để người dùng chọn.
 	 */
 	public void showmenu() {
 		if (itemLayer != null) {

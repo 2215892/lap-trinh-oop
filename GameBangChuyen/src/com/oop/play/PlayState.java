@@ -42,6 +42,7 @@ import com.oop.play.objects.PlaySquare;
 import com.oop.play.objects.PlaySwitch;
 import com.oop.play.objects.PlayTerminal;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PlayState.
  */
@@ -86,12 +87,18 @@ public class PlayState extends GameState {
 
 	private int highscore = -1;
 
+	/** The rnd. */
 	Random rnd = new Random();
+	
 	/**
 	 * Instantiates a new play state.
 	 * 
 	 * @param panel
 	 *            the parent
+	 * @param lastState
+	 *            the last state
+	 * @param map
+	 *            the map
 	 */
 	public PlayState(final GamePanel panel, final GameState lastState,
 			final ModelMap map) {
@@ -109,6 +116,20 @@ public class PlayState extends GameState {
 
 	private int nextId = -1;
 
+	/**
+	 * Instantiates a new play state.
+	 * 
+	 * @param panel
+	 *            the panel
+	 * @param lastState
+	 *            the last state
+	 * @param map
+	 *            the map
+	 * @param highscore
+	 *            the highscore
+	 * @param nextID
+	 *            the next id
+	 */
 	public PlayState(final GamePanel panel, final GameState lastState,
 			final ModelMap map, int highscore, int nextID) {
 		this(panel, lastState, map);

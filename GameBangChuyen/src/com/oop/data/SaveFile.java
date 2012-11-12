@@ -19,9 +19,10 @@ import org.w3c.dom.NodeList;
 
 import com.oop.model.Helper;
 
+// TODO: Auto-generated Javadoc
 /**
  * Lớp SaveFile. Quản lý việc lưu, nạp save file, đọc thông tin, ghi thông tin
- * từ save file. Luôn ch�?có một đối tượng SaveFile.
+ * từ save file. Luôn chỉ có một đối tượng SaveFile.
  */
 public class SaveFile extends XmlReader {
 
@@ -33,8 +34,8 @@ public class SaveFile extends XmlReader {
 	}
 
 	/** Đường dẫn đến file save. */
-	public final static String fileDir = Helper
-			.getCurrentDirectory() + "save//save.xml";
+	public final static String fileDir = Helper.getCurrentDirectory()
+			+ "save//save.xml";
 
 	private static SaveFile instance;
 	static {
