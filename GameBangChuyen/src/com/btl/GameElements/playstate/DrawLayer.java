@@ -8,6 +8,10 @@ import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.Model.ModelObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DrawLayer.
+ */
 public class DrawLayer extends Layer {
 
 	private class ObjComparator implements Comparator<Drawable> {
@@ -30,10 +34,21 @@ public class DrawLayer extends Layer {
 		}
 	}
 
+	/**
+	 * Instantiates a new draw layer.
+	 * 
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 */
 	public DrawLayer(int width, int height) {
 		super(width, height);
 	}
 
+	/**
+	 * Sort.
+	 */
 	public void sort() {
 		Collections.sort(this.listDrawable, new ObjComparator());
 	}

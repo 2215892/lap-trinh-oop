@@ -7,6 +7,7 @@ import com.btl.GameBoard.GamePanel;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.data.ButtonImage;
 import com.btl.data.ItemImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này mục đích cung cấp các hằng số và các đối tượng khởi tạo cho class
@@ -95,6 +96,9 @@ public class MapCreationManager {
 
 	/**
 	 * Hàm khởi tạo đối tượng MapCreationManager.
+	 * 
+	 * @param parent
+	 *            the parent
 	 */
 	public MapCreationManager(GamePanel parent) {
 		itemListLayer = new DrawLayer[4];

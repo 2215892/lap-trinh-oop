@@ -16,15 +16,29 @@ import com.btl.data.OtherImage;
 import com.btl.data.SaveFile;
 import com.btl.data.SoundEffect;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MapSelect.
+ */
 public class MapSelect extends GameState {
 
 	private SaveFile saveFile = SaveFile.create();
+	
+	/** The Constant LEVEL_COUNT. */
 	public static final int LEVEL_COUNT = 15;
 	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
 	private Button btnBack;
 	private Layer layer;
 	private boolean needUpdate = false;
 
+	/**
+	 * Instantiates a new map select.
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param lastState
+	 *            the last state
+	 */
 	public MapSelect(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
 
@@ -48,22 +62,36 @@ public class MapSelect extends GameState {
 		btnBack.setImage(ButtonImage.BTN_BACK);
 		layer.addDrawable(btnBack);
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		Button clicked = (Button) layer.getClickedObj(new Point(arg0.getX(),
@@ -95,12 +123,19 @@ public class MapSelect extends GameState {
 		}
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 */
 	@Override
 	public void gameRender(Graphics g) {
 
@@ -116,6 +151,10 @@ public class MapSelect extends GameState {
 		g.drawImage(layer.getLayer(), 0, 0, null);
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#update()
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

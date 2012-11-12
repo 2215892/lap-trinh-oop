@@ -13,8 +13,19 @@ import org.w3c.dom.NodeList;
 
 import com.btl.data.XmlReader;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelMap.
+ */
 public class ModelMap extends XmlReader {
 
+	/**
+	 * Creates the map.
+	 * 
+	 * @param fileDir
+	 *            the file dir
+	 * @return the model map
+	 */
 	public static ModelMap createMap(final String fileDir) {
 		ModelMap map = new ModelMap();
 		try {
@@ -42,49 +53,116 @@ public class ModelMap extends XmlReader {
 
 	}
 
+	/**
+	 * Gets the list factory.
+	 * 
+	 * @return the list factory
+	 */
 	public ArrayList<ModelFactory> getListFactory() {
 		return listFactory;
 	}
 
+	/**
+	 * Gets the list item.
+	 * 
+	 * @return the list item
+	 */
 	public ArrayList<ModelItem> getListItem() {
 		return listItem;
 	}
 
+	/**
+	 * Gets the list switch.
+	 * 
+	 * @return the list switch
+	 */
 	public ArrayList<ModelSwitch> getListSwitch() {
 		return listSwitch;
 	}
 
+	/**
+	 * Gets the list terminal.
+	 * 
+	 * @return the list terminal
+	 */
 	public ArrayList<ModelTerminal> getListTerminal() {
 		return listTerminal;
 	}
 
+	/**
+	 * Gets the minute.
+	 * 
+	 * @return the minute
+	 */
 	public int getMinute() {
 		return minute;
 	}
 
+	/**
+	 * Gets the second.
+	 * 
+	 * @return the second
+	 */
 	public int getSecond() {
 		return second;
 	}
 
+	/**
+	 * Sets the list factory.
+	 * 
+	 * @param listFactory
+	 *            the new list factory
+	 */
 	public void setListFactory(ArrayList<ModelFactory> listFactory) {
 		this.listFactory = listFactory;
 	}
+	
+	/**
+	 * Sets the list item.
+	 * 
+	 * @param listItem
+	 *            the new list item
+	 */
 	public void setListItem(ArrayList<ModelItem> listItem) {
 		this.listItem = listItem;
 	}
 
+	/**
+	 * Sets the list switch.
+	 * 
+	 * @param listSwitch
+	 *            the new list switch
+	 */
 	public void setListSwitch(ArrayList<ModelSwitch> listSwitch) {
 		this.listSwitch = listSwitch;
 	}
 
+	/**
+	 * Sets the list terminal.
+	 * 
+	 * @param listTerminal
+	 *            the new list terminal
+	 */
 	public void setListTerminal(ArrayList<ModelTerminal> listTerminal) {
 		this.listTerminal = listTerminal;
 	}
 
+	/**
+	 * Sets the minute.
+	 * 
+	 * @param minute
+	 *            the new minute
+	 */
 	public void setMinute(int minute) {
 		this.minute = minute;
 	}
 
+	/**
+	 * Sets the second.
+	 * 
+	 * @param second
+	 *            the new second
+	 */
 	public void setSecond(int second) {
 		this.second = second;
 	}

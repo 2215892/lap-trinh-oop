@@ -12,6 +12,7 @@ public abstract class GameState implements MouseListener {
 	/** The parent. */
 	protected GamePanel parent;
 
+	/** The last state. */
 	protected GameState lastState;
 
 	/**
@@ -19,12 +20,20 @@ public abstract class GameState implements MouseListener {
 	 * 
 	 * @param parent
 	 *            the parent
+	 * @param lastState
+	 *            the last state
 	 */
 	public GameState(GamePanel parent, GameState lastState) {
 		this.parent = parent;
 		this.lastState = lastState;
 	}
 
+	/**
+	 * Change state.
+	 * 
+	 * @param state
+	 *            the state
+	 */
 	public void changeState(GameState state) {
 		parent.setState(state);
 	}

@@ -13,10 +13,19 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	/** The position. */
 	protected Point position;
 
+	/**
+	 * Instantiates a new model terminal.
+	 */
 	public ModelTerminal() {
 		type = 1;
 	}
 
+	/**
+	 * Instantiates a new model terminal.
+	 * 
+	 * @param terminal
+	 *            the terminal
+	 */
 	public ModelTerminal(final ModelTerminal terminal) {
 		this.position = terminal.getPosition();
 		this.setType(terminal.getType());
@@ -44,22 +53,50 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 		return position;
 	}
 
+	/**
+	 * Gets the type.
+	 * 
+	 * @return the type
+	 */
 	public int getType() {
 		return type;
 	}
 
+	/**
+	 * Sets the type.
+	 * 
+	 * @param type
+	 *            the new type
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
 
+	/**
+	 * Sets the position.
+	 * 
+	 * @param position
+	 *            the new position
+	 */
 	protected void setPosition(Point position) {
 		this.position = position;
 	}
 
+	/**
+	 * Gets the box count.
+	 * 
+	 * @return the box count
+	 */
 	public int getBoxCount() {
 		return boxCount;
 	}
 
+	/**
+	 * Sets the box count.
+	 * 
+	 * @param boxCount
+	 *            the new box count
+	 */
 	public void setBoxCount(int boxCount) {
 		this.boxCount = boxCount;
 	}

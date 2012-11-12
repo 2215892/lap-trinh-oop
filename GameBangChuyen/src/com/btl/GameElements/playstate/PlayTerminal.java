@@ -13,7 +13,13 @@ import com.btl.Model.ModelTerminal;
 import com.btl.Model.RandomEnum;
 import com.btl.data.DirectionImage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlayTerminal.
+ */
 public class PlayTerminal extends ModelTerminal implements Drawable {
+	
+	/** The Constant SIZE. */
 	public static final int SIZE = PlaySquare.SIZE;
 	private static BufferedImage picture = DirectionImage.SQUARE;;
 	private static RandomEnum<TerminalColor> rnd = new RandomEnum<TerminalColor>(
@@ -23,6 +29,12 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	private boolean isWaiting = true;
 
+	/**
+	 * Instantiates a new play terminal.
+	 * 
+	 * @param terminal
+	 *            the terminal
+	 */
 	public PlayTerminal(ModelTerminal terminal) {
 		super(terminal);
 
@@ -46,10 +58,23 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		}
 	}
 
+	/**
+	 * Instantiates a new play terminal.
+	 * 
+	 * @param p
+	 *            the p
+	 */
 	public PlayTerminal(Point p) {
 		super(p);
 	}
 
+	/**
+	 * Box arrived.
+	 * 
+	 * @param box
+	 *            the box
+	 * @return true, if successful
+	 */
 	public boolean boxArrived(PlayBox box) {
 		if (box.getColor() == this.getColor()) {
 			this.setBoxCount(this.getBoxCount() - 1);
@@ -72,6 +97,10 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 		}
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
 	@Override
 	public boolean contains(Point point) {
 		Point logicCoordinate = ConversionFunction.locationToPosition(point,
@@ -82,14 +111,28 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 		return false;
 	}
+	
+	/**
+	 * Gets the color.
+	 * 
+	 * @return the color
+	 */
 	public TerminalColor getColor() {
 		return color;
 	}
 
+	/**
+	 * Checks if is waiting.
+	 * 
+	 * @return true, if is waiting
+	 */
 	public boolean isWaiting() {
 		return isWaiting;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 
@@ -102,14 +145,29 @@ public class PlayTerminal extends ModelTerminal implements Drawable {
 
 	}
 
+	/**
+	 * Sets the color.
+	 * 
+	 * @param color
+	 *            the new color
+	 */
 	public void setColor(TerminalColor color) {
 		this.color = color;
 	}
 
+	/**
+	 * Sets the waiting.
+	 * 
+	 * @param isWaiting
+	 *            the new waiting
+	 */
 	public void setWaiting(boolean isWaiting) {
 		this.isWaiting = isWaiting;
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		Graphics2D g2 = (Graphics2D) buffer.getGraphics();
 

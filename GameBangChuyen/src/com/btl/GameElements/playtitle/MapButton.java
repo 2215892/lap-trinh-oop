@@ -12,11 +12,25 @@ import com.btl.GameElements.playstate.Button;
 import com.btl.data.ButtonImage;
 import com.btl.data.SaveFile;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MapButton.
+ */
 public class MapButton extends Button {
 
 	private int id;
 	private boolean isLock;
 
+	/**
+	 * Instantiates a new map button.
+	 * 
+	 * @param p
+	 *            the p
+	 * @param id
+	 *            the id
+	 * @param isLock
+	 *            the is lock
+	 */
 	public MapButton(Point p, int id, boolean isLock) {
 		super(p);
 		setId(id);
@@ -25,6 +39,9 @@ public class MapButton extends Button {
 		update();
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		this.setLock(SaveFile.create().getLock(getId()));
 		BufferedImage temp;
@@ -55,18 +72,41 @@ public class MapButton extends Button {
 		g.dispose();
 		this.setImage(img);
 	}
+	
+	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 * 
+	 * @param id
+	 *            the new id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Checks if is lock.
+	 * 
+	 * @return true, if is lock
+	 */
 	public boolean isLock() {
 		return isLock;
 	}
 
+	/**
+	 * Sets the lock.
+	 * 
+	 * @param isLock
+	 *            the new lock
+	 */
 	public void setLock(boolean isLock) {
 		this.isLock = isLock;
 	}

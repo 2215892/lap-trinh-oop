@@ -19,11 +19,23 @@ import com.btl.data.ButtonImage;
 import com.btl.data.OtherImage;
 import com.btl.data.SoundEffect;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StartGameTitle.
+ */
 public class StartGameTitle extends GameState {
 
 	private Button btnCampaign, btnCustom, btnBack;
 	private Layer layer;
 
+	/**
+	 * Instantiates a new start game title.
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param lastState
+	 *            the last state
+	 */
 	public StartGameTitle(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
 		initialize();
@@ -31,13 +43,13 @@ public class StartGameTitle extends GameState {
 
 	private void initialize() {
 		layer = new Layer(parent.width, parent.height);
-		layer.setBackground(OtherImage.BG);
+		layer.setBackground(OtherImage.TITLE_BG);
 
-		btnCampaign = new Button(new Point(245, 100));
+		btnCampaign = new Button(new Point(245, 250));
 		btnCampaign.setImage(ButtonImage.BTN_CAMPAIGN);
-		btnCustom = new Button(new Point(245, 160));
+		btnCustom = new Button(new Point(245, 300));
 		btnCustom.setImage(ButtonImage.BTN_CUSTOM_GAME);
-		btnBack = new Button(new Point(245, 220));
+		btnBack = new Button(new Point(245, 350));
 		btnBack.setImage(ButtonImage.BTN_BACK);
 
 		layer.addDrawable(btnBack);
@@ -46,24 +58,44 @@ public class StartGameTitle extends GameState {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Button clicked = (Button) layer.getClickedObj(new Point(e.getX(), e
@@ -96,12 +128,23 @@ public class StartGameTitle extends GameState {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 */
 	@Override
 	public void gameRender(Graphics g) {
 		layer.render();
@@ -109,6 +152,11 @@ public class StartGameTitle extends GameState {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.btl.GameBoard.GameState#update()
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

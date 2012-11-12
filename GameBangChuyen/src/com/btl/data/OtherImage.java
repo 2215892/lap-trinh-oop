@@ -15,9 +15,13 @@ public abstract class OtherImage {
 
 	/** The Constant BG. */
 	public final static BufferedImage BG = ConversionFunction.loadImage(RES_DIR
-			+ "BG.bmp");
+			+ "BG.png");
 
 	/** The Constant ICON. */
 	public final static BufferedImage ICON = ConversionFunction
 			.loadImage(RES_DIR + "ICON.png");
+
+	/** The Constant TITLE_BG. */
+	public final static BufferedImage TITLE_BG = ConversionFunction
+			.loadImage(RES_DIR + "TITLE_BG.png");
 }

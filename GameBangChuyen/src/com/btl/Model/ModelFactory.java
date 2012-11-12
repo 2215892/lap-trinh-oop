@@ -13,10 +13,19 @@ public class ModelFactory extends GraphNode implements ModelObject {
 	/** The position. */
 	protected Point position;
 
+	/**
+	 * Instantiates a new model factory.
+	 */
 	public ModelFactory() {
 
 	}
 
+	/**
+	 * Instantiates a new model factory.
+	 * 
+	 * @param factory
+	 *            the factory
+	 */
 	public ModelFactory(final ModelFactory factory) {
 
 		this.setPosition(factory.getPosition());
@@ -33,6 +42,14 @@ public class ModelFactory extends GraphNode implements ModelObject {
 		setPosition(p);
 	}
 
+	/**
+	 * Instantiates a new model factory.
+	 * 
+	 * @param p
+	 *            the p
+	 * @param d
+	 *            the d
+	 */
 	public ModelFactory(final Point p, final Direction d) {
 		setPosition(p);
 		setDirection(d);

@@ -17,12 +17,19 @@ import com.btl.data.DirectionImage;
  */
 public class PlayFactory extends ModelFactory implements Drawable {
 
+	/** The Constant SIZE. */
 	public static final int SIZE = PlaySquare.SIZE;
 
 	private static BufferedImage picture;
 	private static Random rnd = new Random();
 	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
 
+	/**
+	 * Instantiates a new play factory.
+	 * 
+	 * @param factory
+	 *            the factory
+	 */
 	public PlayFactory(final ModelFactory factory) {
 		super(factory);
 	}
@@ -37,6 +44,12 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		super(p);
 	}
 
+	/**
+	 * Adds the terminal.
+	 * 
+	 * @param terminal
+	 *            the terminal
+	 */
 	public void addTerminal(PlayTerminal terminal) {
 		if (terminal.getColor() != TerminalColor.DEFAULT)
 			this.listTerminals.add(terminal);
@@ -57,6 +70,11 @@ public class PlayFactory extends ModelFactory implements Drawable {
 		return false;
 	}
 
+	/**
+	 * Make box.
+	 * 
+	 * @return the play box
+	 */
 	public PlayBox makeBox() {
 
 		ArrayList<PlayTerminal> terminalWaiting = new ArrayList<PlayTerminal>();

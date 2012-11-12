@@ -22,6 +22,7 @@ import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
 import com.btl.data.ItemImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
@@ -450,7 +451,7 @@ public class AuxiliaryFunction {
 
 	/**
 	 * Hàm chuyển đổi giữa entryPoint(trong ItemMap) và nearestPoint (trong
-	 * ItemMap)
+	 * ItemMap).
 	 * 
 	 * @param nearestPoint
 	 *            the nearest point
@@ -684,7 +685,7 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa
+	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa.
 	 * 
 	 * @param map
 	 *            - map đang vẽ

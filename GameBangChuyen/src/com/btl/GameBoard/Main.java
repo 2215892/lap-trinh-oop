@@ -2,12 +2,13 @@ package com.btl.GameBoard;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
+
 import com.btl.GameElements.playtitle.GameTitle;
 import com.btl.data.OtherImage;
 import com.btl.data.SoundEffect;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
  */
@@ -56,7 +57,7 @@ public class Main {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		frame.setResizable(false);
 		frame.pack();
-		panel.setState(new GameTitle(panel,null));
+		panel.setState(new GameTitle(panel, null));
 
 		frame.setLocationRelativeTo(null);
 

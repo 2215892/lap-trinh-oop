@@ -9,6 +9,7 @@ import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 import com.btl.Model.ModelSwitch;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
@@ -62,6 +63,9 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -157,6 +161,9 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

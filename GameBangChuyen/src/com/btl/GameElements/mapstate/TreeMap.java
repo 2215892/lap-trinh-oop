@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import com.btl.Model.AuxiliaryFunction;
 import com.btl.Model.ConversionFunction;
 import com.btl.data.ItemImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
@@ -40,6 +41,9 @@ public class TreeMap extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#calculateTopLeft()
+	 */
 	@Override
 	protected void calculateTopLeft() {
 		// TODO Auto - generated method stub
@@ -53,6 +57,9 @@ public class TreeMap extends ItemMap {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -71,6 +78,9 @@ public class TreeMap extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#contains(java.awt.Point)
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#contains(java.awt.Point)
+	 */
 	@Override
 	public boolean contains(Point p) {
 		// TODO Auto - generated method stub
@@ -82,6 +92,9 @@ public class TreeMap extends ItemMap {
 	 * 
 	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#calculateNearestPoint()
+	 */
 	@Override
 	protected void calculateNearestPoint() {
 		// TODO tinh diem gan nhat
@@ -91,6 +104,9 @@ public class TreeMap extends ItemMap {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ItemMap#identifyImageType()
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#identifyImageType()
 	 */
 	@Override
 	public void identifyImageType() {
@@ -103,6 +119,9 @@ public class TreeMap extends ItemMap {
 	 * @see
 	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
 	 * )
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ItemMap#calculateValidation(com.btl.GameElements.mapstate.MapCreation)
 	 */
 	@Override
 	public void calculateValidation(MapCreation map) {

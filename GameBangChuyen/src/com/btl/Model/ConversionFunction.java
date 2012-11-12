@@ -10,11 +10,19 @@ import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ConversionFunction.
  */
 public abstract class ConversionFunction {
 
+	/**
+	 * Flip horizontally.
+	 * 
+	 * @param pic
+	 *            the pic
+	 * @return the buffered image
+	 */
 	public static BufferedImage flipHorizontally(BufferedImage pic) {
 		BufferedImage img = new BufferedImage(pic.getWidth(null),
 				pic.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -42,6 +50,15 @@ public abstract class ConversionFunction {
 		return img;
 	}
 
+	/**
+	 * Location to position.
+	 * 
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
+	 * @return the point
+	 */
 	public static Point locationToPosition(Point location, int size) {
 		int x = (location.x + 2 * location.y) / 2;
 		int y = (location.x - 2 * location.y) / 2;
@@ -65,15 +82,27 @@ public abstract class ConversionFunction {
 		Double uy = (double) (t.x - t.y) / 2;
 		return new Point(ux.intValue(), uy.intValue());
 	}
+	
+	/**
+	 * Position to location.
+	 * 
+	 * @param position
+	 *            the position
+	 * @param size
+	 *            the size
+	 * @return the point
+	 */
 	public static Point positionToLocation(Point position, int size) {
 		return new Point((position.x + position.y) * size,
 				(position.x - position.y) * size / 2);
 	}
 
 	/**
+	 * Real to logic.
 	 * 
 	 * @param t
 	 *            : point in real axis
+	 * @return the point
 	 * @return: point in logic axis
 	 */
 	public static Point realToLogic(Point t) {
@@ -83,6 +112,11 @@ public abstract class ConversionFunction {
 		return new Point(ux.intValue(), uy.intValue());
 	}
 
+	/**
+	 * Gets the current directory.
+	 * 
+	 * @return the current directory
+	 */
 	public static String getCurrentDirectory() {
 		String decodedPath = null;
 		try {

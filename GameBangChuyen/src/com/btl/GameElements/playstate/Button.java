@@ -13,9 +13,15 @@ import com.btl.GameEngine.Drawable;
 public class Button implements Drawable {
 
 	private BufferedImage originImg;
+	
+	/** The img. */
 	protected BufferedImage img;
 	private Point position;
+	
+	/** The width. */
 	protected int width;
+	
+	/** The height. */
 	protected int height;
 
 	/**
@@ -30,6 +36,9 @@ public class Button implements Drawable {
 		this.height = 0;
 	}
 
+	/**
+	 * Instantiates a new button.
+	 */
 	public Button() {
 		this.setPosition(new Point(0, 0));
 		this.width = 0;
@@ -71,6 +80,9 @@ public class Button implements Drawable {
 			return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (img != null)
@@ -108,15 +120,32 @@ public class Button implements Drawable {
 
 	}
 
+	/**
+	 * Sets the image.
+	 * 
+	 * @param img
+	 *            the new image
+	 */
 	public void setImage(BufferedImage img) {
 		if (img != null)
 			setImage(img, img.getWidth(), img.getHeight());
 	}
 
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
 	public Point getPosition() {
 		return position;
 	}
 
+	/**
+	 * Sets the position.
+	 * 
+	 * @param position
+	 *            the new position
+	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}

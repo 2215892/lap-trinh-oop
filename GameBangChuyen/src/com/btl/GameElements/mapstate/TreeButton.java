@@ -2,6 +2,7 @@ package com.btl.GameElements.mapstate;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
@@ -33,6 +34,9 @@ public class TreeButton extends ButtonForDraw {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.ButtonForDraw#generateItem(java.awt.Point, int)
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ButtonForDraw#generateItem(java.awt.Point, int)
 	 */
 	@Override
 	public ItemMap generateItem(Point position, int side) {

@@ -32,6 +32,7 @@ import com.btl.Model.ModelTerminal;
 import com.btl.data.ItemImage;
 import com.btl.data.OtherImage;
 
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * đây là class dùng để vẽ map cho game, người chơi dùng chuột để chọn những thứ
@@ -124,6 +125,8 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @param parent
 	 *            - the parent
+	 * @param lastState
+	 *            the last state
 	 */
 	public MapCreation(GamePanel parent, GameState lastState) {
 		super(parent, lastState);
@@ -190,6 +193,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameBoard.GameState#update()
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameBoard.GameState#update()
 	 */
 	@Override
@@ -296,6 +302,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		mX = e.getX();
@@ -358,6 +367,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto - generated method stub
@@ -367,6 +379,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
+	/* (non-Javadoc)
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -393,6 +408,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
+	/* (non-Javadoc)
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -575,6 +593,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @see
 	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO something
@@ -587,6 +608,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @see
 	 * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent
 	 * )
+	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -797,6 +821,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * @see
 	 * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
 	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		/* khi load xong map move moi co hieu luc */
@@ -909,6 +936,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
 	 */
 	@Override
@@ -1315,6 +1345,9 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		return squareCovedList;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#changeState(com.btl.GameBoard.GameState)
+	 */
 	@Override
 	public void changeState(GameState state) {
 		parent.removeMouseMotionListener(this);
@@ -1322,6 +1355,11 @@ public class MapCreation extends GameState implements MouseMotionListener {
 
 	}
 
+	/**
+	 * Gets the parent.
+	 * 
+	 * @return the parent
+	 */
 	public GamePanel getParent() {
 		// TODO Auto-generated method stub
 		return parent;

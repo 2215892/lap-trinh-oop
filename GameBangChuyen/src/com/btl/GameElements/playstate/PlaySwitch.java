@@ -21,11 +21,14 @@ import com.btl.data.DirectionImage;
  */
 public class PlaySwitch extends ModelSwitch implements Drawable {
 
+	/** The Constant PICCOUNT. */
 	public static final int PICCOUNT = PlaySquare.PICCOUNT;
 	/** The Constant SIZE. */
 	public final static int SIZE = 16;
 	private final static int HEIGHT = 50;
 	private final static int WIDTH = 60;
+	
+	/** The picture. */
 	public BufferedImage picture = null;
 	private BufferedImage buffer = null;
 
@@ -33,6 +36,12 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 
 	private int picIndex = 0;
 
+	/**
+	 * Instantiates a new play switch.
+	 * 
+	 * @param mSwitch
+	 *            the m switch
+	 */
 	public PlaySwitch(ModelSwitch mSwitch) {
 		super(mSwitch);
 	}
@@ -45,6 +54,13 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 	public PlaySwitch(Point p) {
 		super(p);
 	}
+	
+	/**
+	 * Adds the input.
+	 * 
+	 * @param d
+	 *            the d
+	 */
 	public void addInput(final Direction d) {
 		this.input.add(d);
 	}
@@ -65,6 +81,11 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 		return false;
 	}
 
+	/**
+	 * Gets the list input.
+	 * 
+	 * @return the list input
+	 */
 	public ArrayList<Direction> getListInput() {
 		return this.input;
 	}
@@ -84,6 +105,9 @@ public class PlaySwitch extends ModelSwitch implements Drawable {
 
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		if (this.picture == null) {
 			initPicture();

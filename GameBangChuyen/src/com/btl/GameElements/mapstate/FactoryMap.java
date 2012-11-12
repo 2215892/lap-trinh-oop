@@ -8,6 +8,7 @@ import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelFactory;
 import com.btl.Model.ModelObject;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 
 /**
@@ -56,6 +57,9 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (outlet)
@@ -68,6 +72,9 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

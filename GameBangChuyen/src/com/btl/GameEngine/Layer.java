@@ -17,6 +17,7 @@ public class Layer {
 	private boolean isVisible = true;
 	private int width, height;
 
+	/** The list drawable. */
 	protected ArrayList<Drawable> listDrawable;
 
 	/**
@@ -79,6 +80,12 @@ public class Layer {
 		} else
 			return null;
 	}
+	
+	/**
+	 * Gets the list drawable.
+	 * 
+	 * @return the list drawable
+	 */
 	public ArrayList<Drawable> getListDrawable() {
 		return this.listDrawable;
 	}
@@ -139,6 +146,12 @@ public class Layer {
 		this.isVisible = true;
 	}
 
+	/**
+	 * Sets the background.
+	 * 
+	 * @param background
+	 *            the new background
+	 */
 	public void setBackground(BufferedImage background) {
 		this.background = background;
 	}

@@ -18,6 +18,8 @@ import com.btl.data.DirectionImage;
  * The Class PlaySquare.
  */
 public class PlaySquare implements Drawable, ModelObject {
+	
+	/** The Constant PICCOUNT. */
 	public static final int PICCOUNT = 8;
 	/** The Constant SIZE. */
 	public final static int SIZE = PlaySwitch.SIZE;
@@ -52,6 +54,9 @@ public class PlaySquare implements Drawable, ModelObject {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.Model.ModelObject#getPosition()
+	 */
 	@Override
 	public Point getPosition() {
 		return this.position;
@@ -71,6 +76,9 @@ public class PlaySquare implements Drawable, ModelObject {
 
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		if (this.picture == null)
 			this.picture = DirectionImage.SQUARE;

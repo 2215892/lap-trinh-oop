@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ModelObject;
 import com.btl.data.ItemImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này là abtract class cha của tất cả các class của các đối tượng hình
@@ -134,6 +135,9 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
 	@Override
 	public abstract boolean contains(Point p);
 
@@ -147,6 +151,9 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.Model.ModelObject#getPosition()
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.Model.ModelObject#getPosition()
 	 */
 	@Override

@@ -296,9 +296,9 @@ public class PlayState extends GameState {
 				id = MapSelect.LEVEL_COUNT;
 			else {
 				id = nextId - 1;
-				if ((isFullBox && listBoxs.size() == 0)) {
+				if (!((isFullBox && listBoxs.size() == 0))) {
 					saveFile.setLock(nextId, false);
-					gameOverMenuLayer.addDrawable(btnNextLevel);
+					gameOverMenuLayer.removeDrawable(btnNextLevel);
 				}
 			}
 
@@ -708,6 +708,7 @@ public class PlayState extends GameState {
 
 		pauseMenuLayer.setBackground(tempImage);
 
+		gameOverMenuLayer.addDrawable(btnNextLevel);
 		gameOverMenuLayer.addDrawable(btnReplay);
 		gameOverMenuLayer.addDrawable(btnEndGame);
 		gameOverMenuLayer.addDrawable(temp);

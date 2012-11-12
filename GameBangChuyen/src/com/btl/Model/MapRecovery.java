@@ -34,6 +34,7 @@ public class MapRecovery {
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
 
+	/** The map. */
 	MapCreation map;
 
 	/**
@@ -184,10 +185,6 @@ public class MapRecovery {
 	 *            - truyền vào hàm khởi tạo
 	 * @param terminalLayer
 	 *            - truyền vào hàm khởi tạo
-	 * @param width
-	 *            the width - truyền vào hàm khởi tạo
-	 * @param height
-	 *            the height - truyền vào hàm khởi tạo
 	 * @param map
 	 *            the map - truyền vào hàm khởi tạo
 	 * @return map đối tượng khởi tạo

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này mục đich tạo ra các đối tượng button phục vụ cho việc vẽ ra màn

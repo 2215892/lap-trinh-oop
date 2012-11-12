@@ -7,6 +7,7 @@ import java.awt.Point;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.ModelTerminal;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này là đối tượng terminal trong map vẽ, được kế thừa từ ModelTerminal
@@ -49,6 +50,9 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(terminalColor);
@@ -58,6 +62,9 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

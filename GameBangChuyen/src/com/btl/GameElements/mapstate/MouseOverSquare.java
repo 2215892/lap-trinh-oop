@@ -6,6 +6,7 @@ import java.awt.Point;
 
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này định nghĩa đối tượng hiện thị phản ánh tính vẽ được hay không tại
@@ -57,6 +58,9 @@ public class MouseOverSquare implements Drawable {
 	 * 
 	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
 	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (isValid)
@@ -80,6 +84,9 @@ public class MouseOverSquare implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/* (non-Javadoc)
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	@Override

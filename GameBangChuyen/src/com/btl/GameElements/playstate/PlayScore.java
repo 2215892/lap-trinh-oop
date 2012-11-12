@@ -12,6 +12,10 @@ import java.util.Random;
 import com.btl.GameEngine.Drawable;
 import com.btl.Model.ConversionFunction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlayScore.
+ */
 public class PlayScore implements Drawable {
 
 	private static Random rnd = new Random();
@@ -23,33 +27,66 @@ public class PlayScore implements Drawable {
 	private Point position;
 
 	private int score;
+	
+	/**
+	 * Instantiates a new play score.
+	 */
 	public PlayScore() {
 		this.height = 20 + rnd.nextInt(25);
 	}
 
+	/**
+	 * Instantiates a new play score.
+	 * 
+	 * @param position
+	 *            the position
+	 * @param score
+	 *            the score
+	 */
 	public PlayScore(Point position, int score) {
 		this();
 		this.setPosition(position);
 		this.setScore(score);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
 	@Override
 	public boolean contains(Point point) {
 		return false;
 	}
 
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
 	public Point getPosition() {
 		return position;
 	}
 
+	/**
+	 * Gets the score.
+	 * 
+	 * @return the score
+	 */
 	public int getScore() {
 		return this.score;
 	}
 
+	/**
+	 * Checks if is done.
+	 * 
+	 * @return true, if is done
+	 */
 	public boolean isDone() {
 		return isDone;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (!isDone) {
@@ -82,9 +119,22 @@ public class PlayScore implements Drawable {
 		}
 	}
 
+	/**
+	 * Sets the position.
+	 * 
+	 * @param position
+	 *            the new position
+	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}
+	
+	/**
+	 * Sets the score.
+	 * 
+	 * @param score
+	 *            the new score
+	 */
 	public void setScore(int score) {
 		this.score = score;
 	}

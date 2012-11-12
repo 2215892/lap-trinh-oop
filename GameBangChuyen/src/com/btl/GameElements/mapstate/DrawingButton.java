@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import com.btl.GameElements.playstate.Button;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này mục đích tạo ra các đối tượng button trong phần vẽ map này, tất cả
@@ -80,6 +81,9 @@ public class DrawingButton extends Button {
 	 * (non - Javadoc)
 	 * 
 	 * @see com.btl.GameElement.Button#paint(java.awt.Graphics)
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.playstate.Button#paint(java.awt.Graphics)
 	 */
 	@Override
 	public void paint(Graphics g) {

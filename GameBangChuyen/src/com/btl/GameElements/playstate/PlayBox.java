@@ -33,13 +33,14 @@ public class PlayBox implements Drawable, ModelObject {
 	public PlayBox() {
 
 	}
+	
 	/**
 	 * Instantiates a new play box.
 	 * 
 	 * @param location
 	 *            the location
-	 * @param flag
-	 *            the flag
+	 * @param color
+	 *            the color
 	 */
 	public PlayBox(Point location, TerminalColor color) {
 		this.setLocation(location);
@@ -57,6 +58,11 @@ public class PlayBox implements Drawable, ModelObject {
 		return false;
 	}
 
+	/**
+	 * Gets the color.
+	 * 
+	 * @return the color
+	 */
 	public TerminalColor getColor() {
 		return color;
 	}
@@ -70,12 +76,20 @@ public class PlayBox implements Drawable, ModelObject {
 		return location;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.Model.ModelObject#getPosition()
+	 */
 	@Override
 	public Point getPosition() {
 		return new Point(ConversionFunction.locationToPosition(this.location,
 				SIZE));
 	}
 
+	/**
+	 * Gets the step.
+	 * 
+	 * @return the step
+	 */
 	public int getStep() {
 		return step;
 	}
@@ -101,10 +115,23 @@ public class PlayBox implements Drawable, ModelObject {
 
 	}
 
+	/**
+	 * Sets the color.
+	 * 
+	 * @param color
+	 *            the new color
+	 */
 	public void setColor(TerminalColor color) {
 		this.color = color;
 	}
 
+	/**
+	 * Sets the destination.
+	 * 
+	 * @param position
+	 *            the position
+	 * @return true, if successful
+	 */
 	public boolean setDestination(final Point position) {
 		if (this.isMoving())
 			return false;
@@ -129,10 +156,19 @@ public class PlayBox implements Drawable, ModelObject {
 		this.location = location;
 	}
 
+	/**
+	 * Sets the step.
+	 * 
+	 * @param step
+	 *            the new step
+	 */
 	public void setStep(int step) {
 		this.step = step;
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		if (this.direction != null) {
 			switch (this.direction) {

@@ -20,11 +20,26 @@ import com.btl.GameElements.playstate.Button;
 import com.btl.Model.ConversionFunction;
 import com.btl.data.ButtonImage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class About.
+ */
 public class About extends GameState {
 	
 	private Button backButton ;
 	private JScrollPane aboutScroll;
 	private JTextArea aboutContent;
+	
+	/**
+	 * Instantiates a new about.
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param lastState
+	 *            the last state
+	 * @param name
+	 *            the name
+	 */
 	public About(GamePanel parent, GameState lastState,String name) {
 		super(parent, lastState);
 		backButton = new Button(new Point (0,0));
@@ -87,12 +102,18 @@ public class About extends GameState {
 		  return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (backButton.contains(new Point(e.getX(),e.getY()))){
@@ -101,36 +122,54 @@ public class About extends GameState {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#gameRender(java.awt.Graphics)
+	 */
 	@Override
 	public void gameRender(Graphics g) {
 		backButton.paint(g);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#update()
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.btl.GameBoard.GameState#changeState(com.btl.GameBoard.GameState)
+	 */
 	@Override
 	public void changeState(GameState state) {
 		parent.remove(aboutScroll);

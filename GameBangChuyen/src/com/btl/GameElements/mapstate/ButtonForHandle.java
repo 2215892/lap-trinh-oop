@@ -2,6 +2,7 @@ package com.btl.GameElements.mapstate;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+// TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
 /**
  * class này là các class cho các button điều khiển, ví dụ xóa, quay lai,
