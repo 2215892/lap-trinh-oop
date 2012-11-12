@@ -2,16 +2,14 @@ package com.btl.GameElements.mapstate;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-// TODO: Auto - generated Javadoc
-/**
- * class này là các class cho các button điều khiển, ví dụ xóa, quay lai,
- * save...
- * 
- * @author mai tien khai
- * 
- */
-public abstract class ButtonForHandle extends DrawingButton {
 
+import com.btl.Model.AuxiliaryFunction;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeleteButton.
+ */
+public class DeleteButton extends ButtonForHandle {
 	/**
 	 * Hàm khởi tạo của button.
 	 * 
@@ -24,15 +22,18 @@ public abstract class ButtonForHandle extends DrawingButton {
 	 * @param controlCode
 	 *            - mã điều khiển của Button
 	 */
-	public ButtonForHandle(Point p, BufferedImage normalImage,
+	public DeleteButton(Point p, BufferedImage normalImage,
 			BufferedImage activeImage, int controlCode) {
 		super(p, normalImage, activeImage, controlCode);
+		
 	}
-	/**
-	 * Chức năng của Button
-	 * @param map - map đang vẽ
+
+	/* (non-Javadoc)
+	 * @see com.btl.GameElements.mapstate.ButtonForHandle#handle(com.btl.GameElements.mapstate.MapCreation)
 	 */
-	public abstract void handle(MapCreation map);
-	
+	@Override
+	public void handle(MapCreation map) {
+		AuxiliaryFunction.handleMenuDelete(map);
+	}
 
 }

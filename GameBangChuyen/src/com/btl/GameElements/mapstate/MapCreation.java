@@ -7,28 +7,16 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import com.btl.GameBoard.GamePanel;
 import com.btl.GameBoard.GameState;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
-import com.btl.GameEngine.MapDeleting;
-import com.btl.GameEngine.MapSaving;
 import com.btl.Model.AuxiliaryFunction;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
-import com.btl.Model.MapRecovery;
-import com.btl.Model.ModelFactory;
-import com.btl.Model.ModelItem;
-import com.btl.Model.ModelMap;
-import com.btl.Model.ModelSwitch;
-import com.btl.Model.ModelTerminal;
 import com.btl.data.ItemImage;
 import com.btl.data.OtherImage;
 
@@ -238,54 +226,20 @@ public class MapCreation extends GameState implements MouseMotionListener {
 		}
 		menuLayer.render();
 		parent.repaint();
-		if (temp.getControlCode() == MapCreationManager.DELETEALL) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-			}
-			handleMenuDeleteAll();
-			temp.normalRender();
-			menuLayer.render();
+		if (instantButton instanceof ButtonForHandle){
+			ButtonForHandle tg = (ButtonForHandle)instantButton;
+			tg.handle(this);
 			parent.repaint();
-		} else if (temp.getControlCode() == MapCreationManager.SAVE) {
-			handleMenuSave();
-
-			instantButton.normalRender();
-			handleButtonList.get(0).activeRender();
-			menuLayer.render();
-			parent.repaint();
-			control = MapCreationManager.DEFAULT;
-		} else if (temp.getControlCode() == MapCreationManager.EDIT) {
-			handleEditMap();
-
-			instantButton.normalRender();
-			handleButtonList.get(0).activeRender();
-			menuLayer.render();
-			parent.repaint();
-			control = MapCreationManager.DEFAULT;
 		}
-
-		else if (temp.getControlCode() == MapCreationManager.BACK)
-			handleMenuBack();
-
-	}
-
+	} 
 	/**
-	 * Xử lý khi người chơi ấn nút Back
+	 * Đưa các Button về trạng thái ban đầu (Button chọn là Button)
 	 */
-	private void handleMenuBack() {
-		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */
-		if (!AuxiliaryFunction.isEmpty(this)) {
-
-			String message = "Luu thay doi truoc khi thoat? ";
-			int confirm = JOptionPane.showConfirmDialog(parent, message);
-			if (confirm == JOptionPane.OK_OPTION)
-				handleMenuSave();
-		}
-
-		changeState(lastState);
+	public void setInitialMenuState(){
+		handleButtonList.get(0).activeRender();
+		control = MapCreationManager.DEFAULT;
+		instantButton = handleButtonList.get(0);
+		menuLayer.render();
 	}
 
 	/** tọa độ của chuột ở tọa độ thực. */
@@ -441,8 +395,13 @@ public class MapCreation extends GameState implements MouseMotionListener {
 					handleBoxNumberInput(clickedTer);
 				last = active;
 				active = tg; // gan gia tri cua active cho o vua kich
-				if (control == MapCreationManager.DELETE)
-					handleMenuDelete();
+				if (control == MapCreationManager.DELETE){
+					//handleMenuDelete();
+					DeleteButton mButton = (DeleteButton)instantButton;
+					mButton.handle(this);
+					parent.repaint();
+				}
+					
 				else if (checkMenuHidden()) {
 					if ((control != MapCreationManager.DEFAULT)) {
 						if (instantButton instanceof ButtonForDraw) {
@@ -506,67 +465,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 			}
 		}
 
-	}
-
-	/**
-	 * xử lí khi mà ấn vào button DELETE.
-	 */
-	private void handleMenuDelete() {
-		Point temp = getSquare();
-		FactoryMap f = AuxiliaryFunction.findFactory(temp, factoryLayer);
-		SwitchMap sw = AuxiliaryFunction.findSwitch(temp, this.switchLayer);
-		TerminalMap t = AuxiliaryFunction.findTerminal(temp, terminalLayer);
-		/* goi manager de thuc thi quan ly viec MapCreationManager.DELETE */
-		MapDeleting deleteManager = new MapDeleting(this);
-
-		if (f != null) {
-			// thuc hien xoa cac switch di qua nha may va nha may
-			deleteManager.deleteFactory(f);
-		} else if (t != null) {
-			// thuc hien xoa cac MapCreationManager.TERMINAL
-			deleteManager.deleteTerminal(t);
-		} else if (sw != null) {
-			deleteManager.deleteSwitch(sw);
-		} else {
-
-			ItemMap item = AuxiliaryFunction.findItem(temp, itemMapLayer);
-			if (item != null)
-				deleteManager.deleteItemMap(item);
-		}
-		AuxiliaryFunction.showWrongSwitch(this);
-		AuxiliaryFunction.showWrongFactory(this);
-		switchLayer.render();
-		parent.repaint();
-	}
-
-	/**
-	 * xử lý xóa toàn bộ thông tin về map đang vẽ để vẽ lại từ đầu(khi ấn vào
-	 * button DELETEALL).
-	 */
-	private void handleMenuDeleteAll() {
-		/* hien thong bao ve viec xoa het */
-		String message = "neu an nut nay ban se phai ve lai tu dau ";
-		int option = JOptionPane.showConfirmDialog(parent, message);
-		switch (option) {
-		case JOptionPane.OK_OPTION:
-			deleteAll();
-			break;
-		default:
-			break;
-		}
-
-	}
-
-	/**
-	 * làm rỗng các Layer vẽ.
-	 */
-	private void deleteAll() {
-		itemMapLayer.emptyLayer();
-		terminalLayer.emptyLayer();
-		factoryLayer.emptyLayer();
-		switchLayer.emptyLayer();
-		squareCovedList.clear();
-		parent.repaint();
 	}
 
 	/*
@@ -1053,7 +951,7 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	 * 
 	 * @return điểm góc trái trên cùng của ô vuông trong lưới ô vuông ấn vào
 	 */
-	private Point getSquare() {
+	public Point getSquare() {
 		/* can phai luu y khi ma kich chuot vao phan menu thi return null */
 		if ((mX >= 0) && (mX <= parent.width) && (mY >= 0)
 				&& (mY <= 2 * MapCreationManager.MENU_HEIGHT)
@@ -1087,64 +985,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	}
 
 	/**
-	 * load dữ liệu từ file map muốn Edit.
-	 * 
-	 * @param fileName
-	 *            - đường dẫn tới file map
-	 */
-	private void loadElementFromFile(String fileName) {
-		ModelMap model = ModelMap.createMap(fileName);
-		ArrayList<ModelSwitch> switchFromFile = model.getListSwitch();
-		ArrayList<SwitchMap> temp = AuxiliaryFunction.loadSwitch(
-				switchFromFile, MapCreationManager.SQUARE_SIDE);
-		/* load switchMap vao switchLayer */
-		for (SwitchMap i : temp)
-			switchLayer.addDrawable(i);
-
-		ArrayList<ModelFactory> factoryFromFile = model.getListFactory();
-		ArrayList<FactoryMap> temp2 = AuxiliaryFunction.loadFactory(
-				factoryFromFile, MapCreationManager.SQUARE_SIDE);
-		/* load factoryMap vao factorylayer */
-		for (FactoryMap i : temp2)
-			factoryLayer.addDrawable(i);
-
-		ArrayList<ModelTerminal> terminalFromFile = model.getListTerminal();
-		ArrayList<TerminalMap> temp3 = AuxiliaryFunction.loadTerminal(
-				terminalFromFile, MapCreationManager.SQUARE_SIDE);
-		/* load terminalMap cao termianlLayer */
-		for (TerminalMap i : temp3)
-			terminalLayer.addDrawable(i);
-		ArrayList<ModelItem> itemList = model.getListItem();
-		/* lay ra cac terminalIcon tu listItem */
-		AuxiliaryFunction.loadDrawingLayer(itemMapLayer, itemList,
-				MapCreationManager.SQUARE_SIDE);
-		/* luu nhung o vuong bi phu lai */
-		for (Drawable i : factoryLayer.getListDrawable()) {
-			FactoryMap f = (FactoryMap) i;
-			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
-					itemMapLayer);
-			if (item != null) {
-				for (Point j : ItemImage.getSquareCovered(item.getImage(),
-						f.getPosition(), MapCreationManager.SQUARE_SIDE))
-					squareCovedList.add(j);
-			}
-
-		}
-		for (Drawable i : terminalLayer.getListDrawable()) {
-			TerminalMap f = (TerminalMap) i;
-			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
-					itemMapLayer);
-			if (item != null) {
-				for (Point j : ItemImage.getSquareCovered(item.getImage(),
-						f.getPosition(), MapCreationManager.SQUARE_SIDE))
-					squareCovedList.add(j);
-			}
-
-		}
-
-	}
-
-	/**
 	 * tìm Item mà ấn chuột vào (ví dụ cây cối, cỏ, xe tải ...)
 	 * 
 	 * @param p
@@ -1172,75 +1012,6 @@ public class MapCreation extends GameState implements MouseMotionListener {
 				return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Hàm xử lý file
-	 * 
-	 * @return true nếu map không bị lỗi
-	 */
-	// /////////// them doan nay vao
-	private boolean handleMenuSave() {
-		/* kiem tra xem co switch nao bi loi hay khong */
-		ArrayList<SwitchMap> wrongSwitch = AuxiliaryFunction.falseSwitch(this);
-		ArrayList<FactoryMap> wrongFactory = AuxiliaryFunction
-				.isolatedFactory(this);
-		if ((wrongSwitch.size() == 0) && (wrongFactory.size() == 0)) {
-			try {
-				/* tao ao giac an cho nguoi dung */
-				Thread.sleep(100);
-				System.out.println("da thuc hien sleep xong");
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-			}
-			MapSaving factoryEngine = new MapSaving(this, fileName);
-			fileName = factoryEngine.getFileName();
-			return true;
-		} else { // khi ma co switch bi loi, hien thi no nen
-			String message = "Loi khong the luu vi map co "
-					+ "nhung factory khong co cua ra hoac switch khong co diem den";
-			JOptionPane.showMessageDialog(parent, message, "action failed", 1);
-			return false;
-		}
-	}
-
-	/**
-	 * ham xu li Edit mot file
-	 */
-	// ///////////// them doan nay vao,import them vao jchooser va File
-	private void handleEditMap() {
-		/* hien thong bao luu file cu */
-		String message = " Ban co muon luu map dang ve ? ";
-		boolean check = true;
-		/* neu map khong giong */
-		if (!AuxiliaryFunction.isEmpty(this)) {
-			int result = JOptionPane.showConfirmDialog(parent, message);
-			if (result == JOptionPane.OK_OPTION)
-				check = handleMenuSave();
-		}
-		if (check) {
-			JFileChooser chooser = new JFileChooser();
-			chooser.setCurrentDirectory(new File(ConversionFunction
-					.getCurrentDirectory() + "custom map//"));
-			chooser.showOpenDialog(parent);
-			File selectedFile = chooser.getSelectedFile();
-			if (selectedFile != null) {
-				fileName = selectedFile.getPath();
-				/* thuc hien doc file */
-				deleteAll();
-				loadElementFromFile(fileName);
-				MapRecovery maprecovery = MapRecovery.createMapRecovery(
-						switchLayer, factoryLayer, terminalLayer, this);
-				switchLayer = maprecovery.getSwitchLayer();
-				factoryLayer = maprecovery.getFactoryLayer();
-				terminalLayer = maprecovery.getTerminalLayer();
-				switchLayer.render();
-				AuxiliaryFunction.showWrongFactory(this);
-				AuxiliaryFunction.showWrongSwitch(this);
-				parent.repaint();
-			}
-		}
 	}
 
 	/**
@@ -1325,5 +1096,16 @@ public class MapCreation extends GameState implements MouseMotionListener {
 	public GamePanel getParent() {
 		// TODO Auto-generated method stub
 		return parent;
+	}
+	
+	public String getFileName(){
+		return fileName;
+	}
+	
+	public void setFileName(String name){
+		fileName = name;
+	}
+	public GameState getLastState(){
+		return lastState;
 	}
 }

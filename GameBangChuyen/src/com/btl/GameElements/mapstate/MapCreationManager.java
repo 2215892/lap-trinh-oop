@@ -168,21 +168,21 @@ public class MapCreationManager {
 		terminalButton.setName("terminal");
 		graphicButtonList.add(terminalButton);
 
-		defaultButton = new ButtonForHandle(new Point(defaultX, defaultY),
+		defaultButton = new DefaultButton(new Point(defaultX, defaultY),
 				ButtonImage.DEFAULT_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DEFAULT_BUTTON_IMAGE, DEFAULT);
 		defaultButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		defaultButton.setName("DEFAULT");
 		handleButtonList.add(defaultButton);
 
-		deleteButton = new ButtonForHandle(new Point(deleteX, deleteY),
+		deleteButton = new DeleteButton(new Point(deleteX, deleteY),
 				ButtonImage.DELETE_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DELETE_BUTTON_IMAGE, DELETE);
 		deleteButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		deleteButton.setName("DELETE");
 		handleButtonList.add(deleteButton);
 
-		deleteAllButton = new ButtonForHandle(
+		deleteAllButton = new DeleteAllButton(
 				new Point(deleteAllX, deleteAllY),
 				ButtonImage.DELETEALL_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DELETEALL_BUTTON_IMAGE, DELETEALL);
@@ -204,21 +204,21 @@ public class MapCreationManager {
 		treeButton.setName("tree");
 		graphicButtonList.add(treeButton);
 
-		saveButton = new ButtonForHandle(new Point(saveX, saveY),
+		saveButton = new SaveButton(new Point(saveX, saveY),
 				ButtonImage.SAVE_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_SAVE_BUTTON_IMAGE, SAVE);
 		saveButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		saveButton.setName("SAVE");
 		handleButtonList.add(saveButton);
 
-		backButton = new ButtonForHandle(new Point(backX, backY),
+		backButton = new BackButton(new Point(backX, backY),
 				ButtonImage.BACK_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_BACK_BUTTON_IMAGE, BACK);
 		backButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		backButton.setName("BACK");
 		handleButtonList.add(backButton);
 
-		editButton = new ButtonForHandle(new Point(editFileX, editFileY),
+		editButton = new EditButton(new Point(editFileX, editFileY),
 				ButtonImage.EDIT_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_EDIT_BUTTON_IMAGE, EDIT);
 		editButton.setDimension(ICON_WIDTH, ICON_WIDTH);

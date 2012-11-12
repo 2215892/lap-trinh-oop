@@ -7,7 +7,6 @@ import com.btl.GameElements.mapstate.MapCreation;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
-import javax.swing.SwingUtilities;
 
 // TODO: Auto-generated Javadoc
 // TODO: Auto - generated Javadoc
@@ -57,14 +56,12 @@ public class MapRecovery {
 		this.height = map.getSide();
 		this.width = map.getSide();
 		this.map = map;
-		recoverFullMap();
-		System.out.println("completed!");
 	}
 
 	/**
 	 * Hàm khôi phục lại map.
 	 */
-	private void recoverFullMap() {
+	public void recoverFullMap() {
 		/* khoi tao cac bien check */
 		checkRecover = new boolean[switchLayer.getListDrawable().size()];
 		for (int i = 0; i < checkRecover.length; i++)

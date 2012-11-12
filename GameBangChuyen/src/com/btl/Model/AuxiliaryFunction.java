@@ -6,13 +6,16 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.btl.GameElements.mapstate.FactoryMap;
 import com.btl.GameElements.mapstate.ItemMap;
 import com.btl.GameElements.mapstate.MapCreation;
+import com.btl.GameElements.mapstate.MapCreationManager;
 import com.btl.GameElements.mapstate.SquareMap;
 import com.btl.GameElements.mapstate.SwitchMap;
 import com.btl.GameElements.mapstate.TerminalIcon;
@@ -21,7 +24,10 @@ import com.btl.GameElements.mapstate.TreeMap;
 import com.btl.GameElements.playstate.DrawLayer;
 import com.btl.GameEngine.Drawable;
 import com.btl.GameEngine.Layer;
+import com.btl.GameEngine.MapDeleting;
+import com.btl.GameEngine.MapSaving;
 import com.btl.data.ItemImage;
+
 // TODO: Auto - generated Javadoc
 
 /**
@@ -185,6 +191,7 @@ public class AuxiliaryFunction {
 		}
 		return -1;
 	}
+
 	/**
 	 * Hàm tạo các SwitchMap từ các ModelSwitch(dùng trong đọc file map).
 	 * 
@@ -696,4 +703,215 @@ public class AuxiliaryFunction {
 			return true;
 		return false;
 	}
+
+	/**
+	 * xử lí khi mà ấn vào button DELETE.
+	 */
+	public static void handleMenuDelete(MapCreation map) {
+		Point temp = map.getSquare();
+		if (temp != null) {
+			FactoryMap f = AuxiliaryFunction.findFactory(temp,
+					map.getFactorylayer());
+			SwitchMap sw = AuxiliaryFunction.findSwitch(temp,
+					map.getSwitchLayer());
+			TerminalMap t = AuxiliaryFunction.findTerminal(temp,
+					map.getTerminallayer());
+			/* goi manager de thuc thi quan ly viec MapCreationManager.DELETE */
+			MapDeleting deleteManager = new MapDeleting(map);
+
+			if (f != null) {
+				// thuc hien xoa cac switch di qua nha may va nha may
+				deleteManager.deleteFactory(f);
+			} else if (t != null) {
+				// thuc hien xoa cac MapCreationManager.TERMINAL
+				deleteManager.deleteTerminal(t);
+			} else if (sw != null) {
+				deleteManager.deleteSwitch(sw);
+			} else {
+
+				ItemMap item = AuxiliaryFunction.findItem(temp,
+						map.getItemMapLayer());
+				if (item != null)
+					deleteManager.deleteItemMap(item);
+			}
+			AuxiliaryFunction.showWrongSwitch(map);
+			AuxiliaryFunction.showWrongFactory(map);
+		}
+
+		// switchLayer.render();
+		// parent.repaint();
+	}
+
+	/**
+	 * xử lý xóa toàn bộ thông tin về map đang vẽ để vẽ lại từ đầu(khi ấn vào
+	 * button DELETEALL).
+	 */
+	public static void handleMenuDeleteAll(MapCreation map) {
+		/* hien thong bao ve viec xoa het */
+		String message = "neu an nut nay ban se phai ve lai tu dau ";
+		int option = JOptionPane.showConfirmDialog(map.getParent(), message);
+		switch (option) {
+		case JOptionPane.OK_OPTION:
+			deleteAll(map);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	/**
+	 * làm rỗng các Layer vẽ.
+	 */
+	private static void deleteAll(MapCreation map) {
+
+		map.getItemMapLayer().emptyLayer();
+		map.getTerminallayer().emptyLayer();
+		map.getFactorylayer().emptyLayer();
+		map.getSwitchLayer().emptyLayer();
+		map.getSquareCovedList().clear();
+
+		// parent.repaint();
+	}
+
+	/**
+	 * Hàm xử lý file
+	 * 
+	 * @return true nếu map không bị lỗi
+	 */
+	public static boolean handleMenuSave(MapCreation map) {
+		/* kiem tra xem co switch nao bi loi hay khong */
+		ArrayList<SwitchMap> wrongSwitch = AuxiliaryFunction.falseSwitch(map);
+		ArrayList<FactoryMap> wrongFactory = AuxiliaryFunction
+				.isolatedFactory(map);
+		if ((wrongSwitch.size() == 0) && (wrongFactory.size() == 0)) {
+			try {
+				/* tao ao giac an cho nguoi dung */
+				Thread.sleep(100);
+				System.out.println("da thuc hien sleep xong");
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+			MapSaving factoryEngine = new MapSaving(map, map.getFileName());
+			map.setFileName(factoryEngine.getFileName());
+			return true;
+		} else { // khi ma co switch bi loi, hien thi no nen
+			String message = "Loi khong the luu vi map co "
+					+ "nhung factory khong co cua ra hoac switch khong co diem den";
+			JOptionPane.showMessageDialog(map.getParent(), message,
+					"action failed", 1);
+			return false;
+		}
+	}
+
+	/**
+	 * Hàm xử lý edit một file map
+	 */
+	public static void handleEditMap(MapCreation map) {
+		/* hien thong bao luu file cu */
+		String message = " Ban co muon luu map dang ve ? ";
+		boolean check = true;
+		/* neu map khong giong */
+		if (!AuxiliaryFunction.isEmpty(map)) {
+			int result = JOptionPane
+					.showConfirmDialog(map.getParent(), message);
+			if (result == JOptionPane.OK_OPTION)
+				check = handleMenuSave(map);
+		}
+		if (check) {
+			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory(new File(ConversionFunction
+					.getCurrentDirectory() + "custom map//"));
+			chooser.showOpenDialog(map.getParent());
+			File selectedFile = chooser.getSelectedFile();
+			if (selectedFile != null) {
+				map.setFileName(selectedFile.getPath());
+				/* thuc hien doc file */
+				deleteAll(map);
+				loadElementFromFile(map.getFileName(), map);
+				MapRecovery mapRecovery = MapRecovery.createMapRecovery(
+						map.getSwitchLayer(), map.getFactorylayer(),
+						map.getTerminallayer(), map);
+				mapRecovery.recoverFullMap();
+				AuxiliaryFunction.showWrongFactory(map);
+				AuxiliaryFunction.showWrongSwitch(map);
+			}
+		}
+	}
+
+	/**
+	 * load dữ liệu từ file map muốn Edit.
+	 * 
+	 * @param fileName
+	 *            - đường dẫn tới file map
+	 */
+	private static void loadElementFromFile(String fileName, MapCreation map) {
+		ModelMap model = ModelMap.createMap(fileName);
+		ArrayList<ModelSwitch> switchFromFile = model.getListSwitch();
+		ArrayList<SwitchMap> temp = AuxiliaryFunction.loadSwitch(
+				switchFromFile, MapCreationManager.SQUARE_SIDE);
+		/* load switchMap vao switchLayer */
+		for (SwitchMap i : temp)
+			map.getSwitchLayer().addDrawable(i);
+
+		ArrayList<ModelFactory> factoryFromFile = model.getListFactory();
+		ArrayList<FactoryMap> temp2 = AuxiliaryFunction.loadFactory(
+				factoryFromFile, MapCreationManager.SQUARE_SIDE);
+		/* load factoryMap vao factorylayer */
+		for (FactoryMap i : temp2)
+			map.getFactorylayer().addDrawable(i);
+
+		ArrayList<ModelTerminal> terminalFromFile = model.getListTerminal();
+		ArrayList<TerminalMap> temp3 = AuxiliaryFunction.loadTerminal(
+				terminalFromFile, MapCreationManager.SQUARE_SIDE);
+		/* load terminalMap cao termianlLayer */
+		for (TerminalMap i : temp3)
+			map.getTerminallayer().addDrawable(i);
+		ArrayList<ModelItem> itemList = model.getListItem();
+		/* lay ra cac terminalIcon tu listItem */
+		AuxiliaryFunction.loadDrawingLayer(map.getItemMapLayer(), itemList,
+				MapCreationManager.SQUARE_SIDE);
+		/* luu nhung o vuong bi phu lai */
+		for (Drawable i : map.getFactorylayer().getListDrawable()) {
+			FactoryMap f = (FactoryMap) i;
+			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
+					map.getItemMapLayer());
+			if (item != null) {
+				for (Point j : ItemImage.getSquareCovered(item.getImage(),
+						f.getPosition(), MapCreationManager.SQUARE_SIDE))
+					map.getSquareCovedList().add(j);
+			}
+
+		}
+		for (Drawable i : map.getTerminallayer().getListDrawable()) {
+			TerminalMap f = (TerminalMap) i;
+			ItemMap item = AuxiliaryFunction.findItem(f.getPosition(),
+					map.getItemMapLayer());
+			if (item != null) {
+				for (Point j : ItemImage.getSquareCovered(item.getImage(),
+						f.getPosition(), MapCreationManager.SQUARE_SIDE))
+					map.getSquareCovedList().add(j);
+			}
+
+		}
+
+	}
+
+	/**
+	 * Xử lý khi người chơi ấn nút Back
+	 */
+	public static void handleMenuBack(MapCreation map) {
+		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */
+		if (!AuxiliaryFunction.isEmpty(map)) {
+
+			String message = "Luu thay doi truoc khi thoat? ";
+			int confirm = JOptionPane.showConfirmDialog(map.getParent(),
+					message);
+			if (confirm == JOptionPane.OK_OPTION)
+				handleMenuSave(map);
+		}
+		map.changeState(map.getLastState());
+	}
+
 }
