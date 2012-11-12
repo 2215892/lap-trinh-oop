@@ -116,7 +116,7 @@ public class GameTitle extends GameState {
 			} else if (clicked == btnCreateMap) {
 				changeState(new MapCreation(parent, this));
 			} else if (clicked == btnHighScore) {
-				// TODO
+				changeState(new HighScore(parent, this));
 			} else if (clicked == btnHelp) {
 				changeState(new About(parent, this, "help.txt"));
 			} else if (clicked == btnAbout) {
