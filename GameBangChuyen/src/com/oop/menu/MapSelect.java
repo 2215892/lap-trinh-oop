@@ -21,14 +21,14 @@ import com.oop.play.PlayState;
  */
 public class MapSelect extends GameState {
 
-	private SaveFile saveFile = SaveFile.create();
-
 	/** The Constant LEVEL_COUNT. */
 	public static final int LEVEL_COUNT = 15;
-	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
+
 	private Button btnBack;
 	private Layer layer;
+	private MapButton[] mButtons = new MapButton[LEVEL_COUNT];
 	private boolean needUpdate = false;
+	private SaveFile saveFile = SaveFile.create();
 
 	/**
 	 * Instantiates a new map select.
@@ -44,22 +44,25 @@ public class MapSelect extends GameState {
 		initialize();
 	}
 
-	private void initialize() {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
 
-		layer = new Layer(parent.width, parent.height);
-		layer.setBackground(OtherImage.BG);
-
-		/* Khoi tao cac button level */
-		for (int i = 0; i < LEVEL_COUNT; ++i) {
-			mButtons[i] = new MapButton(new Point(100 + 100 * (i % 5),
-					70 + 100 * (i / 5)), i + 1, saveFile.getLock(i + 1));
-
-			layer.addDrawable(mButtons[i]);
+		if (needUpdate) {
+			for (MapButton btn : mButtons) {
+				if (btn != null) {
+					btn.update();
+				}
+			}
 		}
 
-		btnBack = new Button(new Point(245, 425));
-		btnBack.setImage(ButtonImage.BTN_BACK);
-		layer.addDrawable(btnBack);
+		layer.render();
+		g.drawImage(layer.getLayer(), 0, 0, null);
+
 	}
 
 	/*
@@ -146,33 +149,30 @@ public class MapSelect extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-
-		if (needUpdate) {
-			for (MapButton btn : mButtons) {
-				if (btn != null) {
-					btn.update();
-				}
-			}
-		}
-
-		layer.render();
-		g.drawImage(layer.getLayer(), 0, 0, null);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 
+	}
+
+	private void initialize() {
+
+		layer = new Layer(parent.width, parent.height);
+		layer.setBackground(OtherImage.BG);
+
+		/* Khoi tao cac button level */
+		for (int i = 0; i < LEVEL_COUNT; ++i) {
+			mButtons[i] = new MapButton(new Point(100 + 100 * (i % 5),
+					70 + 100 * (i / 5)), i + 1, saveFile.getLock(i + 1));
+
+			layer.addDrawable(mButtons[i]);
+		}
+
+		btnBack = new Button(new Point(245, 425));
+		btnBack.setImage(ButtonImage.BTN_BACK);
+		layer.addDrawable(btnBack);
 	}
 
 }

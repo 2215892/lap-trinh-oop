@@ -38,15 +38,41 @@ public class TreeMap extends ItemMap {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
+	 * @see
+	 * com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation
+	 * .MapCreation)
 	 */
 	@Override
-	protected void calculateTopLeft() {
+	public void calculateValidation(MapCreation map) {
+		/*
+		 * dieu kien de hinh ve Tree hop le la: + entryPoint khong trung voi bat
+		 * cu element nao trong map dang ve
+		 */
+		if (AuxiliaryFunction.checkIdenticalPostition(map, position))
+			setValidation(true);
+		else
+			setValidation(false);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
 		// TODO Auto - generated method stub
-		Point temp = new Point(position.x - 5 * side / 2, position.y + 3 * side
-				/ 2);
-		Point temp2 = Helper.logicToReal(temp);
-		topLeftPoint = new Point(temp2.x, temp2.y);
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#identifyImageType()
+	 */
+	@Override
+	public void identifyImageType() {
+		type = ItemImage.TREE_TYPE;
 	}
 
 	/*
@@ -68,17 +94,6 @@ public class TreeMap extends ItemMap {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point p) {
-		// TODO Auto - generated method stub
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.oop.mapcreation.objects.ItemMap#calculateNearestPoint()
 	 */
 	@Override
@@ -89,30 +104,15 @@ public class TreeMap extends ItemMap {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#identifyImageType()
+	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
 	 */
 	@Override
-	public void identifyImageType() {
-		type = ItemImage.TREE_TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation
-	 * .MapCreation)
-	 */
-	@Override
-	public void calculateValidation(MapCreation map) {
-		/*
-		 * dieu kien de hinh ve Tree hop le la: + entryPoint khong trung voi bat
-		 * cu element nao trong map dang ve
-		 */
-		if (AuxiliaryFunction.checkIdenticalPostition(map, position))
-			setValidation(true);
-		else
-			setValidation(false);
+	protected void calculateTopLeft() {
+		// TODO Auto - generated method stub
+		Point temp = new Point(position.x - 5 * side / 2, position.y + 3 * side
+				/ 2);
+		Point temp2 = Helper.logicToReal(temp);
+		topLeftPoint = new Point(temp2.x, temp2.y);
 	}
 
 }

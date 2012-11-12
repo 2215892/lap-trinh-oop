@@ -34,30 +34,15 @@ public class GameTitle extends GameState {
 		initialize();
 	}
 
-	private void initialize() {
-
-		btnStart = new Button(new Point(245, 250));
-		btnStart.setImage(ButtonImage.BTN_START_GAME);
-
-		btnCreateMap = new Button(new Point(245, 300));
-		btnCreateMap.setImage(ButtonImage.BTN_CREATE_MAP);
-
-		btnHighScore = new Button(new Point(245, 350));
-		btnHighScore.setImage(ButtonImage.BTN_HIGH_SCORE);
-
-		btnAbout = new Button(new Point(245, 400));
-		btnAbout.setImage(ButtonImage.BTN_ABOUT);
-
-		btnHelp = new Button(new Point(245, 450));
-		btnHelp.setImage(ButtonImage.BTN_HELP);
-
-		layer = new Layer(parent.width, parent.height);
-		layer.setBackground(OtherImage.TITLE_BG);
-		layer.addDrawable(btnAbout);
-		layer.addDrawable(btnCreateMap);
-		layer.addDrawable(btnHelp);
-		layer.addDrawable(btnHighScore);
-		layer.addDrawable(btnStart);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
+		layer.render();
+		g.drawImage(layer.getLayer(), 0, 0, null);
 
 	}
 
@@ -140,23 +125,38 @@ public class GameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-		layer.render();
-		g.drawImage(layer.getLayer(), 0, 0, null);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+
+	}
+
+	private void initialize() {
+
+		btnStart = new Button(new Point(245, 250));
+		btnStart.setImage(ButtonImage.BTN_START_GAME);
+
+		btnCreateMap = new Button(new Point(245, 300));
+		btnCreateMap.setImage(ButtonImage.BTN_CREATE_MAP);
+
+		btnHighScore = new Button(new Point(245, 350));
+		btnHighScore.setImage(ButtonImage.BTN_HIGH_SCORE);
+
+		btnAbout = new Button(new Point(245, 400));
+		btnAbout.setImage(ButtonImage.BTN_ABOUT);
+
+		btnHelp = new Button(new Point(245, 450));
+		btnHelp.setImage(ButtonImage.BTN_HELP);
+
+		layer = new Layer(parent.width, parent.height);
+		layer.setBackground(OtherImage.TITLE_BG);
+		layer.addDrawable(btnAbout);
+		layer.addDrawable(btnCreateMap);
+		layer.addDrawable(btnHelp);
+		layer.addDrawable(btnHighScore);
+		layer.addDrawable(btnStart);
 
 	}
 

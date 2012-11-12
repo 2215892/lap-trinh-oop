@@ -14,16 +14,18 @@ public class GamePanel extends JPanel {
 	/** The Constant WIDTH. */
 	public static final int WIDTH = 1;
 
-	/** The width. */
-	public int width = 685;
-
-	/** The height. */
-	public int height = 485;
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/** The height. */
+	public int height = 485;
+
+	/** The width. */
+	public int width = 685;
+
+	private GameState currentState = null;
 
 	/**
 	 * Instantiates a new game panel.
@@ -32,8 +34,6 @@ public class GamePanel extends JPanel {
 		super();
 		this.setPreferredSize(new Dimension(width, height));
 	}
-
-	private GameState currentState = null;
 
 	/*
 	 * (non-Javadoc)

@@ -11,15 +11,24 @@ public class Button implements Drawable {
 
 	private BufferedImage originImg;
 
+	private Point position;
+	/** The height. */
+	protected int height;
+
 	/** The img. */
 	protected BufferedImage img;
-	private Point position;
 
 	/** The width. */
 	protected int width;
 
-	/** The height. */
-	protected int height;
+	/**
+	 * Instantiates a new button.
+	 */
+	public Button() {
+		this.setPosition(new Point(0, 0));
+		this.width = 0;
+		this.height = 0;
+	}
 
 	/**
 	 * Khoi tao button.
@@ -29,15 +38,6 @@ public class Button implements Drawable {
 	 */
 	public Button(Point p) {
 		this.setPosition(p);
-		this.width = 0;
-		this.height = 0;
-	}
-
-	/**
-	 * Instantiates a new button.
-	 */
-	public Button() {
-		this.setPosition(new Point(0, 0));
 		this.width = 0;
 		this.height = 0;
 	}
@@ -77,6 +77,15 @@ public class Button implements Drawable {
 			return false;
 	}
 
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
+	public Point getPosition() {
+		return position;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -88,6 +97,17 @@ public class Button implements Drawable {
 			g.drawImage(this.img, this.getPosition().x, this.getPosition().y,
 					null);
 
+	}
+
+	/**
+	 * Sets the image.
+	 * 
+	 * @param img
+	 *            the new image
+	 */
+	public void setImage(BufferedImage img) {
+		if (img != null)
+			setImage(img, img.getWidth(), img.getHeight());
 	}
 
 	/**
@@ -111,26 +131,6 @@ public class Button implements Drawable {
 		g.drawImage(this.originImg, 0, 0, this.width, this.height, null);
 		g.dispose();
 
-	}
-
-	/**
-	 * Sets the image.
-	 * 
-	 * @param img
-	 *            the new image
-	 */
-	public void setImage(BufferedImage img) {
-		if (img != null)
-			setImage(img, img.getWidth(), img.getHeight());
-	}
-
-	/**
-	 * Gets the position.
-	 * 
-	 * @return the position
-	 */
-	public Point getPosition() {
-		return position;
 	}
 
 	/**

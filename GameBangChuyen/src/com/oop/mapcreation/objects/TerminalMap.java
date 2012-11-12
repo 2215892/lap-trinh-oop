@@ -18,11 +18,11 @@ import com.oop.model.ModelTerminal;
  */
 public class TerminalMap extends ModelTerminal implements Drawable {
 
-	/** The no box. */
-	private final int NO_BOX = 2;
-
 	/** màu hiển thị của ô vuông terminl. */
 	public final Color terminalColor = Color.yellow;
+
+	/** The no box. */
+	private final int NO_BOX = 2;
 
 	/** The no box. */
 	private int noBox;
@@ -47,22 +47,6 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		g.setColor(terminalColor);
-		g.fillPolygon(Helper.polygon(position, side, side));
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
 	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
 	 */
 	/*
@@ -77,6 +61,31 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	}
 
 	/**
+	 * Gets the box number.
+	 * 
+	 * @return the box number
+	 */
+	public int getBoxNumber() {
+		return noBox;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(terminalColor);
+		g.fillPolygon(Helper.polygon(position, side, side));
+	}
+
+	/**
 	 * Sets the box bumber.
 	 * 
 	 * @param boxNumber
@@ -84,15 +93,6 @@ public class TerminalMap extends ModelTerminal implements Drawable {
 	 */
 	public void setBoxBumber(int boxNumber) {
 		noBox = boxNumber;
-	}
-
-	/**
-	 * Gets the box number.
-	 * 
-	 * @return the box number
-	 */
-	public int getBoxNumber() {
-		return noBox;
 	}
 
 }

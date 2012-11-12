@@ -36,8 +36,23 @@ import com.oop.model.Helper;
  */
 public class MapSaving {
 
+	/** đối tượng để chọn đường dẫn cho file map. */
+	private JFileChooser chooser;
+
+	/** The factory layer của map. */
+	private DrawLayer factoryLayer;
+
 	/** The đường dẫn file. */
 	private String fileName;
+
+	/** file để save. */
+	private File fileSave;
+
+	/** The item map layer của map. */
+	private DrawLayer itemMapLayer;
+
+	/** Map cần lưu. */
+	private MapCreation mapCreation;
 
 	/** The switch layer của map. */
 	private DrawLayer switchLayer;
@@ -45,26 +60,11 @@ public class MapSaving {
 	/** The terminal layer của map. */
 	private DrawLayer terminalLayer;
 
-	/** The factory layer của map. */
-	private DrawLayer factoryLayer;
-
-	/** The item map layer của map. */
-	private DrawLayer itemMapLayer;
-
-	/** Đơn vị (= side/SQUARE_SIDE). */
-	private int unit;
-
-	/** đối tượng để chọn đường dẫn cho file map. */
-	private JFileChooser chooser;
-
-	/** file để save. */
-	private File fileSave;
-
 	/** The terminal trap của map ( khi box vào đây sẽ mất điểm). */
 	private ArrayList<TerminalMap> terminalTrap;
 
-	/** Map cần lưu. */
-	private MapCreation mapCreation;
+	/** Đơn vị (= side/SQUARE_SIDE). */
+	private int unit;
 
 	/**
 	 * Khơi tạo đối tượng thực hiên công việc save.
@@ -98,19 +98,97 @@ public class MapSaving {
 	}
 
 	/**
-	 * thực hiện lưu các trap(là các switch không có hướng).
+	 * Gets the file name.
+	 * 
+	 * @return the file name
 	 */
-	private void handleTrap() {
-		for (Drawable i : switchLayer.getListDrawable()) {
-			SwitchMap temp = (SwitchMap) i;
-			if (temp.getListDirection().size() == 0) {
-				TerminalMap t = new TerminalMap(temp.getPosition(),
-						mapCreation.getSide());
-				t.setType(0);
-				terminalTrap.add(t);
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * kiem tra xem mot switch co duoc luu hay khong.
+	 * 
+	 * @param sw
+	 *            the sw
+	 * @return true neu ma dc save
+	 */
+	private boolean checkValid(SwitchMap sw) {
+		SwitchMap tg;
+		FactoryMap f;
+		// lay currentDir cua sw
+		int cL = sw.getCurrentDir();
+		// tim switch phia tren no
+		tg = AuxiliaryFunction.upNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x - unit,
+				sw.getPosition().y), factoryLayer);
+		if ((tg != null) && (tg.getListDirection().size() > 0)) {
+
+			/* so sanh huong cua hai cai */
+			for (Direction i : tg.getListDirection()) {
+				if ((i != sw.getListDirection().get(cL))
+						&& (i == Direction.DOWN))
+					return true;
+			}
+
+		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
+		/* tim switch phia duoi no' */
+		tg = AuxiliaryFunction.downNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x + unit,
+				sw.getPosition().y), factoryLayer);
+		if ((tg != null) && (tg.getListDirection().size() > 0)) {
+
+			for (Direction i : tg.getListDirection()) {
+				if ((i != sw.getListDirection().get(cL)) && (i == Direction.UP))
+					return true;
 			}
 		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
+		/* tim swicth ben phai no */
+		tg = AuxiliaryFunction.rightNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(
+				new Point(sw.getPosition().x, sw.getPosition().y + unit),
+				factoryLayer);
+		if ((tg != null) && (tg.getListDirection().size() > 0)) {
+			// khi ma neighbor trc no co huong(tuc la khong phai la trap)
 
+			for (Direction i : tg.getListDirection()) {
+				if ((i != sw.getListDirection().get(cL))
+						&& (i == Direction.LEFT))
+					return true;
+			}
+
+		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
+		/* tim switch ben trai no */
+		tg = AuxiliaryFunction.leftNeighbor(sw, this.switchLayer);
+		f = AuxiliaryFunction.findFactory(
+				new Point(sw.getPosition().x, sw.getPosition().y - unit),
+				factoryLayer);
+		if ((tg != null) && (tg.getListDirection().size() > 0)) {
+
+			for (Direction i : tg.getListDirection()) {
+				if ((i != sw.getListDirection().get(cL))
+						&& (i == Direction.RIGHT))
+					return true;
+			}
+
+		}
+		if (f != null) {
+			if (f.getDirection() != sw.getListDirection().get(cL))
+				return true;
+		}
+		return false;
 	}
 
 	/**
@@ -276,6 +354,22 @@ public class MapSaving {
 	}
 
 	/**
+	 * thực hiện lưu các trap(là các switch không có hướng).
+	 */
+	private void handleTrap() {
+		for (Drawable i : switchLayer.getListDrawable()) {
+			SwitchMap temp = (SwitchMap) i;
+			if (temp.getListDirection().size() == 0) {
+				TerminalMap t = new TerminalMap(temp.getPosition(),
+						mapCreation.getSide());
+				t.setType(0);
+				terminalTrap.add(t);
+			}
+		}
+
+	}
+
+	/**
 	 * tạo thẻ tag cho đối tượng itemMap.
 	 * 
 	 * @param tagName
@@ -303,100 +397,6 @@ public class MapSaving {
 		id.appendChild(doc.createTextNode("" + temp.getImageId()));
 		tree.appendChild(id);
 		return tree;
-	}
-
-	/**
-	 * kiem tra xem mot switch co duoc luu hay khong.
-	 * 
-	 * @param sw
-	 *            the sw
-	 * @return true neu ma dc save
-	 */
-	private boolean checkValid(SwitchMap sw) {
-		SwitchMap tg;
-		FactoryMap f;
-		// lay currentDir cua sw
-		int cL = sw.getCurrentDir();
-		// tim switch phia tren no
-		tg = AuxiliaryFunction.upNeighbor(sw, this.switchLayer);
-		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x - unit,
-				sw.getPosition().y), factoryLayer);
-		if ((tg != null) && (tg.getListDirection().size() > 0)) {
-
-			/* so sanh huong cua hai cai */
-			for (Direction i : tg.getListDirection()) {
-				if ((i != sw.getListDirection().get(cL))
-						&& (i == Direction.DOWN))
-					return true;
-			}
-
-		}
-		if (f != null) {
-			if (f.getDirection() != sw.getListDirection().get(cL))
-				return true;
-		}
-		/* tim switch phia duoi no' */
-		tg = AuxiliaryFunction.downNeighbor(sw, this.switchLayer);
-		f = AuxiliaryFunction.findFactory(new Point(sw.getPosition().x + unit,
-				sw.getPosition().y), factoryLayer);
-		if ((tg != null) && (tg.getListDirection().size() > 0)) {
-
-			for (Direction i : tg.getListDirection()) {
-				if ((i != sw.getListDirection().get(cL)) && (i == Direction.UP))
-					return true;
-			}
-		}
-		if (f != null) {
-			if (f.getDirection() != sw.getListDirection().get(cL))
-				return true;
-		}
-		/* tim swicth ben phai no */
-		tg = AuxiliaryFunction.rightNeighbor(sw, this.switchLayer);
-		f = AuxiliaryFunction.findFactory(
-				new Point(sw.getPosition().x, sw.getPosition().y + unit),
-				factoryLayer);
-		if ((tg != null) && (tg.getListDirection().size() > 0)) {
-			// khi ma neighbor trc no co huong(tuc la khong phai la trap)
-
-			for (Direction i : tg.getListDirection()) {
-				if ((i != sw.getListDirection().get(cL))
-						&& (i == Direction.LEFT))
-					return true;
-			}
-
-		}
-		if (f != null) {
-			if (f.getDirection() != sw.getListDirection().get(cL))
-				return true;
-		}
-		/* tim switch ben trai no */
-		tg = AuxiliaryFunction.leftNeighbor(sw, this.switchLayer);
-		f = AuxiliaryFunction.findFactory(
-				new Point(sw.getPosition().x, sw.getPosition().y - unit),
-				factoryLayer);
-		if ((tg != null) && (tg.getListDirection().size() > 0)) {
-
-			for (Direction i : tg.getListDirection()) {
-				if ((i != sw.getListDirection().get(cL))
-						&& (i == Direction.RIGHT))
-					return true;
-			}
-
-		}
-		if (f != null) {
-			if (f.getDirection() != sw.getListDirection().get(cL))
-				return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Gets the file name.
-	 * 
-	 * @return the file name
-	 */
-	public String getFileName() {
-		return fileName;
 	}
 
 }

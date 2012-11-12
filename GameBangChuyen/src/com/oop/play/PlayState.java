@@ -55,36 +55,38 @@ public class PlayState extends GameState {
 	private int boxStep = 0;
 	private Button btnContinue;
 	private Button btnEndGame;
-	private Button btnPause;
 	private Button btnNextLevel;
+	private Button btnPause;
 	private Button btnReplay;
 	private BufferedImage buffer;
 
-	private ModelMap map;
+	private int count = 0;
 
+	private int highscore = -1;
 	private boolean isFullBox = false;
 	private ArrayList<PlayBox> listBoxs = new ArrayList<PlayBox>();
 	private ArrayList<PlayFactory> listFactorys = new ArrayList<PlayFactory>();
 	private ArrayList<Layer> listLayers;
 	private ArrayList<PlayScore> listScores = new ArrayList<PlayScore>();
-	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();
 
+	private ArrayList<PlaySquare> listSquares = new ArrayList<PlaySquare>();
 	private ArrayList<PlaySwitch> listSwitchs = new ArrayList<PlaySwitch>();
 	private ArrayList<PlayTerminal> listTerminals = new ArrayList<PlayTerminal>();
-	private DrawLayer platformLayer, bgLayer, objLayer, bg2Layer;
 
-	private int score = 0;
+	private ModelMap map;
 
 	private int maxSecond, currentSecond;
 
-	private Layer scoreLayer, menuLayer, pauseMenuLayer, gameOverMenuLayer;
+	private int nextId = -1;
+
+	private DrawLayer platformLayer, bgLayer, objLayer, bg2Layer;
 
 	private SaveFile saveFile = SaveFile.create();
+	private int score = 0;
+
+	private Layer scoreLayer, menuLayer, pauseMenuLayer, gameOverMenuLayer;
 
 	private Timer timer;
-	private int count = 0;
-
-	private int highscore = -1;
 
 	/** The rnd. */
 	Random rnd = new Random();
@@ -113,8 +115,6 @@ public class PlayState extends GameState {
 
 	}
 
-	private int nextId = -1;
-
 	/**
 	 * Instantiates a new play state.
 	 * 
@@ -134,29 +134,6 @@ public class PlayState extends GameState {
 		this(panel, lastState, map);
 		this.highscore = highscore;
 		this.nextId = nextID;
-	}
-
-	private void resume() {
-		timer = new Timer();
-
-		timer.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				update();
-
-				SwingUtilities.invokeLater(new Runnable() {
-
-					@Override
-					public void run() {
-						parent.repaint();
-
-					}
-				});
-
-			}
-		}, 0, TIMER_DELAY);
-
 	}
 
 	/*
@@ -208,15 +185,6 @@ public class PlayState extends GameState {
 		}
 
 	}
-	private String secondToString(int second) {
-
-		int m = second / 60;
-		int s = second % 60;
-
-		return s < 10 ? new String(Integer.toString(m) + ":0"
-				+ Integer.toString(s)) : new String(Integer.toString(m) + ":"
-				+ Integer.toString(s));
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -228,7 +196,6 @@ public class PlayState extends GameState {
 		// khong dung den
 
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -276,88 +243,6 @@ public class PlayState extends GameState {
 
 	}
 
-	private void buttonClickedHandle(Button clicked) {
-		if (clicked != null)
-			SoundEffect.BUTTONCLICK.play();
-		if (clicked == btnPause) {
-			pause();
-			pauseMenuLayer.show();
-			pauseMenuLayer.render();
-			parent.repaint();
-		} else if (clicked == btnContinue) {
-			pauseMenuLayer.hide();
-			resume();
-		} else if (clicked == btnEndGame) {
-			parent.setState(lastState);
-		} else if (clicked == btnNextLevel) {
-			ModelMap map = ModelMap.createMap(Helper.getCurrentDirectory()
-					+ "map//" + nextId);
-			if (map != null) {
-				int id = nextId;
-				if (nextId < MapSelect.LEVEL_COUNT)
-					nextId++;
-				else
-					nextId = -1;
-				PlayState playState = new PlayState(parent, lastState, map,
-						saveFile.getHighscore(id), nextId);
-				changeState(playState);
-			}
-		} else if (clicked == btnReplay) {
-			int id = 0;
-			if (nextId == -1)
-				id = MapSelect.LEVEL_COUNT;
-			else
-				id = nextId - 1;
-
-			if (map != null) {
-				PlayState playState = null;
-				if (highscore != -1)
-					playState = new PlayState(parent, lastState, map,
-							saveFile.getHighscore(id), nextId);
-				else
-					playState = new PlayState(parent, lastState, map);
-				changeState(playState);
-			}
-		}
-
-	}
-	private void onGameEnd() {
-		if (highscore != -1) {
-			int id = 0;
-			if (nextId == -1)
-				id = MapSelect.LEVEL_COUNT;
-			else {
-				id = nextId - 1;
-				if (!((isFullBox && listBoxs.size() == 0))) {
-					saveFile.setLock(nextId, false);
-					gameOverMenuLayer.removeDrawable(btnNextLevel);
-				}
-			}
-
-			if (score > highscore)
-				saveFile.setHighscore(id, score);
-
-			saveFile.save();
-		}
-
-		pause();
-		gameOverMenuLayer.show();
-		gameOverMenuLayer.render();
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				parent.repaint();
-
-			}
-		});
-
-	}
-
-	private void pause() {
-		timer.cancel();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -401,11 +286,11 @@ public class PlayState extends GameState {
 		}
 
 	}
+
 	private void addBox(PlayBox box) {
 		objLayer.addDrawable(box);
 		listBoxs.add(box);
 	}
-
 	private void addScore(PlayScore score) {
 		this.score += score.getScore();
 		this.listScores.add(score);
@@ -472,6 +357,52 @@ public class PlayState extends GameState {
 		}
 	}
 
+	private void buttonClickedHandle(Button clicked) {
+		if (clicked != null)
+			SoundEffect.BUTTONCLICK.play();
+		if (clicked == btnPause) {
+			pause();
+			pauseMenuLayer.show();
+			pauseMenuLayer.render();
+			parent.repaint();
+		} else if (clicked == btnContinue) {
+			pauseMenuLayer.hide();
+			resume();
+		} else if (clicked == btnEndGame) {
+			parent.setState(lastState);
+		} else if (clicked == btnNextLevel) {
+			ModelMap map = ModelMap.createMap(Helper.getCurrentDirectory()
+					+ "map//" + nextId);
+			if (map != null) {
+				int id = nextId;
+				if (nextId < MapSelect.LEVEL_COUNT)
+					nextId++;
+				else
+					nextId = -1;
+				PlayState playState = new PlayState(parent, lastState, map,
+						saveFile.getHighscore(id), nextId);
+				changeState(playState);
+			}
+		} else if (clicked == btnReplay) {
+			int id = 0;
+			if (nextId == -1)
+				id = MapSelect.LEVEL_COUNT;
+			else
+				id = nextId - 1;
+
+			if (map != null) {
+				PlayState playState = null;
+				if (highscore != -1)
+					playState = new PlayState(parent, lastState, map,
+							saveFile.getHighscore(id), nextId);
+				else
+					playState = new PlayState(parent, lastState, map);
+				changeState(playState);
+			}
+		}
+
+	}
+
 	private void collisionHandle(final ArrayList<PlayBox> notMovingBoxs) {
 		ArrayList<PlayBox> collidedBoxs = new ArrayList<PlayBox>();
 		int size = notMovingBoxs.size();
@@ -505,34 +436,6 @@ public class PlayState extends GameState {
 		}
 
 	}
-
-	private void DFS(PlaySwitch pSwitch) {
-		if (pSwitch.getFlag() == 1)
-			return;
-		pSwitch.setFlag(1);
-		for (Direction d : pSwitch.getListDirection()) {
-			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
-			pSwitch.addNeighbor(temp);
-			if (temp.getClass().equals(PlaySwitch.class)) {
-				((PlaySwitch) temp).addInput(d);
-				DFS((PlaySwitch) temp);
-			}
-		}
-	}
-
-	private void DFS2(PlaySwitch pSwitch, PlayFactory factory) {
-		if (pSwitch.getFlag() == 1)
-			return;
-		pSwitch.setFlag(1);
-		for (Direction d : pSwitch.getListDirection()) {
-			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
-			if (temp.getClass().equals(PlaySwitch.class)) {
-				DFS2((PlaySwitch) temp, factory);
-			} else
-				factory.addTerminal((PlayTerminal) temp);
-		}
-	}
-
 	private GraphNode getNeighbor(final Point position, final Direction d) {
 		Point newPoint = position;
 		GraphNode node;
@@ -547,6 +450,7 @@ public class PlayState extends GameState {
 
 		} while (true);
 	}
+
 	private GraphNode getNode(final Point p) {
 		for (PlaySwitch i : this.listSwitchs) {
 			if (i.getPosition().equals(p))
@@ -585,9 +489,22 @@ public class PlayState extends GameState {
 			GraphNode neighbor = getNeighbor(factory.getPosition(),
 					factory.getDirection());
 			if (neighbor.getClass().equals(PlaySwitch.class)) {
-				DFS2((PlaySwitch) neighbor, factory);
+				initFactory((PlaySwitch) neighbor, factory);
 			} else
 				factory.addTerminal((PlayTerminal) neighbor);
+		}
+	}
+
+	private void initFactory(PlaySwitch pSwitch, PlayFactory factory) {
+		if (pSwitch.getFlag() == 1)
+			return;
+		pSwitch.setFlag(1);
+		for (Direction d : pSwitch.getListDirection()) {
+			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
+			if (temp.getClass().equals(PlaySwitch.class)) {
+				initFactory((PlaySwitch) temp, factory);
+			} else
+				factory.addTerminal((PlayTerminal) temp);
 		}
 	}
 
@@ -597,9 +514,10 @@ public class PlayState extends GameState {
 		factory.addNeighbor(neighbor);
 		if (neighbor.getClass().equals(PlaySwitch.class)) {
 			((PlaySwitch) neighbor).addInput(factory.getDirection());
-			DFS((PlaySwitch) neighbor);
+			initSquareFromSwitch((PlaySwitch) neighbor);
 		}
 	}
+
 	private void initFromModelMap(final ModelMap map) {
 		this.maxSecond = map.getSecond() + map.getMinute() * 60;
 
@@ -753,6 +671,7 @@ public class PlayState extends GameState {
 		menuLayer.render();
 
 	}
+
 	private void initItems(ArrayList<ModelItem> listItem) {
 		for (ModelItem i : listItem) {
 			PlayItem item = new PlayItem(i);
@@ -775,6 +694,19 @@ public class PlayState extends GameState {
 
 	}
 
+	private void initSquareFromSwitch(PlaySwitch pSwitch) {
+		if (pSwitch.getFlag() == 1)
+			return;
+		pSwitch.setFlag(1);
+		for (Direction d : pSwitch.getListDirection()) {
+			GraphNode temp = getNeighbor(pSwitch.getPosition(), d);
+			pSwitch.addNeighbor(temp);
+			if (temp.getClass().equals(PlaySwitch.class)) {
+				((PlaySwitch) temp).addInput(d);
+				initSquareFromSwitch((PlaySwitch) temp);
+			}
+		}
+	}
 	private void makeNewBox() {
 		ArrayList<PlayBox> boxList = new ArrayList<PlayBox>();
 		PlayBox box = null;
@@ -801,6 +733,41 @@ public class PlayState extends GameState {
 			boxStep--;
 		}
 	}
+	private void onGameEnd() {
+		if (highscore != -1) {
+			int id = 0;
+			if (nextId == -1)
+				id = MapSelect.LEVEL_COUNT;
+			else {
+				id = nextId - 1;
+				if (!((isFullBox && listBoxs.size() == 0))) {
+					saveFile.setLock(nextId, false);
+					gameOverMenuLayer.removeDrawable(btnNextLevel);
+				}
+			}
+
+			if (score > highscore)
+				saveFile.setHighscore(id, score);
+
+			saveFile.save();
+		}
+
+		pause();
+		gameOverMenuLayer.show();
+		gameOverMenuLayer.render();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				parent.repaint();
+
+			}
+		});
+
+	}
+	private void pause() {
+		timer.cancel();
+	}
 
 	private void removeBox(PlayBox box) {
 		this.listBoxs.remove(box);
@@ -821,6 +788,39 @@ public class PlayState extends GameState {
 	private void removeScore(PlayScore score) {
 		this.listScores.remove(score);
 		this.scoreLayer.removeDrawable(score);
+	}
+
+	private void resume() {
+		timer = new Timer();
+
+		timer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				update();
+
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						parent.repaint();
+
+					}
+				});
+
+			}
+		}, 0, TIMER_DELAY);
+
+	}
+
+	private String secondToString(int second) {
+
+		int m = second / 60;
+		int s = second % 60;
+
+		return s < 10 ? new String(Integer.toString(m) + ":0"
+				+ Integer.toString(s)) : new String(Integer.toString(m) + ":"
+				+ Integer.toString(s));
 	}
 
 	private boolean setBoxDestination(PlayBox box) {

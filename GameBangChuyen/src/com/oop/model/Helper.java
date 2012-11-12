@@ -33,6 +33,22 @@ public abstract class Helper {
 	}
 
 	/**
+	 * Gets the current directory.
+	 * 
+	 * @return the current directory
+	 */
+	public static String getCurrentDirectory() {
+		String decodedPath = null;
+		try {
+			decodedPath = (URLDecoder.decode(ClassLoader.getSystemClassLoader()
+					.getResource(".").getPath(), "UTF-8"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return decodedPath;
+	}
+
+	/**
 	 * Load anh.
 	 * 
 	 * @param fileDir
@@ -83,51 +99,6 @@ public abstract class Helper {
 	}
 
 	/**
-	 * Position to location.
-	 * 
-	 * @param position
-	 *            the position
-	 * @param size
-	 *            the size
-	 * @return the point
-	 */
-	public static Point positionToLocation(Point position, int size) {
-		return new Point((position.x + position.y) * size,
-				(position.x - position.y) * size / 2);
-	}
-
-	/**
-	 * Real to logic.
-	 * 
-	 * @param t
-	 *            : point in real axis
-	 * @return the point
-	 * @return: point in logic axis
-	 */
-	public static Point realToLogic(Point t) {
-
-		Double ux = (double) (2 * t.y + t.x) / 2;
-		Double uy = (double) (t.x - 2 * t.y) / 2;
-		return new Point(ux.intValue(), uy.intValue());
-	}
-
-	/**
-	 * Gets the current directory.
-	 * 
-	 * @return the current directory
-	 */
-	public static String getCurrentDirectory() {
-		String decodedPath = null;
-		try {
-			decodedPath = (URLDecoder.decode(ClassLoader.getSystemClassLoader()
-					.getResource(".").getPath(), "UTF-8"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return decodedPath;
-	}
-
-	/**
 	 * chuyen tu toa do ao sang toa do thuc bien mot hinh vuong trong toa do ao
 	 * sang toa do thuc.
 	 * 
@@ -157,5 +128,34 @@ public abstract class Helper {
 
 		return poly;
 
+	}
+
+	/**
+	 * Position to location.
+	 * 
+	 * @param position
+	 *            the position
+	 * @param size
+	 *            the size
+	 * @return the point
+	 */
+	public static Point positionToLocation(Point position, int size) {
+		return new Point((position.x + position.y) * size,
+				(position.x - position.y) * size / 2);
+	}
+
+	/**
+	 * Real to logic.
+	 * 
+	 * @param t
+	 *            : point in real axis
+	 * @return the point
+	 * @return: point in logic axis
+	 */
+	public static Point realToLogic(Point t) {
+
+		Double ux = (double) (2 * t.y + t.x) / 2;
+		Double uy = (double) (t.x - 2 * t.y) / 2;
+		return new Point(ux.intValue(), uy.intValue());
 	}
 }

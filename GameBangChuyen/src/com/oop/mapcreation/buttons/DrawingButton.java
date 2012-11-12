@@ -19,23 +19,23 @@ public class DrawingButton extends Button {
 	/** màu của button khi mà chuột đi vào. */
 	public final Color hoverColor = new Color(255, 0, 0, 100);
 
-	/** ảnh hiện thị của Button khi ở trạng thái bình thường. */
-	private BufferedImage normalRender;
-
 	/** ảnh hiển thị của Button khi ở trạng thái kích hoạt. */
 	private BufferedImage activeRender;
-
-	/** Biến kiểm tra xem trạng thái của Button có phải normal hau không. */
-	private boolean normal;
-
-	/** tên của Button. */
-	private String name;
 
 	/** mã điều khiển của button. */
 	private int controlCode;
 
 	/** The hover. */
 	private boolean hover;
+
+	/** tên của Button. */
+	private String name;
+
+	/** Biến kiểm tra xem trạng thái của Button có phải normal hau không. */
+	private boolean normal;
+
+	/** ảnh hiện thị của Button khi ở trạng thái bình thường. */
+	private BufferedImage normalRender;
 
 	private boolean visible = true;
 
@@ -64,16 +64,65 @@ public class DrawingButton extends Button {
 	}
 
 	/**
-	 * dat chieu dai rong cho bieu tuong cua button.
-	 * 
-	 * @param height
-	 *            chieu cao cua button can ve
-	 * @param width
-	 *            chieu rong cua button can ve
+	 * Chuyển sang trạng thái kích hoạt cho Button.
 	 */
-	public void setDimension(int height, int width) {
-		this.height = height;
-		this.width = width;
+	public void activeRender() {
+		normal = false;
+		this.setImage(activeRender, this.width, this.height);
+	}
+
+	/**
+	 * Gets the control code.
+	 * 
+	 * @return the control code
+	 */
+	public int getControlCode() {
+		return controlCode;
+	}
+
+	/**
+	 * Gets the height.
+	 * 
+	 * @return the height
+	 */
+	public int getHeight() {
+		return this.height;
+	}
+
+	/**
+	 * Gets the name.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Gets the state.
+	 * 
+	 * @return the state
+	 */
+	public boolean getState() {
+		return normal;
+	}
+
+	/**
+	 * Gets the width.
+	 * 
+	 * @return the width
+	 */
+	public int getwidth() {
+		return this.width;
+	}
+
+	/**
+	 * Chuyển về trạng thái bình thường cho Button.
+	 */
+	public void normalRender() {
+		normal = true;
+		this.setImage(normalRender, this.width, this.height);
+
 	}
 
 	/*
@@ -99,57 +148,16 @@ public class DrawingButton extends Button {
 	}
 
 	/**
-	 * Gets the state.
+	 * dat chieu dai rong cho bieu tuong cua button.
 	 * 
-	 * @return the state
+	 * @param height
+	 *            chieu cao cua button can ve
+	 * @param width
+	 *            chieu rong cua button can ve
 	 */
-	public boolean getState() {
-		return normal;
-	}
-
-	/**
-	 * Chuyển về trạng thái bình thường cho Button.
-	 */
-	public void normalRender() {
-		normal = true;
-		this.setImage(normalRender, this.width, this.height);
-
-	}
-
-	/**
-	 * Chuyển sang trạng thái kích hoạt cho Button.
-	 */
-	public void activeRender() {
-		normal = false;
-		this.setImage(activeRender, this.width, this.height);
-	}
-
-	/**
-	 * Gets the control code.
-	 * 
-	 * @return the control code
-	 */
-	public int getControlCode() {
-		return controlCode;
-	}
-
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *            the new name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public void setDimension(int height, int width) {
+		this.height = height;
+		this.width = width;
 	}
 
 	/**
@@ -163,21 +171,13 @@ public class DrawingButton extends Button {
 	}
 
 	/**
-	 * Gets the height.
+	 * Sets the name.
 	 * 
-	 * @return the height
+	 * @param name
+	 *            the new name
 	 */
-	public int getHeight() {
-		return this.height;
-	}
-
-	/**
-	 * Gets the width.
-	 * 
-	 * @return the width
-	 */
-	public int getwidth() {
-		return this.width;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

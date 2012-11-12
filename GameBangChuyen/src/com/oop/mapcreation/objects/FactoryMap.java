@@ -27,11 +27,11 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 	/** chiều cao của ô vuông Factory. */
 	private int height;
 
-	/** chiểu rộng của ô vuông Factory. */
-	private int width;
-
 	/** kiểm tra xem factory có đầu ra hay không. */
 	private boolean outlet;
+
+	/** chiểu rộng của ô vuông Factory. */
+	private int width;
 
 	/**
 	 * Hàm khởi tạo đối tượng này.
@@ -48,25 +48,6 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 		this.height = height;
 		this.width = width;
 		outlet = false;
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		if (outlet)
-			g.setColor(factoryColor);
-		else
-			g.setColor(WRONG_COLOR);
-		g.fillPolygon(Helper.polygon(this.position, width, height));
 	}
 
 	/*
@@ -89,6 +70,25 @@ public class FactoryMap extends ModelFactory implements Drawable, ModelObject {
 		} else
 			return false;
 
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		if (outlet)
+			g.setColor(factoryColor);
+		else
+			g.setColor(WRONG_COLOR);
+		g.fillPolygon(Helper.polygon(this.position, width, height));
 	}
 
 	/**

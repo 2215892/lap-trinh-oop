@@ -22,9 +22,6 @@ import com.oop.gamepanel.Layer;
  */
 public class HighScore extends GameState {
 
-	private Button btnBack;
-	private Layer layer;
-
 	private class HighScoreTable implements Drawable {
 
 		private SaveFile saveFile = SaveFile.create();
@@ -51,19 +48,6 @@ public class HighScore extends GameState {
 			drawString((Graphics2D) g);
 		}
 
-		private void drawTable(Graphics g) {
-			g.setColor(Color.black);
-
-			g.drawRect(100, 100, 485, 320);
-			g.drawLine(325, 100, 325, 420);
-
-			for (int i = 0; i < MapSelect.LEVEL_COUNT; ++i) {
-				g.drawLine(100, 100 + (i + 1) * 320
-						/ (MapSelect.LEVEL_COUNT + 1), 585, 100 + (i + 1) * 320
-						/ (MapSelect.LEVEL_COUNT + 1));
-			}
-		}
-
 		private void drawString(Graphics2D g) {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
@@ -80,7 +64,23 @@ public class HighScore extends GameState {
 						* 320 / (MapSelect.LEVEL_COUNT + 1));
 			}
 		}
+
+		private void drawTable(Graphics g) {
+			g.setColor(Color.black);
+
+			g.drawRect(100, 100, 485, 320);
+			g.drawLine(325, 100, 325, 420);
+
+			for (int i = 0; i < MapSelect.LEVEL_COUNT; ++i) {
+				g.drawLine(100, 100 + (i + 1) * 320
+						/ (MapSelect.LEVEL_COUNT + 1), 585, 100 + (i + 1) * 320
+						/ (MapSelect.LEVEL_COUNT + 1));
+			}
+		}
 	}
+	private Button btnBack;
+
+	private Layer layer;
 
 	/**
 	 * Instantiates a new high score.
@@ -102,6 +102,18 @@ public class HighScore extends GameState {
 		layer.setBackground(OtherImage.BG);
 		layer.addDrawable(btnBack);
 		layer.addDrawable(highscore);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
+		layer.render();
+		g.drawImage(layer.getLayer(), 0, 0, null);
+
 	}
 
 	/*
@@ -166,18 +178,6 @@ public class HighScore extends GameState {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-		layer.render();
-		g.drawImage(layer.getLayer(), 0, 0, null);
 
 	}
 

@@ -25,9 +25,9 @@ import com.oop.model.Helper;
  */
 public class About extends GameState {
 
-	private Button backButton;
-	private JScrollPane aboutScroll;
 	private JTextArea aboutContent;
+	private JScrollPane aboutScroll;
+	private Button backButton;
 
 	/**
 	 * Instantiates a new about.
@@ -70,34 +70,28 @@ public class About extends GameState {
 
 		parent.revalidate();
 	}
-	/**
-	 * đọc lội dung của file about ra
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param fileName
-	 * @return
-	 * @throws IOException
+	 * @see com.oop.gamepanel.GameState#changeState(com.oop.gamepanel.GameState)
 	 */
-	private String readFile(String fileName) throws IOException {
-		String result = "";
-		try {
-			File fileDir = new File(fileName);
+	@Override
+	public void changeState(GameState state) {
+		parent.remove(aboutScroll);
+		parent.revalidate();
+		parent.setState(state);
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(fileDir), "UTF8"));
+	}
 
-			String strLine;
-			while ((strLine = in.readLine()) != null) {
-				result += "\n" + strLine;
-			}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
+		backButton.paint(g);
 
-			in.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return result;
 	}
 
 	/*
@@ -107,6 +101,28 @@ public class About extends GameState {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -138,39 +154,6 @@ public class About extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-		backButton.paint(g);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
@@ -179,16 +162,33 @@ public class About extends GameState {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * đọc lội dung của file about ra
 	 * 
-	 * @see com.oop.gamepanel.GameState#changeState(com.oop.gamepanel.GameState)
+	 * @param fileName
+	 * @return
+	 * @throws IOException
 	 */
-	@Override
-	public void changeState(GameState state) {
-		parent.remove(aboutScroll);
-		parent.revalidate();
-		parent.setState(state);
+	private String readFile(String fileName) throws IOException {
+		String result = "";
+		try {
+			File fileDir = new File(fileName);
 
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					new FileInputStream(fileDir), "UTF8"));
+
+			String strLine;
+			while ((strLine = in.readLine()) != null) {
+				result += "\n" + strLine;
+			}
+
+			in.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 }

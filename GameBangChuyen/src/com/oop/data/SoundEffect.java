@@ -17,11 +17,11 @@ import com.oop.model.Helper;
 public enum SoundEffect {
 
 	/** Âm thanh nền. */
-	BACKGROUND("background.wav"), /** Âm khi hộp đến đúng terminal. */
-	RIGHTBOX("right_box.wav"), /** Âm khi hộp đến terminal sai. */
-	WRONGBOX("wrong_box.wav"),
-	/** Âm khi button được click. */
-	BUTTONCLICK("click.wav");
+	BACKGROUND("background.wav"), /** Âm khi button được click. */
+	BUTTONCLICK("click.wav"), /** Âm khi hộp đến đúng terminal. */
+	RIGHTBOX("right_box.wav"),
+	/** Âm khi hộp đến terminal sai. */
+	WRONGBOX("wrong_box.wav");
 
 	/**
 	 * The Enum Volume.
@@ -68,18 +68,6 @@ public enum SoundEffect {
 	}
 
 	/**
-	 * Chạy âm thanh.
-	 */
-	public void play() {
-		if (clip != null && volume != Volume.MUTE) {
-			if (clip.isRunning())
-				clip.stop(); // Stop the player if it is still running
-			clip.setFramePosition(0); // rewind to the beginning
-			clip.start(); // Start playing
-		}
-	}
-
-	/**
 	 * Chạy âm thanh lặp đi lặp lại.
 	 */
 	public void loop() {
@@ -88,6 +76,18 @@ public enum SoundEffect {
 				clip.stop(); // Stop the player if it is still running
 			clip.setFramePosition(0); // rewind to the beginning
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+	}
+
+	/**
+	 * Chạy âm thanh.
+	 */
+	public void play() {
+		if (clip != null && volume != Volume.MUTE) {
+			if (clip.isRunning())
+				clip.stop(); // Stop the player if it is still running
+			clip.setFramePosition(0); // rewind to the beginning
+			clip.start(); // Start playing
 		}
 	}
 

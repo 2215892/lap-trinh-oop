@@ -44,43 +44,24 @@ public class SquareMap extends ItemMap {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
+	 * @see
+	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
+	 * )
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
+	 * @see
+	 * com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation
+	 * .MapCreation)
 	 */
 	@Override
-	protected void calculateTopLeft() {
-		Point realPosition = Helper.logicToReal(position);
-		Double spacing = (double) 2 * side / (Math.sqrt(5));
-		Point temp = new Point(realPosition.x - spacing.intValue() - 2 * side
-				/ 15, realPosition.y - 2 * side / 15);
+	public void calculateValidation(MapCreation map) {
+		if (AuxiliaryFunction.checkIdenticalPostition(map, position))
+			setValidation(true);
+		else
+			setValidation(false);
 
-		topLeftPoint = new Point(temp.x - 2, temp.y + 1);
-
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		if (isValid)
-			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
-					null);
-		else {
-			g.setColor(INVALID_COLOR);
-			g.fillPolygon(Helper.polygon(position, side, side));
-		}
 	}
 
 	/*
@@ -117,6 +98,27 @@ public class SquareMap extends ItemMap {
 	/*
 	 * (non - Javadoc)
 	 * 
+	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		if (isValid)
+			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
+					null);
+		else {
+			g.setColor(INVALID_COLOR);
+			g.fillPolygon(Helper.polygon(position, side, side));
+		}
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
 	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
 	 */
 	/*
@@ -133,23 +135,21 @@ public class SquareMap extends ItemMap {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see
-	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
-	 * )
+	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.oop.mapcreation.objects.ItemMap#calculateValidation(com.oop.mapcreation
-	 * .MapCreation)
+	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
 	 */
 	@Override
-	public void calculateValidation(MapCreation map) {
-		if (AuxiliaryFunction.checkIdenticalPostition(map, position))
-			setValidation(true);
-		else
-			setValidation(false);
+	protected void calculateTopLeft() {
+		Point realPosition = Helper.logicToReal(position);
+		Double spacing = (double) 2 * side / (Math.sqrt(5));
+		Point temp = new Point(realPosition.x - spacing.intValue() - 2 * side
+				/ 15, realPosition.y - 2 * side / 15);
+
+		topLeftPoint = new Point(temp.x - 2, temp.y + 1);
 
 	}
 

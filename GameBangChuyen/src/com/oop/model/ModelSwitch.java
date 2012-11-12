@@ -81,6 +81,15 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 	}
 
 	/**
+	 * Gets the current dir.
+	 * 
+	 * @return the current dir
+	 */
+	public int getCurrentDir() {
+		return this.currentDir;
+	}
+
+	/**
 	 * Gets the direction.
 	 * 
 	 * @return the direction
@@ -123,15 +132,6 @@ public class ModelSwitch extends GraphNode implements ModelObject {
 		if (this.listDirection.isEmpty()) {
 			this.currentDir = -1;
 		}
-	}
-
-	/**
-	 * Gets the current dir.
-	 * 
-	 * @return the current dir
-	 */
-	public int getCurrentDir() {
-		return this.currentDir;
 	}
 
 	/**

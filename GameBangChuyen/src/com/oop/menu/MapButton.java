@@ -39,6 +39,44 @@ public class MapButton extends Button {
 	}
 
 	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Checks if is lock.
+	 * 
+	 * @return true, if is lock
+	 */
+	public boolean isLock() {
+		return isLock;
+	}
+
+	/**
+	 * Sets the id.
+	 * 
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Sets the lock.
+	 * 
+	 * @param isLock
+	 *            the new lock
+	 */
+	public void setLock(boolean isLock) {
+		this.isLock = isLock;
+	}
+
+	/**
 	 * Update.
 	 */
 	public void update() {
@@ -70,44 +108,6 @@ public class MapButton extends Button {
 
 		g.dispose();
 		this.setImage(img);
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the new id
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Checks if is lock.
-	 * 
-	 * @return true, if is lock
-	 */
-	public boolean isLock() {
-		return isLock;
-	}
-
-	/**
-	 * Sets the lock.
-	 * 
-	 * @param isLock
-	 *            the new lock
-	 */
-	public void setLock(boolean isLock) {
-		this.isLock = isLock;
 	}
 
 }

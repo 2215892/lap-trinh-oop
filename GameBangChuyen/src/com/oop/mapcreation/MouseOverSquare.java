@@ -17,23 +17,23 @@ import com.oop.model.Helper;
  */
 public class MouseOverSquare implements Drawable {
 
-	/** màu hiển thị có thể vẽ được switch ở đây. */
-	public static Color VALID_COLOR = new Color(0, 0, 255, 150);
-
 	/** màu hiển thị không thể vẽ được switch ở đây. */
 	public static Color INVALID_COLOR = new Color(255, 0, 0, 150);
 
-	/** vi tri góc trái trên cung của ô chuột move vào. */
-	private Point position;
+	/** màu hiển thị có thể vẽ được switch ở đây. */
+	public static Color VALID_COLOR = new Color(0, 0, 255, 150);
 
 	/** chiều dài logic ô vuông cần hiển thị. */
 	private int height;
 
-	/** chiều rộng logic của ô vuông cần hiển thị. */
-	private int width;
-
 	/** tinh hợp lệ của ô vuông định vẽ switch. */
 	private boolean isValid;
+
+	/** vi tri góc trái trên cung của ô chuột move vào. */
+	private Point position;
+
+	/** chiều rộng logic của ô vuông cần hiển thị. */
+	private int width;
 
 	/**
 	 * Khởi tạo đối tượng.
@@ -50,6 +50,27 @@ public class MouseOverSquare implements Drawable {
 		this.height = height;
 		this.width = width;
 		isValid = false;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
+		Point logicPoint = Helper.realToLogic(p);
+
+		if ((this.position.x <= logicPoint.x && (this.position.x + this.width) >= logicPoint.x)
+				&& (this.position.y <= logicPoint.y && (this.position.y + this.height) >= logicPoint.y)) {
+			return true;
+		} else
+			return false;
 	}
 
 	/*
@@ -80,27 +101,6 @@ public class MouseOverSquare implements Drawable {
 	 */
 	public void setValidation(boolean isvalid) {
 		this.isValid = isvalid;
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point p) {
-		Point logicPoint = Helper.realToLogic(p);
-
-		if ((this.position.x <= logicPoint.x && (this.position.x + this.width) >= logicPoint.x)
-				&& (this.position.y <= logicPoint.y && (this.position.y + this.height) >= logicPoint.y)) {
-			return true;
-		} else
-			return false;
 	}
 
 }

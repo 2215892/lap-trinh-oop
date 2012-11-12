@@ -8,11 +8,11 @@ import java.awt.event.MouseListener;
  */
 public abstract class GameState implements MouseListener {
 
-	/** The parent. */
-	protected GamePanel parent;
-
 	/** The last state. */
 	protected GameState lastState;
+
+	/** The parent. */
+	protected GamePanel parent;
 
 	/**
 	 * Instantiates a new game state.

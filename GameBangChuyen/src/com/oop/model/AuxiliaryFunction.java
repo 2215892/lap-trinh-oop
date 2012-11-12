@@ -37,229 +37,6 @@ import com.oop.mapcreation.objects.TreeMap;
 public class AuxiliaryFunction {
 
 	/**
-	 * Tìm SwitchMap trong một Layer.
-	 * 
-	 * @param position
-	 *            - vị trí cần tìm
-	 * @param switchLayer
-	 *            - layer chứa switch cần tìm
-	 * @return switchMap với vị trí position
-	 */
-	public static SwitchMap findSwitch(Point position, Layer switchLayer) {
-
-		ArrayList<Drawable> switchList = switchLayer.getListDrawable();
-		for (Drawable i : switchList) {
-			SwitchMap temp = (SwitchMap) i;
-			if (checkPoint(position, temp.getPosition()))
-				return temp;
-		}
-		return null;
-	}
-
-	/**
-	 * Tìm cac FactoryMap trong một Layer.
-	 * 
-	 * @param position
-	 *            - vị trí cần tìm
-	 * @param factoryLayer
-	 *            - layer chứa factory cần tìm
-	 * @return factoryMap với vị trí position
-	 */
-	public static FactoryMap findFactory(Point position, Layer factoryLayer) {
-		ArrayList<Drawable> factoryList = factoryLayer.getListDrawable();
-
-		for (Drawable i : factoryList) {
-			FactoryMap temp = (FactoryMap) i;
-			if (temp.getPosition().equals(position))
-				return temp;
-
-		}
-		return null;
-	}
-
-	/**
-	 * Tìm cac TerminalMap trong một Layer.
-	 * 
-	 * @param position
-	 *            - vị trí cần tìm
-	 * @param terminalLayer
-	 *            - layer chứa terminal cần tìm
-	 * @return TerminalMap với vị trí position
-	 */
-	public static TerminalMap findTerminal(Point position, Layer terminalLayer) {
-		ArrayList<Drawable> terminalList = terminalLayer.getListDrawable();
-		for (Drawable i : terminalList) {
-			TerminalMap temp = (TerminalMap) i;
-			if (checkPoint(position, temp.getPosition()))
-				return temp;
-		}
-		return null;
-	}
-
-	/**
-	 * Tìm neighbor phải của một switch.
-	 * 
-	 * @param sw
-	 *            - switch cần tìm neighbor
-	 * @param switchLayer
-	 *            - layer chứa switch
-	 * @return switch cần tìm
-	 */
-	public static SwitchMap rightNeighbor(SwitchMap sw, Layer switchLayer) {
-		return findSwitch(
-				new Point(sw.getPosition().x, sw.getPosition().y
-						+ sw.getHeight()), switchLayer);
-	}
-
-	/**
-	 * Kiểm tra xem hai điểm có trùng nhau hay không.
-	 * 
-	 * @param p1
-	 *            - điểm thứ nhất
-	 * @param p2
-	 *            - điểm thứ hai
-	 * @return true nếu hai điểm cùng tọa độ
-	 */
-	public static boolean checkPoint(Point p1, Point p2) {
-		if ((p1.x == p2.x) && (p1.y == p2.y))
-			return true;
-		return false;
-	}
-
-	/**
-	 * Tìm neighbor trái của một switch.
-	 * 
-	 * @param sw
-	 *            - switch cần tìm neighbor
-	 * @param switchLayer
-	 *            - layer chứa switch
-	 * @return switch cần tìm
-	 */
-	public static SwitchMap leftNeighbor(SwitchMap sw, Layer switchLayer) {
-		return findSwitch(
-				new Point(sw.getPosition().x, sw.getPosition().y
-						- sw.getHeight()), switchLayer);
-	}
-
-	/**
-	 * Tìm neighbor trên của một switch.
-	 * 
-	 * @param sw
-	 *            - switch cần tìm neighbor
-	 * @param switchLayer
-	 *            - layer chứa switch
-	 * @return switch cần tìm
-	 */
-	public static SwitchMap upNeighbor(SwitchMap sw, Layer switchLayer) {
-		return findSwitch(
-				new Point(sw.getPosition().x - sw.getWidth(),
-						sw.getPosition().y), switchLayer);
-	}
-
-	/**
-	 * Tìm neighbor dưới của một switch.
-	 * 
-	 * @param sw
-	 *            - switch cần tìm neighbor
-	 * @param switchLayer
-	 *            - layer chứa switch
-	 * @return switch cần tìm
-	 */
-
-	public static SwitchMap downNeighbor(SwitchMap sw, Layer switchLayer) {
-		return findSwitch(
-				new Point(sw.getPosition().x + sw.getWidth(),
-						sw.getPosition().y), switchLayer);
-	}
-
-	/**
-	 * Hàm tính chỉ số của switch trong một layer.
-	 * 
-	 * @param sw
-	 *            - switch cần tìm chỉ số
-	 * @param switchLayer
-	 *            - layer cần tìm
-	 * @return chỉ số cần tìm, nếu không có switch trả về - 1
-	 */
-	public static int getIndex(SwitchMap sw, Layer switchLayer) {
-		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
-			SwitchMap temp = (SwitchMap) switchLayer.getListDrawable().get(i);
-			if ((temp.getPosition().x == sw.getPosition().x)
-					&& (temp.getPosition().y == sw.getPosition().y))
-				return i;
-		}
-		return -1;
-	}
-
-	/**
-	 * Hàm tạo các SwitchMap từ các ModelSwitch(dùng trong đọc file map).
-	 * 
-	 * @param switchList
-	 *            - list ModelSwitch
-	 * @param unit
-	 *            - cạnh lưới ô vuông
-	 * @return Một list các SwitchMap từ ModelSwitch đầu vào
-	 */
-	public static ArrayList<SwitchMap> loadSwitch(
-			ArrayList<ModelSwitch> switchList, int unit) {
-		ArrayList<SwitchMap> result = new ArrayList<SwitchMap>();
-		for (ModelSwitch i : switchList) {
-			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
-					* unit);
-			SwitchMap temp = new SwitchMap(tg, unit, unit);
-			for (Direction d : i.getListDirection())
-				temp.addDirection(d);
-			temp.setCurrentDir(i.getCurrentDir());
-			result.add(temp);
-		}
-		return result;
-	}
-
-	/**
-	 * Hàm tạo các FactoryMap từ các ModelFactory(dùng trong đọc file map).
-	 * 
-	 * @param factoryList
-	 *            - list các ModelFactory
-	 * @param unit
-	 *            - cạnh lưới ô vuông
-	 * @return Một list các FactoryMap từ ModelFactory đầu vào
-	 */
-	public static ArrayList<FactoryMap> loadFactory(
-			ArrayList<ModelFactory> factoryList, int unit) {
-		ArrayList<FactoryMap> result = new ArrayList<FactoryMap>();
-		for (ModelFactory i : factoryList) {
-			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
-					* unit);
-			FactoryMap temp = new FactoryMap(tg, unit, unit);
-			temp.setDirection(i.getDirection());
-			result.add(temp);
-		}
-		return result;
-	}
-
-	/**
-	 * Hàm tạo các TerminalMap từ các ModelTerminal (dùng trong đọc file map).
-	 * 
-	 * @param terminalList
-	 *            list các ModelTerminal
-	 * @param unit
-	 *            - cạnh lưới ô vuông
-	 * @return Một list các SwitchMap từ ModelTerminal đầu vào
-	 */
-	public static ArrayList<TerminalMap> loadTerminal(
-			ArrayList<ModelTerminal> terminalList, int unit) {
-		ArrayList<TerminalMap> result = new ArrayList<TerminalMap>();
-		for (ModelTerminal i : terminalList) {
-			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
-					* unit);
-			TerminalMap temp = new TerminalMap(tg, unit);
-			temp.setBoxBumber(i.getBoxCount());
-			result.add(temp);
-		}
-		return result;
-	}
-
-	/**
 	 * Kiểm tra xem hai hướng có ngược chiều hay không.
 	 * 
 	 * @param d1
@@ -281,6 +58,41 @@ public class AuxiliaryFunction {
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * Kiểm tra xem vị trí có thuộc layer nào không (trong một map).
+	 * 
+	 * @param mapCreation
+	 *            - map đang vẽ
+	 * @param position
+	 *            - vị trí cần kiểm tra
+	 * @return true nếu không thấy vị trí này
+	 */
+	public static boolean checkIdenticalPostition(MapCreation mapCreation,
+			Point position) {
+		Layer drawingLayer = mapCreation.getItemMapLayer();
+		if ((findFactory(position, mapCreation.getFactorylayer()) == null)
+				&& (findTerminal(position, mapCreation.getTerminallayer()) == null)
+				&& (findItem(position, drawingLayer) == null)
+				&& (findSwitch(position, mapCreation.getSwitchLayer()) == null))
+			return true;
+		return false;
+	}
+
+	/**
+	 * Kiểm tra xem hai điểm có trùng nhau hay không.
+	 * 
+	 * @param p1
+	 *            - điểm thứ nhất
+	 * @param p2
+	 *            - điểm thứ hai
+	 * @return true nếu hai điểm cùng tọa độ
+	 */
+	public static boolean checkPoint(Point p1, Point p2) {
+		if ((p1.x == p2.x) && (p1.y == p2.y))
+			return true;
+		return false;
 	}
 
 	/**
@@ -325,194 +137,36 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Kiểm tra một ô đã có factory, terminal hay switch hay không.
+	 * làm rỗng các Layer vẽ.
 	 * 
-	 * @param p
-	 *            - vị trí cần xét
-	 * @param switchLayer
-	 *            - layer chứa switch
-	 * @param factoryLayer
-	 *            - layer chứa factory
-	 * @param terminalLayer
-	 *            - layer chứa terminal
-	 * @return true nếu chưa có các đối tượng này
+	 * @param map
+	 *            the map
 	 */
-	public static boolean isEmptySquare(Point p, Layer switchLayer,
-			Layer factoryLayer, Layer terminalLayer) {
+	public static void deleteAll(MapCreation map) {
 
-		if ((findSwitch(p, switchLayer) != null)
-				|| (findFactory(p, factoryLayer) != null)
-				|| (findTerminal(p, terminalLayer) != null))
-			return false;
-		return true;
+		map.getItemMapLayer().emptyLayer();
+		map.getTerminallayer().emptyLayer();
+		map.getFactorylayer().emptyLayer();
+		map.getSwitchLayer().emptyLayer();
+		map.getSquareCovedList().clear();
+
+		// parent.repaint();
 	}
 
 	/**
-	 * Tính chiều cáo của ảnh khi biết chiều rộng mà đảm bảo đúng tỉ lệ.
-	 * 
-	 * @param width
-	 *            - chiều rộng của ảnh
-	 * @param img
-	 *            - ảnh cần tính
-	 * @return chiều cao ứng với chiều rộng
-	 */
-	public static int getImageHeight(int width, Image img) {
-
-		Double h = (double) width * img.getHeight(null) / img.getWidth(null);
-		return h.intValue();
-	}
-
-	/**
-	 * Tính vertical flip của một Image.
-	 * 
-	 * @param img
-	 *            - ảnh cần flip
-	 * @return vertivalflip của ảnh
-	 */
-	public static Image verticalFlipImage(Image img) {
-		int h = img.getHeight(null);
-		int w = img.getWidth(null);
-		BufferedImage result = new BufferedImage(w, h,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) result.getGraphics();
-		g.setBackground(new Color(255, 255, 255, 0));
-		g.clearRect(0, 0, w, h);
-		g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
-		g.dispose();
-
-		return result;
-
-	}
-
-	/**
-	 * Tính horizontoal flip của một Image.
-	 * 
-	 * @param img
-	 *            - ảnh cần flip
-	 * @return horizontal flip của ảnh
-	 */
-	public static BufferedImage horizontalFlipImage(Image img) {
-		int h = img.getHeight(null);
-		int w = img.getWidth(null);
-		BufferedImage result = new BufferedImage(w, h,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) result.getGraphics();
-		g.setBackground(new Color(255, 255, 255, 0));
-		g.clearRect(0, 0, w, h);
-		g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
-		g.dispose();
-		return result;
-
-	}
-
-	/**
-	 * Kiểm tra xem vị trí có thuộc layer nào không (trong một map).
-	 * 
-	 * @param mapCreation
-	 *            - map đang vẽ
-	 * @param position
-	 *            - vị trí cần kiểm tra
-	 * @return true nếu không thấy vị trí này
-	 */
-	public static boolean checkIdenticalPostition(MapCreation mapCreation,
-			Point position) {
-		Layer drawingLayer = mapCreation.getItemMapLayer();
-		if ((findFactory(position, mapCreation.getFactorylayer()) == null)
-				&& (findTerminal(position, mapCreation.getTerminallayer()) == null)
-				&& (findItem(position, drawingLayer) == null)
-				&& (findSwitch(position, mapCreation.getSwitchLayer()) == null))
-			return true;
-		return false;
-	}
-
-	/**
-	 * kiem tra xem xem một switch có neighbor nào hay không.
+	 * Tìm neighbor dưới của một switch.
 	 * 
 	 * @param sw
-	 *            - switch cần kiểm tra
+	 *            - switch cần tìm neighbor
 	 * @param switchLayer
 	 *            - layer chứa switch
-	 * @param direction
-	 *            - hướng tìm neighbor
-	 * @return true nếu có neighbor
+	 * @return switch cần tìm
 	 */
-	public static boolean neighborOfSwitch(SwitchMap sw, Layer switchLayer,
-			Direction direction) {
-		ArrayList<SwitchMap> result = new ArrayList<SwitchMap>();
-		SwitchMap leftNeighbor = leftNeighbor(sw, switchLayer);
-		SwitchMap rightNeighbor = rightNeighbor(sw, switchLayer);
-		SwitchMap upNeighbor = upNeighbor(sw, switchLayer);
-		SwitchMap downNeighbor = downNeighbor(sw, switchLayer);
-		if (leftNeighbor != null)
-			result.add(leftNeighbor);
-		if (rightNeighbor != null)
-			result.add(rightNeighbor);
-		if (upNeighbor != null)
-			result.add(upNeighbor);
-		if (downNeighbor != null)
-			result.add(downNeighbor);
-		return true;
-	}
 
-	/**
-	 * Hàm chuyển đổi giữa entryPoint(trong ItemMap) và nearestPoint (trong
-	 * ItemMap).
-	 * 
-	 * @param nearestPoint
-	 *            the nearest point
-	 * @param image
-	 *            ảnh xem xét
-	 * @param side
-	 *            - cạnh lưới ô vuông
-	 * @return diem - entryPoint tương ứng
-	 */
-	public static Point nearestPointToEntryPoint(Point nearestPoint,
-			Image image, int side) {
-		Point temp = null;
-		if (image == ItemImage.TRUCK)
-			temp = new Point(nearestPoint.x, nearestPoint.y + 4 * side);
-		else if (image == ItemImage.TRUCK_DOWN)
-			temp = new Point(nearestPoint.x - 4 * side, nearestPoint.y);
-		else if (image == ItemImage.AIRPLANE)
-			temp = new Point(nearestPoint.x + side, nearestPoint.y);
-		else if (image == ItemImage.AIRPLANE_RIGHT)
-			temp = new Point(nearestPoint.x, nearestPoint.y - side);
-		else if (image == ItemImage.SHIP)
-			temp = new Point(nearestPoint.x + side, nearestPoint.y);
-		else if (image == ItemImage.SHIP_RIGHT)
-			temp = new Point(nearestPoint.x, nearestPoint.y - side);
-		return temp;
-	}
-
-	/**
-	 * load itemlist (đọc từ file map) vào drawingLayer.
-	 * 
-	 * @param itemMapLayer
-	 *            - layer load vào
-	 * @param itemList
-	 *            - các item đọc được từ file
-	 * @param side
-	 *            - cạnh lưới ô vuông
-	 */
-	public static void loadDrawingLayer(DrawLayer itemMapLayer,
-			ArrayList<ModelItem> itemList, int side) {
-		/* duyet va sap xep cac itemList vao drawLayer */
-
-		for (ModelItem i : itemList) {
-			BufferedImage image = ItemImage
-					.getItemImage(i.getId(), i.getType());
-			Point position = new Point(i.getPosition().x * side,
-					i.getPosition().y * side);
-			ItemMap item = null;
-			if (i.getType() == ItemImage.VEHICLE_TYPE) {
-				Point temp = nearestPointToEntryPoint(position, image, side);
-				item = new TerminalIcon(temp, side, image);
-			} else if (i.getType() == ItemImage.PLATFORM_TYPE)
-				item = new SquareMap(position, side, image);
-			else if (i.getType() == ItemImage.TREE_TYPE)
-				item = new TreeMap(position, side, image);
-			itemMapLayer.addDrawable(item);
-		}
+	public static SwitchMap downNeighbor(SwitchMap sw, Layer switchLayer) {
+		return findSwitch(
+				new Point(sw.getPosition().x + sw.getWidth(),
+						sw.getPosition().y), switchLayer);
 	}
 
 	/**
@@ -567,53 +221,24 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hiển thị các switch mà khi box đi tới sẽ chạy đến vô hạn.
+	 * Tìm cac FactoryMap trong một Layer.
 	 * 
-	 * @param map
-	 *            - map đang vẽ
+	 * @param position
+	 *            - vị trí cần tìm
+	 * @param factoryLayer
+	 *            - layer chứa factory cần tìm
+	 * @return factoryMap với vị trí position
 	 */
-	public static void showWrongSwitch(MapCreation map) {
-		for (Drawable i : map.getSwitchLayer().getListDrawable()) {
-			SwitchMap sw = (SwitchMap) i;
-			sw.setInfinityState(false);
-		}
-		ArrayList<SwitchMap> result = falseSwitch(map);
-		for (SwitchMap i : result) {
-			i.setInfinityState(true);
-		}
-	}
+	public static FactoryMap findFactory(Point position, Layer factoryLayer) {
+		ArrayList<Drawable> factoryList = factoryLayer.getListDrawable();
 
-	/**
-	 * Tìm các factory không có switch đi ra.
-	 * 
-	 * @param map
-	 *            - map đang vẽ
-	 * @return list các Factory cần tìm
-	 */
-	public static ArrayList<FactoryMap> isolatedFactory(MapCreation map) {
-		ArrayList<FactoryMap> result = new ArrayList<FactoryMap>();
-		for (Drawable i : map.getFactorylayer().getListDrawable()) {
-			FactoryMap f = (FactoryMap) i;
-			if (f.getDirection() == null)
-				result.add(f);
-		}
-		return result;
-	}
+		for (Drawable i : factoryList) {
+			FactoryMap temp = (FactoryMap) i;
+			if (temp.getPosition().equals(position))
+				return temp;
 
-	/**
-	 * Hiển thị các Factory không có switch đi ra.
-	 * 
-	 * @param map
-	 *            - map đang vẽ
-	 */
-	public static void showWrongFactory(MapCreation map) {
-		ArrayList<FactoryMap> result = isolatedFactory(map);
-		for (Drawable i : map.getFactorylayer().getListDrawable()) {
-			FactoryMap f = (FactoryMap) i;
-			f.setOutletState(true);
 		}
-		for (FactoryMap i : result)
-			i.setOutletState(false);
+		return null;
 	}
 
 	/**
@@ -635,21 +260,76 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Xóa(remove) một điểm trong một list.
+	 * Tìm SwitchMap trong một Layer.
 	 * 
-	 * @param list
-	 *            - list chứa các điểm
-	 * @param point
-	 *            - điểm cần remove
+	 * @param position
+	 *            - vị trí cần tìm
+	 * @param switchLayer
+	 *            - layer chứa switch cần tìm
+	 * @return switchMap với vị trí position
 	 */
-	public static void removePointFromList(ArrayList<Point> list, Point point) {
-		for (Point i : list) {
-			if (checkPoint(i, point)) {
-				list.remove(i);
-				break;
-			}
+	public static SwitchMap findSwitch(Point position, Layer switchLayer) {
 
+		ArrayList<Drawable> switchList = switchLayer.getListDrawable();
+		for (Drawable i : switchList) {
+			SwitchMap temp = (SwitchMap) i;
+			if (checkPoint(position, temp.getPosition()))
+				return temp;
 		}
+		return null;
+	}
+
+	/**
+	 * Tìm cac TerminalMap trong một Layer.
+	 * 
+	 * @param position
+	 *            - vị trí cần tìm
+	 * @param terminalLayer
+	 *            - layer chứa terminal cần tìm
+	 * @return TerminalMap với vị trí position
+	 */
+	public static TerminalMap findTerminal(Point position, Layer terminalLayer) {
+		ArrayList<Drawable> terminalList = terminalLayer.getListDrawable();
+		for (Drawable i : terminalList) {
+			TerminalMap temp = (TerminalMap) i;
+			if (checkPoint(position, temp.getPosition()))
+				return temp;
+		}
+		return null;
+	}
+
+	/**
+	 * Tính chiều cáo của ảnh khi biết chiều rộng mà đảm bảo đúng tỉ lệ.
+	 * 
+	 * @param width
+	 *            - chiều rộng của ảnh
+	 * @param img
+	 *            - ảnh cần tính
+	 * @return chiều cao ứng với chiều rộng
+	 */
+	public static int getImageHeight(int width, Image img) {
+
+		Double h = (double) width * img.getHeight(null) / img.getWidth(null);
+		return h.intValue();
+	}
+
+	/**
+	 * Hàm tính chỉ số của switch trong một layer.
+	 * 
+	 * @param sw
+	 *            - switch cần tìm chỉ số
+	 * @param switchLayer
+	 *            - layer cần tìm
+	 * @return chỉ số cần tìm, nếu không có switch trả về - 1
+	 */
+	public static int getIndex(SwitchMap sw, Layer switchLayer) {
+		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
+			SwitchMap temp = (SwitchMap) switchLayer.getListDrawable().get(i);
+			if ((temp.getPosition().x == sw.getPosition().x)
+					&& (temp.getPosition().y == sw.getPosition().y))
+				return i;
+		}
+		return -1;
 	}
 
 	/**
@@ -690,17 +370,60 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa.
+	 * Hàm xử lý edit một file map.
 	 * 
 	 * @param map
-	 *            - map đang vẽ
-	 * @return true nếu map chưa được vẽ gì
+	 *            the map
 	 */
-	public static boolean isEmpty(MapCreation map) {
+	public static void handleEditMap(MapCreation map) {
+		/* hien thong bao luu file cu */
+		String message = " Ban co muon luu map dang ve ? ";
+		boolean check = true;
+		/* neu map khong giong */
+		if (!AuxiliaryFunction.isEmpty(map)) {
+			int result = JOptionPane
+					.showConfirmDialog(map.getParent(), message);
+			if (result == JOptionPane.OK_OPTION)
+				check = handleMenuSave(map);
+		}
+		if (check) {
+			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory(new File(Helper.getCurrentDirectory()
+					+ "custom map//"));
+			chooser.showOpenDialog(map.getParent());
+			File selectedFile = chooser.getSelectedFile();
+			if (selectedFile != null) {
+				map.setFileName(selectedFile.getPath());
+				/* thuc hien doc file */
+				deleteAll(map);
+				loadElementFromFile(map.getFileName(), map);
+				MapRecovery mapRecovery = MapRecovery.createMapRecovery(
+						map.getSwitchLayer(), map.getFactorylayer(),
+						map.getTerminallayer(), map);
+				mapRecovery.recoverFullMap();
+				AuxiliaryFunction.showWrongFactory(map);
+				AuxiliaryFunction.showWrongSwitch(map);
+			}
+		}
+	}
 
-		if (map.getFactorylayer().getListDrawable().size() == 0)
-			return true;
-		return false;
+	/**
+	 * Xử lý khi người chơi ấn nút Back.
+	 * 
+	 * @param map
+	 *            the map
+	 */
+	public static void handleMenuBack(MapCreation map) {
+		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */
+		if (!AuxiliaryFunction.isEmpty(map)) {
+
+			String message = "Luu thay doi truoc khi thoat? ";
+			int confirm = JOptionPane.showConfirmDialog(map.getParent(),
+					message);
+			if (confirm == JOptionPane.OK_OPTION)
+				handleMenuSave(map);
+		}
+		map.changeState(map.getLastState());
 	}
 
 	/**
@@ -766,23 +489,6 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * làm rỗng các Layer vẽ.
-	 * 
-	 * @param map
-	 *            the map
-	 */
-	public static void deleteAll(MapCreation map) {
-
-		map.getItemMapLayer().emptyLayer();
-		map.getTerminallayer().emptyLayer();
-		map.getFactorylayer().emptyLayer();
-		map.getSwitchLayer().emptyLayer();
-		map.getSquareCovedList().clear();
-
-		// parent.repaint();
-	}
-
-	/**
 	 * Hàm xử lý file.
 	 * 
 	 * @param map
@@ -815,41 +521,354 @@ public class AuxiliaryFunction {
 	}
 
 	/**
-	 * Hàm xử lý edit một file map.
+	 * Tính horizontoal flip của một Image.
+	 * 
+	 * @param img
+	 *            - ảnh cần flip
+	 * @return horizontal flip của ảnh
+	 */
+	public static BufferedImage horizontalFlipImage(Image img) {
+		int h = img.getHeight(null);
+		int w = img.getWidth(null);
+		BufferedImage result = new BufferedImage(w, h,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) result.getGraphics();
+		g.setBackground(new Color(255, 255, 255, 0));
+		g.clearRect(0, 0, w, h);
+		g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
+		g.dispose();
+		return result;
+
+	}
+
+	/**
+	 * Hàm kiểm tra xem Map đã được vẽ gì hay chưa.
 	 * 
 	 * @param map
-	 *            the map
+	 *            - map đang vẽ
+	 * @return true nếu map chưa được vẽ gì
 	 */
-	public static void handleEditMap(MapCreation map) {
-		/* hien thong bao luu file cu */
-		String message = " Ban co muon luu map dang ve ? ";
-		boolean check = true;
-		/* neu map khong giong */
-		if (!AuxiliaryFunction.isEmpty(map)) {
-			int result = JOptionPane
-					.showConfirmDialog(map.getParent(), message);
-			if (result == JOptionPane.OK_OPTION)
-				check = handleMenuSave(map);
+	public static boolean isEmpty(MapCreation map) {
+
+		if (map.getFactorylayer().getListDrawable().size() == 0)
+			return true;
+		return false;
+	}
+
+	/**
+	 * Kiểm tra một ô đã có factory, terminal hay switch hay không.
+	 * 
+	 * @param p
+	 *            - vị trí cần xét
+	 * @param switchLayer
+	 *            - layer chứa switch
+	 * @param factoryLayer
+	 *            - layer chứa factory
+	 * @param terminalLayer
+	 *            - layer chứa terminal
+	 * @return true nếu chưa có các đối tượng này
+	 */
+	public static boolean isEmptySquare(Point p, Layer switchLayer,
+			Layer factoryLayer, Layer terminalLayer) {
+
+		if ((findSwitch(p, switchLayer) != null)
+				|| (findFactory(p, factoryLayer) != null)
+				|| (findTerminal(p, terminalLayer) != null))
+			return false;
+		return true;
+	}
+
+	/**
+	 * Tìm các factory không có switch đi ra.
+	 * 
+	 * @param map
+	 *            - map đang vẽ
+	 * @return list các Factory cần tìm
+	 */
+	public static ArrayList<FactoryMap> isolatedFactory(MapCreation map) {
+		ArrayList<FactoryMap> result = new ArrayList<FactoryMap>();
+		for (Drawable i : map.getFactorylayer().getListDrawable()) {
+			FactoryMap f = (FactoryMap) i;
+			if (f.getDirection() == null)
+				result.add(f);
 		}
-		if (check) {
-			JFileChooser chooser = new JFileChooser();
-			chooser.setCurrentDirectory(new File(Helper.getCurrentDirectory()
-					+ "custom map//"));
-			chooser.showOpenDialog(map.getParent());
-			File selectedFile = chooser.getSelectedFile();
-			if (selectedFile != null) {
-				map.setFileName(selectedFile.getPath());
-				/* thuc hien doc file */
-				deleteAll(map);
-				loadElementFromFile(map.getFileName(), map);
-				MapRecovery mapRecovery = MapRecovery.createMapRecovery(
-						map.getSwitchLayer(), map.getFactorylayer(),
-						map.getTerminallayer(), map);
-				mapRecovery.recoverFullMap();
-				AuxiliaryFunction.showWrongFactory(map);
-				AuxiliaryFunction.showWrongSwitch(map);
+		return result;
+	}
+
+	/**
+	 * Tìm neighbor trái của một switch.
+	 * 
+	 * @param sw
+	 *            - switch cần tìm neighbor
+	 * @param switchLayer
+	 *            - layer chứa switch
+	 * @return switch cần tìm
+	 */
+	public static SwitchMap leftNeighbor(SwitchMap sw, Layer switchLayer) {
+		return findSwitch(
+				new Point(sw.getPosition().x, sw.getPosition().y
+						- sw.getHeight()), switchLayer);
+	}
+
+	/**
+	 * load itemlist (đọc từ file map) vào drawingLayer.
+	 * 
+	 * @param itemMapLayer
+	 *            - layer load vào
+	 * @param itemList
+	 *            - các item đọc được từ file
+	 * @param side
+	 *            - cạnh lưới ô vuông
+	 */
+	public static void loadDrawingLayer(DrawLayer itemMapLayer,
+			ArrayList<ModelItem> itemList, int side) {
+		/* duyet va sap xep cac itemList vao drawLayer */
+
+		for (ModelItem i : itemList) {
+			BufferedImage image = ItemImage
+					.getItemImage(i.getId(), i.getType());
+			Point position = new Point(i.getPosition().x * side,
+					i.getPosition().y * side);
+			ItemMap item = null;
+			if (i.getType() == ItemImage.VEHICLE_TYPE) {
+				Point temp = nearestPointToEntryPoint(position, image, side);
+				item = new TerminalIcon(temp, side, image);
+			} else if (i.getType() == ItemImage.PLATFORM_TYPE)
+				item = new SquareMap(position, side, image);
+			else if (i.getType() == ItemImage.TREE_TYPE)
+				item = new TreeMap(position, side, image);
+			itemMapLayer.addDrawable(item);
+		}
+	}
+
+	/**
+	 * Hàm tạo các FactoryMap từ các ModelFactory(dùng trong đọc file map).
+	 * 
+	 * @param factoryList
+	 *            - list các ModelFactory
+	 * @param unit
+	 *            - cạnh lưới ô vuông
+	 * @return Một list các FactoryMap từ ModelFactory đầu vào
+	 */
+	public static ArrayList<FactoryMap> loadFactory(
+			ArrayList<ModelFactory> factoryList, int unit) {
+		ArrayList<FactoryMap> result = new ArrayList<FactoryMap>();
+		for (ModelFactory i : factoryList) {
+			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
+					* unit);
+			FactoryMap temp = new FactoryMap(tg, unit, unit);
+			temp.setDirection(i.getDirection());
+			result.add(temp);
+		}
+		return result;
+	}
+
+	/**
+	 * Hàm tạo các SwitchMap từ các ModelSwitch(dùng trong đọc file map).
+	 * 
+	 * @param switchList
+	 *            - list ModelSwitch
+	 * @param unit
+	 *            - cạnh lưới ô vuông
+	 * @return Một list các SwitchMap từ ModelSwitch đầu vào
+	 */
+	public static ArrayList<SwitchMap> loadSwitch(
+			ArrayList<ModelSwitch> switchList, int unit) {
+		ArrayList<SwitchMap> result = new ArrayList<SwitchMap>();
+		for (ModelSwitch i : switchList) {
+			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
+					* unit);
+			SwitchMap temp = new SwitchMap(tg, unit, unit);
+			for (Direction d : i.getListDirection())
+				temp.addDirection(d);
+			temp.setCurrentDir(i.getCurrentDir());
+			result.add(temp);
+		}
+		return result;
+	}
+
+	/**
+	 * Hàm tạo các TerminalMap từ các ModelTerminal (dùng trong đọc file map).
+	 * 
+	 * @param terminalList
+	 *            list các ModelTerminal
+	 * @param unit
+	 *            - cạnh lưới ô vuông
+	 * @return Một list các SwitchMap từ ModelTerminal đầu vào
+	 */
+	public static ArrayList<TerminalMap> loadTerminal(
+			ArrayList<ModelTerminal> terminalList, int unit) {
+		ArrayList<TerminalMap> result = new ArrayList<TerminalMap>();
+		for (ModelTerminal i : terminalList) {
+			Point tg = new Point(i.getPosition().x * unit, i.getPosition().y
+					* unit);
+			TerminalMap temp = new TerminalMap(tg, unit);
+			temp.setBoxBumber(i.getBoxCount());
+			result.add(temp);
+		}
+		return result;
+	}
+
+	/**
+	 * Hàm chuyển đổi giữa entryPoint(trong ItemMap) và nearestPoint (trong
+	 * ItemMap).
+	 * 
+	 * @param nearestPoint
+	 *            the nearest point
+	 * @param image
+	 *            ảnh xem xét
+	 * @param side
+	 *            - cạnh lưới ô vuông
+	 * @return diem - entryPoint tương ứng
+	 */
+	public static Point nearestPointToEntryPoint(Point nearestPoint,
+			Image image, int side) {
+		Point temp = null;
+		if (image == ItemImage.TRUCK)
+			temp = new Point(nearestPoint.x, nearestPoint.y + 4 * side);
+		else if (image == ItemImage.TRUCK_DOWN)
+			temp = new Point(nearestPoint.x - 4 * side, nearestPoint.y);
+		else if (image == ItemImage.AIRPLANE)
+			temp = new Point(nearestPoint.x + side, nearestPoint.y);
+		else if (image == ItemImage.AIRPLANE_RIGHT)
+			temp = new Point(nearestPoint.x, nearestPoint.y - side);
+		else if (image == ItemImage.SHIP)
+			temp = new Point(nearestPoint.x + side, nearestPoint.y);
+		else if (image == ItemImage.SHIP_RIGHT)
+			temp = new Point(nearestPoint.x, nearestPoint.y - side);
+		return temp;
+	}
+
+	/**
+	 * kiem tra xem xem một switch có neighbor nào hay không.
+	 * 
+	 * @param sw
+	 *            - switch cần kiểm tra
+	 * @param switchLayer
+	 *            - layer chứa switch
+	 * @param direction
+	 *            - hướng tìm neighbor
+	 * @return true nếu có neighbor
+	 */
+	public static boolean neighborOfSwitch(SwitchMap sw, Layer switchLayer,
+			Direction direction) {
+		ArrayList<SwitchMap> result = new ArrayList<SwitchMap>();
+		SwitchMap leftNeighbor = leftNeighbor(sw, switchLayer);
+		SwitchMap rightNeighbor = rightNeighbor(sw, switchLayer);
+		SwitchMap upNeighbor = upNeighbor(sw, switchLayer);
+		SwitchMap downNeighbor = downNeighbor(sw, switchLayer);
+		if (leftNeighbor != null)
+			result.add(leftNeighbor);
+		if (rightNeighbor != null)
+			result.add(rightNeighbor);
+		if (upNeighbor != null)
+			result.add(upNeighbor);
+		if (downNeighbor != null)
+			result.add(downNeighbor);
+		return true;
+	}
+
+	/**
+	 * Xóa(remove) một điểm trong một list.
+	 * 
+	 * @param list
+	 *            - list chứa các điểm
+	 * @param point
+	 *            - điểm cần remove
+	 */
+	public static void removePointFromList(ArrayList<Point> list, Point point) {
+		for (Point i : list) {
+			if (checkPoint(i, point)) {
+				list.remove(i);
+				break;
 			}
+
 		}
+	}
+
+	/**
+	 * Tìm neighbor phải của một switch.
+	 * 
+	 * @param sw
+	 *            - switch cần tìm neighbor
+	 * @param switchLayer
+	 *            - layer chứa switch
+	 * @return switch cần tìm
+	 */
+	public static SwitchMap rightNeighbor(SwitchMap sw, Layer switchLayer) {
+		return findSwitch(
+				new Point(sw.getPosition().x, sw.getPosition().y
+						+ sw.getHeight()), switchLayer);
+	}
+
+	/**
+	 * Hiển thị các Factory không có switch đi ra.
+	 * 
+	 * @param map
+	 *            - map đang vẽ
+	 */
+	public static void showWrongFactory(MapCreation map) {
+		ArrayList<FactoryMap> result = isolatedFactory(map);
+		for (Drawable i : map.getFactorylayer().getListDrawable()) {
+			FactoryMap f = (FactoryMap) i;
+			f.setOutletState(true);
+		}
+		for (FactoryMap i : result)
+			i.setOutletState(false);
+	}
+
+	/**
+	 * Hiển thị các switch mà khi box đi tới sẽ chạy đến vô hạn.
+	 * 
+	 * @param map
+	 *            - map đang vẽ
+	 */
+	public static void showWrongSwitch(MapCreation map) {
+		for (Drawable i : map.getSwitchLayer().getListDrawable()) {
+			SwitchMap sw = (SwitchMap) i;
+			sw.setInfinityState(false);
+		}
+		ArrayList<SwitchMap> result = falseSwitch(map);
+		for (SwitchMap i : result) {
+			i.setInfinityState(true);
+		}
+	}
+
+	/**
+	 * Tìm neighbor trên của một switch.
+	 * 
+	 * @param sw
+	 *            - switch cần tìm neighbor
+	 * @param switchLayer
+	 *            - layer chứa switch
+	 * @return switch cần tìm
+	 */
+	public static SwitchMap upNeighbor(SwitchMap sw, Layer switchLayer) {
+		return findSwitch(
+				new Point(sw.getPosition().x - sw.getWidth(),
+						sw.getPosition().y), switchLayer);
+	}
+
+	/**
+	 * Tính vertical flip của một Image.
+	 * 
+	 * @param img
+	 *            - ảnh cần flip
+	 * @return vertivalflip của ảnh
+	 */
+	public static Image verticalFlipImage(Image img) {
+		int h = img.getHeight(null);
+		int w = img.getWidth(null);
+		BufferedImage result = new BufferedImage(w, h,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) result.getGraphics();
+		g.setBackground(new Color(255, 255, 255, 0));
+		g.clearRect(0, 0, w, h);
+		g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
+		g.dispose();
+
+		return result;
+
 	}
 
 	/**
@@ -908,25 +927,6 @@ public class AuxiliaryFunction {
 
 		}
 
-	}
-
-	/**
-	 * Xử lý khi người chơi ấn nút Back.
-	 * 
-	 * @param map
-	 *            the map
-	 */
-	public static void handleMenuBack(MapCreation map) {
-		/* trước hết yêu cầu người chơi có lưu thay đổi hay không */
-		if (!AuxiliaryFunction.isEmpty(map)) {
-
-			String message = "Luu thay doi truoc khi thoat? ";
-			int confirm = JOptionPane.showConfirmDialog(map.getParent(),
-					message);
-			if (confirm == JOptionPane.OK_OPTION)
-				handleMenuSave(map);
-		}
-		map.changeState(map.getLastState());
 	}
 
 }

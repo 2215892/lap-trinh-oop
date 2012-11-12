@@ -17,17 +17,40 @@ import com.oop.model.Direction;
  */
 public class MapRecovery {
 
-	/** The switch layer của map. */
-	private DrawLayer switchLayer;
+	/**
+	 * Hàm khởi tạo tĩnh cho đổi tượng này.
+	 * 
+	 * @param switchLayer
+	 *            - truyền vào hàm khởi tạo
+	 * @param factoryLayer
+	 *            - truyền vào hàm khởi tạo
+	 * @param terminalLayer
+	 *            - truyền vào hàm khởi tạo
+	 * @param map
+	 *            the map - truyền vào hàm khởi tạo
+	 * @return map đối tượng khởi tạo
+	 */
+	public static MapRecovery createMapRecovery(DrawLayer switchLayer,
+			DrawLayer factoryLayer, DrawLayer terminalLayer, MapCreation map) {
+		MapRecovery temp = new MapRecovery(switchLayer, factoryLayer,
+				terminalLayer, map);
+		return temp;
+	}
+
+	/** Biến kiểm tra xem switch được duyệt hay chưa. */
+	private boolean[] checkRecover;
 
 	/** The factory layer của map. */
 	private DrawLayer factoryLayer;
 
-	/** The terminal layer của map. */
-	private DrawLayer terminalLayer;
-
 	/** chiều cao logic của switch cần khôi phục. */
 	private int height;
+
+	/** The switch layer của map. */
+	private DrawLayer switchLayer;
+
+	/** The terminal layer của map. */
+	private DrawLayer terminalLayer;
 
 	/** chiều rộng của switch cần khôi phục. */
 	private int width;
@@ -58,6 +81,33 @@ public class MapRecovery {
 	}
 
 	/**
+	 * Gets the factory layer.
+	 * 
+	 * @return the factory layer
+	 */
+	public DrawLayer getFactoryLayer() {
+		return factoryLayer;
+	}
+
+	/**
+	 * Gets the switch layer.
+	 * 
+	 * @return the switch layer
+	 */
+	public DrawLayer getSwitchLayer() {
+		return switchLayer;
+	}
+
+	/**
+	 * Gets the terminal layer.
+	 * 
+	 * @return the terminal layer
+	 */
+	public DrawLayer getTerminalLayer() {
+		return terminalLayer;
+	}
+
+	/**
 	 * Hàm khôi phục lại map.
 	 */
 	public void recoverFullMap() {
@@ -74,6 +124,29 @@ public class MapRecovery {
 		 * sau khi thuc hien duyet xong tu cac nha may can phai duyet cac switch
 		 * ma chuwa dc duyet
 		 */
+	}
+
+	/**
+	 * Tạo một neighbor switch ứng với hướng xác định.
+	 * 
+	 * @param p
+	 *            - vị trí của ô cần tạo neighbor
+	 * @param d
+	 *            - hướng tạo neighbor
+	 * @return switch cần tạo
+	 */
+	private SwitchMap createNeighborSwitch(Point p, Direction d) {
+		SwitchMap temp;
+		if (d == Direction.UP)
+			temp = new SwitchMap(new Point(p.x - width, p.y), width, height);
+		else if (d == Direction.DOWN)
+			temp = new SwitchMap(new Point(p.x + width, p.y), width, height);
+		else if (d == Direction.LEFT)
+			temp = new SwitchMap(new Point(p.x, p.y - height), width, height);
+		else
+			temp = new SwitchMap(new Point(p.x, p.y + height), width, height);
+		temp.addDirection(d);
+		return temp;
 	}
 
 	/**
@@ -114,9 +187,6 @@ public class MapRecovery {
 
 	}
 
-	/** Biến kiểm tra xem switch được duyệt hay chưa. */
-	private boolean[] checkRecover;
-
 	/**
 	 * Duyệt từ switch.
 	 * 
@@ -147,76 +217,6 @@ public class MapRecovery {
 					recoverFromSwitch(tg);
 			}
 		}
-	}
-
-	/**
-	 * Tạo một neighbor switch ứng với hướng xác định.
-	 * 
-	 * @param p
-	 *            - vị trí của ô cần tạo neighbor
-	 * @param d
-	 *            - hướng tạo neighbor
-	 * @return switch cần tạo
-	 */
-	private SwitchMap createNeighborSwitch(Point p, Direction d) {
-		SwitchMap temp;
-		if (d == Direction.UP)
-			temp = new SwitchMap(new Point(p.x - width, p.y), width, height);
-		else if (d == Direction.DOWN)
-			temp = new SwitchMap(new Point(p.x + width, p.y), width, height);
-		else if (d == Direction.LEFT)
-			temp = new SwitchMap(new Point(p.x, p.y - height), width, height);
-		else
-			temp = new SwitchMap(new Point(p.x, p.y + height), width, height);
-		temp.addDirection(d);
-		return temp;
-	}
-
-	/**
-	 * Hàm khởi tạo tĩnh cho đổi tượng này.
-	 * 
-	 * @param switchLayer
-	 *            - truyền vào hàm khởi tạo
-	 * @param factoryLayer
-	 *            - truyền vào hàm khởi tạo
-	 * @param terminalLayer
-	 *            - truyền vào hàm khởi tạo
-	 * @param map
-	 *            the map - truyền vào hàm khởi tạo
-	 * @return map đối tượng khởi tạo
-	 */
-	public static MapRecovery createMapRecovery(DrawLayer switchLayer,
-			DrawLayer factoryLayer, DrawLayer terminalLayer, MapCreation map) {
-		MapRecovery temp = new MapRecovery(switchLayer, factoryLayer,
-				terminalLayer, map);
-		return temp;
-	}
-
-	/**
-	 * Gets the switch layer.
-	 * 
-	 * @return the switch layer
-	 */
-	public DrawLayer getSwitchLayer() {
-		return switchLayer;
-	}
-
-	/**
-	 * Gets the factory layer.
-	 * 
-	 * @return the factory layer
-	 */
-	public DrawLayer getFactoryLayer() {
-		return factoryLayer;
-	}
-
-	/**
-	 * Gets the terminal layer.
-	 * 
-	 * @return the terminal layer
-	 */
-	public DrawLayer getTerminalLayer() {
-		return terminalLayer;
 	}
 
 }

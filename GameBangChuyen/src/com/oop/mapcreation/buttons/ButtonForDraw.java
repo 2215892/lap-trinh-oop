@@ -17,11 +17,11 @@ import com.oop.mapcreation.objects.ItemMap;
  */
 public abstract class ButtonForDraw extends DrawingButton {
 
-	/** Hiển thị của cac item(ví dụ cây, xe tải ...) đi kèm */
-	protected Layer itemLayer;
-
 	/** layer để add đối tượng cần vẽ vào layer. */
 	protected Layer drawingLayer;
+
+	/** Hiển thị của cac item(ví dụ cây, xe tải ...) đi kèm */
+	protected Layer itemLayer;
 
 	/** kiểm tra xem trạng thái của các menu ẩn hay hiện. */
 	protected boolean itemMenuHidden;
@@ -62,18 +62,39 @@ public abstract class ButtonForDraw extends DrawingButton {
 	public abstract ItemMap generateItem(Point position, int side);
 
 	/**
-	 * Hiển thị menu của Button ra để người dùng chọn.
+	 * Gets the drawing layer.
+	 * 
+	 * @return the drawing layer
 	 */
-	public void showmenu() {
-		if (itemLayer != null) {
-			for (Drawable i : itemLayer.getListDrawable()) {
-				MenuItem temp = (MenuItem) i;
-				temp.show();
-			}
-			itemLayer.render();
-		}
-		itemMenuHidden = false;
+	public Layer getDrawingLayer() {
+		return this.drawingLayer;
+	}
 
+	/**
+	 * Gets the item layer.
+	 * 
+	 * @return the item layer
+	 */
+	public Layer getItemLayer() {
+		return itemLayer;
+	}
+
+	/**
+	 * Gets the item menu state.
+	 * 
+	 * @return the item menu state
+	 */
+	public boolean getItemMenuState() {
+		return itemMenuHidden;
+	}
+
+	/**
+	 * Gets the selected item.
+	 * 
+	 * @return the selected item
+	 */
+	public MenuItem getSelectedItem() {
+		return selectedItem;
 	}
 
 	/**
@@ -91,21 +112,13 @@ public abstract class ButtonForDraw extends DrawingButton {
 	}
 
 	/**
-	 * Gets the selected item.
+	 * Select item.
 	 * 
-	 * @return the selected item
+	 * @param selectedItem
+	 *            the selected item
 	 */
-	public MenuItem getSelectedItem() {
-		return selectedItem;
-	}
-
-	/**
-	 * Gets the item menu state.
-	 * 
-	 * @return the item menu state
-	 */
-	public boolean getItemMenuState() {
-		return itemMenuHidden;
+	public void selectItem(MenuItem selectedItem) {
+		this.selectedItem = selectedItem;
 	}
 
 	/**
@@ -119,15 +132,6 @@ public abstract class ButtonForDraw extends DrawingButton {
 	}
 
 	/**
-	 * Gets the drawing layer.
-	 * 
-	 * @return the drawing layer
-	 */
-	public Layer getDrawingLayer() {
-		return this.drawingLayer;
-	}
-
-	/**
 	 * Sets the item list.
 	 * 
 	 * @param itemList
@@ -136,23 +140,19 @@ public abstract class ButtonForDraw extends DrawingButton {
 	public void setItemList(Layer itemList) {
 		itemLayer = itemList;
 	}
+	/**
+	 * Hiển thị menu của Button ra để người dùng chọn.
+	 */
+	public void showmenu() {
+		if (itemLayer != null) {
+			for (Drawable i : itemLayer.getListDrawable()) {
+				MenuItem temp = (MenuItem) i;
+				temp.show();
+			}
+			itemLayer.render();
+		}
+		itemMenuHidden = false;
 
-	/**
-	 * Gets the item layer.
-	 * 
-	 * @return the item layer
-	 */
-	public Layer getItemLayer() {
-		return itemLayer;
-	}
-	/**
-	 * Select item.
-	 * 
-	 * @param selectedItem
-	 *            the selected item
-	 */
-	public void selectItem(MenuItem selectedItem) {
-		this.selectedItem = selectedItem;
 	}
 
 }

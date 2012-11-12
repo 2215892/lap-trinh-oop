@@ -24,11 +24,26 @@ import com.oop.model.Direction;
  */
 public class MapDeleting {
 
-	/** SwitchLayer của map. */
-	private Layer switchLayer;
+	/** dãy các biến cần để kiểm tra duyệt. */
+	private boolean[] deleteSwitch;
 
 	/** The factoryLayer của map. */
 	private Layer factoryLayer;
+
+	/** Chiều cao logic. */
+	private int height;
+
+	/** The item map layer của map. */
+	private DrawLayer itemMapLayer;
+
+	/** Map đang vẽ. */
+	private MapCreation map;
+
+	/** The square layer của map. */
+	private Layer squareLayer;
+
+	/** SwitchLayer của map. */
+	private Layer switchLayer;
 
 	/** The terminal layer của map. */
 	private DrawLayer terminalLayer;
@@ -36,20 +51,8 @@ public class MapDeleting {
 	/** The tree layer của map. */
 	private Layer treeLayer;
 
-	/** The square layer của map. */
-	private Layer squareLayer;
-
-	/** Chiều cao logic. */
-	private int height;
-
 	/** Chiều rộng logic. */
 	private int width;
-
-	/** Map đang vẽ. */
-	private MapCreation map;
-
-	/** The item map layer của map. */
-	private DrawLayer itemMapLayer;
 
 	/**
 	 * Hàm khởi tạo đối tượng.
@@ -68,6 +71,39 @@ public class MapDeleting {
 	}
 
 	/**
+	 * Xóa nhà máy chọn.
+	 * 
+	 * @param f
+	 *            - factory cần xóa
+	 */
+	public void deleteFactory(FactoryMap f) {
+		/* xoa nha may vua chon */
+		factoryLayer.removeDrawable(f);
+		ItemMap ter = AuxiliaryFunction.findItem(f.getPosition(), itemMapLayer);
+		itemMapLayer.removeDrawable(ter);
+		factoryLayer.render();
+		/* cap nhat lai cac diem do factory va terminal phu */
+		// FactoryIcon fc = (FactoryIcon) ter;
+		ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
+				ter.getEntryPoint(), map.getSide());
+		for (Point i : list)
+			AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
+
+		traverseAndDelete();
+		factoryLayer.render();
+	}
+
+	/**
+	 * xóa itemMap.
+	 * 
+	 * @param item
+	 *            - item cần xóa
+	 */
+	public void deleteItemMap(ItemMap item) {
+		itemMapLayer.removeDrawable(item);
+	}
+
+	/**
 	 * xóa ô vuông nền.
 	 * 
 	 * @param squareMap
@@ -76,18 +112,6 @@ public class MapDeleting {
 	public void deleteSquare(SquareMap squareMap) {
 		squareLayer.removeDrawable(squareMap);
 		squareLayer.render();
-	}
-
-	/**
-	 * xóa cây.
-	 * 
-	 * @param treeMap
-	 *            the tree map
-	 */
-	public void deleteTree(TreeMap treeMap) {
-
-		treeLayer.removeDrawable(treeMap);
-		treeLayer.render();
 	}
 
 	/**
@@ -104,42 +128,42 @@ public class MapDeleting {
 		switchLayer.render();
 	}
 
-	/** dãy các biến cần để kiểm tra duyệt. */
-	private boolean[] deleteSwitch;
+	/**
+	 * xử lý xóa terminal đã chọn.
+	 * 
+	 * @param t
+	 *            - terminal cân xóa
+	 */
+
+	public void deleteTerminal(TerminalMap t) {
+
+		/* remove t di */
+		terminalLayer.removeDrawable(t);
+		terminalLayer.render();
+		/* remove bieu tuong cua t di */
+
+		ItemMap ter = AuxiliaryFunction.findItem(t.getPosition(), itemMapLayer);
+		if (ter != null) {
+			ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
+					ter.getEntryPoint(), map.getSide());
+			for (Point i : list)
+				AuxiliaryFunction.removePointFromList(map.getSquareCovedList(),
+						i);
+			itemMapLayer.removeDrawable(ter);
+		}
+
+	}
 
 	/**
-	 * Duyệt đồ thị và xóa những switch cô lập.
+	 * xóa cây.
+	 * 
+	 * @param treeMap
+	 *            the tree map
 	 */
-	private void traverseAndDelete() {
+	public void deleteTree(TreeMap treeMap) {
 
-		/* danh dau cho cac switch, ban dau cho gia tri true */
-		/* sau khi duyet song true la bi xoa, false la giu lai */
-		deleteSwitch = new boolean[switchLayer.getListDrawable().size()];
-		for (int i = 0; i < deleteSwitch.length; i++)
-			deleteSwitch[i] = true;
-		/* qua trinh duyet tu cac factory */
-		for (Drawable i : factoryLayer.getListDrawable()) {
-			traverseFactory((FactoryMap) i);
-		}
-		/* danh sach cac switch can xoa */
-		ArrayList<Point> deletedList = new ArrayList<Point>();
-
-		for (int i = 0; i < deleteSwitch.length; i++)
-			if (deleteSwitch[i] == true) {
-				/* neu dc xoa thi cho toa do luu tru vao deletedList */
-				SwitchMap temp = (SwitchMap) (switchLayer.getListDrawable()
-						.get(i));
-				deletedList.add(new Point(temp.getPosition()));
-			}
-
-		// xoa cac switch thua ra khoi
-		for (Point i : deletedList) {
-			deleteElementSwitch(i);
-		}
-		switchLayer.render();
-
-		updateFactory();
-		updateTerminal();
+		treeLayer.removeDrawable(treeMap);
+		treeLayer.render();
 	}
 
 	/**
@@ -160,84 +184,41 @@ public class MapDeleting {
 	}
 
 	/**
-	 * duyệt đồ thì từ một nhà máy.
+	 * xóa một terminal.
 	 * 
-	 * @param f
-	 *            - factory bắt đầu duyệt
+	 * @param p
+	 *            - vị trí cần xóa
 	 */
-	private void traverseFactory(FactoryMap f) {
-		SwitchMap temp = new SwitchMap(f.getPosition(), width, height);
-		/* neu factory co huog tuc la da co switch noi vao no thi moi duyet */
-		SwitchMap tgUp = AuxiliaryFunction.upNeighbor(temp, this.switchLayer);
-		SwitchMap tgDown = AuxiliaryFunction.downNeighbor(temp,
-				this.switchLayer);
-		SwitchMap tgLeft = AuxiliaryFunction.leftNeighbor(temp,
-				this.switchLayer);
-		SwitchMap tgRight = AuxiliaryFunction.rightNeighbor(temp,
-				this.switchLayer);
-		if (f.getDirection() != null) {
-			// tim theo huong UP
-			if ((f.getDirection() == Direction.UP) && (tgUp != null)
-					&& (deleteSwitch[getIndex(tgUp)] == true))
-				traverseSwitch(tgUp);
-			else if ((f.getDirection() == Direction.DOWN) && (tgDown != null)
-					&& (deleteSwitch[getIndex(tgDown)] == true)) {
-				traverseSwitch(AuxiliaryFunction.downNeighbor(temp,
-						this.switchLayer));
-
-			} else if ((f.getDirection() == Direction.LEFT) && (tgLeft != null)
-					&& (deleteSwitch[getIndex(tgLeft)] == true))
-				traverseSwitch(tgLeft);
-			else if ((f.getDirection() == Direction.RIGHT) && (tgRight != null)
-					&& (deleteSwitch[getIndex(tgRight)] == true))
-				traverseSwitch(tgRight);
-		}
-
-	}
-
-	/**
-	 * ta cần update lại danh sách các factory sau khi xóa các switch.
-	 */
-	private void updateFactory() {
-		for (Drawable i : factoryLayer.getListDrawable()) {
-			FactoryMap temp = (FactoryMap) i;
-			SwitchMap sw = new SwitchMap(temp.getPosition(), width, height);
-
-			if (temp.getDirection() != null) {
-				if ((temp.getDirection() == Direction.UP)
-						&& (AuxiliaryFunction.upNeighbor(sw, this.switchLayer) == null))
-					temp.setDirection(null);
-				else if ((temp.getDirection() == Direction.DOWN)
-						&& (AuxiliaryFunction
-								.downNeighbor(sw, this.switchLayer) == null))
-					temp.setDirection(null);
-				else if ((temp.getDirection() == Direction.RIGHT)
-						&& (AuxiliaryFunction.rightNeighbor(sw,
-								this.switchLayer) == null))
-					temp.setDirection(null);
-				else if ((temp.getDirection() == Direction.LEFT)
-						&& (AuxiliaryFunction
-								.leftNeighbor(sw, this.switchLayer) == null))
-					temp.setDirection(null);
+	private void deleteElementT(Point p) {
+		/* xoa trong terminalLayer */
+		for (Drawable t : terminalLayer.getListDrawable()) {
+			TerminalMap temp = (TerminalMap) t;
+			if ((temp.getPosition().x == p.x) && (temp.getPosition().y == p.y)) {
+				terminalLayer.removeDrawable(t);
+				break;
 			}
 		}
+		/* xóa trong terminalMapImagae */
+		ItemMap temp = AuxiliaryFunction.findItem(p, itemMapLayer);
+		if (temp != null)
+			itemMapLayer.removeDrawable(temp);
 	}
 
 	/**
-	 * update lại các terminal sau khi xóa các switch.
+	 * Hàm tính chỉ số của switch trong swichLayer.
+	 * 
+	 * @param sw
+	 *            - switch cần lấy chỉ số
+	 * @return chỉ số của switch trong list nếu tìm thấy, không thấy trả về - 1
 	 */
-	private void updateTerminal() {
-
-		ArrayList<Point> deletedList = new ArrayList<Point>();
-		for (Drawable i : terminalLayer.getListDrawable())
-			if (removeTerminal((TerminalMap) i))
-				deletedList.add(((TerminalMap) i).getPosition());
-		for (Point i : deletedList) {
-			deleteElementT(i);
+	private int getIndex(SwitchMap sw) {
+		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
+			SwitchMap temp = (SwitchMap) switchLayer.getListDrawable().get(i);
+			if ((temp.getPosition().x == sw.getPosition().x)
+					&& (temp.getPosition().y == sw.getPosition().y))
+				return i;
 		}
-
-		terminalLayer.render();
-		// update();
+		return -1;
 	}
 
 	/**
@@ -277,41 +258,74 @@ public class MapDeleting {
 	}
 
 	/**
-	 * xóa một terminal.
-	 * 
-	 * @param p
-	 *            - vị trí cần xóa
+	 * Duyệt đồ thị và xóa những switch cô lập.
 	 */
-	private void deleteElementT(Point p) {
-		/* xoa trong terminalLayer */
-		for (Drawable t : terminalLayer.getListDrawable()) {
-			TerminalMap temp = (TerminalMap) t;
-			if ((temp.getPosition().x == p.x) && (temp.getPosition().y == p.y)) {
-				terminalLayer.removeDrawable(t);
-				break;
-			}
+	private void traverseAndDelete() {
+
+		/* danh dau cho cac switch, ban dau cho gia tri true */
+		/* sau khi duyet song true la bi xoa, false la giu lai */
+		deleteSwitch = new boolean[switchLayer.getListDrawable().size()];
+		for (int i = 0; i < deleteSwitch.length; i++)
+			deleteSwitch[i] = true;
+		/* qua trinh duyet tu cac factory */
+		for (Drawable i : factoryLayer.getListDrawable()) {
+			traverseFactory((FactoryMap) i);
 		}
-		/* xóa trong terminalMapImagae */
-		ItemMap temp = AuxiliaryFunction.findItem(p, itemMapLayer);
-		if (temp != null)
-			itemMapLayer.removeDrawable(temp);
+		/* danh sach cac switch can xoa */
+		ArrayList<Point> deletedList = new ArrayList<Point>();
+
+		for (int i = 0; i < deleteSwitch.length; i++)
+			if (deleteSwitch[i] == true) {
+				/* neu dc xoa thi cho toa do luu tru vao deletedList */
+				SwitchMap temp = (SwitchMap) (switchLayer.getListDrawable()
+						.get(i));
+				deletedList.add(new Point(temp.getPosition()));
+			}
+
+		// xoa cac switch thua ra khoi
+		for (Point i : deletedList) {
+			deleteElementSwitch(i);
+		}
+		switchLayer.render();
+
+		updateFactory();
+		updateTerminal();
 	}
 
 	/**
-	 * Hàm tính chỉ số của switch trong swichLayer.
+	 * duyệt đồ thì từ một nhà máy.
 	 * 
-	 * @param sw
-	 *            - switch cần lấy chỉ số
-	 * @return chỉ số của switch trong list nếu tìm thấy, không thấy trả về - 1
+	 * @param f
+	 *            - factory bắt đầu duyệt
 	 */
-	private int getIndex(SwitchMap sw) {
-		for (int i = 0; i < switchLayer.getListDrawable().size(); i++) {
-			SwitchMap temp = (SwitchMap) switchLayer.getListDrawable().get(i);
-			if ((temp.getPosition().x == sw.getPosition().x)
-					&& (temp.getPosition().y == sw.getPosition().y))
-				return i;
+	private void traverseFactory(FactoryMap f) {
+		SwitchMap temp = new SwitchMap(f.getPosition(), width, height);
+		/* neu factory co huog tuc la da co switch noi vao no thi moi duyet */
+		SwitchMap tgUp = AuxiliaryFunction.upNeighbor(temp, this.switchLayer);
+		SwitchMap tgDown = AuxiliaryFunction.downNeighbor(temp,
+				this.switchLayer);
+		SwitchMap tgLeft = AuxiliaryFunction.leftNeighbor(temp,
+				this.switchLayer);
+		SwitchMap tgRight = AuxiliaryFunction.rightNeighbor(temp,
+				this.switchLayer);
+		if (f.getDirection() != null) {
+			// tim theo huong UP
+			if ((f.getDirection() == Direction.UP) && (tgUp != null)
+					&& (deleteSwitch[getIndex(tgUp)] == true))
+				traverseSwitch(tgUp);
+			else if ((f.getDirection() == Direction.DOWN) && (tgDown != null)
+					&& (deleteSwitch[getIndex(tgDown)] == true)) {
+				traverseSwitch(AuxiliaryFunction.downNeighbor(temp,
+						this.switchLayer));
+
+			} else if ((f.getDirection() == Direction.LEFT) && (tgLeft != null)
+					&& (deleteSwitch[getIndex(tgLeft)] == true))
+				traverseSwitch(tgLeft);
+			else if ((f.getDirection() == Direction.RIGHT) && (tgRight != null)
+					&& (deleteSwitch[getIndex(tgRight)] == true))
+				traverseSwitch(tgRight);
 		}
-		return -1;
+
 	}
 
 	/**
@@ -364,61 +378,47 @@ public class MapDeleting {
 	}
 
 	/**
-	 * xử lý xóa terminal đã chọn.
-	 * 
-	 * @param t
-	 *            - terminal cân xóa
+	 * ta cần update lại danh sách các factory sau khi xóa các switch.
 	 */
+	private void updateFactory() {
+		for (Drawable i : factoryLayer.getListDrawable()) {
+			FactoryMap temp = (FactoryMap) i;
+			SwitchMap sw = new SwitchMap(temp.getPosition(), width, height);
 
-	public void deleteTerminal(TerminalMap t) {
+			if (temp.getDirection() != null) {
+				if ((temp.getDirection() == Direction.UP)
+						&& (AuxiliaryFunction.upNeighbor(sw, this.switchLayer) == null))
+					temp.setDirection(null);
+				else if ((temp.getDirection() == Direction.DOWN)
+						&& (AuxiliaryFunction
+								.downNeighbor(sw, this.switchLayer) == null))
+					temp.setDirection(null);
+				else if ((temp.getDirection() == Direction.RIGHT)
+						&& (AuxiliaryFunction.rightNeighbor(sw,
+								this.switchLayer) == null))
+					temp.setDirection(null);
+				else if ((temp.getDirection() == Direction.LEFT)
+						&& (AuxiliaryFunction
+								.leftNeighbor(sw, this.switchLayer) == null))
+					temp.setDirection(null);
+			}
+		}
+	}
 
-		/* remove t di */
-		terminalLayer.removeDrawable(t);
-		terminalLayer.render();
-		/* remove bieu tuong cua t di */
+	/**
+	 * update lại các terminal sau khi xóa các switch.
+	 */
+	private void updateTerminal() {
 
-		ItemMap ter = AuxiliaryFunction.findItem(t.getPosition(), itemMapLayer);
-		if (ter != null) {
-			ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
-					ter.getEntryPoint(), map.getSide());
-			for (Point i : list)
-				AuxiliaryFunction.removePointFromList(map.getSquareCovedList(),
-						i);
-			itemMapLayer.removeDrawable(ter);
+		ArrayList<Point> deletedList = new ArrayList<Point>();
+		for (Drawable i : terminalLayer.getListDrawable())
+			if (removeTerminal((TerminalMap) i))
+				deletedList.add(((TerminalMap) i).getPosition());
+		for (Point i : deletedList) {
+			deleteElementT(i);
 		}
 
-	}
-
-	/**
-	 * Xóa nhà máy chọn.
-	 * 
-	 * @param f
-	 *            - factory cần xóa
-	 */
-	public void deleteFactory(FactoryMap f) {
-		/* xoa nha may vua chon */
-		factoryLayer.removeDrawable(f);
-		ItemMap ter = AuxiliaryFunction.findItem(f.getPosition(), itemMapLayer);
-		itemMapLayer.removeDrawable(ter);
-		factoryLayer.render();
-		/* cap nhat lai cac diem do factory va terminal phu */
-		// FactoryIcon fc = (FactoryIcon) ter;
-		ArrayList<Point> list = ItemImage.getSquareCovered(ter.getImage(),
-				ter.getEntryPoint(), map.getSide());
-		for (Point i : list)
-			AuxiliaryFunction.removePointFromList(map.getSquareCovedList(), i);
-
-		traverseAndDelete();
-		factoryLayer.render();
-	}
-
-	/**
-	 * xóa itemMap.
-	 * 
-	 * @param item
-	 *            - item cần xóa
-	 */
-	public void deleteItemMap(ItemMap item) {
-		itemMapLayer.removeDrawable(item);
+		terminalLayer.render();
+		// update();
 	}
 }

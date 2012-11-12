@@ -43,6 +43,15 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	}
 
 	/**
+	 * Gets the box count.
+	 * 
+	 * @return the box count
+	 */
+	public int getBoxCount() {
+		return boxCount;
+	}
+
+	/**
 	 * Gets the position.
 	 * 
 	 * @return the position
@@ -59,6 +68,16 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	 */
 	public int getType() {
 		return type;
+	}
+
+	/**
+	 * Sets the box count.
+	 * 
+	 * @param boxCount
+	 *            the new box count
+	 */
+	public void setBoxCount(int boxCount) {
+		this.boxCount = boxCount;
 	}
 
 	/**
@@ -79,24 +98,5 @@ public class ModelTerminal extends GraphNode implements ModelObject {
 	 */
 	protected void setPosition(Point position) {
 		this.position = position;
-	}
-
-	/**
-	 * Gets the box count.
-	 * 
-	 * @return the box count
-	 */
-	public int getBoxCount() {
-		return boxCount;
-	}
-
-	/**
-	 * Sets the box count.
-	 * 
-	 * @param boxCount
-	 *            the new box count
-	 */
-	public void setBoxCount(int boxCount) {
-		this.boxCount = boxCount;
 	}
 }

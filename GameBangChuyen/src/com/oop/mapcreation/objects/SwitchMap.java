@@ -22,23 +22,23 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	/** hiện thị khi mà switch không đi tới một terminal nào. */
 	public final Color WRONG_COLOR = Color.PINK;
 
-	/** màu của ô hiển thị. */
-	private Color switchColor = Color.orange;
-
-	/** màu hiển thị. */
-	private Color renderColor;
-
 	/** chiều cao logic ô switch. */
 	private int height;
-
-	/** chiều rộng ô switch. */
-	private int width;
 
 	/**
 	 * dùng để kiểm tra khi box đi theo switch này có đi mãi không dừng hay
 	 * không.
 	 */
 	private boolean infinity;
+
+	/** màu hiển thị. */
+	private Color renderColor;
+
+	/** màu của ô hiển thị. */
+	private Color switchColor = Color.orange;
+
+	/** chiều rộng ô switch. */
+	private int width;
 
 	/**
 	 * Hàm khởi tạo đối tượng này.
@@ -56,6 +56,55 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 		this.width = width;
 		renderColor = switchColor;
 		infinity = false;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
+
+		Point logicPoint = Helper.realToLogic(p);
+		if ((this.position.x <= logicPoint.x && (this.position.x + this.width) >= logicPoint.x)
+				&& (this.position.y <= logicPoint.y && (this.position.y + this.height) >= logicPoint.y)) {
+			return true;
+		} else
+			return false;
+
+	}
+
+	/**
+	 * Gets the height.
+	 * 
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Gets the infinity state.
+	 * 
+	 * @return the infinity state
+	 */
+	public boolean getInfinityState() {
+		return infinity;
+	}
+
+	/**
+	 * Gets the width.
+	 * 
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
 	}
 
 	/*
@@ -133,16 +182,10 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	}
 
 	/**
-	 * Tính trung điểm của một đoạn thẳng.
-	 * 
-	 * @param p1
-	 *            the p1
-	 * @param p2
-	 *            the p2
-	 * @return trung điểm của đoạn thẳng
+	 * đặt màu ở trạng thái mặc định.
 	 */
-	private Point getMidPoint(Point p1, Point p2) {
-		return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+	public void setDefaultColor() {
+		renderColor = switchColor;
 	}
 
 	/**
@@ -158,62 +201,6 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 		this.height = height;
 	}
 
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point p) {
-
-		Point logicPoint = Helper.realToLogic(p);
-		if ((this.position.x <= logicPoint.x && (this.position.x + this.width) >= logicPoint.x)
-				&& (this.position.y <= logicPoint.y && (this.position.y + this.height) >= logicPoint.y)) {
-			return true;
-		} else
-			return false;
-
-	}
-
-	/**
-	 * đặt màu ở trạng thái mặc định.
-	 */
-	public void setDefaultColor() {
-		renderColor = switchColor;
-	}
-
-	/**
-	 * Gets the height.
-	 * 
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Gets the width.
-	 * 
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Gets the infinity state.
-	 * 
-	 * @return the infinity state
-	 */
-	public boolean getInfinityState() {
-		return infinity;
-	}
-
 	/**
 	 * Sets the infinity state.
 	 * 
@@ -222,5 +209,18 @@ public class SwitchMap extends ModelSwitch implements Drawable {
 	 */
 	public void setInfinityState(boolean infinity) {
 		this.infinity = infinity;
+	}
+
+	/**
+	 * Tính trung điểm của một đoạn thẳng.
+	 * 
+	 * @param p1
+	 *            the p1
+	 * @param p2
+	 *            the p2
+	 * @return trung điểm của đoạn thẳng
+	 */
+	private Point getMidPoint(Point p1, Point p2) {
+		return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
 	}
 }

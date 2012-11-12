@@ -41,126 +41,6 @@ public class FactoryIcon extends ItemMap {
 	/*
 	 * (non - Javadoc)
 	 * 
-	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
-	 */
-	@Override
-	protected void calculateTopLeft() {
-		Point temp = null;
-		if (this.image == ItemImage.TRUCK)
-			temp = new Point(position.x - 3 * side, position.y - 2 * side);
-		else if (this.image == ItemImage.TRUCK_DOWN)
-			temp = new Point(position.x, position.y + side);
-		else if (this.image == ItemImage.AIRPLANE)
-			temp = new Point(position.x - 4 * side, position.y);
-		else if (this.image == ItemImage.AIRPLANE_RIGHT)
-			temp = new Point(position.x - 2 * side, position.y + 2 * side);
-		else if (this.image == ItemImage.SHIP)
-			temp = new Point(position.x - 6 * side, position.y + 2 * side);
-		else if (this.image == ItemImage.SHIP_RIGHT)
-			temp = new Point(position.x - 4 * side, position.y + 4 * side);
-		topLeftPoint = Helper.logicToReal(temp);
-
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		if (isValid)
-			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
-					null);
-
-		else {
-
-			g.setColor(INVALID_COLOR);
-			g.fillPolygon(Helper.polygon(position, side, side));
-			ArrayList<Point> pointCovered = ItemImage.getSquareCovered(image,
-					position, side);
-			for (Point i : pointCovered) {
-				g.fillPolygon(Helper.polygon(i, side, side));
-			}
-			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
-					null);
-		}
-
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#calculateNearestPoint()
-	 */
-	@Override
-	protected void calculateNearestPoint() {
-		Point temp = null;
-		if (this.image == ItemImage.TRUCK)
-			temp = new Point(position.x, position.y - 4 * side);
-		else if (this.image == ItemImage.TRUCK_DOWN)
-			temp = new Point(position.x + 4 * side, position.y);
-		else if (this.image == ItemImage.AIRPLANE)
-			temp = new Point(position.x - side, position.y);
-		else if (this.image == ItemImage.AIRPLANE_RIGHT)
-			temp = new Point(position.x, position.y + side);
-		else if (this.image == ItemImage.SHIP)
-			temp = new Point(position.x - side, position.y);
-		else if (this.image == ItemImage.SHIP_RIGHT)
-			temp = new Point(position.x, position.y + side);
-		nearestPoint = temp;
-
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.ItemMap#identifyImageType()
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#identifyImageType()
-	 */
-	@Override
-	public void identifyImageType() {
-		type = ItemImage.VEHICLE_TYPE;
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameElement.ItemMap#contains(java.awt.Point)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.mapcreation.objects.ItemMap#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point p) {
-
-		return false;
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
 	 * @see
 	 * com.btl.GameElement.ItemMap#calculateValidation(com.btl.GameBoard.MapCreation
 	 * )
@@ -221,6 +101,68 @@ public class FactoryIcon extends ItemMap {
 		}
 	}
 
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameElement.ItemMap#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
+
+		return false;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameElement.ItemMap#identifyImageType()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#identifyImageType()
+	 */
+	@Override
+	public void identifyImageType() {
+		type = ItemImage.VEHICLE_TYPE;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameElement.ItemMap#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		if (isValid)
+			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
+					null);
+
+		else {
+
+			g.setColor(INVALID_COLOR);
+			g.fillPolygon(Helper.polygon(position, side, side));
+			ArrayList<Point> pointCovered = ItemImage.getSquareCovered(image,
+					position, side);
+			for (Point i : pointCovered) {
+				g.fillPolygon(Helper.polygon(i, side, side));
+			}
+			g.drawImage(image, topLeftPoint.x, topLeftPoint.y, width, height,
+					null);
+		}
+
+	}
+
 	/**
 	 * kiem tra mot diem trong mot list hay khong.
 	 * 
@@ -235,5 +177,63 @@ public class FactoryIcon extends ItemMap {
 			if (AuxiliaryFunction.checkPoint(i, p))
 				return true;
 		return false;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameElement.ItemMap#calculateNearestPoint()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#calculateNearestPoint()
+	 */
+	@Override
+	protected void calculateNearestPoint() {
+		Point temp = null;
+		if (this.image == ItemImage.TRUCK)
+			temp = new Point(position.x, position.y - 4 * side);
+		else if (this.image == ItemImage.TRUCK_DOWN)
+			temp = new Point(position.x + 4 * side, position.y);
+		else if (this.image == ItemImage.AIRPLANE)
+			temp = new Point(position.x - side, position.y);
+		else if (this.image == ItemImage.AIRPLANE_RIGHT)
+			temp = new Point(position.x, position.y + side);
+		else if (this.image == ItemImage.SHIP)
+			temp = new Point(position.x - side, position.y);
+		else if (this.image == ItemImage.SHIP_RIGHT)
+			temp = new Point(position.x, position.y + side);
+		nearestPoint = temp;
+
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameElement.ItemMap#calculateTopLeft()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.mapcreation.objects.ItemMap#calculateTopLeft()
+	 */
+	@Override
+	protected void calculateTopLeft() {
+		Point temp = null;
+		if (this.image == ItemImage.TRUCK)
+			temp = new Point(position.x - 3 * side, position.y - 2 * side);
+		else if (this.image == ItemImage.TRUCK_DOWN)
+			temp = new Point(position.x, position.y + side);
+		else if (this.image == ItemImage.AIRPLANE)
+			temp = new Point(position.x - 4 * side, position.y);
+		else if (this.image == ItemImage.AIRPLANE_RIGHT)
+			temp = new Point(position.x - 2 * side, position.y + 2 * side);
+		else if (this.image == ItemImage.SHIP)
+			temp = new Point(position.x - 6 * side, position.y + 2 * side);
+		else if (this.image == ItemImage.SHIP_RIGHT)
+			temp = new Point(position.x - 4 * side, position.y + 4 * side);
+		topLeftPoint = Helper.logicToReal(temp);
+
 	}
 }

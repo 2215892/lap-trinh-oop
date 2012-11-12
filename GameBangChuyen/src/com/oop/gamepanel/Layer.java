@@ -52,6 +52,13 @@ public class Layer {
 	}
 
 	/**
+	 * khi ma muon xoa het cac Drawable cua Layer.
+	 */
+	public void emptyLayer() {
+		listDrawable.clear();
+	}
+
+	/**
 	 * Lay doi tuong bi click chuot.
 	 * 
 	 * @param p
@@ -88,13 +95,13 @@ public class Layer {
 	public ArrayList<Drawable> getListDrawable() {
 		return this.listDrawable;
 	}
-
 	/**
 	 * Hide.
 	 */
 	public void hide() {
 		this.isVisible = false;
 	}
+
 	/**
 	 * Checks if is visible.
 	 * 
@@ -139,13 +146,6 @@ public class Layer {
 	}
 
 	/**
-	 * Show.
-	 */
-	public void show() {
-		this.isVisible = true;
-	}
-
-	/**
 	 * Sets the background.
 	 * 
 	 * @param background
@@ -156,10 +156,10 @@ public class Layer {
 	}
 
 	/**
-	 * khi ma muon xoa het cac Drawable cua Layer.
+	 * Show.
 	 */
-	public void emptyLayer() {
-		listDrawable.clear();
+	public void show() {
+		this.isVisible = true;
 	}
 
 }

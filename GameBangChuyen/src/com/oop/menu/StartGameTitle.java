@@ -40,20 +40,15 @@ public class StartGameTitle extends GameState {
 		initialize();
 	}
 
-	private void initialize() {
-		layer = new Layer(parent.width, parent.height);
-		layer.setBackground(OtherImage.TITLE_BG);
-
-		btnCampaign = new Button(new Point(245, 250));
-		btnCampaign.setImage(ButtonImage.BTN_CAMPAIGN);
-		btnCustom = new Button(new Point(245, 300));
-		btnCustom.setImage(ButtonImage.BTN_CUSTOM_GAME);
-		btnBack = new Button(new Point(245, 350));
-		btnBack.setImage(ButtonImage.BTN_BACK);
-
-		layer.addDrawable(btnBack);
-		layer.addDrawable(btnCampaign);
-		layer.addDrawable(btnCustom);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
+	 */
+	@Override
+	public void gameRender(Graphics g) {
+		layer.render();
+		g.drawImage(layer.getLayer(), 0, 0, null);
 
 	}
 
@@ -142,23 +137,28 @@ public class StartGameTitle extends GameState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.oop.gamepanel.GameState#gameRender(java.awt.Graphics)
-	 */
-	@Override
-	public void gameRender(Graphics g) {
-		layer.render();
-		g.drawImage(layer.getLayer(), 0, 0, null);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see com.oop.gamepanel.GameState#update()
 	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+
+	}
+
+	private void initialize() {
+		layer = new Layer(parent.width, parent.height);
+		layer.setBackground(OtherImage.TITLE_BG);
+
+		btnCampaign = new Button(new Point(245, 250));
+		btnCampaign.setImage(ButtonImage.BTN_CAMPAIGN);
+		btnCustom = new Button(new Point(245, 300));
+		btnCustom.setImage(ButtonImage.BTN_CUSTOM_GAME);
+		btnBack = new Button(new Point(245, 350));
+		btnBack.setImage(ButtonImage.BTN_BACK);
+
+		layer.addDrawable(btnBack);
+		layer.addDrawable(btnCampaign);
+		layer.addDrawable(btnCustom);
 
 	}
 

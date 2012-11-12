@@ -13,20 +13,20 @@ import com.oop.gamepanel.Drawable;
  */
 public class Time implements Drawable {
 
-	/** vị trí hiển thị thời gian trên map đang vẽ. */
-	private Point position;
-
 	/** kích thước của ảnh hiển thị thời gian. */
 	private int height;
 
-	/** chiều rộng của ảnh hiên thị. */
-	private int width;
+	/** vị trí hiển thị thời gian trên map đang vẽ. */
+	private Point position;
 
 	/** thời gian hiển thị. */
 	private int time;
 
 	/** đơn vị thời gian: giây phút. */
 	private String unit;
+
+	/** chiều rộng của ảnh hiên thị. */
+	private int width;
 
 	/**
 	 * Hàm khởi tạo đối tượng.
@@ -45,47 +45,6 @@ public class Time implements Drawable {
 		this.width = width;
 		this.height = height;
 		this.unit = unit;
-	}
-
-	/**
-	 * Sets the time.
-	 * 
-	 * @param time
-	 *            the new time
-	 */
-	public void setTime(int time) {
-		if ((0 < time) && (time < 60))
-			this.time = time;
-	}
-
-	/**
-	 * Gets the time.
-	 * 
-	 * @return the time
-	 */
-	public int getTime() {
-		return time;
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		g.setColor(Color.white);
-		g.fillRect(position.x, position.y, width, height);
-		g.setColor(Color.red);
-		g.drawRect(position.x, position.y, width, height);
-		g.drawString(unit, position.x, position.y + height / 3);
-		g.drawString("" + time, position.x + width / 3, position.y + 2 * height
-				/ 3);
 	}
 
 	/*
@@ -109,11 +68,52 @@ public class Time implements Drawable {
 	}
 
 	/**
+	 * Gets the time.
+	 * 
+	 * @return the time
+	 */
+	public int getTime() {
+		return time;
+	}
+
+	/**
 	 * Gets the unit.
 	 * 
 	 * @return the unit
 	 */
 	public String getUnit() {
 		return unit;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(position.x, position.y, width, height);
+		g.setColor(Color.red);
+		g.drawRect(position.x, position.y, width, height);
+		g.drawString(unit, position.x, position.y + height / 3);
+		g.drawString("" + time, position.x + width / 3, position.y + 2 * height
+				/ 3);
+	}
+
+	/**
+	 * Sets the time.
+	 * 
+	 * @param time
+	 *            the new time
+	 */
+	public void setTime(int time) {
+		if ((0 < time) && (time < 60))
+			this.time = time;
 	}
 }

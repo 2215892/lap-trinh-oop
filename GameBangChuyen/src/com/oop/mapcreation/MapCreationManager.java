@@ -33,20 +33,11 @@ import com.oop.mapcreation.buttons.TreeButton;
 public class MapCreationManager {
 	// class cung cap cac hang so va khoi tao cac component cho MapCreation
 
+	/** The Constant BACK. */
+	public static final int BACK = 11;
+
 	/** cac ma chuc nang cua menu. */
 	public static final int DEFAULT = 5;
-
-	/** The Constant FACTORY. */
-	public static final int FACTORY = 1;
-
-	/** The Constant TERMINAL. */
-	public static final int TERMINAL = 2;
-
-	/** The Constant SQUARE. */
-	public static final int SQUARE = 3;
-
-	/** The Constant TREE. */
-	public static final int TREE = 4;
 
 	/** The Constant DELETE. */
 	public static final int DELETE = 6;
@@ -54,47 +45,50 @@ public class MapCreationManager {
 	/** The Constant DELETEALL. */
 	public static final int DELETEALL = 7;
 
-	/** The Constant SAVE. */
-	public static final int SAVE = 8;
-
-	/** The Constant BACK. */
-	public static final int BACK = 11;
-
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
 
-	/** Mã điều khiển nút ve một map mới. */
-	public static final int NEW = 10;
-	/** The Constant SQUARE_SIDE. */
-	public static final int SQUARE_SIDE = 18;
-
-	/** The Constant MENU_HEIGHT. */
-	public static final int MENU_HEIGHT = 50;
+	/** The Constant FACTORY. */
+	public static final int FACTORY = 1;
 
 	/** The Constant ICON_WIDTH. */
 	public static final int ICON_WIDTH = 40;
 
-	/** The graphic button list. */
-	private ArrayList<ButtonForDraw> graphicButtonList;
+	/** The Constant MENU_HEIGHT. */
+	public static final int MENU_HEIGHT = 50;
 
-	/** The factory button. */
-	private FactoryButton factoryButton;
+	/** Mã điều khiển nút ve một map mới. */
+	public static final int NEW = 10;
 
-	/** The terminal button. */
-	private TerminalButton terminalButton;
+	/** The Constant SAVE. */
+	public static final int SAVE = 8;
 
-	/** The tree button. */
-	private TreeButton treeButton;
+	/** The Constant SQUARE. */
+	public static final int SQUARE = 3;
+	/** The Constant SQUARE_SIDE. */
+	public static final int SQUARE_SIDE = 18;
 
-	/** The square button. */
-	private SquareButton squareButton;
+	/** The Constant TERMINAL. */
+	public static final int TERMINAL = 2;
 
-	/** The handle button list. */
-	private ArrayList<ButtonForHandle> handleButtonList;
+	/** The Constant TREE. */
+	public static final int TREE = 4;
+
+	/** The default button. */
+	private ButtonForHandle defaultButton;
 
 	/** The back button. */
 	private ButtonForHandle deleteButton, deleteAllButton, saveButton,
 			backButton, editButton, newButton;
+
+	/** The factory button. */
+	private FactoryButton factoryButton;
+
+	/** The graphic button list. */
+	private ArrayList<ButtonForDraw> graphicButtonList;
+
+	/** The handle button list. */
+	private ArrayList<ButtonForHandle> handleButtonList;
 
 	/** The item list layer. */
 	private DrawLayer[] itemListLayer;
@@ -105,8 +99,14 @@ public class MapCreationManager {
 	/** thoi gian choi. */
 	private Time minute, second;
 
-	/** The default button. */
-	private ButtonForHandle defaultButton;
+	/** The square button. */
+	private SquareButton squareButton;
+
+	/** The terminal button. */
+	private TerminalButton terminalButton;
+
+	/** The tree button. */
+	private TreeButton treeButton;
 
 	/**
 	 * Hàm khởi tạo đối tượng MapCreationManager.
@@ -131,6 +131,60 @@ public class MapCreationManager {
 		Point secondPosition = new Point(minutePosition.x + ICON_WIDTH, 0);
 		second = new Time(secondPosition, ICON_WIDTH, ICON_WIDTH, " giay");
 		second.setTime(30);
+	}
+
+	/**
+	 * Gets the button for draw.
+	 * 
+	 * @return the button for draw
+	 */
+	public ArrayList<ButtonForDraw> getButtonForDraw() {
+		return graphicButtonList;
+	}
+
+	/**
+	 * Gets the button for handle.
+	 * 
+	 * @return the button for handle
+	 */
+	public ArrayList<ButtonForHandle> getButtonForHandle() {
+		return handleButtonList;
+	}
+
+	/**
+	 * Gets the item list layer.
+	 * 
+	 * @return the item list layer
+	 */
+	public DrawLayer[] getItemListLayer() {
+		return itemListLayer;
+	}
+
+	/**
+	 * Gets the item map layer.
+	 * 
+	 * @return the item map layer
+	 */
+	public DrawLayer getItemMapLayer() {
+		return itemMapLayer;
+	}
+
+	/**
+	 * Gets the minute.
+	 * 
+	 * @return the minute
+	 */
+	public Time getMinute() {
+		return minute;
+	}
+
+	/**
+	 * Gets the second.
+	 * 
+	 * @return the second
+	 */
+	public Time getSecond() {
+		return second;
 	}
 
 	/**
@@ -282,46 +336,6 @@ public class MapCreationManager {
 	}
 
 	/**
-	 * Khởi tạo các menu chọn cho Button Tree.
-	 */
-	public void iniTreeLayer() {
-		int baseHeight = treeButton.getHeight();
-		int baseWidth = treeButton.getHeight();
-		Double height = (double) baseWidth * 58 / 36;
-		int h = height.intValue();
-		Point tree1Position = new Point(treeButton.getPosition().x,
-				treeButton.getPosition().y + baseHeight);
-		Point tree2Position = new Point(tree1Position.x, tree1Position.y + h);
-		Point tree3Position = new Point(tree2Position.x, tree2Position.y + h);
-		Point tree4Position = new Point(tree3Position.x, tree3Position.y + h);
-		Point tree5Position = new Point(tree4Position.x, tree4Position.y + h);
-		Point tree6Position = new Point(tree5Position.x, tree5Position.y + h);
-
-		MenuItem tree1Item = new MenuItem(ItemImage.TREE_1, tree1Position,
-				baseWidth, h, treeButton);
-		MenuItem tree2Item = new MenuItem(ItemImage.TREE_2, tree2Position,
-				baseWidth, h, treeButton);
-		MenuItem tree3Item = new MenuItem(ItemImage.TREE_3, tree3Position,
-				baseWidth, h, treeButton);
-		MenuItem tree4Item = new MenuItem(ItemImage.TREE_4, tree4Position,
-				baseWidth, h, treeButton);
-		MenuItem tree5Item = new MenuItem(ItemImage.TREE_5, tree5Position,
-				baseWidth, h, treeButton);
-		MenuItem tree6Item = new MenuItem(ItemImage.TREE_6, tree6Position,
-				baseWidth, h, treeButton);
-
-		itemListLayer[TREE - 1].addDrawable(tree6Item);
-		itemListLayer[TREE - 1].addDrawable(tree5Item);
-		itemListLayer[TREE - 1].addDrawable(tree4Item);
-		itemListLayer[TREE - 1].addDrawable(tree3Item);
-		itemListLayer[TREE - 1].addDrawable(tree2Item);
-		itemListLayer[TREE - 1].addDrawable(tree1Item);
-
-		treeButton.setItemList(itemListLayer[TREE - 1]);
-
-	}
-
-	/**
 	 * Khởi tạo các Menu cho Button Terminal.
 	 */
 	public void iniTerminalLayer() {
@@ -366,6 +380,46 @@ public class MapCreationManager {
 	}
 
 	/**
+	 * Khởi tạo các menu chọn cho Button Tree.
+	 */
+	public void iniTreeLayer() {
+		int baseHeight = treeButton.getHeight();
+		int baseWidth = treeButton.getHeight();
+		Double height = (double) baseWidth * 58 / 36;
+		int h = height.intValue();
+		Point tree1Position = new Point(treeButton.getPosition().x,
+				treeButton.getPosition().y + baseHeight);
+		Point tree2Position = new Point(tree1Position.x, tree1Position.y + h);
+		Point tree3Position = new Point(tree2Position.x, tree2Position.y + h);
+		Point tree4Position = new Point(tree3Position.x, tree3Position.y + h);
+		Point tree5Position = new Point(tree4Position.x, tree4Position.y + h);
+		Point tree6Position = new Point(tree5Position.x, tree5Position.y + h);
+
+		MenuItem tree1Item = new MenuItem(ItemImage.TREE_1, tree1Position,
+				baseWidth, h, treeButton);
+		MenuItem tree2Item = new MenuItem(ItemImage.TREE_2, tree2Position,
+				baseWidth, h, treeButton);
+		MenuItem tree3Item = new MenuItem(ItemImage.TREE_3, tree3Position,
+				baseWidth, h, treeButton);
+		MenuItem tree4Item = new MenuItem(ItemImage.TREE_4, tree4Position,
+				baseWidth, h, treeButton);
+		MenuItem tree5Item = new MenuItem(ItemImage.TREE_5, tree5Position,
+				baseWidth, h, treeButton);
+		MenuItem tree6Item = new MenuItem(ItemImage.TREE_6, tree6Position,
+				baseWidth, h, treeButton);
+
+		itemListLayer[TREE - 1].addDrawable(tree6Item);
+		itemListLayer[TREE - 1].addDrawable(tree5Item);
+		itemListLayer[TREE - 1].addDrawable(tree4Item);
+		itemListLayer[TREE - 1].addDrawable(tree3Item);
+		itemListLayer[TREE - 1].addDrawable(tree2Item);
+		itemListLayer[TREE - 1].addDrawable(tree1Item);
+
+		treeButton.setItemList(itemListLayer[TREE - 1]);
+
+	}
+
+	/**
 	 * khởi tạo các menu cho Button Factory.
 	 */
 	private void iniFactoryLayer() {
@@ -406,60 +460,6 @@ public class MapCreationManager {
 		itemListLayer[FACTORY - 1].addDrawable(planeUp);
 		itemListLayer[FACTORY - 1].addDrawable(planeRight);
 		factoryButton.setItemList(itemListLayer[FACTORY - 1]);
-	}
-
-	/**
-	 * Gets the item list layer.
-	 * 
-	 * @return the item list layer
-	 */
-	public DrawLayer[] getItemListLayer() {
-		return itemListLayer;
-	}
-
-	/**
-	 * Gets the item map layer.
-	 * 
-	 * @return the item map layer
-	 */
-	public DrawLayer getItemMapLayer() {
-		return itemMapLayer;
-	}
-
-	/**
-	 * Gets the button for draw.
-	 * 
-	 * @return the button for draw
-	 */
-	public ArrayList<ButtonForDraw> getButtonForDraw() {
-		return graphicButtonList;
-	}
-
-	/**
-	 * Gets the button for handle.
-	 * 
-	 * @return the button for handle
-	 */
-	public ArrayList<ButtonForHandle> getButtonForHandle() {
-		return handleButtonList;
-	}
-
-	/**
-	 * Gets the minute.
-	 * 
-	 * @return the minute
-	 */
-	public Time getMinute() {
-		return minute;
-	}
-
-	/**
-	 * Gets the second.
-	 * 
-	 * @return the second
-	 */
-	public Time getSecond() {
-		return second;
 	}
 
 }

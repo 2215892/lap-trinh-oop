@@ -12,33 +12,6 @@ import com.oop.model.Helper;
  */
 public abstract class ItemImage {
 
-	/** The Constant PLATFORM_TYPE. */
-	public static final int PLATFORM_TYPE = 2;
-
-	/** The Constant TREE_TYPE. */
-	public static final int TREE_TYPE = 3;
-
-	/** The Constant SHIP_RIGHT_ID. */
-	public static final int SHIP_RIGHT_ID = 6;
-
-	/** The Constant SHIP_UP_ID. */
-	public static final int SHIP_UP_ID = 5;
-
-	/** The Constant PLANE_RIGHT_ID. */
-	public static final int PLANE_RIGHT_ID = 4;
-
-	/** The Constant PLANE_UP_ID. */
-	public static final int PLANE_UP_ID = 3;
-
-	/** The Constant TRUCK_DOWN_ID. */
-	public static final int TRUCK_DOWN_ID = 2;
-
-	/** The Constant TRUCK_LEFT_ID. */
-	public static final int TRUCK_LEFT_ID = 1;
-
-	/** The Constant VEHICLE_TYPE. */
-	public static final int VEHICLE_TYPE = 1;
-
 	/** The Constant RES_DIR. */
 	public final static String RES_DIR = Helper.getCurrentDirectory()
 			+ "res\\item\\";
@@ -50,6 +23,12 @@ public abstract class ItemImage {
 	/** The Constant AIRPLANE_RIGHT. */
 	public static final BufferedImage AIRPLANE_RIGHT = Helper
 			.flipHorizontally(AIRPLANE);
+
+	/** The Constant PLANE_RIGHT_ID. */
+	public static final int PLANE_RIGHT_ID = 4;
+
+	/** The Constant PLANE_UP_ID. */
+	public static final int PLANE_UP_ID = 3;
 
 	/** The Constant PLATFORM_1. */
 	public final static BufferedImage PLATFORM_1 = Helper.loadImage(RES_DIR
@@ -67,6 +46,9 @@ public abstract class ItemImage {
 	public final static BufferedImage PLATFORM_4 = Helper.loadImage(RES_DIR
 			+ "PLATFORM_4.png");
 
+	/** The Constant PLATFORM_TYPE. */
+	public static final int PLATFORM_TYPE = 2;
+
 	/** The Constant SHIP. */
 	public final static BufferedImage SHIP = Helper.loadImage(RES_DIR
 			+ "SHIP.png");
@@ -74,6 +56,12 @@ public abstract class ItemImage {
 	/** The Constant SHIP_RIGHT. */
 	public static final BufferedImage SHIP_RIGHT = Helper
 			.flipHorizontally(SHIP);
+
+	/** The Constant SHIP_RIGHT_ID. */
+	public static final int SHIP_RIGHT_ID = 6;
+
+	/** The Constant SHIP_UP_ID. */
+	public static final int SHIP_UP_ID = 5;
 
 	/** The Constant TREE_1. */
 	public final static BufferedImage TREE_1 = Helper.loadImage(RES_DIR
@@ -99,6 +87,9 @@ public abstract class ItemImage {
 	public final static BufferedImage TREE_6 = Helper.loadImage(RES_DIR
 			+ "TREE_6.png");
 
+	/** The Constant TREE_TYPE. */
+	public static final int TREE_TYPE = 3;
+
 	/** The Constant TRUCK. */
 	public final static BufferedImage TRUCK = Helper.loadImage(RES_DIR
 			+ "TRUCK.png");
@@ -106,6 +97,82 @@ public abstract class ItemImage {
 	/** The Constant TRUCK_DOWN. */
 	public static final BufferedImage TRUCK_DOWN = Helper
 			.flipHorizontally(TRUCK);
+
+	/** The Constant TRUCK_DOWN_ID. */
+	public static final int TRUCK_DOWN_ID = 2;
+
+	/** The Constant TRUCK_LEFT_ID. */
+	public static final int TRUCK_LEFT_ID = 1;
+
+	/** The Constant VEHICLE_TYPE. */
+	public static final int VEHICLE_TYPE = 1;
+
+	/**
+	 * Xác định hướng cho các ảnh, dùng cho các ảnh thuộc họ terminal, factory.
+	 * 
+	 * @param image
+	 *            ảnh cần xác định hướng
+	 * @return hướng của ảnh
+	 */
+	public static Direction getDirection(BufferedImage image) {
+		if (image == TRUCK)
+			return Direction.LEFT;
+		else if (image == TRUCK_DOWN)
+			return Direction.DOWN;
+		else if (image == AIRPLANE)
+			return Direction.UP;
+		else if (image == AIRPLANE_RIGHT)
+			return Direction.RIGHT;
+		else if (image == SHIP)
+			return Direction.UP;
+		else if (image == SHIP_RIGHT)
+			return Direction.RIGHT;
+
+		return null;
+	}
+
+	/**
+	 * Lấy id của ảnh.
+	 * 
+	 * @param image
+	 *            ảnh cần xét
+	 * @return id của item tương ứng với ảnh
+	 */
+	public static int getId(BufferedImage image) {
+		if (image == TREE_1)
+			return 1;
+		else if (image == TREE_2)
+			return 2;
+		else if (image == TREE_3)
+			return 3;
+		else if (image == TREE_4)
+			return 4;
+		else if (image == TREE_5)
+			return 5;
+		else if (image == TREE_6)
+			return 6;
+
+		else if (image == TRUCK_DOWN)
+			return TRUCK_DOWN_ID;
+		else if (image == TRUCK)
+			return TRUCK_LEFT_ID;
+		else if (image == SHIP_RIGHT)
+			return SHIP_RIGHT_ID;
+		else if (image == SHIP)
+			return SHIP_UP_ID;
+		else if (image == AIRPLANE_RIGHT)
+			return PLANE_RIGHT_ID;
+		else if (image == AIRPLANE)
+			return PLANE_UP_ID;
+
+		else if (image == PLATFORM_1)
+			return 1;
+		else if (image == PLATFORM_2)
+			return 2;
+		else if (image == PLATFORM_3)
+			return 3;
+		return -1;
+	}
 
 	/**
 	 * Lấy ảnh tương ứng id v�?type.
@@ -205,95 +272,6 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * Xác định hướng cho các ảnh, dùng cho các ảnh thuộc họ terminal, factory.
-	 * 
-	 * @param image
-	 *            ảnh cần xác định hướng
-	 * @return hướng của ảnh
-	 */
-	public static Direction getDirection(BufferedImage image) {
-		if (image == TRUCK)
-			return Direction.LEFT;
-		else if (image == TRUCK_DOWN)
-			return Direction.DOWN;
-		else if (image == AIRPLANE)
-			return Direction.UP;
-		else if (image == AIRPLANE_RIGHT)
-			return Direction.RIGHT;
-		else if (image == SHIP)
-			return Direction.UP;
-		else if (image == SHIP_RIGHT)
-			return Direction.RIGHT;
-
-		return null;
-	}
-
-	/**
-	 * Lấy type của ảnh.
-	 * 
-	 * @param image
-	 *            ảnh cần xét
-	 * @return giá trị type của ảnh
-	 */
-	public static int getType(BufferedImage image) {
-		if ((image == TREE_1) || (image == TREE_2) || (image == TREE_3)
-				|| (image == TREE_4) || (image == TREE_5) || (image == TREE_6))
-			return TREE_TYPE;
-		else if ((image == PLATFORM_1) || (image == PLATFORM_2)
-				|| (image == PLATFORM_3))
-			return PLATFORM_TYPE;
-		else if ((image == TRUCK_DOWN) || (image == TRUCK)
-				|| (image == SHIP_RIGHT) || (image == SHIP)
-				|| (image == AIRPLANE_RIGHT) || (image == AIRPLANE))
-			return VEHICLE_TYPE;
-
-		return -1;
-	}
-
-	/**
-	 * Lấy id của ảnh.
-	 * 
-	 * @param image
-	 *            ảnh cần xét
-	 * @return id của item tương ứng với ảnh
-	 */
-	public static int getId(BufferedImage image) {
-		if (image == TREE_1)
-			return 1;
-		else if (image == TREE_2)
-			return 2;
-		else if (image == TREE_3)
-			return 3;
-		else if (image == TREE_4)
-			return 4;
-		else if (image == TREE_5)
-			return 5;
-		else if (image == TREE_6)
-			return 6;
-
-		else if (image == TRUCK_DOWN)
-			return TRUCK_DOWN_ID;
-		else if (image == TRUCK)
-			return TRUCK_LEFT_ID;
-		else if (image == SHIP_RIGHT)
-			return SHIP_RIGHT_ID;
-		else if (image == SHIP)
-			return SHIP_UP_ID;
-		else if (image == AIRPLANE_RIGHT)
-			return PLANE_RIGHT_ID;
-		else if (image == AIRPLANE)
-			return PLANE_UP_ID;
-
-		else if (image == PLATFORM_1)
-			return 1;
-		else if (image == PLATFORM_2)
-			return 2;
-		else if (image == PLATFORM_3)
-			return 3;
-		return -1;
-	}
-
-	/**
 	 * Tính các ô vuông bị phủ khi chèn item vẽ map.
 	 * 
 	 * @param terminalImage
@@ -340,6 +318,28 @@ public abstract class ItemImage {
 		}
 
 		return list;
+	}
+
+	/**
+	 * Lấy type của ảnh.
+	 * 
+	 * @param image
+	 *            ảnh cần xét
+	 * @return giá trị type của ảnh
+	 */
+	public static int getType(BufferedImage image) {
+		if ((image == TREE_1) || (image == TREE_2) || (image == TREE_3)
+				|| (image == TREE_4) || (image == TREE_5) || (image == TREE_6))
+			return TREE_TYPE;
+		else if ((image == PLATFORM_1) || (image == PLATFORM_2)
+				|| (image == PLATFORM_3))
+			return PLATFORM_TYPE;
+		else if ((image == TRUCK_DOWN) || (image == TRUCK)
+				|| (image == SHIP_RIGHT) || (image == SHIP)
+				|| (image == AIRPLANE_RIGHT) || (image == AIRPLANE))
+			return VEHICLE_TYPE;
+
+		return -1;
 	}
 
 }

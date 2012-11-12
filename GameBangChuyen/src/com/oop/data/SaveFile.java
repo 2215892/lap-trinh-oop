@@ -25,8 +25,6 @@ import com.oop.model.Helper;
  */
 public class SaveFile extends XmlReader {
 
-	private ArrayList<Map> maps = new ArrayList<Map>();
-
 	private class Map {
 		int id, highscore;
 		boolean isLock = true;
@@ -37,6 +35,7 @@ public class SaveFile extends XmlReader {
 			+ "save//save.xml";
 
 	private static SaveFile instance;
+
 	static {
 		instance = new SaveFile();
 		try {
@@ -50,7 +49,6 @@ public class SaveFile extends XmlReader {
 
 		instance.setLock(1, false);
 	}
-
 	/**
 	 * Tạo đối tượng file save.
 	 * 
@@ -61,8 +59,42 @@ public class SaveFile extends XmlReader {
 		return instance;
 	}
 
+	private ArrayList<Map> maps = new ArrayList<Map>();
+
 	private SaveFile() {
 
+	}
+
+	/**
+	 * Lấy highscore tương ứng với id.
+	 * 
+	 * @param id
+	 *            id của map cần tìm
+	 * @return highscore tương ứng
+	 */
+	public int getHighscore(int id) {
+		for (Map map : maps) {
+			if (map.id == id)
+				return map.highscore;
+
+		}
+		return 0;
+	}
+
+	/**
+	 * Kiểm tra map có b�?khóa không.
+	 * 
+	 * @param id
+	 *            id của map
+	 * @return true nếu map b�?khóa, false nếu ngược lại
+	 */
+	public boolean getLock(int id) {
+		for (Map map : maps) {
+			if (map.id == id)
+				return map.isLock;
+
+		}
+		return true;
 	}
 
 	/**
@@ -119,6 +151,74 @@ public class SaveFile extends XmlReader {
 	}
 
 	/**
+	 * Đặt highscore cho id.
+	 * 
+	 * @param id
+	 *            id cần đặt
+	 * @param score
+	 *            điểm cần đặt
+	 */
+	public void setHighscore(int id, int score) {
+		for (Map map : maps) {
+			if (map.id == id) {
+				map.highscore = score;
+				return;
+			}
+		}
+
+		Map map = new Map();
+		map.id = id;
+		map.highscore = score;
+		maps.add(map);
+	}
+
+	/**
+	 * Đặt khóa cho map.
+	 * 
+	 * @param id
+	 *            id của map
+	 * @param isLock
+	 *            true nếu muốn map khóa, false nếu ngược lại
+	 */
+	public void setLock(int id, boolean isLock) {
+		for (Map map : maps) {
+			if (map.id == id) {
+				map.isLock = isLock;
+
+				return;
+			}
+		}
+
+		Map map = new Map();
+		map.id = id;
+		map.isLock = isLock;
+		maps.add(map);
+	}
+
+	private Map getMap(Element ele) {
+		Map map = new Map();
+		map.id = getIntValue(ele, "id");
+		map.highscore = getIntValue(ele, "highscore");
+		map.isLock = getBooleanValue(ele, "isLock");
+
+		return map;
+	}
+
+	private void getMaps(NodeList nlMap) {
+		if (nlMap != null && nlMap.getLength() > 0) {
+			for (int i = 0; i < nlMap.getLength(); i++) {
+
+				Element el = (Element) nlMap.item(i);
+
+				Map e = getMap(el);
+
+				maps.add(e);
+			}
+		}
+
+	}
+
+	/**
 	 * Nạp thông tin từ file
 	 * 
 	 * @param fileDir
@@ -147,106 +247,6 @@ public class SaveFile extends XmlReader {
 		getMaps(nlMap);
 
 		return true;
-	}
-
-	private void getMaps(NodeList nlMap) {
-		if (nlMap != null && nlMap.getLength() > 0) {
-			for (int i = 0; i < nlMap.getLength(); i++) {
-
-				Element el = (Element) nlMap.item(i);
-
-				Map e = getMap(el);
-
-				maps.add(e);
-			}
-		}
-
-	}
-
-	private Map getMap(Element ele) {
-		Map map = new Map();
-		map.id = getIntValue(ele, "id");
-		map.highscore = getIntValue(ele, "highscore");
-		map.isLock = getBooleanValue(ele, "isLock");
-
-		return map;
-	}
-
-	/**
-	 * Đặt highscore cho id.
-	 * 
-	 * @param id
-	 *            id cần đặt
-	 * @param score
-	 *            điểm cần đặt
-	 */
-	public void setHighscore(int id, int score) {
-		for (Map map : maps) {
-			if (map.id == id) {
-				map.highscore = score;
-				return;
-			}
-		}
-
-		Map map = new Map();
-		map.id = id;
-		map.highscore = score;
-		maps.add(map);
-	}
-
-	/**
-	 * Lấy highscore tương ứng với id.
-	 * 
-	 * @param id
-	 *            id của map cần tìm
-	 * @return highscore tương ứng
-	 */
-	public int getHighscore(int id) {
-		for (Map map : maps) {
-			if (map.id == id)
-				return map.highscore;
-
-		}
-		return 0;
-	}
-
-	/**
-	 * Kiểm tra map có b�?khóa không.
-	 * 
-	 * @param id
-	 *            id của map
-	 * @return true nếu map b�?khóa, false nếu ngược lại
-	 */
-	public boolean getLock(int id) {
-		for (Map map : maps) {
-			if (map.id == id)
-				return map.isLock;
-
-		}
-		return true;
-	}
-
-	/**
-	 * Đặt khóa cho map.
-	 * 
-	 * @param id
-	 *            id của map
-	 * @param isLock
-	 *            true nếu muốn map khóa, false nếu ngược lại
-	 */
-	public void setLock(int id, boolean isLock) {
-		for (Map map : maps) {
-			if (map.id == id) {
-				map.isLock = isLock;
-
-				return;
-			}
-		}
-
-		Map map = new Map();
-		map.id = id;
-		map.isLock = isLock;
-		maps.add(map);
 	}
 
 }

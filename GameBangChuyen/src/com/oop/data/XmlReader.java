@@ -9,23 +9,16 @@ import org.w3c.dom.NodeList;
 public abstract class XmlReader {
 
 	/**
-	 * Lấy giá trị dạng text.
+	 * Lấy giá trị dạng boolean.
 	 * 
 	 * @param ele
 	 *            đối tượng Element
 	 * @param tagName
 	 *            the tag name
-	 * @return giá trị
+	 * @return giá trị tương ứng
 	 */
-	protected String getTextValue(Element ele, String tagName) {
-		String textVal = null;
-		NodeList nl = ele.getElementsByTagName(tagName);
-		if (nl != null && nl.getLength() > 0) {
-			Element el = (Element) nl.item(0);
-			textVal = el.getFirstChild().getNodeValue();
-		}
-
-		return textVal;
+	protected boolean getBooleanValue(Element ele, String tagName) {
+		return Boolean.parseBoolean(getTextValue(ele, tagName));
 	}
 
 	/**
@@ -43,16 +36,23 @@ public abstract class XmlReader {
 	}
 
 	/**
-	 * Lấy giá trị dạng boolean.
+	 * Lấy giá trị dạng text.
 	 * 
 	 * @param ele
 	 *            đối tượng Element
 	 * @param tagName
 	 *            the tag name
-	 * @return giá trị tương ứng
+	 * @return giá trị
 	 */
-	protected boolean getBooleanValue(Element ele, String tagName) {
-		return Boolean.parseBoolean(getTextValue(ele, tagName));
+	protected String getTextValue(Element ele, String tagName) {
+		String textVal = null;
+		NodeList nl = ele.getElementsByTagName(tagName);
+		if (nl != null && nl.getLength() > 0) {
+			Element el = (Element) nl.item(0);
+			textVal = el.getFirstChild().getNodeValue();
+		}
+
+		return textVal;
 	}
 
 }

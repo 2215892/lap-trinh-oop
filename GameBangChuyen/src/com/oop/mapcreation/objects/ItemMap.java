@@ -22,40 +22,40 @@ import com.oop.model.ModelObject;
  */
 public abstract class ItemMap implements Drawable, ModelObject {
 
-	/** điểm gần nhất xo với mắt nhìn vào lưới ô vuông. */
-	protected Point nearestPoint;
-
-	/** điểm đầu vào cho đối tượng vẽ. */
-	protected Point position;
-
-	/**
-	 * vị trí góc trái trên cùng để đặt ảnh vào của đối tượng hiển thị trên màn
-	 * hình.
-	 */
-	protected Point topLeftPoint;
-
-	/** anh cần vẽ ra màn hình. */
-	protected BufferedImage image;
-
 	/** chiều cao của ảnh cần vẽ. */
 	protected int height;
 
-	/** chiều rộng của ảnh cần vẽ ra màn hình. */
-	protected int width;
-
-	/** cạnh lưới ô vuông của bản đồ cần vẽ. */
-	protected int side;
-
-	/** biến kiểm tra xem có thể vẽ với vị trí đầu vào position hay không. */
-	protected boolean isValid;
-	/** loại của ảnh vẽ ra, ví dụ : cây, ô vuông, terminal ... */
-	protected int type;
+	/** anh cần vẽ ra màn hình. */
+	protected BufferedImage image;
 
 	/** id của ảnh vẽ ra. */
 	protected int imageId;
 
 	/** Màu hiển thị vị trí này không được phép vẽ ảnh. */
 	protected final Color INVALID_COLOR = new Color(255, 0, 0, 150);
+
+	/** biến kiểm tra xem có thể vẽ với vị trí đầu vào position hay không. */
+	protected boolean isValid;
+
+	/** điểm gần nhất xo với mắt nhìn vào lưới ô vuông. */
+	protected Point nearestPoint;
+
+	/** điểm đầu vào cho đối tượng vẽ. */
+	protected Point position;
+
+	/** cạnh lưới ô vuông của bản đồ cần vẽ. */
+	protected int side;
+	/**
+	 * vị trí góc trái trên cùng để đặt ảnh vào của đối tượng hiển thị trên màn
+	 * hình.
+	 */
+	protected Point topLeftPoint;
+
+	/** loại của ảnh vẽ ra, ví dụ : cây, ô vuông, terminal ... */
+	protected int type;
+
+	/** chiều rộng của ảnh cần vẽ ra màn hình. */
+	protected int width;
 
 	/**
 	 * Hàm khởi tạo đối tượng.
@@ -80,51 +80,12 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	}
 
 	/**
-	 * tính kích thước tương ứng với size của cạnh ô vuông trong lưới ô vuông,
-	 * giả sử cạnh chuẩn là 19.
-	 */
-	private void calculateImageDimension() {
-		Double tempHeight = (double) side * image.getHeight(null) / 19;
-		Double tempWidth = (double) side * image.getWidth(null) / 19;
-		height = tempHeight.intValue();
-		width = tempWidth.intValue();
-	}
-
-	/** tính điểm góc trái trên cùng để vẽ ảnh. */
-	protected abstract void calculateTopLeft();
-
-	/** tính vị trí ô vuông gần mắt nhất nhìn từ ảnh. */
-	protected abstract void calculateNearestPoint();
-
-	/** xác định loại ảnh cần vẽ : tree, factory... */
-	protected abstract void identifyImageType();
-
-	/**
 	 * Tính xem vị trí này có thể đặt ảnh hay không.
 	 * 
 	 * @param map
 	 *            the map
 	 */
 	public abstract void calculateValidation(MapCreation map);
-
-	/**
-	 * phương thức cho việc vẽ ảnh ra màn hình.
-	 * 
-	 * @param g
-	 *            - đối tượng graphics
-	 */
-	@Override
-	public abstract void paint(Graphics g);
-
-	/**
-	 * Sets the image.
-	 * 
-	 * @param image
-	 *            the new image
-	 */
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
 
 	/*
 	 * (non - Javadoc)
@@ -138,28 +99,6 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	 */
 	@Override
 	public abstract boolean contains(Point p);
-
-	/**
-	 * tính id của ảnh từ ảnh nhập vào.
-	 */
-	protected void calculateImageId() {
-		imageId = ItemImage.getId(image);
-	}
-
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.Model.ModelObject#getPosition()
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.model.ModelObject#getPosition()
-	 */
-	@Override
-	public Point getPosition() {
-		return nearestPoint;
-	}
 
 	/**
 	 * Gets the entry point.
@@ -180,13 +119,36 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	}
 
 	/**
-	 * Sets the validation.
+	 * Gets the image id.
 	 * 
-	 * @param validation
-	 *            the new validation
+	 * @return the image id
 	 */
-	public void setValidation(boolean validation) {
-		isValid = validation;
+	public int getImageId() {
+		return imageId;
+	}
+
+	/**
+	 * Gets the image type.
+	 * 
+	 * @return the image type
+	 */
+	public int getImageType() {
+		return type;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.Model.ModelObject#getPosition()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.model.ModelObject#getPosition()
+	 */
+	@Override
+	public Point getPosition() {
+		return nearestPoint;
 	}
 
 	/**
@@ -199,21 +161,59 @@ public abstract class ItemMap implements Drawable, ModelObject {
 	}
 
 	/**
-	 * Gets the image type.
+	 * phương thức cho việc vẽ ảnh ra màn hình.
 	 * 
-	 * @return the image type
+	 * @param g
+	 *            - đối tượng graphics
 	 */
-	public int getImageType() {
-		return type;
+	@Override
+	public abstract void paint(Graphics g);
+
+	/**
+	 * Sets the image.
+	 * 
+	 * @param image
+	 *            the new image
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	/**
-	 * Gets the image id.
+	 * Sets the validation.
 	 * 
-	 * @return the image id
+	 * @param validation
+	 *            the new validation
 	 */
-	public int getImageId() {
-		return imageId;
+	public void setValidation(boolean validation) {
+		isValid = validation;
 	}
+
+	/**
+	 * tính kích thước tương ứng với size của cạnh ô vuông trong lưới ô vuông,
+	 * giả sử cạnh chuẩn là 19.
+	 */
+	private void calculateImageDimension() {
+		Double tempHeight = (double) side * image.getHeight(null) / 19;
+		Double tempWidth = (double) side * image.getWidth(null) / 19;
+		height = tempHeight.intValue();
+		width = tempWidth.intValue();
+	}
+
+	/**
+	 * tính id của ảnh từ ảnh nhập vào.
+	 */
+	protected void calculateImageId() {
+		imageId = ItemImage.getId(image);
+	}
+
+	/** tính vị trí ô vuông gần mắt nhất nhìn từ ảnh. */
+	protected abstract void calculateNearestPoint();
+
+	/** tính điểm góc trái trên cùng để vẽ ảnh. */
+	protected abstract void calculateTopLeft();
+
+	/** xác định loại ảnh cần vẽ : tree, factory... */
+	protected abstract void identifyImageType();
 
 }

@@ -20,26 +20,26 @@ public class MenuItem implements Drawable {
 	/** The hover color. */
 	public final Color hoverColor = new Color(255, 0, 0, 100);
 
-	/** ảnh hiện thị cho item. */
-	private BufferedImage itemImage;
+	/** button chua menuitem nay. */
+	private ButtonForDraw button;
 
 	/** chiều cao của ảnh hiển thị. */
 	private int height;
 
-	/** chiều rộng của ảnh hiển thị. */
-	private int width;
+	/** biến kiểm tra trang thái chuột có hover vào item hay không. */
+	private boolean hover;
 
 	/** xem item có ẩn hay không. */
 	private boolean isHidden;
 
+	/** ảnh hiện thị cho item. */
+	private BufferedImage itemImage;
+
 	/** vị trí để vẽ item. */
 	private Point position;
 
-	/** button chua menuitem nay. */
-	private ButtonForDraw button;
-
-	/** biến kiểm tra trang thái chuột có hover vào item hay không. */
-	private boolean hover;
+	/** chiều rộng của ảnh hiển thị. */
+	private int width;
 
 	/**
 	 * Khởi tạo một đối tượng MenuItem.
@@ -64,6 +64,77 @@ public class MenuItem implements Drawable {
 		this.position = position;
 		this.button = button;
 		hover = false;
+	}
+
+	/**
+	 * thay đổi trạng thái của MenuItemm.
+	 */
+	public void changeState() {
+		if (isHidden)
+			isHidden = false;
+		else
+			isHidden = true;
+	}
+
+	/**
+	 * Gửi yêu cầu cho Button chọn Item này.
+	 */
+	public void choose() {
+		button.selectItem(this);
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
+		/* khi ma item menu hien ra thi moi tinh la click chuot vao hay khong */
+		if ((!isHidden)
+				&& (this.position.x <= p.x && (this.position.x + this.width) >= p.x)
+				&& (this.position.y <= p.y && (this.position.y + this.height) >= p.y)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * Gets the button.
+	 * 
+	 * @return the button
+	 */
+	public DrawingButton getButton() {
+		return button;
+	}
+
+	/**
+	 * Gets the image.
+	 * 
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return itemImage;
+	}
+
+	/**
+	 * Ẩn Menuitem.
+	 */
+	public void hide() {
+		isHidden = true;
+	}
+
+	/**
+	 * Khi được ấn vào thì ẩn đi menu của Button tương ứng.
+	 */
+	public void hideButtonMenu() {
+		button.hideMenu();
 	}
 
 	/*
@@ -95,84 +166,6 @@ public class MenuItem implements Drawable {
 
 	}
 
-	/*
-	 * (non - Javadoc)
-	 * 
-	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.oop.gamepanel.Drawable#contains(java.awt.Point)
-	 */
-	@Override
-	public boolean contains(Point p) {
-		/* khi ma item menu hien ra thi moi tinh la click chuot vao hay khong */
-		if ((!isHidden)
-				&& (this.position.x <= p.x && (this.position.x + this.width) >= p.x)
-				&& (this.position.y <= p.y && (this.position.y + this.height) >= p.y)) {
-			return true;
-		}
-		return false;
-
-	}
-
-	/**
-	 * thay đổi trạng thái của MenuItemm.
-	 */
-	public void changeState() {
-		if (isHidden)
-			isHidden = false;
-		else
-			isHidden = true;
-	}
-
-	/**
-	 * Gửi yêu cầu cho Button chọn Item này.
-	 */
-	public void choose() {
-		button.selectItem(this);
-	}
-
-	/**
-	 * Hiển thị MenuItem.
-	 */
-	public void show() {
-		isHidden = false;
-	}
-
-	/**
-	 * Ẩn Menuitem.
-	 */
-	public void hide() {
-		isHidden = true;
-	}
-
-	/**
-	 * Khi được ấn vào thì ẩn đi menu của Button tương ứng.
-	 */
-	public void hideButtonMenu() {
-		button.hideMenu();
-	}
-
-	/**
-	 * Gets the image.
-	 * 
-	 * @return the image
-	 */
-	public BufferedImage getImage() {
-		return itemImage;
-	}
-
-	/**
-	 * Gets the button.
-	 * 
-	 * @return the button
-	 */
-	public DrawingButton getButton() {
-		return button;
-	}
-
 	/**
 	 * Sets the hover state.
 	 * 
@@ -181,5 +174,12 @@ public class MenuItem implements Drawable {
 	 */
 	public void setHoverState(boolean hoverState) {
 		hover = hoverState;
+	}
+
+	/**
+	 * Hiển thị MenuItem.
+	 */
+	public void show() {
+		isHidden = false;
 	}
 }
