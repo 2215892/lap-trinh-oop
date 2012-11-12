@@ -278,9 +278,12 @@ public class PlayState extends GameState {
 				id = nextId - 1;
 
 			if (map != null) {
-
-				PlayState playState = new PlayState(parent, lastState, map,
-						saveFile.getHighscore(id), nextId);
+				PlayState playState = null;
+				if (highscore != -1)
+					playState = new PlayState(parent, lastState, map,
+							saveFile.getHighscore(id), nextId);
+				else
+					playState = new PlayState(parent, lastState, map);
 				changeState(playState);
 			}
 		}
