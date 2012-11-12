@@ -1,0 +1,103 @@
+package com.oop.mapcreation;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+
+import com.oop.gamepanel.Drawable;
+import com.oop.model.Helper;
+// TODO: Auto-generated Javadoc
+// TODO: Auto - generated Javadoc
+/**
+ * class n?�? định nghĩa đối tượng hiện th?�?phản ánh tính vẽ được hay không tại
+ * v?�?trí di chuyển của chuột trên lưới ô vuông. Nhưng ch?�?trong trường hợp l?�?
+ * vẽ switch
+ * 
+ * @author mai tien khai
+ * 
+ */
+public class MouseOverSquare implements Drawable {
+
+	/** m?�? hiển th?�?có th?�?vẽ được switch ?�?đây. */
+	public static Color VALID_COLOR = new Color(0, 0, 255, 150);
+
+	/** m?�? hiển th?�?không th?�?vẽ được switch ?�?đây. */
+	public static Color INVALID_COLOR = new Color(255, 0, 0, 150);
+
+	/** vi tri góc trái trên cung của ô chuột move v?�?. */
+	private Point position;
+
+	/** chiều d?�? logic ô vuông cần hiển th?�? */
+	private int height;
+
+	/** chiều rộng logic của ô vuông cần hiển th?�? */
+	private int width;
+
+	/** tinh hợp l?�?của ô vuông định vẽ switch. */
+	private boolean isValid;
+
+	/**
+	 * Khởi tạo đối tượng.
+	 * 
+	 * @param position
+	 *            - v?�?trí ô hiển th?�?
+	 * @param width
+	 *            - chiều rộng logic
+	 * @param height
+	 *            - chiều cao logic
+	 */
+	public MouseOverSquare(Point position, int width, int height) {
+		this.position = position;
+		this.height = height;
+		this.width = width;
+		isValid = false;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		if (isValid)
+			g.setColor(VALID_COLOR);
+		else
+			g.setColor(INVALID_COLOR);
+		g.fillPolygon(Helper.polygon(position, width, height));
+
+	}
+
+	/**
+	 * Sets the validation.
+	 * 
+	 * @param isvalid
+	 *            the new validation
+	 */
+	public void setValidation(boolean isvalid) {
+		this.isValid = isvalid;
+	}
+
+	/*
+	 * (non - Javadoc)
+	 * 
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	/* (non-Javadoc)
+	 * @see com.btl.GameEngine.Drawable#contains(java.awt.Point)
+	 */
+	@Override
+	public boolean contains(Point p) {
+		Point logicPoint = Helper.realToLogic(p);
+
+		if ((this.position.x <= logicPoint.x && (this.position.x + this.width) >= logicPoint.x)
+				&& (this.position.y <= logicPoint.y && (this.position.y + this.height) >= logicPoint.y)) {
+			return true;
+		} else
+			return false;
+	}
+
+}
