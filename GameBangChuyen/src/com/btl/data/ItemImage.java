@@ -7,68 +7,115 @@ import java.util.ArrayList;
 import com.btl.Model.ConversionFunction;
 import com.btl.Model.Direction;
 
+/**
+ * Lớp ItemImage. Cung cấp hình ảnh về các item
+ */
 public abstract class ItemImage {
 
+	/** The Constant PLATFORM_TYPE. */
 	public static final int PLATFORM_TYPE = 2;
 
+	/** The Constant TREE_TYPE. */
 	public static final int TREE_TYPE = 3;
 
+	/** The Constant SHIP_RIGHT_ID. */
 	public static final int SHIP_RIGHT_ID = 6;
 
+	/** The Constant SHIP_UP_ID. */
 	public static final int SHIP_UP_ID = 5;
 
+	/** The Constant PLANE_RIGHT_ID. */
 	public static final int PLANE_RIGHT_ID = 4;
 
+	/** The Constant PLANE_UP_ID. */
 	public static final int PLANE_UP_ID = 3;
 
+	/** The Constant TRUCK_DOWN_ID. */
 	public static final int TRUCK_DOWN_ID = 2;
 
+	/** The Constant TRUCK_LEFT_ID. */
 	public static final int TRUCK_LEFT_ID = 1;
 
+	/** The Constant VEHICLE_TYPE. */
 	public static final int VEHICLE_TYPE = 1;
 
+	/** The Constant RES_DIR. */
 	public final static String RES_DIR = ConversionFunction
 			.getCurrentDirectory() + "res\\item\\";
 
+	/** The Constant AIRPLANE. */
 	public final static BufferedImage AIRPLANE = ConversionFunction
 			.loadImage(RES_DIR + "AIRPLANE.png");
 
+	/** The Constant AIRPLANE_RIGHT. */
 	public static final BufferedImage AIRPLANE_RIGHT = ConversionFunction
 			.flipHorizontally(AIRPLANE);
 
+	/** The Constant PLATFORM_1. */
 	public final static BufferedImage PLATFORM_1 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_1.png");
+
+	/** The Constant PLATFORM_2. */
 	public final static BufferedImage PLATFORM_2 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_2.png");
+
+	/** The Constant PLATFORM_3. */
 	public final static BufferedImage PLATFORM_3 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_3.png");
 
+	/** The Constant PLATFORM_4. */
 	public final static BufferedImage PLATFORM_4 = ConversionFunction
 			.loadImage(RES_DIR + "PLATFORM_4.png");
+
+	/** The Constant SHIP. */
 	public final static BufferedImage SHIP = ConversionFunction
 			.loadImage(RES_DIR + "SHIP.png");
 
+	/** The Constant SHIP_RIGHT. */
 	public static final BufferedImage SHIP_RIGHT = ConversionFunction
 			.flipHorizontally(SHIP);
+
+	/** The Constant TREE_1. */
 	public final static BufferedImage TREE_1 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_1.png");
+
+	/** The Constant TREE_2. */
 	public final static BufferedImage TREE_2 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_2.png");
+
+	/** The Constant TREE_3. */
 	public final static BufferedImage TREE_3 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_3.png");
 
+	/** The Constant TREE_4. */
 	public final static BufferedImage TREE_4 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_4.png");
+
+	/** The Constant TREE_5. */
 	public final static BufferedImage TREE_5 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_5.png");
+
+	/** The Constant TREE_6. */
 	public final static BufferedImage TREE_6 = ConversionFunction
 			.loadImage(RES_DIR + "TREE_6.png");
+
+	/** The Constant TRUCK. */
 	public final static BufferedImage TRUCK = ConversionFunction
 			.loadImage(RES_DIR + "TRUCK.png");
 
+	/** The Constant TRUCK_DOWN. */
 	public static final BufferedImage TRUCK_DOWN = ConversionFunction
 			.flipHorizontally(TRUCK);
 
+	/**
+	 * Lấy ảnh tương ứng id và type.
+	 * 
+	 * @param id
+	 *            id của item
+	 * @param type
+	 *            giá trị type của item
+	 * @return ảnh của item tương ứng
+	 */
 	public static BufferedImage getItemImage(int id, int type) {
 		switch (type) {
 			case VEHICLE_TYPE : /* TRUCK, AIRPLANE, SHIP */
@@ -120,6 +167,15 @@ public abstract class ItemImage {
 		return null;
 	}
 
+	/**
+	 * Lấy khoảng đệm để vẽ item.
+	 * 
+	 * @param id
+	 *            id của item
+	 * @param type
+	 *            type của item
+	 * @return Point(x, y) với x, y tương ứng là đệm trục x, y
+	 */
 	public static Point getItemPad(int id, int type) {
 		switch (type) {
 			case VEHICLE_TYPE : /* TRUCK, AIRPLANE, SHIP */
@@ -149,11 +205,11 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * xac dinh huong cho cac anh, dung cho cac anh thuoc lop terminal, factory.
+	 * Xác định hướng cho các ảnh, dùng cho các ảnh thuộc họ terminal, factory.
 	 * 
 	 * @param image
-	 *            anh can xac dinh huong
-	 * @return huong cua anh
+	 *            ảnh cần xác định hướng
+	 * @return hướng của ảnh
 	 */
 	public static Direction getDirection(BufferedImage image) {
 		if (image == TRUCK)
@@ -173,11 +229,11 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * lay type cua anh.
+	 * Lấy type của ảnh.
 	 * 
 	 * @param image
-	 *            anh can xem loai
-	 * @return loai cua anh
+	 *            ảnh cần xét
+	 * @return giá trị type của ảnh
 	 */
 	public static int getType(BufferedImage image) {
 		if ((image == TREE_1) || (image == TREE_2) || (image == TREE_3)
@@ -195,11 +251,11 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * Gets the id.
+	 * Lấy id của ảnh.
 	 * 
 	 * @param image
-	 *            the image
-	 * @return the id
+	 *            ảnh cần xét
+	 * @return id của item tương ứng với ảnh
 	 */
 	public static int getId(BufferedImage image) {
 		if (image == TREE_1)
@@ -238,15 +294,15 @@ public abstract class ItemImage {
 	}
 
 	/**
-	 * ham tinh cac o vuong bi phu khi chen anh terminal vao map.
+	 * Tính các ô vuông bị phủ khi chèn item vào map
 	 * 
 	 * @param terminalImage
-	 *            anh terminal can chen
+	 *            ảnh terminal cần chèn
 	 * @param position
-	 *            vi tri cua terminal
+	 *            vị trí terminal
 	 * @param side
-	 *            canh o vuong ve
-	 * @return list cac o vuong bi phu
+	 *            cạnh của ô vuông vẽ
+	 * @return danh sách ô vuông bị phủ
 	 */
 	public static ArrayList<Point> getSquareCovered(
 			BufferedImage terminalImage, Point position, int side) {

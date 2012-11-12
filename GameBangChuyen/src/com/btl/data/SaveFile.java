@@ -19,6 +19,10 @@ import org.w3c.dom.NodeList;
 
 import com.btl.Model.ConversionFunction;
 
+/**
+ * Lớp SaveFile. Quản lý việc lưu, nạp save file, đọc thông tin, ghi thông tin
+ * từ save file. Luôn chỉ có một đối tượng SaveFile.
+ */
 public class SaveFile extends XmlReader {
 
 	private ArrayList<Map> maps = new ArrayList<Map>();
@@ -28,6 +32,7 @@ public class SaveFile extends XmlReader {
 		boolean isLock = true;
 	}
 
+	/** Đường dẫn đến file save. */
 	public final static String fileDir = ConversionFunction
 			.getCurrentDirectory() + "save//save.xml";
 
@@ -46,6 +51,11 @@ public class SaveFile extends XmlReader {
 		instance.setLock(1, false);
 	}
 
+	/**
+	 * Tạo đối tượng file save.
+	 * 
+	 * @return đối tượng SaveFile
+	 */
 	public static SaveFile create() {
 
 		return instance;
@@ -55,6 +65,9 @@ public class SaveFile extends XmlReader {
 
 	}
 
+	/**
+	 * Lưu thông tin vào file.
+	 */
 	public void save() {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory
@@ -64,7 +77,6 @@ public class SaveFile extends XmlReader {
 			docBuilder = docFactory.newDocumentBuilder();
 
 			Document doc = docBuilder.newDocument();
-			/* root element */
 			Element saveF = doc.createElement("SaveFile");
 			doc.appendChild(saveF);
 			for (Map i : maps) {
@@ -106,6 +118,13 @@ public class SaveFile extends XmlReader {
 
 	}
 
+	/**
+	 * Nạp thông tin từ file
+	 * 
+	 * @param fileDir
+	 *            địa chỉ đường dẫn
+	 * @return true nếu load thành công, false nếu load lỗi
+	 */
 	private boolean load(String fileDir) {
 		File f = new File(fileDir);
 
@@ -114,18 +133,14 @@ public class SaveFile extends XmlReader {
 		Document dom;
 
 		try {
-
-			// Using factory get an instance of document builder
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			// parse using builder to get DOM representation of the XML file
 			dom = db.parse(f);
 
 		} catch (Exception e) {
 			return false;
 		}
 
-		// get the root element
 		Element docEle = dom.getDocumentElement();
 
 		NodeList nlMap = docEle.getElementsByTagName("map");
@@ -138,13 +153,10 @@ public class SaveFile extends XmlReader {
 		if (nlMap != null && nlMap.getLength() > 0) {
 			for (int i = 0; i < nlMap.getLength(); i++) {
 
-				// get the factory element
 				Element el = (Element) nlMap.item(i);
 
-				// get the Map object
 				Map e = getMap(el);
 
-				// add it to list
 				maps.add(e);
 			}
 		}
@@ -160,6 +172,14 @@ public class SaveFile extends XmlReader {
 		return map;
 	}
 
+	/**
+	 * Đặt highscore cho id.
+	 * 
+	 * @param id
+	 *            id cần đặt
+	 * @param score
+	 *            điểm cần đặt
+	 */
 	public void setHighscore(int id, int score) {
 		for (Map map : maps) {
 			if (map.id == id) {
@@ -174,6 +194,13 @@ public class SaveFile extends XmlReader {
 		maps.add(map);
 	}
 
+	/**
+	 * Lấy highscore tương ứng với id.
+	 * 
+	 * @param id
+	 *            id của map cần tìm
+	 * @return highscore tương ứng
+	 */
 	public int getHighscore(int id) {
 		for (Map map : maps) {
 			if (map.id == id)
@@ -183,6 +210,13 @@ public class SaveFile extends XmlReader {
 		return 0;
 	}
 
+	/**
+	 * Kiểm tra map có bị khóa không.
+	 * 
+	 * @param id
+	 *            id của map
+	 * @return true nếu map bị khóa, false nếu ngược lại
+	 */
 	public boolean getLock(int id) {
 		for (Map map : maps) {
 			if (map.id == id)
@@ -192,6 +226,14 @@ public class SaveFile extends XmlReader {
 		return true;
 	}
 
+	/**
+	 * Đặt khóa cho map.
+	 * 
+	 * @param id
+	 *            id của map
+	 * @param isLock
+	 *            true nếu muốn map khóa, false nếu ngược lại
+	 */
 	public void setLock(int id, boolean isLock) {
 		for (Map map : maps) {
 			if (map.id == id) {

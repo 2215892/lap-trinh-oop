@@ -11,19 +11,40 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.btl.Model.ConversionFunction;
 
+/**
+ * The Enum SoundEffect. Thể hiện hiệu ứng âm thanh
+ */
 public enum SoundEffect {
 
-	BACKGROUND("background.wav"), RIGHTBOX("right_box.wav"), WRONGBOX(
-			"wrong_box.wav"), BUTTONCLICK("click.wav");
+	/** Âm thanh nền. */
+	BACKGROUND("background.wav"), /** Âm khi hộp đến đúng terminal. */
+	RIGHTBOX("right_box.wav"), /** Âm khi hộp đến terminal sai. */
+	WRONGBOX("wrong_box.wav"),
+	/** Âm khi button được click. */
+	BUTTONCLICK("click.wav");
 
+	/**
+	 * The Enum Volume.
+	 */
 	public static enum Volume {
-		MUTE, OK
+
+		/** Không tiếng. */
+		MUTE,
+		/** Có tiếng. */
+		OK
 	}
 
+	/** Âm lượng mặc định. */
 	public static Volume volume = Volume.OK;
 
 	private Clip clip;
 
+	/**
+	 * Khởi tạo SoundEffect.
+	 * 
+	 * @param soundFileName
+	 *            tên của âm thanh
+	 */
 	SoundEffect(String soundFileName) {
 		String fileDir = ConversionFunction.getCurrentDirectory() + "sound\\";
 		try {
@@ -46,7 +67,9 @@ public enum SoundEffect {
 		}
 	}
 
-	// Play or Re-play the sound effect from the beginning, by rewinding.
+	/**
+	 * Chạy âm thanh.
+	 */
 	public void play() {
 		if (clip != null && volume != Volume.MUTE) {
 			if (clip.isRunning())
@@ -56,6 +79,9 @@ public enum SoundEffect {
 		}
 	}
 
+	/**
+	 * Chạy âm thanh lặp đi lặp lại.
+	 */
 	public void loop() {
 		if (clip != null && volume != Volume.MUTE) {
 			if (clip.isRunning())
