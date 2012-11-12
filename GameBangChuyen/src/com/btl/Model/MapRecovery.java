@@ -57,14 +57,12 @@ public class MapRecovery {
 		this.height = map.getSide();
 		this.width = map.getSide();
 		this.map = map;
-		recoverFullMap();
-		System.out.println("completed!");
 	}
 
 	/**
 	 * Hàm khôi phục lại map.
 	 */
-	private void recoverFullMap() {
+	public void recoverFullMap() {
 		/* khoi tao cac bien check */
 		checkRecover = new boolean[switchLayer.getListDrawable().size()];
 		for (int i = 0; i < checkRecover.length; i++)

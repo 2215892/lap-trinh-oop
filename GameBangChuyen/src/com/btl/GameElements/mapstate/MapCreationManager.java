@@ -46,11 +46,13 @@ public class MapCreationManager {
 	public static final int SAVE = 8;
 
 	/** The Constant BACK. */
-	public static final int BACK = 10;
+	public static final int BACK = 11;
 
 	/** Mã điều khiển nút Edit File. */
 	public static final int EDIT = 9;
-
+	
+	/**Mã điều khiển nút ve một map mới*/
+	public static final int NEW = 10;
 	/** The Constant SQUARE_SIDE. */
 	public static final int SQUARE_SIDE = 18;
 
@@ -80,7 +82,7 @@ public class MapCreationManager {
 
 	/** The back button. */
 	private ButtonForHandle deleteButton, deleteAllButton, saveButton,
-			backButton, editButton;
+			backButton, editButton, newButton;
 
 	/** The item list layer. */
 	private DrawLayer[] itemListLayer;
@@ -154,7 +156,10 @@ public class MapCreationManager {
 
 		int editFileX = (EDIT - 1) * ICON_WIDTH;
 		int editFileY = 0;
-
+		
+		int newButtonX = (NEW -1)*ICON_WIDTH;
+		int newButtonY = 0;
+		
 		graphicButtonList = new ArrayList<ButtonForDraw>();
 		handleButtonList = new ArrayList<ButtonForHandle>();
 
@@ -172,21 +177,21 @@ public class MapCreationManager {
 		terminalButton.setName("terminal");
 		graphicButtonList.add(terminalButton);
 
-		defaultButton = new ButtonForHandle(new Point(defaultX, defaultY),
+		defaultButton = new DefaultButton(new Point(defaultX, defaultY),
 				ButtonImage.DEFAULT_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DEFAULT_BUTTON_IMAGE, DEFAULT);
 		defaultButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		defaultButton.setName("DEFAULT");
 		handleButtonList.add(defaultButton);
 
-		deleteButton = new ButtonForHandle(new Point(deleteX, deleteY),
+		deleteButton = new DeleteButton(new Point(deleteX, deleteY),
 				ButtonImage.DELETE_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DELETE_BUTTON_IMAGE, DELETE);
 		deleteButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		deleteButton.setName("DELETE");
 		handleButtonList.add(deleteButton);
 
-		deleteAllButton = new ButtonForHandle(
+		deleteAllButton = new DeleteAllButton(
 				new Point(deleteAllX, deleteAllY),
 				ButtonImage.DELETEALL_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_DELETEALL_BUTTON_IMAGE, DELETEALL);
@@ -208,26 +213,33 @@ public class MapCreationManager {
 		treeButton.setName("tree");
 		graphicButtonList.add(treeButton);
 
-		saveButton = new ButtonForHandle(new Point(saveX, saveY),
+		saveButton = new SaveButton(new Point(saveX, saveY),
 				ButtonImage.SAVE_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_SAVE_BUTTON_IMAGE, SAVE);
 		saveButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		saveButton.setName("SAVE");
 		handleButtonList.add(saveButton);
 
-		backButton = new ButtonForHandle(new Point(backX, backY),
+		backButton = new BackButton(new Point(backX, backY),
 				ButtonImage.BACK_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_BACK_BUTTON_IMAGE, BACK);
 		backButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		backButton.setName("BACK");
 		handleButtonList.add(backButton);
 
-		editButton = new ButtonForHandle(new Point(editFileX, editFileY),
+		editButton = new EditButton(new Point(editFileX, editFileY),
 				ButtonImage.EDIT_BUTTON_IMAGE,
 				ButtonImage.ACTIVE_EDIT_BUTTON_IMAGE, EDIT);
 		editButton.setDimension(ICON_WIDTH, ICON_WIDTH);
 		editButton.setName("Edit a map");
 		handleButtonList.add(editButton);
+		
+		newButton = new NewButton(new Point(newButtonX,newButtonY),
+				ButtonImage.NEW_BUTTON_IMAGE,
+				ButtonImage.NEW_BUTTON_IMAGE,NEW);
+		newButton.setDimension(ICON_WIDTH, ICON_WIDTH);
+		newButton.setName("Create new canvas to draw");
+		handleButtonList.add(newButton);
 	}
 
 	/**
